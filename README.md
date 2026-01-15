@@ -13,6 +13,90 @@
 - 🌍 多语言支持（中文、英文）
 - 🚀 基于Bootstrap前端框架，轻量高效
 - 📦 纯静态网站，部署简单快速
+- 🔍 站点有效性检测，确保链接可用
+- 🎨 本地favicon缓存，提升加载速度
+
+## 项目结构
+
+```
+WebStackPage.github.io/
+├── assets/              # 静态资源文件
+│   ├── css/            # 样式文件
+│   ├── js/             # JavaScript文件
+│   ├── images/         # 图片资源
+│   └── favicons/      # 网站图标缓存
+├── cn/                 # 中文版本
+│   ├── index.html      # 中文首页
+│   └── about.html     # 关于页面
+├── en/                 # 英文版本
+│   ├── index.html      # 英文首页
+│   └── about.html     # 关于页面
+├── tools/              # 开发工具脚本
+│   ├── README.md       # 工具说明文档
+│   ├── final_fix.py    # HTML生成脚本
+│   ├── cache_favicons.py  # Favicon缓存脚本
+│   ├── check_sites_validity.py  # 站点有效性检测
+│   ├── fix_bugs.py     # Bug修复脚本
+│   └── ...           # 其他工具脚本
+├── index.html          # 根目录首页（中文）
+├── 404.html           # 404错误页面
+├── README.md           # 项目说明文档
+├── 完整版导航.json     # 网站数据源
+└── favicon_mapping.json # Favicon映射文件
+```
+
+## 快速开始
+
+### 本地运行
+
+```bash
+# 使用Python内置服务器
+cd WebStackPage.github.io
+python -m http.server 8000
+
+# 访问
+# 中文版：http://localhost:8000
+# 英文版：http://localhost:8000/en/
+```
+
+### 添加新网站
+
+1. 编辑 `完整版导航.json` 文件
+2. 运行工具脚本更新网站：
+
+```bash
+# 1. 检测新添加的站点是否有效
+python tools/check_sites_validity.py
+
+# 2. 下载新站点的favicon
+python tools/cache_favicons.py
+
+# 3. 重新生成HTML文件
+python tools/final_fix.py
+```
+
+## 工具脚本使用
+
+项目提供了多个工具脚本用于网站维护，详细说明请查看 [tools/README.md](tools/README.md)。
+
+### 常用命令
+
+```bash
+# 检测站点有效性
+python tools/check_sites_validity.py
+
+# 删除无效站点
+python tools/remove_invalid_sites.py
+
+# 更新favicon缓存
+python tools/cache_favicons.py
+
+# 重新生成HTML
+python tools/final_fix.py
+
+# 修复已知bug
+python tools/fix_bugs.py
+```
 
 ## 部署到Cloudflare Pages
 
@@ -27,21 +111,21 @@
 #### 步骤1：创建GitHub仓库
 
 1. 访问 [GitHub](https://github.com/new) 创建新仓库
-2. 仓库名称：`009tg.github.io`（推荐，用于Cloudflare Pages）
+2. 仓库名称：`WebStackPage.github.io` 或 `009tg.com`
 3. 设置为Public公开仓库
 4. 点击"Create repository"创建仓库
 
 #### 步骤2：推送代码到GitHub
 
 ```bash
-# 如果还没有初始化Git仓库
-cd "d:\测试文档\url\000\WebStackPage.github.io"
+# 初始化Git仓库（如果还没有）
+cd WebStackPage.github.io
 git init
 git add .
 git commit -m "Initial commit"
 
 # 配置远程仓库（替换为你的GitHub用户名）
-git remote add origin https://github.com/你的GitHub用户名/009tg.github.io.git
+git remote add origin https://github.com/你的GitHub用户名/WebStackPage.github.io.git
 
 # 推送到GitHub
 git push -u origin master
@@ -53,7 +137,7 @@ git push -u origin master
 2. 进入 **Workers & Pages** → **Create a project**
 3. 点击 **Connect to Git**
 4. 选择 **GitHub**，授权Cloudflare访问你的GitHub账号
-5. 选择你创建的 `009tg.github.io` 仓库
+5. 选择你创建的仓库
 6. 点击 **Begin setup** 开始部署
 
 #### 步骤4：配置自定义域名
@@ -86,21 +170,58 @@ Cloudflare Pages支持自动部署，当你推送代码到GitHub时：
 - **前端框架**：Bootstrap 3.x
 - **样式框架**：Xenon
 - **图标库**：Font Awesome, Linecons
-- **JavaScript**：jQuery, TweenMax
+- **JavaScript**：jQuery, TweenMax, Lozad (懒加载)
+- **开发工具**：Python 3.x
 
-## 本地运行
+## 维护指南
 
-```bash
-# 使用Python内置服务器
-cd "d:\测试文档\url\000\WebStackPage.github.io"
-python -m http.server 8000
+### 定期维护任务
 
-# 或使用其他静态服务器
-# npx http-server
-# php -S localhost:8000
-```
+1. **站点有效性检测**（每周）
+   ```bash
+   python tools/check_sites_validity.py
+   ```
 
-然后访问：http://localhost:8000
+2. **删除无效站点**（根据检测结果）
+   ```bash
+   python tools/remove_invalid_sites.py
+   ```
+
+3. **更新favicon缓存**（每月）
+   ```bash
+   python tools/cache_favicons.py
+   ```
+
+4. **重新生成HTML**（数据更新后）
+   ```bash
+   python tools/final_fix.py
+   ```
+
+### 数据更新流程
+
+1. 编辑 `完整版导航.json` 添加或修改网站
+2. 运行 `check_sites_validity.py` 验证新站点
+3. 运行 `cache_favicons.py` 下载favicon
+4. 运行 `final_fix.py` 重新生成HTML
+5. 提交代码到GitHub触发自动部署
+
+## 常见问题
+
+### Q: 如何添加新网站？
+
+A: 编辑 `完整版导航.json` 文件，按照现有格式添加网站信息，然后运行 `python tools/final_fix.py` 重新生成HTML。
+
+### Q: 网站图标不显示怎么办？
+
+A: 运行 `python tools/cache_favicons.py` 重新下载favicon，或者手动将图标文件放到 `assets/favicons/` 目录。
+
+### Q: 如何检测无效链接？
+
+A: 运行 `python tools/check_sites_validity.py`，脚本会检测所有站点并生成报告。
+
+### Q: 英文版本如何更新？
+
+A: 运行 `python tools/final_fix.py` 会同时生成中文和英文版本的HTML文件。
 
 ## License
 

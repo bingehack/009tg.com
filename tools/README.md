@@ -15,6 +15,8 @@
 - 识别无法访问的站点（超时、连接错误、HTTP错误等）
 - 生成检测报告，列出所有无效站点
 - 支持将无效站点从JSON数据中安全删除
+- 支持代理配置
+- 集成第三方API验证
 
 **使用方法：**
 ```bash
@@ -29,15 +31,20 @@ python check_sites_validity.py --timeout 15
 
 # 指定JSON文件路径
 python check_sites_validity.py --file 完整版导航.json
+
+# 使用代理
+python check_sites_validity.py --proxy http://127.0.0.1:7890
 ```
 
 **主要特性：**
 - 支持并发检测，提高检测效率
-- 支持自定义超时时间
+- 支持多种请求方法（HEAD/GET）
+- 支持SSL验证控制
 - 详细的错误日志记录
 - 生成HTML格式的检测报告
 - 支持备份原始数据
 - 安全的删除机制，避免误删
+- 集成第三方API验证（downforeveryoneorjustme.com）
 
 ---
 
@@ -93,7 +100,54 @@ python cache_favicons.py
 
 ---
 
-### 4. generate_english.py - 英文版生成脚本
+### 4. remove_invalid_sites.py - 删除无效站点脚本
+
+**用途：**
+从JSON数据中删除无效站点，并重新生成HTML文件。
+
+**功能概述：**
+- 从HTML报告中提取无效URL
+- 自动备份原始JSON文件
+- 从JSON数据中删除无效站点
+- 自动重新生成HTML文件
+
+**使用方法：**
+```bash
+python remove_invalid_sites.py
+```
+
+**主要特性：**
+- 自动备份原始数据
+- 支持从HTML报告提取URL
+- 自动重新生成HTML
+- 详细的删除日志
+
+---
+
+### 5. fix_bugs.py - Bug修复脚本
+
+**用途：**
+修复导航网站中的已知bug。
+
+**功能概述：**
+- 修复关于本站链接问题
+- 修复英文版本favicon路径问题
+- 修复英文版本语言切换器问题
+- 自动修复所有HTML文件
+
+**使用方法：**
+```bash
+python fix_bugs.py
+```
+
+**主要特性：**
+- 自动修复多个已知bug
+- 支持中文、英文版本
+- 保持HTML结构不变
+
+---
+
+### 6. generate_english.py - 英文版生成脚本
 
 **用途：**
 将中文版HTML文件翻译为英文版本。
@@ -118,7 +172,7 @@ python generate_english.py
 
 ---
 
-### 5. cleanup_old_data.py - 旧数据清理脚本
+### 7. cleanup_old_data.py - 旧数据清理脚本
 
 **用途：**
 清除HTML文件中的旧数据，重新生成干净的HTML文件。
@@ -141,7 +195,7 @@ python cleanup_old_data.py
 
 ---
 
-### 6. fix_issues.py - 问题修复脚本
+### 8. fix_issues.py - 问题修复脚本
 
 **用途：**
 修复导航网站中的各种问题。
@@ -165,7 +219,7 @@ python fix_issues.py
 
 ---
 
-### 7. generate_nested_nav.py - 嵌套导航生成脚本
+### 9. generate_nested_nav.py - 嵌套导航生成脚本
 
 **用途：**
 生成带有嵌套导航菜单的HTML文件。
@@ -189,7 +243,7 @@ python generate_nested_nav.py
 
 ---
 
-### 8. fix_html.py - HTML修复脚本
+### 10. fix_html.py - HTML修复脚本
 
 **用途：**
 修复HTML文件中的资源引用路径和标题信息。
@@ -212,7 +266,7 @@ python fix_html.py
 
 ---
 
-### 9. keep_style_generate.py - 风格保持生成脚本
+### 11. keep_style_generate.py - 风格保持生成脚本
 
 **用途：**
 保持原有风格生成新的导航网站。
@@ -236,7 +290,7 @@ python keep_style_generate.py
 
 ---
 
-### 10. simple_generate.py - 简单HTML生成脚本
+### 12. simple_generate.py - 简单HTML生成脚本
 
 **用途：**
 生成简单版本的HTML导航文件。
@@ -259,7 +313,7 @@ python simple_generate.py
 
 ---
 
-### 11. generate_new_html.py - 新HTML生成脚本
+### 13. generate_new_html.py - 新HTML生成脚本
 
 **用途：**
 生成新的导航网站HTML文件。
@@ -282,7 +336,7 @@ python generate_new_html.py
 
 ---
 
-### 12. convert_json_to_html.py - JSON转HTML脚本
+### 14. convert_json_to_html.py - JSON转HTML脚本
 
 **用途：**
 将JSON格式的导航数据转换为HTML页面。
@@ -306,28 +360,63 @@ python convert_json_to_html.py
 
 ---
 
+### 15. test_sites.py - 站点测试脚本
+
+**用途：**
+测试站点访问情况。
+
+**使用方法：**
+```bash
+python test_sites.py
+```
+
+---
+
+### 16. test_sites_get.py - GET方法测试脚本
+
+**用途：**
+使用GET方法测试站点访问。
+
+**使用方法：**
+```bash
+python test_sites_get.py
+```
+
+---
+
+### 17. test_sites_no_proxy.py - 无代理测试脚本
+
+**用途：**
+不使用代理测试站点访问。
+
+**使用方法：**
+```bash
+python test_sites_no_proxy.py
+```
+
+---
+
 ## 使用建议
 
 ### 日常维护流程：
 1. 使用 `check_sites_validity.py` 定期检测站点有效性
-2. 发现无效站点后，使用 `--delete` 参数删除
+2. 发现无效站点后，使用 `remove_invalid_sites.py` 删除
 3. 使用 `cache_favicons.py` 更新favicon缓存
 4. 使用 `final_fix.py` 重新生成HTML文件
-5. 使用 `generate_english.py` 生成英文版本
+5. 如有bug，使用 `fix_bugs.py` 修复
 
 ### 首次部署流程：
 1. 准备JSON数据文件（完整版导航.json）
 2. 运行 `cache_favicons.py` 下载favicon
 3. 运行 `final_fix.py` 生成HTML文件
-4. 运行 `generate_english.py` 生成英文版本
-5. 将生成的HTML文件部署到服务器
+4. 将生成的HTML文件部署到服务器
 
 ### 数据更新流程：
 1. 更新JSON数据文件
 2. 运行 `check_sites_validity.py` 检测新添加的站点
 3. 运行 `cache_favicons.py` 更新favicon
 4. 运行 `final_fix.py` 重新生成HTML
-5. 运行 `generate_english.py` 更新英文版本
+5. 提交代码到GitHub触发自动部署
 
 ## 注意事项
 
@@ -357,9 +446,9 @@ pip install requests
 
 ## 版本历史
 
-- v1.0 - 初始版本，包含所有基础脚本
+- v2.0 - 添加站点有效性检测、删除无效站点、bug修复脚本
 - v1.1 - 添加站点有效性检测脚本
-- v1.2 - 为所有脚本添加标准化头部注释
+- v1.0 - 初始版本，包含所有基础脚本
 
 ## 联系方式
 

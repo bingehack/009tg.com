@@ -744,7 +744,7 @@ def get_favicon_url(url, favicon_mapping=None):
     # 如果没有缓存，使用Google favicon服务
     return f'https://www.google.com/s2/favicons?domain={domain}&sz=64'
 
-def generate_content(groups, category_map, favicon_mapping=None):
+def generate_content(groups, category_map, favicon_mapping=None, is_english=False):
     """生成内容区域"""
     content_html = ''
     sites_data = {}
@@ -765,11 +765,16 @@ def generate_content(groups, category_map, favicon_mapping=None):
         # 存储网站数据到JavaScript对象
         sites_data[group_name] = []
         for site in group_sites:
+            site_url = site.get('url', '#')
+            site_icon = get_favicon_url(site_url, favicon_mapping)
+            # 如果是英文版本，调整favicon路径
+            if is_english and site_icon.startswith('assets/favicons/'):
+                site_icon = '../' + site_icon
             sites_data[group_name].append({
                 'name': site.get('name', '未知网站'),
-                'url': site.get('url', '#'),
+                'url': site_url,
                 'description': site.get('description', ''),
-                'icon': get_favicon_url(site.get('url', '#'), favicon_mapping)
+                'icon': site_icon
             })
         
         # 添加分页控制按钮（如果有超过18个网站）
@@ -803,6 +808,9 @@ def generate_content(groups, category_map, favicon_mapping=None):
             site_url = site.get('url', '#')
             site_description = site.get('description', '')
             site_icon = get_favicon_url(site_url, favicon_mapping)
+            # 如果是英文版本，调整favicon路径
+            if is_english and site_icon.startswith('assets/favicons/'):
+                site_icon = '../' + site_icon
             
             content_html += f'''<div class="site-item" data-index="{i}">
                 <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('{site_url}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="{site_url}">
