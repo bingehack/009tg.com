@@ -3,6 +3,9 @@
 *.pyc
 __pycache__/
 
+# 例外：tools文件夹下的Python脚本
+!tools/*.py
+
 # 数据文件
 *.json
 !favicon_mapping.json
