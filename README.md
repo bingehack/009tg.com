@@ -19,7 +19,7 @@
 ## 项目结构
 
 ```
-WebStackPage.github.io/
+009tg.com/
 ├── assets/              # 静态资源文件
 │   ├── css/            # 样式文件
 │   ├── js/             # JavaScript文件
@@ -51,7 +51,7 @@ WebStackPage.github.io/
 
 ```bash
 # 使用Python内置服务器
-cd WebStackPage.github.io
+cd 009tg.com
 python -m http.server 8000
 
 # 访问
@@ -111,7 +111,7 @@ python tools/fix_bugs.py
 #### 步骤1：创建GitHub仓库
 
 1. 访问 [GitHub](https://github.com/new) 创建新仓库
-2. 仓库名称：`WebStackPage.github.io` 或 `009tg.com`
+2. 仓库名称：`009tg.com`
 3. 设置为Public公开仓库
 4. 点击"Create repository"创建仓库
 
@@ -119,13 +119,13 @@ python tools/fix_bugs.py
 
 ```bash
 # 初始化Git仓库（如果还没有）
-cd WebStackPage.github.io
+cd 009tg.com
 git init
 git add .
 git commit -m "Initial commit"
 
 # 配置远程仓库（替换为你的GitHub用户名）
-git remote add origin https://github.com/你的GitHub用户名/WebStackPage.github.io.git
+git remote add origin https://github.com/你的GitHub用户名/009tg.com.git
 
 # 推送到GitHub
 git push -u origin master

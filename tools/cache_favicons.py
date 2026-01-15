@@ -161,9 +161,9 @@ def save_cache_mapping(mapping, mapping_file):
     print(f"映射关系已保存到: {mapping_file}")
 
 if __name__ == "__main__":
-    json_file = "完整版导航.json"
-    cache_dir = "assets/favicons"
-    mapping_file = "favicon_mapping.json"
+    json_file = "../完整版导航.json"
+    cache_dir = "../assets/favicons"
+    mapping_file = "../favicon_mapping.json"
     
     print("开始缓存favicon...")
     print("=" * 60)

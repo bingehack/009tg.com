@@ -177,8 +177,8 @@ def generate_html():
                     </li>
                 </ul>
                 <ul class="user-info-menu right-links list-inline list-unstyled">
-                    <li class="hidden-sm hidden-xs">
-                        <a href="https://github.com/WebStackPage/WebStackPage.github.io" target="_blank">
+                    <li class="hidden-sm hidden-xs" style="display: none;">
+                        <a href="https://github.com/bingehack/0009tg.com" target="_blank">
                             <i class="fa-github"></i>  GitHub
                         </a>
                     </li>

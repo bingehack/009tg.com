@@ -28,10 +28,11 @@ import json
 import os
 from urllib.parse import urlparse
 import hashlib
+import urllib.parse
 
 def load_favicon_mapping():
     """加载favicon映射关系"""
-    mapping_file = 'favicon_mapping.json'
+    mapping_file = '../favicon_mapping.json'
     if os.path.exists(mapping_file):
         with open(mapping_file, 'r', encoding='utf-8') as f:
             return json.load(f)
@@ -70,8 +71,14 @@ def final_fix():
     # 生成导航菜单
     nav_html = generate_nav_menu(category_tree)
     
-    # 生成内容区域和网站数据
-    content_html, sites_data_json = generate_content(data['groups'], category_map, favicon_mapping)
+    # 生成内容区域和网站数据（根目录版本）
+    content_html, sites_data_json = generate_content(data['groups'], category_map, favicon_mapping, is_english=False, is_root=True)
+    
+    # 生成内容区域和网站数据（cn目录版本）
+    content_html_cn, sites_data_json_cn = generate_content(data['groups'], category_map, favicon_mapping, is_english=False, is_root=False)
+    
+    # 生成内容区域和网站数据（英文版本）
+    content_html_en, sites_data_json_en = generate_content(data['groups'], category_map, favicon_mapping, is_english=True, is_root=False)
     
     # 4. 读取干净的HTML模板
     template = '''<!DOCTYPE html>
@@ -321,17 +328,20 @@ def final_fix():
                     </li>
                 </ul>
                 <ul class="user-info-menu right-links list-inline list-unstyled">
-                    <li class="hidden-sm hidden-xs">
-                        <a href="https://github.com/WebStackPage/WebStackPage.github.io" target="_blank">
+                    <li class="hidden-sm hidden-xs" style="display: none;">
+                        <a href="https://github.com/bingehack/0009tg.com" target="_blank">
                             <i class="fa-github"></i>  GitHub
                         </a>
                     </li>
                 </ul>
             </nav>
             <script>
-                // 存储所有分类的网站数据
-                var allSitesData = {sites_data};
-            </script>
+        // 存储所有分类的网站数据
+        var allSitesData = {sites_data};
+        
+        // 设置redirect.html的基础路径
+        var redirectBasePath = '{redirect_base_path}';
+    </script>
             {content}
         </div>
     </div>
@@ -420,7 +430,7 @@ def final_fix():
                 for (var i = startIndex; i < endIndex; i++) {
                     var site = sites[i];
                     if (site) {
-                        var redirectUrl = 'redirect.html?url=' + encodeURIComponent('${site.url}') + '&name=' + encodeURIComponent('${site.name}');
+                        var redirectUrl = redirectBasePath + 'redirect.html?url=' + encodeURIComponent(site.url) + '&name=' + encodeURIComponent(site.name);
                         var siteHtml = `<div class="site-item" data-index="${i}">
                             <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('${redirectUrl}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${site.url}">
                                 <div class="xe-comment-entry">
@@ -502,7 +512,7 @@ def final_fix():
                     for (var i = startIndex; i < endIndex; i++) {
                         var site = sites[i];
                         if (site) {
-                        var redirectUrl = 'redirect.html?url=' + encodeURIComponent('${site.url}') + '&name=' + encodeURIComponent('${site.name}');
+                        var redirectUrl = redirectBasePath + 'redirect.html?url=' + encodeURIComponent(site.url) + '&name=' + encodeURIComponent(site.name);
                         var siteHtml = `<div class="site-item" data-index="${i}">
                             <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('${redirectUrl}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${site.url}">
                                 <div class="xe-comment-entry">
@@ -608,20 +618,33 @@ def final_fix():
     html = html.replace('{content}', content_html)
     html = html.replace('{sites_data}', sites_data_json)
     
+    # 替换模板中的占位符（cn目录版本）
+    html_cn_content = template.replace('{nav_menu}', nav_html)
+    html_cn_content = html_cn_content.replace('{content}', content_html_cn)
+    html_cn_content = html_cn_content.replace('{sites_data}', sites_data_json_cn)
+    
+    # 替换模板中的占位符（英文版本）
+    html_en_content = template.replace('{nav_menu}', nav_html)
+    html_en_content = html_en_content.replace('{content}', content_html_en)
+    html_en_content = html_en_content.replace('{sites_data}', sites_data_json_en)
+    
     # 5. 保存新的HTML文件
     print("保存新的HTML文件...")
     
-    # 保存到根目录
+    # 保存到根目录（redirect.html在同一目录）
+    html_root = html.replace('{redirect_base_path}', '')
     with open('../index.html', 'w', encoding='utf-8') as f:
-        f.write(html)
+        f.write(html_root)
     
-    # 保存到cn目录
+    # 保存到cn目录（redirect.html在父目录）
+    html_cn = html_cn_content.replace('{redirect_base_path}', '../')
     with open('../cn/index.html', 'w', encoding='utf-8') as f:
-        f.write(html)
+        f.write(html_cn)
     
-    # 保存到en目录
+    # 保存到en目录（redirect.html在父目录，使用英文内容）
+    html_en_final = html_en_content.replace('{redirect_base_path}', '../')
     with open('../en/index.html', 'w', encoding='utf-8') as f:
-        f.write(html)
+        f.write(html_en_final)
     
     print("最终修复完成！文件：index.html, cn/index.html 和 en/index.html")
 
@@ -636,6 +659,7 @@ def build_category_tree(groups):
             'name': group['name'],
             'parent_id': group['parent_id'],
             'sites': group['sites'],
+            'order_num': group.get('order_num', 0),
             'is_parent': False,
             'children': []
         }
@@ -660,7 +684,8 @@ def generate_nav_menu(category_tree):
     
     # 图标映射字典
     icon_map = {
-        '实用工具': 'fa-wrench',
+        '下海推荐': 'fa-wrench',
+        '教程福利': 'fa-gift',
         'AI工具': 'fa-microphone',
         '跨境推广': 'fa-globe',
         '跨境资讯': 'fa-file-text-o',
@@ -685,7 +710,9 @@ def generate_nav_menu(category_tree):
         '内容创作': 'fa-camera',
         '数据分析': 'fa-bar-chart',
         '学习资源': 'fa-book',
-        '其他工具': 'fa-cog'
+        '其他工具': 'fa-cog',
+        '指纹浏览器': 'fa-globe',
+        '检测优化': 'fa-shield'
     }
     
     # 遍历所有分类
@@ -705,8 +732,11 @@ def generate_nav_menu(category_tree):
                 </a>
                 <ul>'''
             
+            # 按照order_num对子分类进行排序
+            sorted_children = sorted(children, key=lambda x: x.get('order_num', 0))
+            
             # 添加子分类
-            for child in children:
+            for child in sorted_children:
                 nav_html += f'''<li>
                     <a href="#{child['name']}" class="smooth">
                         <span class="title">{child['name']}</span>
@@ -716,10 +746,10 @@ def generate_nav_menu(category_tree):
             nav_html += '''</ul>
             </li>'''
         else:
-            # 没有子分类，直接作为菜单项
+            # 没有子分类，直接作为菜单项（与有子分类的大类保持一致）
             nav_html += f'''<li>
-                <a href="#{category_name}" class="smooth">
-                    <i class="linecons-star"></i>
+                <a>
+                    <i class="{icon_class}"></i>
                     <span class="title">{category_name}</span>
                 </a>
             </li>'''
@@ -747,7 +777,7 @@ def get_favicon_url(url, favicon_mapping=None):
     # 如果没有缓存，使用Google favicon服务
     return f'https://www.google.com/s2/favicons?domain={domain}&sz=64'
 
-def generate_content(groups, category_map, favicon_mapping=None, is_english=False):
+def generate_content(groups, category_map, favicon_mapping=None, is_english=False, is_root=False):
     """生成内容区域"""
     content_html = ''
     sites_data = {}
@@ -770,8 +800,8 @@ def generate_content(groups, category_map, favicon_mapping=None, is_english=Fals
         for site in group_sites:
             site_url = site.get('url', '#')
             site_icon = get_favicon_url(site_url, favicon_mapping)
-            # 如果是英文版本，调整favicon路径
-            if is_english and site_icon.startswith('assets/favicons/'):
+            # 如果不是根目录（cn或en目录），调整favicon路径
+            if not is_root and site_icon.startswith('assets/favicons/'):
                 site_icon = '../' + site_icon
             sites_data[group_name].append({
                 'name': site.get('name', '未知网站'),
@@ -811,12 +841,18 @@ def generate_content(groups, category_map, favicon_mapping=None, is_english=Fals
             site_url = site.get('url', '#')
             site_description = site.get('description', '')
             site_icon = get_favicon_url(site_url, favicon_mapping)
-            # 如果是英文版本，调整favicon路径
-            if is_english and site_icon.startswith('assets/favicons/'):
+            # 如果不是根目录（cn或en目录），调整favicon路径
+            if not is_root and site_icon.startswith('assets/favicons/'):
                 site_icon = '../' + site_icon
             
+            # 生成跳转URL（静态内容也使用redirect.html）
+            redirect_base = '' if is_root else '../'
+            encoded_url = urllib.parse.quote(site_url, safe='')
+            encoded_name = urllib.parse.quote(site_name, safe='')
+            redirect_url = f"{redirect_base}redirect.html?url={encoded_url}&name={encoded_name}"
+            
             content_html += f'''<div class="site-item" data-index="{i}">
-                <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('{site_url}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="{site_url}">
+                <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('{redirect_url}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="{site_url}">
                     <div class="xe-comment-entry">
                         <a class="xe-user-img">
                             <img data-src="{site_icon}" class="lozad img-circle" width="40">
