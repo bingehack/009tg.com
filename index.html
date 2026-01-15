@@ -17776,6 +17776,14 @@
                 var leftPagination = categoryRow.find('.pagination-left');
                 var rightPagination = categoryRow.find('.pagination-right');
                 
+                // 检查是否使用分页
+                var usePagination = $(this).data('pagination');
+                
+                // 如果不使用分页，跳过这个分类（保留静态HTML内容）
+                if (usePagination === 'False') {
+                    return;
+                }
+                
                 // 获取该分类的所有网站数据
                 var sites = allSitesData[categoryName] || [];
                 
