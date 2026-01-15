@@ -1,3 +1,11 @@
+.text-gray {
+    color: #666;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
 .box2 {
     height: 86px;
     cursor: pointer;
@@ -11,6 +19,28 @@
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    will-change: transform, box-shadow;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.box2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.box2:hover::before {
+    opacity: 1;
 }
 
 .box2:hover {
@@ -24,12 +54,35 @@
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
+    border-color: #d0d7de;
+}
+
+.xe-comment a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.xe-comment a:hover {
+    color: #0066cc;
+}
+
+.xe-comment p {
+    color: #999;
+    transition: color 0.2s ease;
+}
+
+.box2:hover .xe-comment p {
+    color: #666;
 }
 
 .xe-comment-entry img {
     float: left;
     display: block;
     margin-right: 10px;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 .xe-comment {
     transform: translateY(-50%);
@@ -64,4 +117,83 @@
 
 .img-circle {
     padding: 7px 0;
+}
+
+.navbar-brand .logo img {
+    filter: brightness(1.1) contrast(1.1);
+    transition: filter 0.3s ease;
+}
+
+.navbar-brand .logo:hover img {
+    filter: brightness(1.2) contrast(1.15);
+}
+
+.sidebar-menu .logo img {
+    filter: brightness(1.05) contrast(1.05);
+    transition: filter 0.3s ease;
+}
+
+.sidebar-menu .logo:hover img {
+    filter: brightness(1.1) contrast(1.1);
+}
+
+.page-container {
+    min-height: calc(100vh - 60px);
+}
+
+.sidebar-menu {
+    z-index: 1000;
+}
+
+.main-content {
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 15px 10px;
+    }
+    
+    .box2 {
+        padding: 0px 20px 0px 20px;
+        margin: 15px 0 0 0;
+    }
+    
+    .xe-comment {
+        margin-left: 40px;
+    }
+    
+    .xe-comment-entry img {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 10px 5px;
+    }
+    
+    .box2 {
+        padding: 0px 15px 0px 15px;
+        margin: 10px 0 0 0;
+        height: auto;
+        min-height: 80px;
+    }
+    
+    .xe-comment p {
+        font-size: 12px;
+    }
+    
+    .xe-comment a {
+        font-size: 13px;
+    }
+}
+
+.text-gray {
+    color: #666;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
 }
