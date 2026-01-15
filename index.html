@@ -17926,9 +17926,15 @@
             }
             
             // 为所有favicon图片添加错误处理
-            $(document).on('error', 'img.lozad', function() {
+            $(document).on('error', 'img', function() {
                 const img = $(this);
                 const currentSrc = img.attr('src');
+                
+                // 如果是本地图片文件加载失败，使用默认图标
+                if (currentSrc.includes('assets/favicons/')) {
+                    img.attr('src', 'assets/images/logos/default.png');
+                    return;
+                }
                 
                 // 尝试从URL中提取域名
                 let domain = '';
