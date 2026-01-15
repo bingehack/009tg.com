@@ -81,10 +81,11 @@ def final_fix():
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="viggo" />
-    <title>我的导航 - 跨境电商工具导航</title>
-    <meta name="keywords" content="跨境电商,营销工具,AI工具,社交媒体,独立站,广告投放">
-    <meta name="description" content="我的导航 - 收集国内外优秀的跨境电商工具、营销资源、AI工具、社交媒体平台等。">
+    <meta name="author" content="Invisible man" />
+    <title>009tg下海导航 - Invisible Man</title>
+    <meta name="theme-color" content="#f9f9f9"/>
+    <meta name="keywords" content="009tg下海导航,网址导航,上网导航,网址大全,网址目录,创业工具,副业赚钱,投资理财,跨境电商,营销工具,AI工具,社交媒体,独立站,广告投放"/>
+    <meta name="description" content="009tg下海导航致力于打造国内最好的互联网上优质网站网址大全，收录了全网好用强大的网站网址和软件包括创业、副业、投资、跨境电商、营销工具、AI工具、社交媒体、独立站、广告投放、生活、休闲、办公、工具、资源等超全面的网址和职业技巧内容，让您的上网体验更便捷更放心，努力成为全民级人人都在用的网址导航。"/>
     <link rel="shortcut icon" href="assets/images/favicon.png">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic">
     <link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css">
