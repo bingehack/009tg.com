@@ -53,7 +53,7 @@ def final_fix():
     
     # 1. 读取JSON数据
     print("读取JSON数据...")
-    with open('完整版导航.json', 'r', encoding='utf-8') as f:
+    with open('../完整版导航.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
     
     # 2. 加载favicon映射
@@ -420,8 +420,9 @@ def final_fix():
                 for (var i = startIndex; i < endIndex; i++) {
                     var site = sites[i];
                     if (site) {
+                        var redirectUrl = 'redirect.html?url=' + encodeURIComponent('${site.url}') + '&name=' + encodeURIComponent('${site.name}');
                         var siteHtml = `<div class="site-item" data-index="${i}">
-                            <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('${site.url}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${site.url}">
+                            <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('${redirectUrl}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${site.url}">
                                 <div class="xe-comment-entry">
                                     <a class="xe-user-img">
                                         <img data-src="${site.icon}" class="lozad img-circle" width="40">
@@ -501,23 +502,24 @@ def final_fix():
                     for (var i = startIndex; i < endIndex; i++) {
                         var site = sites[i];
                         if (site) {
-                            var siteHtml = `<div class="site-item" data-index="${i}">
-                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('${site.url}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${site.url}">
-                                    <div class="xe-comment-entry">
-                                        <a class="xe-user-img">
-                                            <img data-src="${site.icon}" class="lozad img-circle" width="40">
+                        var redirectUrl = 'redirect.html?url=' + encodeURIComponent('${site.url}') + '&name=' + encodeURIComponent('${site.name}');
+                        var siteHtml = `<div class="site-item" data-index="${i}">
+                            <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('${redirectUrl}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${site.url}">
+                                <div class="xe-comment-entry">
+                                    <a class="xe-user-img">
+                                        <img data-src="${site.icon}" class="lozad img-circle" width="40">
+                                    </a>
+                                    <div class="xe-comment">
+                                        <a href="#" class="xe-user-name overflowClip_1">
+                                            <strong>${site.name}</strong>
                                         </a>
-                                        <div class="xe-comment">
-                                            <a href="#" class="xe-user-name overflowClip_1">
-                                                <strong>${site.name}</strong>
-                                            </a>
-                                            <p class="overflowClip_2">${site.description}</p>
-                                        </div>
+                                        <p class="overflowClip_2">${site.description}</p>
                                     </div>
                                 </div>
-                            </div>`;
-                            contentDiv.append(siteHtml);
-                        }
+                            </div>
+                        </div>`;
+                        contentDiv.append(siteHtml);
+                    }
                     }
                     
                     // 更新当前页码
@@ -610,15 +612,15 @@ def final_fix():
     print("保存新的HTML文件...")
     
     # 保存到根目录
-    with open('index.html', 'w', encoding='utf-8') as f:
+    with open('../index.html', 'w', encoding='utf-8') as f:
         f.write(html)
     
     # 保存到cn目录
-    with open('cn/index.html', 'w', encoding='utf-8') as f:
+    with open('../cn/index.html', 'w', encoding='utf-8') as f:
         f.write(html)
     
     # 保存到en目录
-    with open('en/index.html', 'w', encoding='utf-8') as f:
+    with open('../en/index.html', 'w', encoding='utf-8') as f:
         f.write(html)
     
     print("最终修复完成！文件：index.html, cn/index.html 和 en/index.html")
