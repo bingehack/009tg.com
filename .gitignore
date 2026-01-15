@@ -5,6 +5,7 @@ __pycache__/
 
 # 数据文件
 *.json
+!favicon_mapping.json
 
 # 临时文件
 *.tmp
