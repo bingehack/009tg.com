@@ -28,8 +28,16 @@ def generate_html():
     
     # 1. 读取JSON数据
     print("读取JSON数据...")
-    with open('完整版导航.json', 'r', encoding='utf-8') as f:
+    import os
+    json_path = os.path.join(os.path.dirname(__file__), '..', '完整版导航.json')
+    with open(json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
+    
+    # 1.5. 读取favicon映射
+    print("读取favicon映射...")
+    favicon_mapping_path = os.path.join(os.path.dirname(__file__), '..', 'favicon_mapping.json')
+    with open(favicon_mapping_path, 'r', encoding='utf-8') as f:
+        favicon_mapping = json.load(f)
     
     # 2. 生成导航菜单
     print("生成导航菜单...")
@@ -58,11 +66,21 @@ def generate_html():
             site_description = site.get('description', '')
             site_icon = site.get('icon', '../assets/images/logos/default.png')
             
+            # 尝试使用本地favicon
+            from urllib.parse import urlparse
+            try:
+                parsed_url = urlparse(site_url)
+                domain = parsed_url.netloc
+                if domain in favicon_mapping:
+                    site_icon = favicon_mapping[domain]
+            except:
+                pass
+            
             section.append(f'''<div class="col-sm-3">
                 <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('{site_url}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="{site_url}">
                     <div class="xe-comment-entry">
                         <a class="xe-user-img">
-                            <img data-src="{site_icon}" class="lozad img-circle" width="40">
+                            <img src="{site_icon}" data-src="{site_icon}" class="lozad img-circle" width="40">
                         </a>
                         <div class="xe-comment">
                             <a href="#" class="xe-user-name overflowClip_1">
@@ -188,18 +206,18 @@ def generate_html():
         </div>
     </div>
     <script>
-        $(document).ready(function() {
-            $('.smooth').click(function(e) {
+        $(document).ready(function() {{
+            $('.smooth').click(function(e) {{
                 var href = $(this).attr("href");
                 var pos = $(href).position().top - 30;
                 $(".sidebar-menu").find("li").removeClass("active");
                 $(this).parent("li").addClass("active");
                 e.preventDefault();
-                $("html,body").animate({
+                $("html,body").animate({{
                     scrollTop: pos
-                }, 1000);
-            });
-        });
+                }}, 1000);
+            }});
+        }});
     </script>
     <!-- Bottom Scripts -->
     <script src="assets/js/bootstrap.min.js"></script> 
@@ -218,7 +236,8 @@ def generate_html():
     
     # 5. 保存HTML文件
     print("保存HTML文件...")
-    with open('index.html', 'w', encoding='utf-8') as f:
+    output_path = os.path.join(os.path.dirname(__file__), '..', 'index.html')
+    with open(output_path, 'w', encoding='utf-8') as f:
         f.write(html)
     
     print("生成完成！文件：index.html")
