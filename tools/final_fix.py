@@ -341,6 +341,12 @@ def final_fix():
         
         // 设置redirect.html的基础路径
         var redirectBasePath = '{redirect_base_path}';
+        
+        // 跳转到目标网站的函数
+        function redirectToSite(url, name) {
+            var redirectUrl = redirectBasePath + 'redirect.html?url=' + encodeURIComponent(url) + '&name=' + encodeURIComponent(name);
+            window.location.href = redirectUrl;
+        }
     </script>
             {content}
         </div>
@@ -430,9 +436,8 @@ def final_fix():
                 for (var i = startIndex; i < endIndex; i++) {
                     var site = sites[i];
                     if (site) {
-                        var redirectUrl = redirectBasePath + 'redirect.html?url=' + encodeURIComponent(site.url) + '&name=' + encodeURIComponent(site.name);
                         var siteHtml = `<div class="site-item" data-index="${i}">
-                            <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('${redirectUrl}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${site.url}">
+                            <div class="xe-widget xe-conversations box2 label-info" onclick="redirectToSite('${site.url}', '${site.name}')" data-toggle="tooltip" data-placement="bottom" title="${site.url}">
                                 <div class="xe-comment-entry">
                                     <a class="xe-user-img">
                                         <img data-src="${site.icon}" class="lozad img-circle" width="40">
@@ -845,14 +850,11 @@ def generate_content(groups, category_map, favicon_mapping=None, is_english=Fals
             if not is_root and site_icon.startswith('assets/favicons/'):
                 site_icon = '../' + site_icon
             
-            # 生成跳转URL（静态内容也使用redirect.html）
+            # 生成跳转URL（使用redirectToSite函数）
             redirect_base = '' if is_root else '../'
-            encoded_url = urllib.parse.quote(site_url, safe='')
-            encoded_name = urllib.parse.quote(site_name, safe='')
-            redirect_url = f"{redirect_base}redirect.html?url={encoded_url}&name={encoded_name}"
             
             content_html += f'''<div class="site-item" data-index="{i}">
-                <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('{redirect_url}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="{site_url}">
+                <div class="xe-widget xe-conversations box2 label-info" onclick="redirectToSite('{site_url}', '{site_name}')" data-toggle="tooltip" data-placement="bottom" title="{site_url}">
                     <div class="xe-comment-entry">
                         <a class="xe-user-img">
                             <img data-src="{site_icon}" class="lozad img-circle" width="40">
