@@ -1,0 +1,14 @@
+{
+  "url": "https://www.ponzu.gg",
+  "host": "www.ponzu.gg",
+  "status": 200,
+  "statusText": "ok",
+  "icons": [
+    {
+      "sizes": "100x100",
+      "href": "data:image/svg+xml;base64,CiAgICA8c3ZnIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjY2NjY2NjIi8+CiAgICAgIDx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBmaWxsPSIjMDAwMDAwIj5XPC90ZXh0PgogICAgPC9zdmc+CiAg"
+    }
+  ],
+  "duration": "2.59s",
+  "source": "placeholder"
+}

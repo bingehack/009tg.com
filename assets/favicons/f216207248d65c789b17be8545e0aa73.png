@@ -1,0 +1,14 @@
+{
+  "url": "https://magento.com",
+  "host": "magento.com",
+  "status": 200,
+  "statusText": "ok",
+  "icons": [
+    {
+      "href": "https://icons.duckduckgo.com/ip3/magento.com.ico",
+      "sizes": "100x100"
+    }
+  ],
+  "duration": "1.48s",
+  "source": "third-party"
+}

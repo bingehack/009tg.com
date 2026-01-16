@@ -213,10 +213,13 @@ Cloudflare Pages支持自动部署，当你推送代码到GitHub时：
 
 ### 2026-01-16
 
+- **修复faviconextractor.com API格式错误**：将错误的URL格式`https://www.faviconextractor.com/favicon/{domain}?larger=true`修复为正确的`https://www.faviconextractor.com/api/favicon/{domain}`
+- **修复JSON数据中的URL格式**：将包含路径的URL（如`https://echodata.work/home.html`）修复为只包含域名的格式（如`https://echodata.work`）
 - **修复Google favicon服务超时问题**：为使用Google favicon服务的图片添加默认src属性，避免显示小地球图标
 - **修复JavaScript模板变量转义**：修复动态生成的img标签中的转义变量问题
 - **修复不分页分类的显示问题**：JavaScript代码现在会跳过`data-pagination="False"`的分类，保留静态HTML内容
 - **优化HTML生成脚本**：使用本地favicon文件而不是在线服务，提升加载速度
+- **成功缓存1164个favicon**：使用修复后的API格式成功下载了所有网站的favicon图标
 
 ## 常见问题
 

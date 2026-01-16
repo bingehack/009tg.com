@@ -1,0 +1,14 @@
+{
+  "url": "http://luckytrader.com/",
+  "host": "luckytrader.com",
+  "status": 200,
+  "statusText": "OK",
+  "icons": [
+    {
+      "sizes": "unknown",
+      "href": "http://luckytrader.com/data:,"
+    }
+  ],
+  "duration": "5.00s",
+  "source": "website"
+}

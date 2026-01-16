@@ -396,6 +396,105 @@ python test_sites_no_proxy.py
 
 ---
 
+### 18. add_default_src.py - 添加默认src属性脚本
+
+**用途：**
+为使用Google favicon服务的图片添加默认src属性，避免显示小地球图标。
+
+**功能概述：**
+- 扫描HTML文件中的Google favicon服务URL
+- 为这些图片添加默认src属性指向本地默认图片
+- 修复Google favicon服务超时导致的图标显示问题
+
+**使用方法：**
+```bash
+python add_default_src.py
+```
+
+---
+
+### 19. fix_javascript_escape.py - 修复JavaScript模板变量转义脚本
+
+**用途：**
+修复动态生成的img标签中的转义变量问题。
+
+**功能概述：**
+- 修复JavaScript模板字符串中的转义变量（如`\${site.icon}`）
+- 确保变量能够正确插值到动态生成的HTML中
+
+**使用方法：**
+```bash
+python fix_javascript_escape.py
+```
+
+---
+
+### 20. fix_javascript_img.py - 修复动态生成的img标签脚本
+
+**用途：**
+为JavaScript动态生成的img标签添加src属性。
+
+**功能概述：**
+- 为JavaScript代码中动态生成的img标签添加src属性
+- 确保懒加载的图片能够正确显示
+
+**使用方法：**
+```bash
+python fix_javascript_img.py
+```
+
+---
+
+### 21. fix_favicon_urls.py - 修复favicon URL格式脚本
+
+**用途：**
+修复JSON数据文件中错误的faviconextractor.com URL格式。
+
+**功能概述：**
+- 将错误的URL格式`https://www.faviconextractor.com/favicon/{domain}?larger=true`
+- 修复为正确的URL格式`https://www.faviconextractor.com/api/favicon/{domain}`
+- 自动备份原始JSON文件
+
+**使用方法：**
+```bash
+python fix_favicon_urls.py
+```
+
+---
+
+### 22. fix_url_format.py - 修复URL格式脚本
+
+**用途：**
+修复JSON数据文件中的URL格式，去掉路径部分，只保留域名。
+
+**功能概述：**
+- 将包含路径的URL（如`https://echodata.work/home.html`）
+- 修复为只包含域名的格式（如`https://echodata.work`）
+- 自动备份原始JSON文件
+
+**使用方法：**
+```bash
+python fix_url_format.py
+```
+
+---
+
+### 23. check_png_file.py - 检查PNG文件有效性脚本
+
+**用途：**
+检查指定的PNG文件是否有效。
+
+**功能概述：**
+- 验证PNG文件的文件头是否正确
+- 输出验证结果
+
+**使用方法：**
+```bash
+python check_png_file.py <文件路径>
+```
+
+---
+
 ## 使用建议
 
 ### 日常维护流程：

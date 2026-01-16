@@ -45,7 +45,7 @@ def get_favicon_sources(domain):
         f"https://www.google.com/s2/favicons?domain={domain}&sz=64",
         f"https://favicon.yandex.net/favicon/{domain}",
         f"https://api.statvoo.com/favicon/{domain}",
-        f"https://www.faviconextractor.com/favicon/{domain}?larger=true"
+        f"https://www.faviconextractor.com/api/favicon/{domain}"
     ]
 
 def download_favicon(url, save_path, timeout=10):
