@@ -33,10 +33,12 @@
 │   └── about.html     # 关于页面
 ├── tools/              # 开发工具脚本
 │   ├── README.md       # 工具说明文档
-│   ├── final_fix.py    # HTML生成脚本
+│   ├── generate_new_html.py  # HTML生成脚本
 │   ├── cache_favicons.py  # Favicon缓存脚本
 │   ├── check_sites_validity.py  # 站点有效性检测
-│   ├── fix_bugs.py     # Bug修复脚本
+│   ├── add_default_src.py  # 为Google favicon服务添加默认src属性
+│   ├── fix_javascript_escape.py  # 修复JavaScript模板变量转义
+│   ├── fix_javascript_img.py  # 修复动态生成的img标签
 │   └── ...           # 其他工具脚本
 ├── index.html          # 根目录首页（中文）
 ├── 404.html           # 404错误页面
@@ -68,11 +70,11 @@ python -m http.server 8000
 # 1. 检测新添加的站点是否有效
 python tools/check_sites_validity.py
 
-# 2. 下载新站点的favicon
+# 3. 下载新站点的favicon
 python tools/cache_favicons.py
 
-# 3. 重新生成HTML文件
-python tools/final_fix.py
+# 4. 重新生成HTML文件
+python tools/generate_new_html.py
 ```
 
 ## 工具脚本使用
@@ -92,10 +94,12 @@ python tools/remove_invalid_sites.py
 python tools/cache_favicons.py
 
 # 重新生成HTML
-python tools/final_fix.py
+python tools/generate_new_html.py
 
-# 修复已知bug
-python tools/fix_bugs.py
+# 修复已知问题
+python tools/add_default_src.py
+python tools/fix_javascript_escape.py
+python tools/fix_javascript_img.py
 ```
 
 ## 部署到Cloudflare Pages
@@ -194,7 +198,7 @@ Cloudflare Pages支持自动部署，当你推送代码到GitHub时：
 
 4. **重新生成HTML**（数据更新后）
    ```bash
-   python tools/final_fix.py
+   python tools/generate_new_html.py
    ```
 
 ### 数据更新流程
@@ -202,14 +206,23 @@ Cloudflare Pages支持自动部署，当你推送代码到GitHub时：
 1. 编辑 `完整版导航.json` 添加或修改网站
 2. 运行 `check_sites_validity.py` 验证新站点
 3. 运行 `cache_favicons.py` 下载favicon
-4. 运行 `final_fix.py` 重新生成HTML
+4. 运行 `generate_new_html.py` 重新生成HTML
 5. 提交代码到GitHub触发自动部署
+
+## 最新修复
+
+### 2026-01-16
+
+- **修复Google favicon服务超时问题**：为使用Google favicon服务的图片添加默认src属性，避免显示小地球图标
+- **修复JavaScript模板变量转义**：修复动态生成的img标签中的转义变量问题
+- **修复不分页分类的显示问题**：JavaScript代码现在会跳过`data-pagination="False"`的分类，保留静态HTML内容
+- **优化HTML生成脚本**：使用本地favicon文件而不是在线服务，提升加载速度
 
 ## 常见问题
 
 ### Q: 如何添加新网站？
 
-A: 编辑 `完整版导航.json` 文件，按照现有格式添加网站信息，然后运行 `python tools/final_fix.py` 重新生成HTML。
+A: 编辑 `完整版导航.json` 文件，按照现有格式添加网站信息，然后运行 `python tools/generate_new_html.py` 重新生成HTML。
 
 ### Q: 网站图标不显示怎么办？
 
