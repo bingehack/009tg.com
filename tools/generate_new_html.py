@@ -77,7 +77,7 @@ def generate_html():
                 pass
             
             section.append(f'''<div class="col-sm-3">
-                <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('{site_url}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="{site_url}">
+                <div class="xe-widget xe-conversations box2 label-info" onclick="redirectToSite('{site_url}', '{site_name}')" data-toggle="tooltip" data-placement="bottom" title="{site_url}">
                     <div class="xe-comment-entry">
                         <a class="xe-user-img">
                             <img src="{site_icon}" data-src="{site_icon}" class="lozad img-circle" width="40">
@@ -206,6 +206,11 @@ def generate_html():
         </div>
     </div>
     <script>
+        function redirectToSite(url, name) {{
+            var redirectUrl = 'redirect.html?url=' + encodeURIComponent(url) + '&name=' + encodeURIComponent(name);
+            window.location.href = redirectUrl;
+        }}
+        
         $(document).ready(function() {{
             $('.smooth').click(function(e) {{
                 var href = $(this).attr("href");
