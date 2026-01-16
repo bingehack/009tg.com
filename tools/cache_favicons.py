@@ -26,10 +26,16 @@ Favicon缓存脚本
 
 import json
 import os
+import sys
 import requests
 import hashlib
 from urllib.parse import urlparse
 import time
+
+# 设置标准输出编码为UTF-8
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 def get_domain_from_url(url):
     """从URL中提取域名"""
@@ -40,13 +46,52 @@ def get_domain_from_url(url):
         return None
 
 def get_favicon_sources(domain):
-    """获取多个favicon源"""
+    """获取多个favicon源（优先使用Google）"""
     return [
         f"https://www.google.com/s2/favicons?domain={domain}&sz=64",
         f"https://favicon.yandex.net/favicon/{domain}",
         f"https://api.statvoo.com/favicon/{domain}",
         f"https://www.faviconextractor.com/api/favicon/{domain}"
     ]
+
+def is_valid_image(content):
+    """检查内容是否是有效的图片"""
+    image_signatures = {
+        b'\x89PNG\r\n\x1a\n': 'PNG',
+        b'\xff\xd8\xff': 'JPEG',
+        b'GIF87a': 'GIF',
+        b'GIF89a': 'GIF',
+        b'BM': 'BMP',
+        b'RIFF': 'WEBP'
+    }
+    
+    for signature, format_name in image_signatures.items():
+        if content.startswith(signature):
+            return True, format_name
+    
+    return False, None
+
+def parse_faviconextractor_json(content):
+    """解析faviconextractor.com API返回的JSON数据"""
+    try:
+        import base64
+        
+        data = json.loads(content)
+        if 'icons' in data and len(data['icons']) > 0:
+            icon = data['icons'][0]
+            if 'href' in icon:
+                href = icon['href']
+                
+                if href.startswith('data:image/svg+xml;base64,'):
+                    svg_data = base64.b64decode(href.split(',')[1])
+                    return svg_data, 'svg'
+                elif href.startswith('http://') or href.startswith('https://'):
+                    return href, 'url'
+        
+        return None, None
+    except Exception as e:
+        print(f"解析JSON失败: {e}")
+        return None, None
 
 def download_favicon(url, save_path, timeout=10):
     """下载favicon图片"""
@@ -56,9 +101,41 @@ def download_favicon(url, save_path, timeout=10):
         }
         response = requests.get(url, headers=headers, timeout=timeout)
         if response.status_code == 200 and len(response.content) > 100:
-            with open(save_path, 'wb') as f:
-                f.write(response.content)
-            return True
+            is_valid, format_name = is_valid_image(response.content)
+            
+            if is_valid:
+                with open(save_path, 'wb') as f:
+                    f.write(response.content)
+                return True
+            else:
+                print(f"  检测到非图片内容，尝试解析...")
+                content, content_type = parse_faviconextractor_json(response.content)
+                
+                if content_type == 'svg':
+                    try:
+                        import cairosvg
+                        
+                        png_data = cairosvg.svg2png(bytestring=content)
+                        
+                        with open(save_path, 'wb') as f:
+                            f.write(png_data)
+                        
+                        print(f"  ✓ SVG转PNG成功")
+                        return True
+                    except ImportError:
+                        print(f"  ✗ 需要安装cairosvg库: pip install cairosvg")
+                        return False
+                    except Exception as e:
+                        print(f"  ✗ SVG转PNG失败: {e}")
+                        return False
+                
+                elif content_type == 'url':
+                    print(f"  尝试下载实际图片URL: {content}")
+                    return download_favicon(content, save_path, timeout)
+                
+                else:
+                    print(f"  ✗ 无法解析JSON内容")
+                    return False
     except Exception as e:
         print(f"下载失败: {url} - {e}")
     return False
@@ -112,6 +189,9 @@ def cache_favicons(json_file, cache_dir):
     failed_count = 0
     cached_domains = {}
     
+    # 默认图标路径
+    default_icon_path = "../assets/images/logos/default.png"
+    
     for i, site in enumerate(sites, 1):
         domain = get_domain_from_url(site['url'])
         if not domain:
@@ -135,17 +215,25 @@ def cache_favicons(json_file, cache_dir):
         
         for source_url in favicon_sources:
             if download_favicon(source_url, cache_path):
-                print(f"  ✓ 下载成功: {source_url}")
+                print(f"  下载成功: {source_url}")
                 cached_domains[domain] = f"assets/favicons/{cache_filename}"
                 downloaded = True
                 success_count += 1
                 break
             else:
-                print(f"  ✗ 失败: {source_url}")
+                print(f"  失败: {source_url}")
         
         if not downloaded:
-            print(f"  ✗ 所有源都失败")
-            failed_count += 1
+            print(f"  所有源都失败，使用默认图标")
+            # 复制默认图标
+            try:
+                import shutil
+                shutil.copy(default_icon_path, cache_path)
+                cached_domains[domain] = f"assets/favicons/{cache_filename}"
+                success_count += 1
+            except Exception as e:
+                print(f"  复制默认图标失败: {e}")
+                failed_count += 1
         
         time.sleep(0.2)
     
