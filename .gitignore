@@ -5,6 +5,7 @@ __pycache__/
 
 # 例外：tools文件夹下的Python脚本
 !tools/*.py
+!tools/test_scripts/*.py
 
 # 数据文件
 *.json
