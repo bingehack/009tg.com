@@ -462,13 +462,55 @@ def generate_html():
     <script>
         var allSitesData = {{}};
         var currentPage = {{}};
-        var itemsPerPage = 6;
+        var categoryData = {{}};
+        var itemsPerPage = 15;
         
+        function calculateItemsPerPage() {{
+            var windowWidth = $(window).width();
+            if (windowWidth > 1400) {{
+                return 18; // 6列 × 3行
+            }} else if (windowWidth > 1200) {{
+                return 12; // 4列 × 3行
+            }} else if (windowWidth > 992) {{
+                return 9;  // 3列 × 3行
+            }} else if (windowWidth > 768) {{
+                return 6;  // 2列 × 3行
+            }} else if (windowWidth > 480) {{
+                return 6;  // 2列 × 3行
+            }} else {{
+                return 3;  // 1列 × 3行
+            }}
+        }}
+
+        $(window).resize(function() {{
+            var newItemsPerPage = calculateItemsPerPage();
+            if (newItemsPerPage !== itemsPerPage) {{
+                itemsPerPage = newItemsPerPage;
+                $('.category-row').each(function() {{
+                    var categoryName = $(this).data('category');
+                    currentPage[categoryName] = 1;
+                    changePage(categoryName, 1);
+                }});
+            }}
+        }});
+
         {sites_data_js}
         
         $(document).ready(function() {{
             var observer = lozad();
             
+            // 初始化分类数据和当前页码
+            $('.category-row').each(function() {{
+                var categoryName = $(this).data('category');
+                var totalItems = $(this).data('total');
+                categoryData[categoryName] = totalItems;
+                currentPage[categoryName] = 1;
+            }});
+
+            // 计算每页显示数量
+            itemsPerPage = calculateItemsPerPage();
+
+            // 渲染分类内容
             $('.category-row').each(function() {{
                 var categoryName = $(this).data('category');
                 var categoryRow = $(this);
@@ -529,7 +571,7 @@ def generate_html():
                 }}
                 
                 if (leftPagination.length > 0 && enablePagination) {{
-                    var totalPages = Math.ceil(sites.length / itemsPerPage);
+                    var totalPages = Math.ceil(categoryData[categoryName] / itemsPerPage);
                     
                     if (totalPages > 1) {{
                         leftPagination.find('.prev-page').prop('disabled', true);
@@ -558,7 +600,7 @@ def generate_html():
                     var sites = allSitesData[categoryName] || [];
                     
                     currentPage[categoryName] = pageNum;
-                    var totalPages = Math.ceil(sites.length / itemsPerPage);
+                    var totalPages = Math.ceil(categoryData[categoryName] / itemsPerPage);
                     
                     contentDiv.empty();
                     
@@ -624,7 +666,7 @@ def generate_html():
                 var categoryName = $(this).data('category');
                 var categoryRow = $('.category-row[data-category="' + categoryName + '"]');
                 var sites = allSitesData[categoryName] || [];
-                var totalPages = Math.ceil(sites.length / itemsPerPage);
+                var totalPages = Math.ceil(categoryData[categoryName] / itemsPerPage);
                 var currentPageNum = currentPage[categoryName] || 1;
                 if (currentPageNum < totalPages) {{
                     changePage(categoryName, currentPageNum + 1);

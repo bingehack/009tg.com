@@ -1218,8 +1218,38 @@
     <script>
         var allSitesData = {};
         var currentPage = {};
-        var itemsPerPage = 6;
+        var categoryData = {};
+        var itemsPerPage = 15;
         
+        function calculateItemsPerPage() {
+            var windowWidth = $(window).width();
+            if (windowWidth > 1400) {
+                return 18; // 6列 × 3行
+            } else if (windowWidth > 1200) {
+                return 12; // 4列 × 3行
+            } else if (windowWidth > 992) {
+                return 9;  // 3列 × 3行
+            } else if (windowWidth > 768) {
+                return 6;  // 2列 × 3行
+            } else if (windowWidth > 480) {
+                return 6;  // 2列 × 3行
+            } else {
+                return 3;  // 1列 × 3行
+            }
+        }
+
+        $(window).resize(function() {
+            var newItemsPerPage = calculateItemsPerPage();
+            if (newItemsPerPage !== itemsPerPage) {
+                itemsPerPage = newItemsPerPage;
+                $('.category-row').each(function() {
+                    var categoryName = $(this).data('category');
+                    currentPage[categoryName] = 1;
+                    changePage(categoryName, 1);
+                });
+            }
+        });
+
         allSitesData['下海推荐'] = [{"name": "Sexo 博客", "url": "https://invisibleman.dpdns.org", "description": "博客", "icon": "assets/favicons/c00f5a5795130a909f978a73fce74027.png"}, {"name": "Libretv", "url": "https://tv.safesystem.dpdns.org", "description": "Libretv", "icon": "assets/favicons/093bca42950dbc02ab00f74e58b5d918.png"}, {"name": "账号星球", "url": "http://accboyinvman.acceboy.com", "description": "苹果id购买|国外ID购买|电报Telegram 账号购买-账号星球", "icon": "assets/favicons/7dadb4e62aa7584241decf0aa741471a.png"}];
         allSitesData['教程福利'] = [{"name": "MoonTV业务", "url": "https://tomsum77.dpdns.org", "description": "MoonTV业务", "icon": "assets/favicons/b95fc2cf42ead5355de8eadbd648e5cd.png"}, {"name": "订阅提醒", "url": "https://dingyue.tomsum99.dpdns.org", "description": "订阅提醒", "icon": "assets/favicons/27724685ad365329f709326a75259355.png"}, {"name": "MoonTV", "url": "https://moon11.xigua88.dpdns.org", "description": "MoonTV", "icon": "assets/favicons/b31059c11b7b078419ebcf2df7117bbd.png"}, {"name": "科学上网", "url": "https://xigua88.dpdns.org", "description": "科学上网", "icon": "assets/favicons/5e2cc1c871dfd4104faea4688f922e83.png"}, {"name": "Cloudflare 加速下载", "url": "http://cf.tomsum77.dpdns.org", "description": "GitHub 文件加速，Docker 镜像加速", "icon": "assets/favicons/c43a4a546acb6c5abe134b57de9eb534.png"}, {"name": "solara音乐播放器", "url": "https://m.tomsum77.dpdns.org", "description": "solara音乐播放器", "icon": "assets/favicons/78d4c2ce7e66784808900a177f202501.png"}];
         allSitesData['常用工具'] = [{"name": "在线PS图片", "url": "https://www.uupoop.com", "description": "稿定设计|在线PS", "icon": "assets/favicons/707fc2d9f317c1111c2fdce7b2ce9f2e.png"}, {"name": "Similarweb", "url": "https://www.similarweb.com", "description": "知名网站分析工具，能分析网站流量和来源", "icon": "assets/favicons/5ed14c39685d56550210c345c8301c5a.png"}, {"name": "bitly短链接", "url": "https://bitly.com", "description": "可以缩短长链接，推广更方便", "icon": "assets/favicons/c859e5f8ee8f4cdd7791f19b9999cd4d.png"}, {"name": "snapmail邮箱", "url": "https://www.snapmail.cc", "description": "虚拟邮箱/一次性邮箱", "icon": "assets/favicons/bca884ecbbc9f9eff1c3f18f271d899e.png"}, {"name": "APKMirror", "url": "https://www.apkmirror.com", "description": "APKMirror是什么？ APKMirror...", "icon": "assets/favicons/431a629bf4f3de905c14c105c2ea89ed.png"}, {"name": "全球营销日历", "url": "https://nationaldaycalendar.com", "description": "全球热门节日日历工具", "icon": "assets/favicons/9d84863edaf55c5d27d25ec4050ccd2d.png"}, {"name": "Microsoft Office", "url": "https://www.office.com", "description": "微软公司开发的办公软件套装", "icon": "assets/favicons/3e6c9a38b8666d10760136abbb71eb91.png"}, {"name": "AreacodeBase", "url": "https://www.areacodebase.com", "description": "全球区号数据库网站，其中包括超过 1,000,000+ 项的 城市码, 国家, 城市, 区县, 州, 邮编, 纬度, 经度 等。", "icon": "assets/favicons/c6c978b0fe133ef3818a645e9b70c0f1.png"}, {"name": "Asana", "url": "https://www.asana.com", "description": "Asana公司介绍 Asana是一个网...", "icon": "assets/favicons/e688e71fb10b93d25ae1884d928c495e.png"}, {"name": "Apkpure", "url": "https://apkpure.com", "description": "在线下载海外安卓原版应用", "icon": "assets/favicons/dc77eb646d7f23871dd176de0adbb8c6.png"}, {"name": "Dropbox", "url": "https://www.dropbox.com", "description": "云存储服务", "icon": "assets/favicons/1a01fc7cc8de2fa07c52183572f06ac8.png"}, {"name": "敏感词处理工具", "url": "https://igfonts.io", "description": "FB、Google广告时处理敏感词", "icon": "assets/favicons/a6ce554b2dbe8b664ffee085df7662a1.png"}, {"name": "Amzchart", "url": "https://amzchart.com", "description": "亚马逊大数据筛选平台", "icon": "assets/favicons/a973ca95fe8fda8285b8f506e3903e2a.png"}, {"name": "域名查邮箱", "url": "https://hunter.io", "description": "输入网址的域名，查找相关的邮箱", "icon": "assets/favicons/fca64f416c7e7d702a73dc975ecb1136.png"}, {"name": "Focusky PPT制作", "url": "http://www.focusky.com.cn", "description": "快速制作高大上的动画PPT演示", "icon": "assets/favicons/617f21428a8528c1df60824ec980eb29.png"}, {"name": "Slogan生成器", "url": "https://www.shopify.com", "description": "shopify免费工具，免费的标语制作者 发现适合您品牌的口号创意", "icon": "assets/favicons/44d34ef29db3ccfe157283e80f3072c5.png"}, {"name": "Adobe Creative Cloud", "url": "https://www.adobe.com", "description": "一个集成的软件和服务套件", "icon": "assets/favicons/e2b3f8990ced074503375950e24ba3e5.png"}, {"name": "广告出价计算器", "url": "http://adcalc.net", "description": "模拟Campaign的出价，来计算盈利空间", "icon": "assets/favicons/8f75b341407f20464ff64117ac5af29d.png"}, {"name": "Zapier", "url": "https://zapier.com", "description": "云应用程序", "icon": "assets/favicons/7820e86527c7b48a9a859c617d1c5452.png"}, {"name": "Adobe Acrobat", "url": "https://get.adobe.com", "description": "由Adobe公司推出的PDF管理软件", "icon": "assets/favicons/c958fef086e8a0f536b3179f8fa3d318.png"}, {"name": "FreshBooks", "url": "https://www.freshbooks.com", "description": "一款基于云端的财务管理软件", "icon": "assets/favicons/dc190c0eca343e7e1e0bdca879a31d7f.png"}, {"name": "Google Drive", "url": "https://www.google.com", "description": "由谷歌提供的云存储和在线办公套件", "icon": "assets/favicons/0a137b375cc3881a70e186ce2172c8d1.png"}, {"name": "Evernote", "url": "https://evernote.com", "description": "一款功能强大的笔记和组织工具", "icon": "assets/favicons/e910b9f04f71c11040a9a24f8d5cab75.png"}, {"name": "Zoom", "url": "https://zoom.us", "description": "Zoom是什么？ Zoom是一款流行...", "icon": "assets/favicons/f10625aea284974d73f4d2323b7ac610.png"}, {"name": "网站时光机", "url": "https://web.archive.org", "description": "回到过去，查看网站过去的样子", "icon": "assets/favicons/e5516eb5686a18e24b3f0841b0ecbd08.png"}, {"name": "convertio格式转换", "url": "https://convertio.co", "description": "云在线文件格式转换", "icon": "assets/favicons/2b5bd95f1979533cd9a9025910a5560a.png"}, {"name": "查看ip环境", "url": "https://whoer.net", "description": "用于检查Internet的匿名性服务器", "icon": "assets/favicons/6e68181667a0a3652608d23b031c9420.png"}];
@@ -1299,6 +1329,18 @@
         $(document).ready(function() {
             var observer = lozad();
             
+            // 初始化分类数据和当前页码
+            $('.category-row').each(function() {
+                var categoryName = $(this).data('category');
+                var totalItems = $(this).data('total');
+                categoryData[categoryName] = totalItems;
+                currentPage[categoryName] = 1;
+            });
+
+            // 计算每页显示数量
+            itemsPerPage = calculateItemsPerPage();
+
+            // 渲染分类内容
             $('.category-row').each(function() {
                 var categoryName = $(this).data('category');
                 var categoryRow = $(this);
@@ -1359,7 +1401,7 @@
                 }
                 
                 if (leftPagination.length > 0 && enablePagination) {
-                    var totalPages = Math.ceil(sites.length / itemsPerPage);
+                    var totalPages = Math.ceil(categoryData[categoryName] / itemsPerPage);
                     
                     if (totalPages > 1) {
                         leftPagination.find('.prev-page').prop('disabled', true);
@@ -1388,7 +1430,7 @@
                     var sites = allSitesData[categoryName] || [];
                     
                     currentPage[categoryName] = pageNum;
-                    var totalPages = Math.ceil(sites.length / itemsPerPage);
+                    var totalPages = Math.ceil(categoryData[categoryName] / itemsPerPage);
                     
                     contentDiv.empty();
                     
@@ -1454,7 +1496,7 @@
                 var categoryName = $(this).data('category');
                 var categoryRow = $('.category-row[data-category="' + categoryName + '"]');
                 var sites = allSitesData[categoryName] || [];
-                var totalPages = Math.ceil(sites.length / itemsPerPage);
+                var totalPages = Math.ceil(categoryData[categoryName] / itemsPerPage);
                 var currentPageNum = currentPage[categoryName] || 1;
                 if (currentPageNum < totalPages) {
                     changePage(categoryName, currentPageNum + 1);
