@@ -8,20 +8,157 @@
 
 功能概述：
     1. 读取JSON数据
-    2. 生成导航菜单
-    3. 生成内容区域
-    4. 保存为HTML文件
+    2. 构建层级结构（大类和小类）
+    3. 生成导航菜单（支持层级展开）
+    4. 生成内容区域（支持分页）
+    5. 保存为HTML文件
 
 使用方法：
     python generate_new_html.py
 
 主要特性：
     - 生成完整的HTML结构
+    - 支持大类和小类的层级关系
     - 支持自定义导航菜单
+    - 支持分页功能
     - 生成内容区域
 """
 
 import json
+
+def build_hierarchy(groups):
+    """构建层级结构"""
+    hierarchy = {}
+    
+    for group in groups:
+        group_id = group['id']
+        parent_id = group.get('parent_id')
+        
+        if parent_id is None:
+            if group_id not in hierarchy:
+                hierarchy[group_id] = {
+                    'info': group,
+                    'children': []
+                }
+            else:
+                hierarchy[group_id]['info'] = group
+        else:
+            if parent_id in hierarchy:
+                hierarchy[parent_id]['children'].append(group)
+            else:
+                hierarchy[parent_id] = {
+                    'info': None,
+                    'children': [group]
+                }
+    
+    return hierarchy
+
+def generate_nav_menu(hierarchy):
+    """生成导航菜单HTML（支持层级）"""
+    nav_menu = []
+    
+    for parent_id, parent_data in hierarchy.items():
+        parent_info = parent_data['info']
+        children = parent_data['children']
+        
+        if parent_info is None:
+            continue
+        
+        if children:
+            nav_menu.append(f'''<li>
+            <a href="#" class="has-sub">
+                <i class="linecons-star"></i>
+                <span class="title">{parent_info['name']}</span>
+            </a>
+            <ul>''')
+            
+            for child in children:
+                nav_menu.append(f'''<li>
+                <a href="#{child['name']}" class="smooth">
+                    <span class="title">{child['name']}</span>
+                </a>
+            </li>''')
+            
+            nav_menu.append('</ul></li>')
+        else:
+            nav_menu.append(f'''<li>
+            <a href="#{parent_info['name']}" class="smooth">
+                <i class="linecons-star"></i>
+                <span class="title">{parent_info['name']}</span>
+            </a>
+        </li>''')
+    
+    return ''.join(nav_menu)
+
+def generate_content_section(group, favicon_mapping, sites_per_page=12):
+    """生成单个内容区域HTML（支持分页）"""
+    sites = group.get('sites', [])
+    section_name = group['name']
+    
+    if not sites:
+        return ''
+    
+    result = [f'''<h4 class="text-gray"><i class="linecons-tag" style="margin-right: 7px;" id="{section_name}"></i>{section_name}</h4>''']
+    
+    total_sites = len(sites)
+    total_pages = (total_sites + sites_per_page - 1) // sites_per_page
+    
+    for page_num in range(total_pages):
+        start_idx = page_num * sites_per_page
+        end_idx = min(start_idx + sites_per_page, total_sites)
+        page_sites = sites[start_idx:end_idx]
+        
+        result.append(f'<div class="row" data-page="{page_num + 1}" data-total-pages="{total_pages}" data-section="{section_name}">')
+        
+        for site in page_sites:
+            site_name = site.get('name', '未知网站')
+            site_url = site.get('url', '#')
+            site_description = site.get('description', '')
+            site_icon = site.get('icon', 'assets/images/logos/default.png')
+            
+            from urllib.parse import urlparse
+            try:
+                parsed_url = urlparse(site_url)
+                domain = parsed_url.netloc
+                if domain in favicon_mapping:
+                    site_icon = favicon_mapping[domain]
+            except:
+                pass
+            
+            result.append(f'''<div class="col-sm-3">
+                <div class="xe-widget xe-conversations box2 label-info" onclick="redirectToSite('{site_url}', '{site_name}')" data-toggle="tooltip" data-placement="bottom" title="{site_url}">
+                    <div class="xe-comment-entry">
+                        <a class="xe-user-img">
+                            <img src="{site_icon}" data-src="{site_icon}" class="lozad img-circle" width="40">
+                        </a>
+                        <div class="xe-comment">
+                            <a href="#" class="xe-user-name overflowClip_1">
+                                <strong>{site_name}</strong>
+                            </a>
+                            <p class="overflowClip_2">{site_description}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>''')
+        
+        result.append('</div>')
+        
+        if total_pages > 1:
+            result.append(f'''<div class="pagination-container" data-section="{section_name}">
+                <ul class="pagination">
+                    <li class="prev" data-page="{page_num}"><a href="#">«</a></li>''')
+            
+            for p in range(total_pages):
+                active_class = 'active' if p == page_num else ''
+                result.append(f'''<li class="{active_class}" data-page="{p}"><a href="#">{p + 1}</a></li>''')
+            
+            result.append(f'''<li class="next" data-page="{page_num + 2}"><a href="#">»</a></li>
+                </ul>
+            </div>''')
+        
+        result.append('<br />')
+    
+    return ''.join(result)
 
 def generate_html():
     """生成新的HTML文件"""
@@ -39,66 +176,26 @@ def generate_html():
     with open(favicon_mapping_path, 'r', encoding='utf-8') as f:
         favicon_mapping = json.load(f)
     
-    # 2. 生成导航菜单
-    print("生成导航菜单...")
-    nav_menu = []
-    for group in data['groups']:
-        nav_menu.append(f'''<li>
-            <a href="#{group['name']}" class="smooth">
-                <i class="linecons-star"></i>
-                <span class="title">{group['name']}</span>
-            </a>
-        </li>''')
-    nav_html = ''.join(nav_menu)
+    # 2. 构建层级结构
+    print("构建层级结构...")
+    hierarchy = build_hierarchy(data['groups'])
     
-    # 3. 生成内容区域
+    # 3. 生成导航菜单
+    print("生成导航菜单...")
+    nav_html = generate_nav_menu(hierarchy)
+    
+    # 4. 生成内容区域
     print("生成内容区域...")
     content_sections = []
+    
     for group in data['groups']:
-        # 添加分类标题
-        section = [f'''<h4 class="text-gray"><i class="linecons-tag" style="margin-right: 7px;" id="{group['name']}"></i>{group['name']}</h4>
-        <div class="row">''']
-        
-        # 添加网站卡片
-        for site in group['sites']:
-            site_name = site.get('name', '未知网站')
-            site_url = site.get('url', '#')
-            site_description = site.get('description', '')
-            site_icon = site.get('icon', '../assets/images/logos/default.png')
-            
-            # 尝试使用本地favicon
-            from urllib.parse import urlparse
-            try:
-                parsed_url = urlparse(site_url)
-                domain = parsed_url.netloc
-                if domain in favicon_mapping:
-                    site_icon = favicon_mapping[domain]
-            except:
-                pass
-            
-            section.append(f'''<div class="col-sm-3">
-                <div class="xe-widget xe-conversations box2 label-info" onclick="redirectToSite('{site_url}', '{site_name}')" data-toggle="tooltip" data-placement="bottom" title="{site_url}">
-                    <div class="xe-comment-entry">
-                        <a class="xe-user-img">
-                            <img src="{site_icon}" data-src="{site_icon}" class="lozad img-circle" width="40">
-                        </a>
-                        <div class="xe-comment">
-                            <a href="#" class="xe-user-name overflowClip_1">
-                                <strong>{site_name}</strong>
-                            </a>
-                            <p class="overflowClip_2">{site_description}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>''')
-        
-        # 关闭行容器
-        section.append('</div><br />')
-        content_sections.append(''.join(section))
+        content_section = generate_content_section(group, favicon_mapping)
+        if content_section:
+            content_sections.append(content_section)
     
     content_html = ''.join(content_sections)
     
-    # 4. 生成完整HTML
+    # 5. 生成完整HTML
     print("生成完整HTML...")
     html = f'''
 <!DOCTYPE html>
@@ -222,6 +319,73 @@ def generate_html():
                     scrollTop: pos
                 }}, 1000);
             }});
+            
+            // 分页功能
+            $('.pagination a').click(function(e) {{
+                e.preventDefault();
+                var $li = $(this).parent();
+                var page = parseInt($li.data('page'));
+                var $container = $li.closest('.pagination-container');
+                var section = $container.data('section');
+                
+                if ($li.hasClass('disabled')) {{
+                    return;
+                }}
+                
+                // 隐藏该分类的所有页面
+                $('div[data-section="' + section + '"]').hide();
+                
+                // 显示当前页面
+                $('div[data-section="' + section + '"][data-page="' + (page + 1) + '"]').show();
+                
+                // 更新分页按钮状态
+                $container.find('.pagination li').removeClass('active disabled');
+                $container.find('.pagination li[data-page="' + page + '"]').addClass('active');
+                
+                if (page === 0) {{
+                    $container.find('.pagination li.prev').addClass('disabled');
+                }}
+                
+                var totalPages = parseInt($('div[data-section="' + section + '"]').first().data('total-pages'));
+                if (page === totalPages - 1) {{
+                    $container.find('.pagination li.next').addClass('disabled');
+                }}
+            }});
+            
+            // 初始化分页：只显示第一页
+            $('.row[data-page]').each(function() {{
+                var page = parseInt($(this).data('page'));
+                var totalPages = parseInt($(this).data('total-pages'));
+                var section = $(this).data('section');
+                
+                if (page > 1) {{
+                    $(this).hide();
+                }}
+                
+                // 更新分页按钮状态
+                var $container = $(this).next('.pagination-container');
+                if ($container.length > 0) {{
+                    $container.find('.pagination li.prev').addClass('disabled');
+                    if (totalPages === 1) {{
+                        $container.find('.pagination li.next').addClass('disabled');
+                    }}
+                }}
+            }});
+        }});
+        
+        // 处理has-sub菜单展开/收起
+        $(document).on('click', '.has-sub', function(e) {{
+            e.preventDefault();
+            var $this = $(this);
+            var $parent = $this.parent('li');
+            
+            if ($parent.hasClass('expanded')) {{
+                $parent.removeClass('expanded');
+                $this.next('ul').slideUp(200);
+            }} else {{
+                $parent.addClass('expanded');
+                $this.next('ul').slideDown(200);
+            }}
         }});
     </script>
     <!-- Bottom Scripts -->
@@ -239,7 +403,7 @@ def generate_html():
 </html>
 '''
     
-    # 5. 保存HTML文件
+    # 6. 保存HTML文件
     print("保存HTML文件...")
     output_path = os.path.join(os.path.dirname(__file__), '..', 'index.html')
     with open(output_path, 'w', encoding='utf-8') as f:
