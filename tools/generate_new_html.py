@@ -30,16 +30,23 @@ def get_icon_for_category(category_name):
     icon_mapping = {
         "下海推荐": "fa-wrench",
         "AI工具": "fa-microphone",
-        "全球资讯": "fa-file-text-o",
-        "全球推广": "fa-globe",
+        "跨境资讯": "fa-file-text-o",
+        "跨境推广": "fa-globe",
         "社媒资源": "fa-share",
         "全球网络": "fa-cloud",
+        "全球接码": "fa-phone",
+        "数字货币": "fa-credit-card",
+        "全球支付": "fa-credit-card",
         "Facebook": "fa-facebook",
         "Google": "fa-google",
         "广告工具": "fa-bar-chart",
+        "指纹浏览器": "fa-globe",
+        "全球APP下载": "fa-download",
+        "内容制作": "fa-pencil",
+        "技术交流": "fa-comments",
+        "引流工具": "fa-share-alt",
         "跨境电商": "fa-shopping-cart",
-        "投资理财": "fa-briefcase",
-        "创业工具": "fa-rocket"
+        "跨境服务": "fa-briefcase"
     }
     return icon_mapping.get(category_name, "linecons-star")
 
