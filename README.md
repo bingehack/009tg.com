@@ -237,7 +237,7 @@ A: 运行 `python tools/check_sites_validity.py`，脚本会检测所有站点�
 
 ### Q: 英文版本如何更新？
 
-A: 运行 `python tools/final_fix.py` 会同时生成中文和英文版本的HTML文件。
+A: 运行 `python tools/generate_new_html.py` 会生成中文版本的HTML文件。英文版本需要单独维护。
 
 ## License
 
