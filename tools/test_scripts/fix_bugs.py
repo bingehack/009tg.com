@@ -11,6 +11,13 @@ Bug 3: 英文版本的语言切换器链接应正确跳转
 import os
 import re
 
+# 获取脚本所在目录的父目录的父目录（项目根目录）
+script_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(os.path.dirname(script_dir))
+
+# 切换到项目根目录
+os.chdir(project_root)
+
 def fix_about_link(html_content, is_english=False):
     """修复关于本站链接"""
     if is_english:

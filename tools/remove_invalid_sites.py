@@ -75,6 +75,13 @@ def main():
     print("删除无效站点并重新生成HTML")
     print("=" * 60)
     
+    # 获取脚本所在目录的父目录（项目根目录）
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(script_dir)
+    
+    # 切换到项目根目录
+    os.chdir(project_root)
+    
     # 文件路径
     json_file = '完整版导航.json'
     html_report = 'connection_failed_sites.html'
@@ -110,7 +117,7 @@ def main():
     
     # 重新生成HTML
     print("\n重新生成HTML...")
-    os.system('python tools/final_fix.py')
+    os.system('python tools/generate_new_html.py')
 
 if __name__ == '__main__':
     main()

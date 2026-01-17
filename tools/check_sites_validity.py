@@ -679,6 +679,13 @@ def remove_invalid_sites(data, invalid_sites, output_file='完整版导航_clean
 
 def main():
     """主函数"""
+    # 获取脚本所在目录的父目录（项目根目录）
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(script_dir)
+    
+    # 切换到项目根目录
+    os.chdir(project_root)
+    
     parser = argparse.ArgumentParser(description='站点有效性检测脚本')
     parser.add_argument('--file', default='完整版导航.json', help='JSON数据文件路径')
     parser.add_argument('--timeout', type=int, default=10, help='请求超时时间（秒）')

@@ -1,4 +1,12 @@
+import os
 import re
+
+# 获取脚本所在目录的父目录（项目根目录）
+script_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(script_dir)
+
+# 切换到项目根目录
+os.chdir(project_root)
 
 html_files = ['index.html', 'cn/index.html', 'en/index.html']
 

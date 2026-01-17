@@ -80,7 +80,14 @@ def fix_json_file(json_file):
     print(f"共修复了 {fixed_count} 个favicon URL")
 
 if __name__ == "__main__":
-    json_file = "../完整版导航.json"
+    # 获取脚本所在目录的父目录（项目根目录）
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(script_dir)
+    
+    # 切换到项目根目录
+    os.chdir(project_root)
+    
+    json_file = "完整版导航.json"
     
     print("开始修复JSON文件中的favicon URL...")
     print("=" * 60)

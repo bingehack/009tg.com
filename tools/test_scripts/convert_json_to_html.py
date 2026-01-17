@@ -23,10 +23,18 @@ JSON转HTML脚本
 """
 
 import json
+import os
 import re
 
 def convert_json_to_html():
     """将JSON数据转换为HTML页面"""
+    
+    # 获取脚本所在目录的父目录的父目录（项目根目录）
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(os.path.dirname(script_dir))
+    
+    # 切换到项目根目录
+    os.chdir(project_root)
     
     # 1. 读取JSON数据
     print("读取JSON数据...")
