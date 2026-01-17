@@ -25,6 +25,24 @@
 import json
 from urllib.parse import urlparse
 
+def get_icon_for_category(category_name):
+    """根据分类名称获取对应的图标"""
+    icon_mapping = {
+        "下海推荐": "fa-wrench",
+        "AI工具": "fa-microphone",
+        "全球资讯": "fa-file-text-o",
+        "全球推广": "fa-globe",
+        "社媒资源": "fa-share",
+        "全球网络": "fa-cloud",
+        "Facebook": "fa-facebook",
+        "Google": "fa-google",
+        "广告工具": "fa-bar-chart",
+        "跨境电商": "fa-shopping-cart",
+        "投资理财": "fa-briefcase",
+        "创业工具": "fa-rocket"
+    }
+    return icon_mapping.get(category_name, "linecons-star")
+
 def build_category_tree(groups):
     """构建分类树结构"""
     group_dict = {g['id']: g for g in groups}
@@ -45,18 +63,23 @@ def build_category_tree(groups):
 def generate_nav_menu(groups):
     """生成导航菜单HTML"""
     def generate_menu_item(group, level=0):
-        icon_classes = ['linecons-star', 'fa-wrench', 'fa-microphone', 'fa-file-text-o', 
-                       'fa-globe', 'fa-share', 'fa-cloud', 'fa-shopping-cart', 'fa-briefcase',
-                       'fa-bar-chart', 'fa-cogs', 'fa-rocket']
-        icon_class = icon_classes[level % len(icon_classes)]
+        icon_class = get_icon_for_category(group['name']) if level == 0 else None
         
         has_children = 'children' in group and len(group['children']) > 0
         
         if has_children:
             children_html = ''.join([generate_menu_item(child, level + 1) for child in group['children']])
-            return f'''<li>
+            if icon_class:
+                return f'''<li>
                 <a>
                     <i class="{icon_class}"></i>
+                    <span class="title">{group['name']}</span>
+                </a>
+                <ul>{children_html}</ul>
+            </li>'''
+            else:
+                return f'''<li>
+                <a>
                     <span class="title">{group['name']}</span>
                 </a>
                 <ul>{children_html}</ul>
@@ -122,8 +145,11 @@ def generate_content_section(group, favicon_mapping):
     total_sites = len(sites)
     category_name = group['name']
     
+    # 根据网站数量决定是否启用分页
+    enable_pagination = total_sites > 4
+    
     return f'''<h4 class="text-gray"><i class="linecons-tag" style="margin-right: 7px;" id="{category_name}"></i>{category_name}</h4>
-<div class="row category-row" data-category="{category_name}" data-total="{total_sites}" data-pagination="True">
+<div class="row category-row" data-category="{category_name}" data-total="{total_sites}" data-pagination="{str(enable_pagination).lower()}">
     <div class="pagination-left"></div>
     <div class="category-content"></div>
     <div class="pagination-right"></div>
@@ -294,37 +320,60 @@ def generate_html():
                 var contentDiv = categoryRow.find('.category-content');
                 var leftPagination = categoryRow.find('.pagination-left');
                 var rightPagination = categoryRow.find('.pagination-right');
+                var enablePagination = $(this).data('pagination');
                 
                 var sites = allSitesData[categoryName] || [];
                 
                 contentDiv.empty();
                 
                 if (sites.length > 0) {{
-                    var startIndex = 0;
-                    var endIndex = Math.min(startIndex + itemsPerPage, sites.length);
-                    
-                    for (var i = startIndex; i < endIndex; i++) {{
-                        var site = sites[i];
-                        var siteHtml = `<div class="col-sm-3">
-                            <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('redirect.html?url=${{encodeURIComponent(site.url)}}&name=${{encodeURIComponent(site.name)}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
-                                <div class="xe-comment-entry">
-                                    <a class="xe-user-img">
-                                        <img src="${{site.icon}}" data-src="${{site.icon}}" class="lozad img-circle" width="40">
-                                    </a>
-                                    <div class="xe-comment">
-                                        <a href="#" class="xe-user-name overflowClip_1">
-                                            <strong>${{site.name}}</strong>
+                    if (enablePagination) {{
+                        var startIndex = 0;
+                        var endIndex = Math.min(startIndex + itemsPerPage, sites.length);
+                        
+                        for (var i = startIndex; i < endIndex; i++) {{
+                            var site = sites[i];
+                            var siteHtml = `<div class="col-sm-3">
+                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('redirect.html?url=${{encodeURIComponent(site.url)}}&name=${{encodeURIComponent(site.name)}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
+                                    <div class="xe-comment-entry">
+                                        <a class="xe-user-img">
+                                            <img src="${{site.icon}}" data-src="${{site.icon}}" class="lozad img-circle" width="40">
                                         </a>
-                                        <p class="overflowClip_2">${{site.description}}</p>
+                                        <div class="xe-comment">
+                                            <a href="#" class="xe-user-name overflowClip_1">
+                                                <strong>${{site.name}}</strong>
+                                            </a>
+                                            <p class="overflowClip_2">${{site.description}}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>`;
-                        contentDiv.append(siteHtml);
+                            </div>`;
+                            contentDiv.append(siteHtml);
+                        }}
+                    }} else {{
+                        for (var i = 0; i < sites.length; i++) {{
+                            var site = sites[i];
+                            var siteHtml = `<div class="col-sm-3">
+                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('redirect.html?url=${{encodeURIComponent(site.url)}}&name=${{encodeURIComponent(site.name)}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
+                                    <div class="xe-comment-entry">
+                                        <a class="xe-user-img">
+                                            <img src="${{site.icon}}" data-src="${{site.icon}}" class="lozad img-circle" width="40">
+                                        </a>
+                                        <div class="xe-comment">
+                                            <a href="#" class="xe-user-name overflowClip_1">
+                                                <strong>${{site.name}}</strong>
+                                            </a>
+                                            <p class="overflowClip_2">${{site.description}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                            contentDiv.append(siteHtml);
+                        }}
                     }}
                 }}
                 
-                if (leftPagination.length > 0) {{
+                if (leftPagination.length > 0 && enablePagination) {{
                     var totalPages = Math.ceil(sites.length / itemsPerPage);
                     leftPagination.find('.prev-page').prop('disabled', true);
                     rightPagination.find('.next-page').prop('disabled', totalPages <= 1);
@@ -338,10 +387,11 @@ def generate_html():
                 var contentDiv = categoryRow.find('.category-content');
                 var leftPagination = categoryRow.find('.pagination-left');
                 var rightPagination = categoryRow.find('.pagination-right');
+                var enablePagination = categoryRow.data('pagination');
                 
                 contentDiv.css('opacity', '0.5');
                 
-                if (leftPagination.length > 0) {{
+                if (leftPagination.length > 0 && enablePagination) {{
                     leftPagination.find('button').prop('disabled', true);
                     rightPagination.find('button').prop('disabled', true);
                 }}
@@ -354,7 +404,7 @@ def generate_html():
                     
                     contentDiv.empty();
                     
-                    if (sites.length > 0) {{
+                    if (sites.length > 0 && enablePagination) {{
                         var startIndex = (pageNum - 1) * itemsPerPage;
                         var endIndex = Math.min(startIndex + itemsPerPage, sites.length);
                         
@@ -379,7 +429,7 @@ def generate_html():
                         }}
                     }}
                     
-                    if (leftPagination.length > 0) {{
+                    if (leftPagination.length > 0 && enablePagination) {{
                         leftPagination.find('.prev-page').prop('disabled', pageNum === 1);
                         rightPagination.find('.next-page').prop('disabled', pageNum === totalPages);
                     }}
