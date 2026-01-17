@@ -145,8 +145,8 @@ def generate_content_section(group, favicon_mapping):
     total_sites = len(sites)
     category_name = group['name']
     
-    # 根据网站数量决定是否启用分页
-    enable_pagination = total_sites > 6
+    # 根据网站数量决定是否启用分页（超过18个才分页）
+    enable_pagination = total_sites > 18
     
     if enable_pagination:
         return f'''<h4 class="text-gray"><i class="linecons-tag" style="margin-right: 7px;" id="{category_name}"></i>{category_name}</h4>
