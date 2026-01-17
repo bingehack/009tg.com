@@ -146,24 +146,13 @@ def generate_content_section(group, favicon_mapping):
     category_name = group['name']
     
     # 根据网站数量决定是否启用分页
-    enable_pagination = total_sites > 4
-    
-    # 生成分页按钮HTML
-    left_pagination_html = ''
-    right_pagination_html = ''
-    if enable_pagination:
-        left_pagination_html = f'''<button class="btn btn-sm btn-default prev-page" data-category="{category_name}" disabled>
-            <i class="fa fa-chevron-left"></i>
-        </button>'''
-        right_pagination_html = f'''<button class="btn btn-sm btn-default next-page" data-category="{category_name}">
-            <i class="fa fa-chevron-right"></i>
-        </button>'''
+    enable_pagination = total_sites > 6
     
     return f'''<h4 class="text-gray"><i class="linecons-tag" style="margin-right: 7px;" id="{category_name}"></i>{category_name}</h4>
 <div class="row category-row" data-category="{category_name}" data-total="{total_sites}" data-pagination="{str(enable_pagination).lower()}">
-    <div class="pagination-left">{left_pagination_html}</div>
+    <div class="pagination-left"></div>
     <div class="category-content"></div>
-    <div class="pagination-right">{right_pagination_html}</div>
+    <div class="pagination-right"></div>
 </div>
 <br />'''
 
@@ -232,7 +221,148 @@ def generate_html():
     <link rel="stylesheet" href="assets/css/xenon-components.css">
     <link rel="stylesheet" href="assets/css/xenon-skins.css">
     <link rel="stylesheet" href="assets/css/nav.css">
+    <style>
+        /* 分页行容器 */
+        .category-row {{
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }}
+        
+        /* 左侧翻页按钮 */
+        .pagination-left {{
+            display: flex;
+            align-items: center;
+            padding-right: 15px;
+            flex-shrink: 0;
+            width: 40px;
+        }}
+        
+        /* 右侧翻页按钮 */
+        .pagination-right {{
+            display: flex;
+            align-items: center;
+            padding-left: 15px;
+            flex-shrink: 0;
+            width: 40px;
+        }}
+        
+        /* 内容区域 */
+        .category-content {{
+            flex-grow: 1;
+            transition: opacity 0.3s ease;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+        }}
+        
+        /* 网站项 - 响应式网格布局 */
+        .site-item {{
+            flex: 0 0 calc(16.666% - 15px);
+            max-width: calc(16.666% - 15px);
+            margin: 0 15px 15px 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }}
+        
+        /* 翻页按钮样式 */
+        .pagination-left .btn,
+        .pagination-right .btn {{
+            padding: 8px 12px;
+            min-width: 40px;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+        }}
+        
+        .pagination-left .btn:hover:not(:disabled),
+        .pagination-right .btn:hover:not(:disabled) {{
+            background: #e0e0e0;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }}
+        
+        .pagination-left .btn:disabled,
+        .pagination-right .btn:disabled {{
+            opacity: 0.3;
+            cursor: not-allowed;
+            background: #f0f0f0;
+        }}
+        
+        /* 响应式设计 */
+        @media (max-width: 1400px) {{
+            .site-item {{
+                flex: 0 0 calc(25% - 15px);
+                max-width: calc(25% - 15px);
+            }}
+        }}
+        
+        @media (max-width: 1200px) {{
+            .site-item {{
+                flex: 0 0 calc(33.333% - 15px);
+                max-width: calc(33.333% - 15px);
+            }}
+        }}
+        
+        @media (max-width: 992px) {{
+            .site-item {{
+                flex: 0 0 calc(50% - 15px);
+                max-width: calc(50% - 15px);
+            }}
+        }}
+        
+        @media (max-width: 768px) {{
+            .category-row {{
+                flex-direction: column;
+                gap: 10px;
+            }}
+            
+            .pagination-left,
+            .pagination-right {{
+                width: 100%;
+                justify-content: center;
+                padding: 0;
+                height: auto;
+            }}
+            
+            .pagination-left .btn,
+            .pagination-right .btn {{
+                width: 100%;
+                min-width: auto;
+            }}
+            
+            .category-content {{
+                width: 100%;
+            }}
+            
+            .site-item {{
+                flex: 0 0 calc(50% - 15px);
+                max-width: calc(50% - 15px);
+            }}
+        }}
+        
+        @media (max-width: 480px) {{
+            .site-item {{
+                flex: 0 0 100%;
+                max-width: 100%;
+                margin: 0 0 15px 0;
+            }}
+            
+            .pagination-left .btn,
+            .pagination-right .btn {{
+                padding: 6px 10px;
+                font-size: 12px;
+            }}
+        }}
+        
+        /* 网站项悬停效果 */
+        .site-item:hover {{
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }}
+    </style>
     <script src="assets/js/jquery-1.11.1.min.js"></script>
+    <script src="assets/js/lozad.js"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -318,54 +448,15 @@ def generate_html():
     <script>
         var allSitesData = {{}};
         var currentPage = {{}};
-        var itemsPerPage = 4;
-        
-        // 根据屏幕宽度计算每页显示数量
-        function calculateItemsPerPage() {{
-            var windowWidth = $(window).width();
-            if (windowWidth > 1400) {{
-                return 18; // 6列 × 3行
-            }} else if (windowWidth > 1200) {{
-                return 15; // 5列 × 3行
-            }} else if (windowWidth > 992) {{
-                return 12; // 4列 × 3行
-            }} else if (windowWidth > 768) {{
-                return 9; // 3列 × 3行
-            }} else {{
-                return 6; // 2列 × 3行
-            }}
-        }}
-        
-        // 窗口大小改变时重新计算每页显示数量
-        $(window).resize(function() {{
-            var newItemsPerPage = calculateItemsPerPage();
-            if (newItemsPerPage !== itemsPerPage) {{
-                itemsPerPage = newItemsPerPage;
-                // 重新加载所有分类的第一页
-                $('.category-row').each(function() {{
-                    var categoryName = $(this).data('category');
-                    var enablePagination = $(this).data('pagination');
-                    if (enablePagination) {{
-                        currentPage[categoryName] = 1;
-                        changePage(categoryName, 1);
-                    }}
-                }});
-            }}
-        }});
-        
-        // 初始计算每页显示数量
-        itemsPerPage = calculateItemsPerPage();
+        var itemsPerPage = 6;
         
         {sites_data_js}
         
         $(document).ready(function() {{
             var observer = lozad();
             
-            // 初始化所有分类，显示第一页
             $('.category-row').each(function() {{
                 var categoryName = $(this).data('category');
-                currentPage[categoryName] = 1;
-                
                 var categoryRow = $(this);
                 var contentDiv = categoryRow.find('.category-content');
                 var leftPagination = categoryRow.find('.pagination-left');
@@ -383,7 +474,7 @@ def generate_html():
                         
                         for (var i = startIndex; i < endIndex; i++) {{
                             var site = sites[i];
-                            var siteHtml = `<div class="col-sm-3">
+                            var siteHtml = `<div class="site-item" data-index="${{i}}">
                                 <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('redirect.html?url=${{encodeURIComponent(site.url)}}&name=${{encodeURIComponent(site.name)}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
                                     <div class="xe-comment-entry">
                                         <a class="xe-user-img">
@@ -403,7 +494,7 @@ def generate_html():
                     }} else {{
                         for (var i = 0; i < sites.length; i++) {{
                             var site = sites[i];
-                            var siteHtml = `<div class="col-sm-3">
+                            var siteHtml = `<div class="site-item" data-index="${{i}}">
                                 <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('redirect.html?url=${{encodeURIComponent(site.url)}}&name=${{encodeURIComponent(site.name)}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
                                     <div class="xe-comment-entry">
                                         <a class="xe-user-img">
@@ -425,29 +516,16 @@ def generate_html():
                 
                 if (leftPagination.length > 0 && enablePagination) {{
                     var totalPages = Math.ceil(sites.length / itemsPerPage);
-                    leftPagination.find('.prev-page').prop('disabled', true);
-                    rightPagination.find('.next-page').prop('disabled', totalPages <= 1);
-                }}
-            }});
-            
-            // 下一页按钮点击事件
-            $('.next-page').click(function() {{
-                var categoryName = $(this).data('category');
-                var currentPageNum = currentPage[categoryName];
-                var totalPages = Math.ceil(allSitesData[categoryName].length / itemsPerPage);
-                
-                if (currentPageNum < totalPages) {{
-                    changePage(categoryName, currentPageNum + 1);
-                }}
-            }});
-            
-            // 上一页按钮点击事件
-            $('.prev-page').click(function() {{
-                var categoryName = $(this).data('category');
-                var currentPageNum = currentPage[categoryName];
-                
-                if (currentPageNum > 1) {{
-                    changePage(categoryName, currentPageNum - 1);
+                    leftPagination.empty();
+                    rightPagination.empty();
+                    
+                    if (totalPages > 1) {{
+                        leftPagination.append('<button class="btn prev-page" onclick="changePage(\'' + categoryName + '\', 1)"><i class="fa fa-chevron-left"></i></button>');
+                        rightPagination.append('<button class="btn next-page" onclick="changePage(\'' + categoryName + '\', 2)"><i class="fa fa-chevron-right"></i></button>');
+                        
+                        leftPagination.find('.prev-page').prop('disabled', true);
+                        rightPagination.find('.next-page').prop('disabled', totalPages <= 1);
+                    }}
                 }}
             }});
             
@@ -481,7 +559,7 @@ def generate_html():
                         
                         for (var i = startIndex; i < endIndex; i++) {{
                             var site = sites[i];
-                            var siteHtml = `<div class="col-sm-3">
+                            var siteHtml = `<div class="site-item" data-index="${{i}}">
                                 <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('redirect.html?url=${{encodeURIComponent(site.url)}}&name=${{encodeURIComponent(site.name)}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
                                     <div class="xe-comment-entry">
                                         <a class="xe-user-img">
@@ -532,7 +610,6 @@ def generate_html():
     <script src="assets/js/xenon-toggles.js"></script> 
     <!-- JavaScripts initializations and stuff -->        
     <script src="assets/js/xenon-custom.js"></script>  
-    <script src="assets/js/lozad.js"></script>
 </body>
 
 </html>
