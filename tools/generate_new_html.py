@@ -148,11 +148,22 @@ def generate_content_section(group, favicon_mapping):
     # 根据网站数量决定是否启用分页
     enable_pagination = total_sites > 4
     
+    # 生成分页按钮HTML
+    left_pagination_html = ''
+    right_pagination_html = ''
+    if enable_pagination:
+        left_pagination_html = f'''<button class="btn btn-sm btn-default prev-page" data-category="{category_name}" disabled>
+            <i class="fa fa-chevron-left"></i>
+        </button>'''
+        right_pagination_html = f'''<button class="btn btn-sm btn-default next-page" data-category="{category_name}">
+            <i class="fa fa-chevron-right"></i>
+        </button>'''
+    
     return f'''<h4 class="text-gray"><i class="linecons-tag" style="margin-right: 7px;" id="{category_name}"></i>{category_name}</h4>
 <div class="row category-row" data-category="{category_name}" data-total="{total_sites}" data-pagination="{str(enable_pagination).lower()}">
-    <div class="pagination-left"></div>
+    <div class="pagination-left">{left_pagination_html}</div>
     <div class="category-content"></div>
-    <div class="pagination-right"></div>
+    <div class="pagination-right">{right_pagination_html}</div>
 </div>
 <br />'''
 
@@ -309,13 +320,52 @@ def generate_html():
         var currentPage = {{}};
         var itemsPerPage = 4;
         
+        // 根据屏幕宽度计算每页显示数量
+        function calculateItemsPerPage() {{
+            var windowWidth = $(window).width();
+            if (windowWidth > 1400) {{
+                return 18; // 6列 × 3行
+            }} else if (windowWidth > 1200) {{
+                return 15; // 5列 × 3行
+            }} else if (windowWidth > 992) {{
+                return 12; // 4列 × 3行
+            }} else if (windowWidth > 768) {{
+                return 9; // 3列 × 3行
+            }} else {{
+                return 6; // 2列 × 3行
+            }}
+        }}
+        
+        // 窗口大小改变时重新计算每页显示数量
+        $(window).resize(function() {{
+            var newItemsPerPage = calculateItemsPerPage();
+            if (newItemsPerPage !== itemsPerPage) {{
+                itemsPerPage = newItemsPerPage;
+                // 重新加载所有分类的第一页
+                $('.category-row').each(function() {{
+                    var categoryName = $(this).data('category');
+                    var enablePagination = $(this).data('pagination');
+                    if (enablePagination) {{
+                        currentPage[categoryName] = 1;
+                        changePage(categoryName, 1);
+                    }}
+                }});
+            }}
+        }});
+        
+        // 初始计算每页显示数量
+        itemsPerPage = calculateItemsPerPage();
+        
         {sites_data_js}
         
         $(document).ready(function() {{
             var observer = lozad();
             
+            // 初始化所有分类，显示第一页
             $('.category-row').each(function() {{
                 var categoryName = $(this).data('category');
+                currentPage[categoryName] = 1;
+                
                 var categoryRow = $(this);
                 var contentDiv = categoryRow.find('.category-content');
                 var leftPagination = categoryRow.find('.pagination-left');
@@ -377,6 +427,27 @@ def generate_html():
                     var totalPages = Math.ceil(sites.length / itemsPerPage);
                     leftPagination.find('.prev-page').prop('disabled', true);
                     rightPagination.find('.next-page').prop('disabled', totalPages <= 1);
+                }}
+            }});
+            
+            // 下一页按钮点击事件
+            $('.next-page').click(function() {{
+                var categoryName = $(this).data('category');
+                var currentPageNum = currentPage[categoryName];
+                var totalPages = Math.ceil(allSitesData[categoryName].length / itemsPerPage);
+                
+                if (currentPageNum < totalPages) {{
+                    changePage(categoryName, currentPageNum + 1);
+                }}
+            }});
+            
+            // 上一页按钮点击事件
+            $('.prev-page').click(function() {{
+                var categoryName = $(this).data('category');
+                var currentPageNum = currentPage[categoryName];
+                
+                if (currentPageNum > 1) {{
+                    changePage(categoryName, currentPageNum - 1);
                 }}
             }});
             
