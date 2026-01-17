@@ -148,8 +148,22 @@ def generate_content_section(group, favicon_mapping):
     # 根据网站数量决定是否启用分页
     enable_pagination = total_sites > 6
     
-    return f'''<h4 class="text-gray"><i class="linecons-tag" style="margin-right: 7px;" id="{category_name}"></i>{category_name}</h4>
-<div class="row category-row" data-category="{category_name}" data-total="{total_sites}" data-pagination="{str(enable_pagination).lower()}">
+    if enable_pagination:
+        return f'''<h4 class="text-gray"><i class="linecons-tag" style="margin-right: 7px;" id="{category_name}"></i>{category_name}</h4>
+<div class="row category-row" data-category="{category_name}" data-total="{total_sites}" data-pagination="true">
+    <div class="pagination-left"><button class="btn btn-sm btn-default prev-page" data-category="{category_name}" disabled>
+        <i class="fa fa-chevron-left"></i>
+    </button></div>
+    <div class="category-content"></div>
+    <div class="pagination-right">
+        <button class="btn btn-sm btn-default next-page" data-category="{category_name}">
+            <i class="fa fa-chevron-right"></i>
+        </button></div>
+</div>
+<br />'''
+    else:
+        return f'''<h4 class="text-gray"><i class="linecons-tag" style="margin-right: 7px;" id="{category_name}"></i>{category_name}</h4>
+<div class="row category-row" data-category="{category_name}" data-total="{total_sites}" data-pagination="false">
     <div class="pagination-left"></div>
     <div class="category-content"></div>
     <div class="pagination-right"></div>
@@ -516,13 +530,8 @@ def generate_html():
                 
                 if (leftPagination.length > 0 && enablePagination) {{
                     var totalPages = Math.ceil(sites.length / itemsPerPage);
-                    leftPagination.empty();
-                    rightPagination.empty();
                     
                     if (totalPages > 1) {{
-                        leftPagination.append('<button class="btn prev-page" onclick="changePage(\'' + categoryName + '\', 1)"><i class="fa fa-chevron-left"></i></button>');
-                        rightPagination.append('<button class="btn next-page" onclick="changePage(\'' + categoryName + '\', 2)"><i class="fa fa-chevron-right"></i></button>');
-                        
                         leftPagination.find('.prev-page').prop('disabled', true);
                         rightPagination.find('.next-page').prop('disabled', totalPages <= 1);
                     }}
@@ -598,6 +607,28 @@ def generate_html():
                 $("html,body").animate({{
                     scrollTop: pos
                 }}, 1000);
+            }});
+            
+            // 分页按钮点击事件委托
+            $(document).on('click', '.prev-page', function(e) {{
+                e.preventDefault();
+                var categoryName = $(this).data('category');
+                var currentPageNum = currentPage[categoryName] || 1;
+                if (currentPageNum > 1) {{
+                    changePage(categoryName, currentPageNum - 1);
+                }}
+            }});
+            
+            $(document).on('click', '.next-page', function(e) {{
+                e.preventDefault();
+                var categoryName = $(this).data('category');
+                var categoryRow = $('.category-row[data-category="' + categoryName + '"]');
+                var sites = allSitesData[categoryName] || [];
+                var totalPages = Math.ceil(sites.length / itemsPerPage);
+                var currentPageNum = currentPage[categoryName] || 1;
+                if (currentPageNum < totalPages) {{
+                    changePage(categoryName, currentPageNum + 1);
+                }}
             }});
         }});
     </script>
