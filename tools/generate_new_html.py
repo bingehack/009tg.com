@@ -697,6 +697,14 @@ def generate_html():
     
     print("保存HTML文件...")
     output_path = os.path.join(os.path.dirname(__file__), '..', 'index.html')
+    
+    # 备份现有的index.html文件
+    if os.path.exists(output_path):
+        backup_path = os.path.join(os.path.dirname(__file__), '..', 'index.html.backup')
+        import shutil
+        shutil.copy2(output_path, backup_path)
+        print("已备份现有index.html文件到index.html.backup")
+    
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(html)
     
