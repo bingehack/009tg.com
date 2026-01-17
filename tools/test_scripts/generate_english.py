@@ -37,11 +37,30 @@ def generate_english_version():
     # 英文翻译映射
     translations = {
         # 页面标题和元信息
-        '我的导航 - 跨境电商工具导航': 'My Navigation - Cross-border E-commerce Tools',
-        '跨境电商,营销工具,AI工具,社交媒体,独立站,广告投放': 'cross-border e-commerce, marketing tools, AI tools, social media, independent sites, advertising',
-        '我的导航 - 收集国内外优秀的跨境电商工具、营销资源、AI工具、社交媒体平台等。': 'My Navigation - Collecting excellent cross-border e-commerce tools, marketing resources, AI tools, social media platforms, etc.',
+        '009tg下海导航 - Invisible Man': '009tg Navigation - Invisible Man',
+        '009tg下海导航,网址导航,上网导航,网址大全,网址目录,创业工具,副业赚钱,投资理财,跨境电商,营销工具,AI工具,社交媒体,独立站,广告投放': '009tg Navigation,website navigation,internet navigation,website directory,entrepreneurial tools,side hustle,investment and wealth management,cross-border e-commerce,marketing tools,AI tools,social media,independent sites,advertising',
+        '009tg下海导航致力于打造国内最好的互联网上优质网站网址大全，收录了全网好用强大的网站网址和软件包括创业、副业、投资、跨境电商、营销工具、AI工具、社交媒体、独立站、广告投放、生活、休闲、办公、工具、资源等超全面的网址和职业技巧内容，让您的上网体验更便捷更放心，努力成为全民级人人都在用的网址导航。': '009tg Navigation is committed to creating the best high-quality website directory on the Chinese internet, collecting powerful websites and software from the entire internet including entrepreneurship,side hustles,investment,cross-border e-commerce,marketing tools,AI tools,social media,independent sites,advertising,lifestyle,leisure,office,tools,resources and other comprehensive URLs and professional skills content,making your internet experience more convenient and reassuring,striving to become a national-level website navigation used by everyone.',
         
         # 分类名称
+        '下海推荐': 'Recommended',
+        'AI工具': 'AI Tools',
+        '跨境资讯': 'Cross-border News',
+        '跨境推广': 'Cross-border Promotion',
+        '社媒资源': 'Social Media Resources',
+        '全球网络': 'Global Network',
+        '全球接码': 'Global SMS',
+        '数字货币': 'Cryptocurrency',
+        '全球支付': 'Global Payment',
+        'Facebook': 'Facebook',
+        'Google': 'Google',
+        '广告工具': 'Ad Tools',
+        '指纹浏览器': 'Fingerprint Browsers',
+        '全球APP下载': 'Global App Download',
+        '内容制作': 'Content Creation',
+        '技术交流': 'Tech Discussion',
+        '引流工具': 'Traffic Tools',
+        '跨境电商': 'Cross-border E-commerce',
+        '跨境服务': 'Cross-border Services',
         '实用工具': 'Practical Tools',
         '常用工具': 'Common Tools',
         '推荐工具': 'Recommended Tools',
@@ -81,7 +100,6 @@ def generate_english_version():
         '交易所': 'Exchanges',
         '钱包': 'Wallets',
         '跨境支付': 'Cross-border Payment',
-        'Facebook': 'Facebook',
         'FB常用工具': 'FB Common Tools',
         'FB申诉链接': 'FB Appeal Links',
         'FB官方资料': 'FB Official Resources',
@@ -94,7 +112,6 @@ def generate_english_version():
         '追踪系统': 'Tracking Systems',
         'Cloak工具': 'Cloaking Tools',
         '检测优化': 'Detection & Optimization',
-        '指纹浏览器': 'Fingerprint Browsers',
         '社交app': 'Social Apps',
         '电商app': 'E-commerce Apps',
         '常用app': 'Common Apps',
@@ -136,6 +153,9 @@ def generate_english_version():
     en_html = en_html.replace('href="assets/', 'href="../assets/')
     en_html = en_html.replace('src="assets/', 'src="../assets/')
     
+    # 修复JavaScript数据中的图标路径
+    en_html = en_html.replace('"icon": "assets/', '"icon": "../assets/')
+    
     # 修复语言切换菜单 - 英文版本应该默认显示English
     # 使用字符串查找方法来匹配完整的language-switcher li标签
     start_tag = '<li class="dropdown hover-line language-switcher">'
@@ -162,12 +182,12 @@ def generate_english_version():
                         </a>
                         <ul class="dropdown-menu languages">
                             <li class="active">
-                                <a href="en/index.html">
+                                <a href="../index.html">
                                     <img src="../assets/images/flags/flag-us.png" alt="flag-us" /> English
                                 </a>
                             </li>
                             <li>
-                                <a href="../index.html">
+                                <a href="../cn/index.html">
                                     <img src="../assets/images/flags/flag-cn.png" alt="flag-cn" /> Chinese
                                 </a>
                             </li>
@@ -182,6 +202,10 @@ def generate_english_version():
             print("警告：未找到language-switcher内部的</ul>")
     else:
         print("警告：未找到语言切换菜单")
+    
+    # 修复redirect.html链接
+    print("修复redirect.html链接...")
+    en_html = en_html.replace("window.open('redirect.html", "window.open('../redirect.html")
     
     # 保存英文版本
     print("保存英文版本...")

@@ -369,6 +369,13 @@ Cloudflare Pages支持自动部署，当你推送代码到GitHub时：
 
 ### 2026-01-17
 
+- **添加Google AdSense代码**：在所有网页的`<head>`标签之间添加了AdSense代码，包括index.html、cn/index.html、en/index.html、redirect.html等所有HTML文件
+- **更新HTML生成脚本**：修改generate_new_html.py，确保新生成的HTML文件自动包含AdSense代码
+- **修复英文版内容问题**：发现英文版index.html包含中文内容，运行generate_english.py脚本生成正确的英文版本
+- **修复英文版图标路径**：更新generate_english.py脚本，修复JavaScript数据中的图标路径（从"assets/favicons/"改为"../assets/favicons/"）
+- **修复cn/index.html图标路径**：创建fix_cn_paths.py脚本，修复cn/index.html中的资源路径和JavaScript图标路径
+- **修复redirect.html链接**：修复cn/index.html和en/index.html中的redirect.html链接路径，确保正确跳转到根目录的redirect.html页面
+- **优化多语言版本路径管理**：统一处理根目录、cn/、en/三个版本的资源路径，确保图标和链接正常工作
 - **优化所有Python脚本的使用说明**：为所有工具脚本添加了详细的使用说明文档，包括用途、功能概述、使用方法和主要特性
 - **更新README.md文档**：完善了工具脚本使用说明，添加了核心工具脚本、HTML修复工具脚本和测试脚本的详细说明
 - **添加脚本文档注释**：所有Python脚本都包含了标准化的文档注释，便于理解和使用
