@@ -1,3 +1,22 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+修复JavaScript动态生成的img标签脚本
+
+用途：
+    为JavaScript动态生成的img标签添加src属性。
+
+功能概述：
+    修改JavaScript代码中动态生成的img标签，添加src属性以确保图片正确显示
+
+使用方法：
+    python fix_javascript_img.py
+
+主要特性：
+    - 为懒加载图片添加src属性
+    - 支持多个HTML文件（index.html, cn/index.html, en/index.html）
+"""
+
 import os
 import re
 

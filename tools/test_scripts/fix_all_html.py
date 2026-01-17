@@ -1,3 +1,22 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+修复所有HTML文件脚本
+
+用途：
+    为所有HTML文件中的懒加载图片添加src属性。
+
+功能概述：
+    扫描所有HTML文件，为使用data-src的img标签添加src属性
+
+使用方法：
+    python fix_all_html.py
+
+主要特性：
+    - 批量处理多个HTML文件
+    - 为懒加载图片添加src属性
+"""
+
 import os
 import re
 

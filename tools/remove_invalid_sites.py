@@ -1,3 +1,30 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+删除无效站点脚本
+
+用途：
+    从JSON数据中删除无效站点，并重新生成HTML文件。
+
+功能概述：
+    1. 从HTML报告中提取无效URL
+    2. 自动备份原始JSON文件
+    3. 从JSON数据中删除无效站点
+    4. 自动重新生成HTML文件
+
+使用方法：
+    python remove_invalid_sites.py
+
+主要特性：
+    - 自动备份原始数据
+    - 支持从HTML报告提取URL
+    - 自动重新生成HTML
+    - 详细的删除日志
+
+注意：
+    需要先运行 check_sites_validity.py 生成 connection_failed_sites.html 报告
+"""
+
 import json
 import os
 import shutil

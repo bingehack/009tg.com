@@ -1,3 +1,22 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+修复JavaScript转义变量脚本
+
+用途：
+    修复动态生成的img标签中的转义变量问题。
+
+功能概述：
+    修复JavaScript模板字符串中的转义变量（如\${site.icon}），确保变量能够正确插值到动态生成的HTML中
+
+使用方法：
+    python fix_javascript_escape.py
+
+主要特性：
+    - 移除错误的反斜杠转义
+    - 支持多个HTML文件（index.html, cn/index.html, en/index.html）
+"""
+
 import os
 
 # 获取脚本所在目录的父目录（项目根目录）

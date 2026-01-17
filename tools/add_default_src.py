@@ -1,3 +1,23 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+添加默认src属性脚本
+
+用途：
+    为使用Google favicon服务的图片添加默认src属性，避免显示小地球图标。
+
+功能概述：
+    扫描HTML文件中的Google favicon服务URL，为这些图片添加默认src属性指向本地默认图片
+
+使用方法：
+    python add_default_src.py
+
+主要特性：
+    - 修复Google favicon服务超时导致的图标显示问题
+    - 为懒加载图片提供fallback
+    - 支持多个HTML文件（index.html, cn/index.html, en/index.html）
+"""
+
 import os
 import re
 

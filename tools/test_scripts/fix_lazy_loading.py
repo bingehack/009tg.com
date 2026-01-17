@@ -1,3 +1,22 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+修复懒加载脚本
+
+用途：
+    为HTML文件中的懒加载图片添加src属性。
+
+功能概述：
+    扫描HTML文件，为使用data-src的img标签添加src属性
+
+使用方法：
+    python fix_lazy_loading.py
+
+主要特性：
+    - 为懒加载图片添加src属性
+    - 支持单个HTML文件处理
+"""
+
 import os
 import re
 
