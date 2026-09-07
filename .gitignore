@@ -6,6 +6,7 @@ __pycache__/
 # 例外：tools目录下的Python脚本需要同步
 !tools/*.py
 !tools/crawler/*.py
+!tools/web_admin/*.py
 !tools/test_scripts/*.py
 
 # 数据文件
