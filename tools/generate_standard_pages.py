@@ -197,9 +197,9 @@ PAGES = {
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <h5><i class="fa-envelope"></i> 电子邮件</h5>
-                                    <p>商务合作 / 广告投放：<a href="mailto:qwertyuiop668@proton.me">qwertyuiop668@proton.me</a></p>
-                                    <p>问题反馈 / 建议：<a href="mailto:qwertyuiop668@proton.me">qwertyuiop668@proton.me</a></p>
-                                    <p>无效链接举报：<a href="mailto:qwertyuiop668@proton.me">qwertyuiop668@proton.me</a></p>
+                                    <p>商务合作 / 广告投放：<a href="mailto:invisibleman009tg@proton.me">invisibleman009tg@proton.me</a></p>
+                                    <p>问题反馈 / 建议：<a href="mailto:invisibleman009tg@proton.me">invisibleman009tg@proton.me</a></p>
+                                    <p>无效链接举报：<a href="mailto:invisibleman009tg@proton.me">invisibleman009tg@proton.me</a></p>
                                 </div>
                             </div>
                         </div>
@@ -224,7 +224,7 @@ PAGES = {
                             </div>
                             <div id="collapse1" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p>请发送邮件至 <a href="mailto:qwertyuiop668@proton.me">qwertyuiop668@proton.me</a>，邮件中请包含：网站名称、网址、网站简介、所属分类建议。我们会在审核后决定是否收录。</p>
+                                    <p>请发送邮件至 <a href="mailto:invisibleman009tg@proton.me">invisibleman009tg@proton.me</a>，邮件中请包含：网站名称、网址、网站简介、所属分类建议。我们会在审核后决定是否收录。</p>
                                 </div>
                             </div>
                         </div>
@@ -236,7 +236,7 @@ PAGES = {
                             </div>
                             <div id="collapse2" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p>请发送邮件至 <a href="mailto:qwertyuiop668@proton.me">qwertyuiop668@proton.me</a>，邮件中请包含：无效链接的网站名称、网址、具体问题（无法访问/内容不符/已改版等）。我们会尽快核实并处理。</p>
+                                    <p>请发送邮件至 <a href="mailto:invisibleman009tg@proton.me">invisibleman009tg@proton.me</a>，邮件中请包含：无效链接的网站名称、网址、具体问题（无法访问/内容不符/已改版等）。我们会尽快核实并处理。</p>
                                 </div>
                             </div>
                         </div>
@@ -248,7 +248,7 @@ PAGES = {
                             </div>
                             <div id="collapse3" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p>我们提供多种广告合作方式，包括首页横幅广告、分类页广告、推荐位等。具体报价和方案请发送邮件至 <a href="mailto:qwertyuiop668@proton.me">qwertyuiop668@proton.me</a> 咨询。</p>
+                                    <p>我们提供多种广告合作方式，包括首页横幅广告、分类页广告、推荐位等。具体报价和方案请发送邮件至 <a href="mailto:invisibleman009tg@proton.me">invisibleman009tg@proton.me</a> 咨询。</p>
                                 </div>
                             </div>
                         </div>
@@ -277,9 +277,9 @@ PAGES = {
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <h5><i class="fa-envelope"></i> Email</h5>
-                                    <p>Business / Advertising: <a href="mailto:qwertyuiop668@proton.me">qwertyuiop668@proton.me</a></p>
-                                    <p>Feedback / Suggestions: <a href="mailto:qwertyuiop668@proton.me">qwertyuiop668@proton.me</a></p>
-                                    <p>Invalid Link Reports: <a href="mailto:qwertyuiop668@proton.me">qwertyuiop668@proton.me</a></p>
+                                    <p>Business / Advertising: <a href="mailto:invisibleman009tg@proton.me">invisibleman009tg@proton.me</a></p>
+                                    <p>Feedback / Suggestions: <a href="mailto:invisibleman009tg@proton.me">invisibleman009tg@proton.me</a></p>
+                                    <p>Invalid Link Reports: <a href="mailto:invisibleman009tg@proton.me">invisibleman009tg@proton.me</a></p>
                                 </div>
                             </div>
                         </div>
@@ -304,7 +304,7 @@ PAGES = {
                             </div>
                             <div id="collapse1" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p>Please send an email to <a href="mailto:qwertyuiop668@proton.me">qwertyuiop668@proton.me</a> with: website name, URL, brief description, and suggested category. We will review and decide whether to include it.</p>
+                                    <p>Please send an email to <a href="mailto:invisibleman009tg@proton.me">invisibleman009tg@proton.me</a> with: website name, URL, brief description, and suggested category. We will review and decide whether to include it.</p>
                                 </div>
                             </div>
                         </div>
@@ -316,7 +316,7 @@ PAGES = {
                             </div>
                             <div id="collapse2" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p>Please send an email to <a href="mailto:qwertyuiop668@proton.me">qwertyuiop668@proton.me</a> with: the website name, URL, and specific issue (inaccessible/content mismatch/redesigned, etc.). We will verify and address it promptly.</p>
+                                    <p>Please send an email to <a href="mailto:invisibleman009tg@proton.me">invisibleman009tg@proton.me</a> with: the website name, URL, and specific issue (inaccessible/content mismatch/redesigned, etc.). We will verify and address it promptly.</p>
                                 </div>
                             </div>
                         </div>
@@ -328,7 +328,7 @@ PAGES = {
                             </div>
                             <div id="collapse3" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <p>We offer various advertising partnership options, including homepage banner ads, category page ads, featured positions, etc. For specific pricing and plans, please email <a href="mailto:qwertyuiop668@proton.me">qwertyuiop668@proton.me</a>.</p>
+                                    <p>We offer various advertising partnership options, including homepage banner ads, category page ads, featured positions, etc. For specific pricing and plans, please email <a href="mailto:invisibleman009tg@proton.me">invisibleman009tg@proton.me</a>.</p>
                                 </div>
                             </div>
                         </div>
