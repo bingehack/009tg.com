@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% block title %}仪表盘 - 009tg管理后台{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="page-header"><i class="fa fa-dashboard"></i> 仪表盘</h2>
+    </div>
+</div>
+
+<!-- 统计卡片 -->
+<div class="row">
+    <div class="col-md-3 col-sm-6">
+        <div class="stat-card stat-blue">
+            <div class="stat-icon"><i class="fa fa-globe"></i></div>
+            <div class="stat-info">
+                <div class="stat-number">{{ stats.total_sites }}</div>
+                <div class="stat-label">收录站点</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="stat-card stat-green">
+            <div class="stat-icon"><i class="fa fa-folder"></i></div>
+            <div class="stat-info">
+                <div class="stat-number">{{ stats.total_categories }}</div>
+                <div class="stat-label">分类总数</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="stat-card stat-orange">
+            <div class="stat-icon"><i class="fa fa-sitemap"></i></div>
+            <div class="stat-info">
+                <div class="stat-number">{{ stats.root_categories }}</div>
+                <div class="stat-label">一级分类</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="stat-card stat-purple">
+            <div class="stat-icon"><i class="fa fa-tags"></i></div>
+            <div class="stat-info">
+                <div class="stat-number">{{ stats.sub_categories }}</div>
+                <div class="stat-label">子分类</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 快捷操作 -->
+<div class="row">
+    <div class="col-md-12">
+        <h3><i class="fa fa-bolt"></i> 快捷操作</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <a href="/crawl" class="quick-action">
+            <i class="fa fa-download fa-3x"></i>
+            <h4>抓取新站点</h4>
+            <p>输入目标站URL，自动抓取、映射、去重</p>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="/manage" class="quick-action">
+            <i class="fa fa-search fa-3x"></i>
+            <h4>搜索/删除站点</h4>
+            <p>按关键词或分类搜索，快速删除失效站点</p>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="javascript:void(0)" onclick="regenerateAll()" class="quick-action">
+            <i class="fa fa-refresh fa-3x"></i>
+            <h4>重新生成所有页面</h4>
+            <p>首页+分类详情页+标准页面+sitemap</p>
+        </a>
+    </div>
+</div>
+
+<!-- 分类站点数排行 -->
+<div class="row" style="margin-top: 30px;">
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-bar-chart"></i> 分类站点数排行（Top 10）</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>分类名称</th>
+                            <th>站点数</th>
+                            <th>占比</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cat in stats.top_categories %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ cat.name }}</td>
+                            <td><span class="badge badge-info">{{ cat.sites_count }}</span></td>
+                            <td>
+                                <div class="progress" style="margin-bottom: 0;">
+                                    <div class="progress-bar" style="width: {{ (cat.sites_count / stats.top_categories[0].sites_count * 100)|int }}%;"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-info-circle"></i> 系统信息</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-condensed">
+                    <tr><td>数据导出日期</td><td>{{ stats.export_date }}</td></tr>
+                    <tr><td>数据源文件</td><td><code>完整版导航.json</code></td></tr>
+                    <tr><td>部署方式</td><td>Cloudflare Pages</td></tr>
+                    <tr><td>Git分支</td><td><code>master</code></td></tr>
+                    <tr><td>自动部署</td><td><span class="label label-success">已开启</span></td></tr>
+                </table>
+                <hr>
+                <h5><i class="fa fa-lightbulb-o"></i> 操作提示</h5>
+                <ul class="tips-list">
+                    <li>抓取后需在"合并生成"页面配置分类映射</li>
+                    <li>所有页面生成后需手动git提交部署</li>
+                    <li>国外站点超时不一定是失效，建议人工确认</li>
+                    <li>修改数据前建议备份完整版导航.json</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 执行日志弹窗 -->
+<div class="modal fade" id="logModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-terminal"></i> 执行日志</h4>
+            </div>
+            <div class="modal-body">
+                <pre id="logOutput" style="max-height: 400px; overflow-y: auto;">正在执行...</pre>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function regenerateAll() {
+    if (!confirm('确定要重新生成所有页面吗？\n\n这将执行：\n1. 下载favicon\n2. 生成中英文首页\n3. 生成分类详情页\n4. 更新sitemap\n\n预计需要1-3分钟。')) return;
+
+    $('#logModal').modal('show');
+    $('#logOutput').text('正在执行，请稍候...\n\n');
+
+    // 模拟执行（实际应该调用API，这里先做提示）
+    setTimeout(function() {
+        $('#logOutput').text('请在命令行执行以下命令：\n\n' +
+            'cd ' + window.location.origin.replace('http://', '').replace(':5000', '') + '\n\n' +
+            'python tools/cache_favicons.py\n' +
+            'python tools/generate_new_html.py\n' +
+            'python tools/generate_category_pages.py\n' +
+            'python tools/generate_standard_pages.py\n' +
+            'python tools/update_sitemap.py\n\n' +
+            '然后提交部署：\n' +
+            'git add .\n' +
+            'git commit -m "重新生成所有页面"\n' +
+            'git push origin master');
+    }, 500);
+}
+</script>
+{% endblock %}

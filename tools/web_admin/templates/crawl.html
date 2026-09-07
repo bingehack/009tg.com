@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+{% block title %}抓取站点 - 009tg管理后台{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="page-header"><i class="fa fa-download"></i> 抓取站点</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-cog"></i> 抓取配置</h3>
+            </div>
+            <div class="panel-body">
+                <!-- 抓取方式选择 -->
+                <div class="form-group">
+                    <label><i class="fa fa-hand-o-right"></i> 抓取方式</label>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="crawler_type" value="generic" checked>
+                            <strong>通用抓取</strong> - 输入任意导航站URL，自动识别结构并抓取
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="crawler_type" value="specific">
+                            <strong>指定脚本抓取</strong> - 使用已有的针对特定站点的抓取脚本（数据更准确）
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 通用抓取：输入URL -->
+                <div id="genericForm">
+                    <div class="form-group">
+                        <label for="targetUrl"><i class="fa fa-link"></i> 目标站点URL</label>
+                        <input type="url" class="form-control input-lg" id="targetUrl"
+                               placeholder="例如：https://www.example-nav.com"
+                               value="">
+                        <p class="help-block">支持服务端渲染站和纯JS渲染站，脚本会自动识别</p>
+                    </div>
+                </div>
+
+                <!-- 指定脚本：选择脚本 -->
+                <div id="specificForm" style="display: none;">
+                    <div class="form-group">
+                        <label for="customScript"><i class="fa fa-file-code-o"></i> 选择抓取脚本</label>
+                        <select class="form-control input-lg" id="customScript">
+                            {% for crawler in crawlers %}
+                            <option value="{{ crawler }}">{{ crawler.replace('crawl_', '').replace('.py', '') }}</option>
+                            {% endfor %}
+                        </select>
+                        <p class="help-block">这些脚本针对特定站点优化，抓取数据更准确。站点结构变化时可能需要更新脚本。</p>
+                    </div>
+                </div>
+
+                <hr>
+
+                <button class="btn btn-primary btn-lg" id="crawlBtn" onclick="startCrawl()">
+                    <i class="fa fa-play"></i> 开始抓取
+                </button>
+                <button class="btn btn-default btn-lg" onclick="location.reload()">
+                    <i class="fa fa-refresh"></i> 重置
+                </button>
+            </div>
+        </div>
+
+        <!-- 抓取进度 -->
+        <div class="panel panel-default" id="progressPanel" style="display: none;">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-spinner fa-spin"></i> 抓取进度</h3>
+            </div>
+            <div class="panel-body">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped active" id="progressBar" style="width: 100%;"></div>
+                </div>
+                <p id="progressText">正在抓取，请稍候（可能需要1-5分钟）...</p>
+                <pre id="crawlLog" style="max-height: 200px; overflow-y: auto; display: none;"></pre>
+            </div>
+        </div>
+
+        <!-- 抓取结果 -->
+        <div class="panel panel-success" id="resultPanel" style="display: none;">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-check-circle"></i> 抓取完成</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="alert alert-success">
+                            <h4><i class="fa fa-folder"></i> 分类数: <span id="resultCategories">0</span></h4>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="alert alert-info">
+                            <h4><i class="fa fa-globe"></i> 站点数: <span id="resultSites">0</span></h4>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h4><i class="fa fa-list"></i> 分类列表</h4>
+                <div id="categoryList"></div>
+                <hr>
+                <a href="/merge" class="btn btn-success btn-lg">
+                    <i class="fa fa-arrow-right"></i> 下一步：分类映射与合并
+                </a>
+            </div>
+        </div>
+
+        <!-- 抓取失败 -->
+        <div class="panel panel-danger" id="errorPanel" style="display: none;">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-exclamation-triangle"></i> 抓取失败</h3>
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-danger" id="errorMessage"></div>
+                <h4><i class="fa fa-wrench"></i> 常见问题排查</h4>
+                <ul class="tips-list">
+                    <li><strong>连接超时</strong>：目标站点可能无法访问，或需要代理。检查网络连接后重试。</li>
+                    <li><strong>SSL错误</strong>：目标站点证书有问题，脚本会自动跳过验证。如仍失败，手动检查。</li>
+                    <li><strong>未找到工具卡片</strong>：目标站点结构特殊，通用抓取无法识别。建议编写专用抓取脚本。</li>
+                    <li><strong>纯JS渲染</strong>：目标站点靠JS加载数据，脚本会尝试查找data.json或内联数据。如失败，需用浏览器开发者工具分析API。</li>
+                    <li><strong>反爬限制</strong>：目标站点有反爬机制（频率限制、验证码等）。降低请求频率或使用代理。</li>
+                    <li><strong>编码问题</strong>：抓取内容乱码。脚本会自动检测编码，如仍有问题，手动指定编码。</li>
+                </ul>
+                <button class="btn btn-default" onclick="location.reload()"><i class="fa fa-refresh"></i> 重新抓取</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 右侧说明 -->
+    <div class="col-md-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-info-circle"></i> 抓取说明</h3>
+            </div>
+            <div class="panel-body">
+                <h5><i class="fa fa-lightbulb-o"></i> 通用抓取</h5>
+                <p>适用于大多数导航站，自动识别页面结构，提取工具名称、URL、描述、分类。</p>
+                <ul class="tips-list">
+                    <li>支持服务端渲染（HTML直接包含内容）</li>
+                    <li>支持纯JS渲染（尝试查找data.json）</li>
+                    <li>自动去重（按域名）</li>
+                    <li>自动清理URL追踪参数</li>
+                </ul>
+
+                <h5 style="margin-top: 20px;"><i class="fa fa-star"></i> 指定脚本抓取</h5>
+                <p>针对特定站点优化的脚本，数据更准确，支持详情页抓取。</p>
+                <ul class="tips-list">
+                    {% for crawler in crawlers %}
+                    <li><code>{{ crawler }}</code></li>
+                    {% endfor %}
+                </ul>
+
+                <h5 style="margin-top: 20px;"><i class="fa fa-exclamation-circle"></i> 注意事项</h5>
+                <ul class="tips-list">
+                    <li>抓取的数据暂存在会话中，关闭页面会丢失</li>
+                    <li>抓取后必须到"合并生成"页面配置分类映射</li>
+                    <li>合并后会自动下载favicon并生成所有页面</li>
+                    <li>生成后需手动git提交部署到Cloudflare</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// 抓取方式切换
+$('input[name="crawler_type"]').change(function() {
+    if ($(this).val() === 'generic') {
+        $('#genericForm').show();
+        $('#specificForm').hide();
+    } else {
+        $('#genericForm').hide();
+        $('#specificForm').show();
+    }
+});
+
+function startCrawl() {
+    var crawlerType = $('input[name="crawler_type"]:checked').val();
+    var url = $('#targetUrl').val().trim();
+    var customScript = $('#customScript').val();
+
+    if (crawlerType === 'generic' && !url) {
+        alert('请输入目标站点URL');
+        return;
+    }
+
+    $('#crawlBtn').prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> 抓取中...');
+    $('#progressPanel').show();
+    $('#resultPanel').hide();
+    $('#errorPanel').hide();
+    $('#crawlLog').hide().text('');
+
+    $.ajax({
+        url: '/api/crawl',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            url: url,
+            crawler_type: crawlerType,
+            custom_script: customScript
+        }),
+        success: function(res) {
+            $('#progressPanel').hide();
+            $('#crawlBtn').prop('disabled', false).html('<i class="fa fa-play"></i> 开始抓取');
+
+            if (res.success) {
+                $('#resultPanel').show();
+                $('#resultCategories').text(res.categories_count);
+                $('#resultSites').text(res.sites_count);
+
+                // 显示分类列表
+                var categories = res.data.categories || [];
+                var html = '<div class="row">';
+                categories.forEach(function(cat, i) {
+                    html += '<div class="col-md-6"><span class="label label-default" style="margin: 2px;">' +
+                            (cat.name || cat) + ' (' + (cat.count || '?') + ')</span></div>';
+                });
+                html += '</div>';
+                $('#categoryList').html(html);
+            } else {
+                $('#errorPanel').show();
+                var errorMsg = res.error || '未知错误';
+                if (res.stderr) errorMsg += '\n\n' + res.stderr;
+                if (res.stdout) errorMsg += '\n\n输出:\n' + res.stdout;
+                $('#errorMessage').text(errorMsg);
+                if (res.traceback) {
+                    $('#crawlLog').show().text(res.traceback);
+                }
+            }
+        },
+        error: function(xhr, status, error) {
+            $('#progressPanel').hide();
+            $('#crawlBtn').prop('disabled', false).html('<i class="fa fa-play"></i> 开始抓取');
+            $('#errorPanel').show();
+            $('#errorMessage').text('请求失败: ' + error + '\n状态码: ' + xhr.status);
+        }
+    });
+}
+</script>
+{% endblock %}

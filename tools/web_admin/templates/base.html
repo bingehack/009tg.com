@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}009tg导航站 - 管理后台{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">
+                    <i class="fa fa-compass"></i> 009tg 管理后台
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="{% if active == 'dashboard' %}active{% endif %}">
+                        <a href="/"><i class="fa fa-dashboard"></i> 仪表盘</a>
+                    </li>
+                    <li class="{% if active == 'crawl' %}active{% endif %}">
+                        <a href="/crawl"><i class="fa fa-download"></i> 抓取站点</a>
+                    </li>
+                    <li class="{% if active == 'merge' %}active{% endif %}">
+                        <a href="/merge"><i class="fa fa-random"></i> 合并生成</a>
+                    </li>
+                    <li class="{% if active == 'manage' %}active{% endif %}">
+                        <a href="/manage"><i class="fa fa-database"></i> 数据管理</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://127.0.0.1:8000" target="_blank"><i class="fa fa-external-link"></i> 预览站点</a></li>
+                    <li><a href="https://github.com/bingehack/009tg.com" target="_blank"><i class="fa fa-github"></i> GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid main-container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">
+                009tg导航站管理后台 | 数据文件: 完整版导航.json | 生成后需手动git提交部署
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

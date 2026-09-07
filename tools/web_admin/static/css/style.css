@@ -1,0 +1,246 @@
+/* 009tg管理后台样式 */
+
+body {
+    padding-top: 70px;
+    background-color: #f5f5f5;
+    font-family: "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.main-container {
+    min-height: calc(100vh - 150px);
+    padding-bottom: 30px;
+}
+
+/* 导航栏 */
+.navbar-inverse {
+    background-color: #2c3e50;
+    border-color: #1a252f;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #ecf0f1;
+    font-weight: bold;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #bdc3c7;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+    color: #fff;
+    background-color: #1a252f;
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+    background-color: #3498db;
+    color: #fff;
+}
+
+/* 页面标题 */
+.page-header {
+    margin-top: 20px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.page-header h2 {
+    color: #2c3e50;
+}
+
+/* 统计卡片 */
+.stat-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.stat-icon {
+    font-size: 48px;
+    margin-right: 20px;
+    opacity: 0.8;
+}
+
+.stat-blue .stat-icon { color: #3498db; }
+.stat-green .stat-icon { color: #27ae60; }
+.stat-orange .stat-icon { color: #e67e22; }
+.stat-purple .stat-icon { color: #9b59b6; }
+
+.stat-number {
+    font-size: 32px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.stat-label {
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+/* 快捷操作 */
+.quick-action {
+    display: block;
+    background: #fff;
+    border-radius: 8px;
+    padding: 30px 20px;
+    text-align: center;
+    color: #2c3e50;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.2s;
+    margin-bottom: 20px;
+    border: 2px solid transparent;
+}
+
+.quick-action:hover {
+    text-decoration: none;
+    color: #3498db;
+    border-color: #3498db;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(52,152,219,0.2);
+}
+
+.quick-action h4 {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.quick-action p {
+    color: #7f8c8d;
+    margin-top: 10px;
+}
+
+/* 面板 */
+.panel {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: none;
+}
+
+.panel-heading {
+    border-bottom: 1px solid #eee;
+    padding: 15px 20px;
+}
+
+.panel-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* 按钮 */
+.btn-primary {
+    background-color: #3498db;
+    border-color: #2980b9;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    border-color: #1a5276;
+}
+
+.btn-success {
+    background-color: #27ae60;
+    border-color: #229954;
+}
+
+.btn-success:hover {
+    background-color: #229954;
+    border-color: #1e8449;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    border-color: #c0392b;
+}
+
+/* 表格 */
+.table > thead > tr > th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    color: #2c3e50;
+}
+
+.table-hover > tbody > tr:hover {
+    background-color: #f0f7ff;
+}
+
+/* 进度条 */
+.progress {
+    height: 25px;
+    border-radius: 4px;
+}
+
+.progress-bar {
+    line-height: 25px;
+    font-size: 12px;
+}
+
+/* 提示列表 */
+.tips-list {
+    padding-left: 20px;
+    line-height: 1.8;
+}
+
+.tips-list li {
+    margin-bottom: 5px;
+    color: #555;
+}
+
+/* 标签 */
+.label {
+    font-weight: normal;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+/* 页脚 */
+.footer {
+    background-color: #2c3e50;
+    color: #bdc3c7;
+    padding: 15px 0;
+    margin-top: 30px;
+}
+
+.footer .text-muted {
+    color: #95a5a6;
+    margin: 0;
+    font-size: 13px;
+}
+
+/* 代码块 */
+pre {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 15px;
+    font-size: 13px;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .stat-card {
+        padding: 15px;
+    }
+    .stat-icon {
+        font-size: 36px;
+        margin-right: 15px;
+    }
+    .stat-number {
+        font-size: 24px;
+    }
+    .quick-action {
+        padding: 20px 15px;
+    }
+}
