@@ -33,20 +33,6 @@
           "created_at": "2025-11-16 15:59:28",
           "updated_at": "2025-11-25 07:44:12",
           "description_en": "Libretv provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet."
-        },
-        {
-          "id": 2001,
-          "group_id": 1,
-          "name": "账号星球",
-          "url": "http://accboyinvman.acceboy.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/accboyinvman.acceboy.com",
-          "description": "苹果id购买|国外ID购买|电报Telegram 账号购买-账号星球",
-          "notes": "层级：下海推荐",
-          "order_num": 2,
-          "is_public": 1,
-          "created_at": "2025-12-10 16:32:18",
-          "updated_at": "2025-12-10 16:32:18",
-          "description_en": "账号星球 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation."
         }
       ]
     },
