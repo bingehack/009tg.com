@@ -293,12 +293,18 @@ def generate_content_section(group, favicon_mapping, lang='cn', is_root=False):
     category_id = group.get('id', 0)
     display_name = translate_category(group['name'], lang)
 
-    # 查看更多链接文本
+    # 查看更多链接文本（大类显示"更多分类"，子分类显示"更多内容"）
     if lang == 'cn':
-        view_more_text = '查看更多'
+        if is_root:
+            view_more_text = '更多分类'
+        else:
+            view_more_text = '更多内容'
         arrow = '→'
     else:
-        view_more_text = 'View More'
+        if is_root:
+            view_more_text = 'More Categories'
+        else:
+            view_more_text = 'More Content'
         arrow = '→'
 
     # 标题行：分类名（可点击）+ 查看更多（最右侧）
