@@ -1,29 +1,158 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-新HTML生成脚本 - 支持多级分类和翻页功能
+新HTML生成脚本 - 支持多级分类、翻页功能和中英文双语
 
 用途：
-    生成新的导航网站HTML文件，支持多级分类和翻页功能。
+    生成导航网站HTML文件，支持多级分类、翻页功能和中英文双语。
 
 功能概述：
     1. 读取JSON数据
     2. 生成嵌套的导航菜单
     3. 生成内容区域（支持翻页）
-    4. 保存为HTML文件
+    4. 生成中文和英文两个版本
+    5. 保存为HTML文件
 
 使用方法：
     python generate_new_html.py
+    python generate_new_html.py --lang cn  # 只生成中文
+    python generate_new_html.py --lang en  # 只生成英文
 
 主要特性：
     - 生成完整的HTML结构
     - 支持多级分类导航菜单
     - 生成内容区域（支持翻页）
     - 使用本地缓存的favicon
+    - 支持中英文双语（英文使用description_en字段）
+    - 自动生成cn/和en/目录下的页面
 """
 
 import json
+import os
+import shutil
+import argparse
 from urllib.parse import urlparse
+
+# ============================================================
+# 分类名中英文翻译映射
+# ============================================================
+CATEGORY_TRANSLATION = {
+    # 一级分类
+    "下海推荐": "Featured",
+    "AI工具": "AI Tools",
+    "跨境资讯": "Cross-border News",
+    "跨境推广": "Cross-border Marketing",
+    "社媒资源": "Social Media",
+    "全球网络": "Global Network",
+    "全球接码": "SMS Verification",
+    "数字货币": "Crypto",
+    "全球支付": "Global Payment",
+    "Facebook": "Facebook",
+    "Google": "Google",
+    "广告工具": "Ad Tools",
+    "指纹浏览器": "Antidetect Browser",
+    "全球APP下载": "Global Apps",
+    "内容制作": "Content Creation",
+    "技术交流": "Tech Community",
+    "引流工具": "Traffic Tools",
+    "跨境电商": "E-commerce",
+    "跨境服务": "Cross-border Services",
+    # 二级分类 - 下海推荐
+    "教程福利": "Tutorials & Benefits",
+    "常用工具": "Common Tools",
+    "推荐工具": "Recommended Tools",
+    "常用网址": "Common URLs",
+    "效率工具": "Efficiency Tools",
+    "短链生成工具": "Short Link Tools",
+    "指纹检测": "Fingerprint Detection",
+    "筛号工具": "Number Screening Tools",
+    # 二级分类 - AI工具
+    "AI常用工具": "AI Common Tools",
+    "AI办公工具": "AI Office Tools",
+    "AI写作工具": "AI Writing Tools",
+    "AI视频工具": "AI Video Tools",
+    "AI Agent智能体": "AI Agents",
+    "AI内容检测": "AI Content Detection",
+    "AI图像工具": "AI Image Tools",
+    "AI学习资源": "AI Learning Resources",
+    "AI开发平台": "AI Development Platform",
+    "AI搜索": "AI Search",
+    "AI翻译": "AI Translation",
+    "AI资讯": "AI News",
+    "AI音频": "AI Audio",
+    "AI编程工具": "AI Programming Tools",
+    "AI设计工具": "AI Design Tools",
+    # 二级分类 - 跨境资讯
+    "全球新闻": "Global News",
+    "中国论坛": "China Forums",
+    "国外论坛": "Foreign Forums",
+    "行业媒体": "Industry Media",
+    # 二级分类 - 跨境推广
+    "广告联盟": "Ad Networks",
+    "SEO工具": "SEO Tools",
+    "流量交换": "Traffic Exchange",
+    "邮件营销": "Email Marketing",
+    # 二级分类 - 社媒资源
+    "社媒工具": "Social Media Tools",
+    "社媒导航": "Social Media Navigation",
+    # 二级分类 - 全球网络
+    "中国VPS": "China VPS",
+    "国外VPS": "Foreign VPS",
+    "域名注册": "Domain Registration",
+    "CDN加速": "CDN Acceleration",
+    "DNS服务": "DNS Services",
+    # 二级分类 - 全球接码
+    "接码平台": "SMS Platforms",
+    "虚拟号码": "Virtual Numbers",
+    # 二级分类 - 数字货币
+    "交易所": "Exchanges",
+    "钱包": "Wallets",
+    "行情工具": "Market Tools",
+    # 二级分类 - 全球支付
+    "支付平台": "Payment Platforms",
+    "收款工具": "Collection Tools",
+    # 二级分类 - Facebook
+    "Facebook工具": "Facebook Tools",
+    "Facebook导航": "Facebook Navigation",
+    # 二级分类 - Google
+    "Google常用": "Google Common",
+    "谷歌插件": "Chrome Extensions",
+    # 二级分类 - 广告工具
+    "广告平台": "Ad Platforms",
+    "广告检测": "Ad Detection",
+    # 二级分类 - 指纹浏览器
+    "指纹浏览器软件": "Antidetect Browsers",
+    # 二级分类 - 全球APP下载
+    "电商app": "E-commerce Apps",
+    "常用app": "Common Apps",
+    # 二级分类 - 内容制作
+    "软件开发": "Software Development",
+    "脚本工具": "Script Tools",
+    "素材编辑": "Media Editing",
+    "图库网站": "Image Libraries",
+    # 二级分类 - 技术交流
+    "技术论坛": "Tech Forums",
+    "开发资源": "Dev Resources",
+    # 二级分类 - 引流工具
+    "引流平台": "Traffic Platforms",
+    "群发工具": "Bulk Messaging",
+    # 二级分类 - 跨境电商
+    "电商平台": "E-commerce Platforms",
+    "选品工具": "Product Research",
+    "ERP系统": "ERP Systems",
+    # 二级分类 - 跨境服务
+    "物流服务": "Logistics",
+    "仓储服务": "Warehousing",
+    "代运营": "Agency Operations",
+}
+
+
+def translate_category(name, lang='cn'):
+    """翻译分类名"""
+    if lang == 'cn':
+        return name
+    return CATEGORY_TRANSLATION.get(name, name)
+
 
 def get_icon_for_category(category_name):
     """根据分类名称获取对应的图标"""
@@ -50,11 +179,12 @@ def get_icon_for_category(category_name):
     }
     return icon_mapping.get(category_name, "linecons-star")
 
+
 def build_category_tree(groups):
     """构建分类树结构"""
     group_dict = {g['id']: g for g in groups}
     root_groups = []
-    
+
     for group in groups:
         if group['parent_id'] is None:
             root_groups.append(group)
@@ -64,99 +194,129 @@ def build_category_tree(groups):
                 if 'children' not in parent:
                     parent['children'] = []
                 parent['children'].append(group)
-    
+
     return root_groups
 
-def generate_nav_menu(groups):
+
+def generate_nav_menu(groups, lang='cn'):
     """生成导航菜单HTML"""
     def generate_menu_item(group, level=0):
         icon_class = get_icon_for_category(group['name']) if level == 0 else None
-        
+        display_name = translate_category(group['name'], lang)
+
         has_children = 'children' in group and len(group['children']) > 0
-        
+
         if has_children:
             children_html = ''.join([generate_menu_item(child, level + 1) for child in group['children']])
             if icon_class:
                 return f'''<li>
                 <a>
                     <i class="{icon_class}"></i>
-                    <span class="title">{group['name']}</span>
+                    <span class="title">{display_name}</span>
                 </a>
                 <ul>{children_html}</ul>
             </li>'''
             else:
                 return f'''<li>
                 <a>
-                    <span class="title">{group['name']}</span>
+                    <span class="title">{display_name}</span>
                 </a>
                 <ul>{children_html}</ul>
             </li>'''
         else:
             return f'''<li>
                 <a href="#{group['name']}" class="smooth">
-                    <span class="title">{group['name']}</span>
+                    <span class="title">{display_name}</span>
                 </a>
             </li>'''
-    
+
     return ''.join([generate_menu_item(group) for group in groups])
 
-def generate_site_data(group, favicon_mapping):
+
+def generate_site_data(group, favicon_mapping, lang='cn', asset_prefix=''):
     """生成网站数据JavaScript"""
     sites_data = []
-    
+
     for site in group.get('sites', []):
         site_name = site.get('name', '未知网站')
         site_url = site.get('url', '#')
-        site_description = site.get('description', '')
-        site_icon = site.get('icon', '../assets/images/logos/default.png')
-        
+        # 英文使用description_en，中文使用description
+        if lang == 'en':
+            site_description = site.get('description_en') or site.get('description', '')
+        else:
+            site_description = site.get('description', '')
+        site_icon = site.get('icon', f'{asset_prefix}assets/images/logos/default.png')
+
         try:
             parsed_url = urlparse(site_url)
             domain = parsed_url.netloc
             if domain in favicon_mapping:
-                site_icon = favicon_mapping[domain]
+                site_icon = asset_prefix + favicon_mapping[domain]
         except:
             pass
-        
+
         sites_data.append({
             'name': site_name,
             'url': site_url,
             'description': site_description,
             'icon': site_icon
         })
-    
+
     return sites_data
 
-def generate_all_sites_data(groups, favicon_mapping):
+
+def generate_all_sites_data(groups, favicon_mapping, lang='cn', asset_prefix=''):
     """生成所有网站数据JavaScript"""
     sites_data_js = []
-    
+
     def process_group(group):
         if group.get('sites'):
-            category_name = group['name']
-            sites = generate_site_data(group, favicon_mapping)
+            category_name = group['name']  # JS中用原始分类名作为key
+            sites = generate_site_data(group, favicon_mapping, lang, asset_prefix)
             sites_json = json.dumps(sites, ensure_ascii=False)
             sites_data_js.append(f"allSitesData['{category_name}'] = {sites_json};")
         if 'children' in group:
             for child in group['children']:
                 process_group(child)
-    
+
     for group in groups:
         process_group(group)
-    
+
     return '\n        '.join(sites_data_js)
 
-def generate_content_section(group, favicon_mapping):
+
+def generate_content_section(group, favicon_mapping, lang='cn', is_root=False):
     """生成内容区域HTML"""
     sites = group.get('sites', [])
     total_sites = len(sites)
-    category_name = group['name']
-    
+    category_name = group['name']  # data-category用原始名，JS查找用
+    category_id = group.get('id', 0)
+    display_name = translate_category(group['name'], lang)
+
+    # 查看更多链接文本
+    if lang == 'cn':
+        view_more_text = '查看更多'
+        arrow = '→'
+    else:
+        view_more_text = 'View More'
+        arrow = '→'
+
+    # 标题行：分类名（可点击）+ 查看更多（最右侧）
+    title_html = f'''<h4 class="text-gray category-title">
+    <i class="linecons-tag" style="margin-right: 7px;" id="{category_name}"></i>
+    <a href="category/{category_id}.html" class="category-name-link">{display_name}</a>
+    <a href="category/{category_id}.html" class="view-more-link">{view_more_text} {arrow}</a>
+</h4>'''
+
+    # 一级分类没有直接站点时，只显示标题行
+    if is_root and total_sites == 0:
+        return title_html + '<br />'
+
     # 根据网站数量决定是否启用分页（超过18个才分页）
     enable_pagination = total_sites > 18
-    
+
     if enable_pagination:
-        return f'''<h4 class="text-gray"><i class="linecons-tag" style="margin-right: 7px;" id="{category_name}"></i>{category_name}</h4>
+        return f'''{title_html}
 <div class="row category-row" data-category="{category_name}" data-total="{total_sites}" data-pagination="true">
     <div class="pagination-left"><button class="btn btn-sm btn-default prev-page" data-category="{category_name}" disabled>
         <i class="fa fa-chevron-left"></i>
@@ -165,11 +325,12 @@ def generate_content_section(group, favicon_mapping):
     <div class="pagination-right">
         <button class="btn btn-sm btn-default next-page" data-category="{category_name}">
             <i class="fa fa-chevron-right"></i>
-        </button></div>
+        </button>
+    </div>
 </div>
 <br />'''
     else:
-        return f'''<h4 class="text-gray"><i class="linecons-tag" style="margin-right: 7px;" id="{category_name}"></i>{category_name}</h4>
+        return f'''{title_html}
 <div class="row category-row" data-category="{category_name}" data-total="{total_sites}" data-pagination="false">
     <div class="pagination-left"></div>
     <div class="category-content"></div>
@@ -177,81 +338,180 @@ def generate_content_section(group, favicon_mapping):
 </div>
 <br />'''
 
-def generate_all_content(groups, favicon_mapping):
+
+def generate_all_content(groups, favicon_mapping, lang='cn'):
     """生成所有内容区域"""
     content_sections = []
-    
-    def process_group(group):
-        if group.get('sites'):
-            content_sections.append(generate_content_section(group, favicon_mapping))
+
+    def process_group(group, is_root=False):
+        # 一级分类始终显示（即使没有直接站点，因为有子分类）
+        # 子分类只有有站点时才显示
+        if is_root or group.get('sites'):
+            content_sections.append(generate_content_section(group, favicon_mapping, lang, is_root))
         if 'children' in group:
             for child in group['children']:
-                process_group(child)
-    
+                process_group(child, is_root=False)
+
     for group in groups:
-        process_group(group)
-    
+        process_group(group, is_root=True)
+
     return ''.join(content_sections)
 
-def generate_html():
-    """生成新的HTML文件"""
-    
-    import os
-    
-    print("读取JSON数据...")
-    json_path = os.path.join(os.path.dirname(__file__), '..', '完整版导航.json')
+
+def generate_language_switcher(lang='cn'):
+    """生成语言切换器HTML"""
+    if lang == 'cn':
+        return '''
+                    <li class="dropdown hover-line language-switcher">
+                        <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="../assets/images/flags/flag-cn.png" alt="flag-cn" /> Chinese
+                        </a>
+                        <ul class="dropdown-menu languages">
+                            <li>
+                                <a href="../en/index.html">
+                                    <img src="../assets/images/flags/flag-us.png" alt="flag-us" /> English
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="../cn/index.html">
+                                    <img src="../assets/images/flags/flag-cn.png" alt="flag-cn" /> Chinese
+                                </a>
+                            </li>
+                        </ul>
+                    </li>'''
+    else:
+        return '''
+                    <li class="dropdown hover-line language-switcher">
+                        <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="../assets/images/flags/flag-us.png" alt="flag-us" /> English
+                        </a>
+                        <ul class="dropdown-menu languages">
+                            <li class="active">
+                                <a href="../en/index.html">
+                                    <img src="../assets/images/flags/flag-us.png" alt="flag-us" /> English
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../cn/index.html">
+                                    <img src="../assets/images/flags/flag-cn.png" alt="flag-cn" /> Chinese
+                                </a>
+                            </li>
+                        </ul>
+                    </li>'''
+
+
+def generate_html(lang='cn'):
+    """生成HTML文件"""
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(script_dir)
+
+    print(f"读取JSON数据...")
+    json_path = os.path.join(project_root, '完整版导航.json')
     with open(json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
-    
+
     print("读取favicon映射...")
-    favicon_mapping_path = os.path.join(os.path.dirname(__file__), '..', 'favicon_mapping.json')
+    favicon_mapping_path = os.path.join(project_root, 'favicon_mapping.json')
     with open(favicon_mapping_path, 'r', encoding='utf-8') as f:
         favicon_mapping = json.load(f)
-    
+
     print("构建分类树...")
     root_groups = build_category_tree(data['groups'])
-    
-    print("生成导航菜单...")
-    nav_html = generate_nav_menu(root_groups)
-    
-    print("生成网站数据...")
-    sites_data_js = generate_all_sites_data(root_groups, favicon_mapping)
-    
-    print("生成内容区域...")
-    content_html = generate_all_content(root_groups, favicon_mapping)
-    
-    print("生成完整HTML...")
+
+    # cn/和en/目录下的页面，资源引用用../前缀
+    asset_prefix = '../'
+
+    print(f"生成导航菜单 ({lang})...")
+    nav_html = generate_nav_menu(root_groups, lang)
+
+    print(f"生成网站数据 ({lang})...")
+    sites_data_js = generate_all_sites_data(root_groups, favicon_mapping, lang, asset_prefix)
+
+    print(f"生成内容区域 ({lang})...")
+    content_html = generate_all_content(root_groups, favicon_mapping, lang)
+
+    lang_switcher = generate_language_switcher(lang)
+
+    # 页面元信息
+    if lang == 'cn':
+        html_lang = 'zh'
+        title = '009tg下海导航 - Invisible Man'
+        keywords = '009tg下海导航,网址导航,上网导航,网址大全,网址目录,创业工具,副业赚钱,投资理财,跨境电商,营销工具,AI工具,社交媒体,独立站,广告投放'
+        description = '009tg下海导航致力于打造国内最好的互联网上优质网站网址大全，收录了全网好用强大的网站网址和软件包括创业、副业、投资、跨境电商、营销工具、AI工具、社交媒体、独立站、广告投放、生活、休闲、办公、工具、资源等超全面的网址和职业技巧内容，让您的上网体验更便捷更放心，努力成为全民级人人都在用的网址导航。'
+        about_text = '关于本站'
+    else:
+        html_lang = 'en'
+        title = '009tg Navigation - Invisible Man'
+        keywords = '009tg navigation, url directory, web directory, startup tools, side hustle, investment, cross-border e-commerce, marketing tools, AI tools, social media, advertising'
+        description = '009tg Navigation is a comprehensive web directory featuring the best websites and tools for entrepreneurship, side hustles, investment, cross-border e-commerce, marketing, AI tools, social media, and more. Your ultimate resource for discovering powerful online tools and professional tips.'
+        about_text = 'About Us'
+
+    print(f"生成完整HTML ({lang})...")
     html = f'''<!DOCTYPE html>
-<html lang="zh">
+<html lang="{html_lang}">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Invisible man" />
-    <title>009tg下海导航 - Invisible Man</title>
+    <title>{title}</title>
     <meta name="theme-color" content="#f9f9f9"/>
-    <meta name="keywords" content="009tg下海导航,网址导航,上网导航,网址大全,网址目录,创业工具,副业赚钱,投资理财,跨境电商,营销工具,AI工具,社交媒体,独立站,广告投放"/>
-    <meta name="description" content="009tg下海导航致力于打造国内最好的互联网上优质网站网址大全，收录了全网好用强大的网站网址和软件包括创业、副业、投资、跨境电商、营销工具、AI工具、社交媒体、独立站、广告投放、生活、休闲、办公、工具、资源等超全面的网址和职业技巧内容，让您的上网体验更便捷更放心，努力成为全民级人人都在用的网址导航。"/>
-    <link rel="shortcut icon" href="assets/images/favicon.png">
+    <meta name="keywords" content="{keywords}"/>
+    <meta name="description" content="{description}"/>
+    <link rel="shortcut icon" href="{asset_prefix}assets/images/favicon.png">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5301924424938934"
          crossorigin="anonymous"></script>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic">
-    <link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css">
-    <link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/xenon-core.css">
-    <link rel="stylesheet" href="assets/css/xenon-components.css">
-    <link rel="stylesheet" href="assets/css/xenon-skins.css">
-    <link rel="stylesheet" href="assets/css/nav.css">
+    <link rel="stylesheet" href="{asset_prefix}assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="{asset_prefix}assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{asset_prefix}assets/css/bootstrap.css">
+    <link rel="stylesheet" href="{asset_prefix}assets/css/xenon-core.css">
+    <link rel="stylesheet" href="{asset_prefix}assets/css/xenon-components.css">
+    <link rel="stylesheet" href="{asset_prefix}assets/css/xenon-skins.css">
+    <link rel="stylesheet" href="{asset_prefix}assets/css/nav.css">
     <style>
+        /* 分类标题行：分类名 + 查看更多 */
+        .category-title {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }}
+        .category-title .linecons-tag {{
+            margin-right: 7px;
+        }}
+        /* 分类名链接 */
+        .category-name-link {{
+            color: inherit;
+            text-decoration: none;
+            flex-grow: 1;
+        }}
+        .category-name-link:hover {{
+            color: #337ab7;
+            text-decoration: underline;
+        }}
+        /* 查看更多链接 */
+        .view-more-link {{
+            font-size: 13px;
+            color: #337ab7;
+            text-decoration: none;
+            flex-shrink: 0;
+            margin-left: 15px;
+            white-space: nowrap;
+        }}
+        .view-more-link:hover {{
+            text-decoration: underline;
+            color: #23527c;
+        }}
+
         /* 分页行容器 */
         .category-row {{
             display: flex;
             align-items: center;
             margin-bottom: 15px;
         }}
-        
+
         /* 左侧翻页按钮 */
         .pagination-left {{
             display: flex;
@@ -260,7 +520,7 @@ def generate_html():
             flex-shrink: 0;
             width: 40px;
         }}
-        
+
         /* 右侧翻页按钮 */
         .pagination-right {{
             display: flex;
@@ -269,7 +529,7 @@ def generate_html():
             flex-shrink: 0;
             width: 40px;
         }}
-        
+
         /* 内容区域 */
         .category-content {{
             flex-grow: 1;
@@ -278,7 +538,7 @@ def generate_html():
             flex-wrap: wrap;
             gap: 0;
         }}
-        
+
         /* 网站项 - 响应式网格布局 */
         .site-item {{
             flex: 0 0 calc(16.666% - 15px);
@@ -286,7 +546,7 @@ def generate_html():
             margin: 0 15px 15px 0;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }}
-        
+
         /* 翻页按钮样式 */
         .pagination-left .btn,
         .pagination-right .btn {{
@@ -297,21 +557,21 @@ def generate_html():
             background: #f5f5f5;
             border: 1px solid #ddd;
         }}
-        
+
         .pagination-left .btn:hover:not(:disabled),
         .pagination-right .btn:hover:not(:disabled) {{
             background: #e0e0e0;
             transform: translateY(-2px);
             box-shadow: 0 2px 5px rgba(0,0,0,0.15);
         }}
-        
+
         .pagination-left .btn:disabled,
         .pagination-right .btn:disabled {{
             opacity: 0.3;
             cursor: not-allowed;
             background: #f0f0f0;
         }}
-        
+
         /* 响应式设计 */
         @media (max-width: 1400px) {{
             .site-item {{
@@ -319,27 +579,27 @@ def generate_html():
                 max-width: calc(25% - 15px);
             }}
         }}
-        
+
         @media (max-width: 1200px) {{
             .site-item {{
                 flex: 0 0 calc(33.333% - 15px);
                 max-width: calc(33.333% - 15px);
             }}
         }}
-        
+
         @media (max-width: 992px) {{
             .site-item {{
                 flex: 0 0 calc(50% - 15px);
                 max-width: calc(50% - 15px);
             }}
         }}
-        
+
         @media (max-width: 768px) {{
             .category-row {{
                 flex-direction: column;
                 gap: 10px;
             }}
-            
+
             .pagination-left,
             .pagination-right {{
                 width: 100%;
@@ -347,45 +607,45 @@ def generate_html():
                 padding: 0;
                 height: auto;
             }}
-            
+
             .pagination-left .btn,
             .pagination-right .btn {{
                 width: 100%;
                 min-width: auto;
             }}
-            
+
             .category-content {{
                 width: 100%;
             }}
-            
+
             .site-item {{
                 flex: 0 0 calc(50% - 15px);
                 max-width: calc(50% - 15px);
             }}
         }}
-        
+
         @media (max-width: 480px) {{
             .site-item {{
                 flex: 0 0 100%;
                 max-width: 100%;
                 margin: 0 0 15px 0;
             }}
-            
+
             .pagination-left .btn,
             .pagination-right .btn {{
                 padding: 6px 10px;
                 font-size: 12px;
             }}
         }}
-        
+
         /* 网站项悬停效果 */
         .site-item:hover {{
             transform: translateY(-5px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }}
     </style>
-    <script src="assets/js/jquery-1.11.1.min.js"></script>
-    <script src="assets/js/lozad.js"></script>
+    <script src="{asset_prefix}assets/js/jquery-1.11.1.min.js"></script>
+    <script src="{asset_prefix}assets/js/lozad.js"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -402,10 +662,10 @@ def generate_html():
                     <!-- logo -->
                     <div class="logo">
                         <a href="index.html" class="logo-expanded">
-                            <img src="assets/images/logo@2x.png" width="100%" alt="" />
+                            <img src="{asset_prefix}assets/images/logo@2x.png" width="100%" alt="" />
                         </a>
                         <a href="index.html" class="logo-collapsed">
-                            <img src="assets/images/logo-collapsed@2x.png" width="40" alt="" />
+                            <img src="{asset_prefix}assets/images/logo-collapsed@2x.png" width="40" alt="" />
                         </a>
                     </div>
                     <div class="mobile-menu-toggle visible-xs">
@@ -422,7 +682,7 @@ def generate_html():
                     <li>
                         <a href="about.html">
                             <i class="linecons-heart"></i>
-                            <span class="tooltip-blue">关于本站</span>
+                            <span class="tooltip-blue">{about_text}</span>
                             <span class="label label-Primary pull-right hidden-collapsed">♥︎</span>
                         </a>
                     </li>
@@ -439,23 +699,7 @@ def generate_html():
                             <i class="fa-bars"></i>
                         </a>
                     </li>
-                    <li class="dropdown hover-line language-switcher">
-                        <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="assets/images/flags/flag-cn.png" alt="flag-cn" /> Chinese
-                        </a>
-                        <ul class="dropdown-menu languages">
-                            <li>
-                                <a href="en/index.html">
-                                    <img src="assets/images/flags/flag-us.png" alt="flag-us" /> English
-                                </a>
-                            </li>
-                            <li class="active">
-                                <a href="cn/index.html">
-                                    <img src="assets/images/flags/flag-cn.png" alt="flag-cn" /> Chinese
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                    {lang_switcher}
                 </ul>
                 <ul class="user-info-menu right-links list-inline list-unstyled">
                     <li class="hidden-sm hidden-xs" style="display: none;">
@@ -473,7 +717,7 @@ def generate_html():
         var currentPage = {{}};
         var categoryData = {{}};
         var itemsPerPage = 15;
-        
+
         function calculateItemsPerPage() {{
             var windowWidth = $(window).width();
             if (windowWidth > 1400) {{
@@ -504,10 +748,10 @@ def generate_html():
         }});
 
         {sites_data_js}
-        
+
         $(document).ready(function() {{
             var observer = lozad();
-            
+
             // 初始化分类数据和当前页码
             $('.category-row').each(function() {{
                 var categoryName = $(this).data('category');
@@ -527,20 +771,20 @@ def generate_html():
                 var leftPagination = categoryRow.find('.pagination-left');
                 var rightPagination = categoryRow.find('.pagination-right');
                 var enablePagination = $(this).data('pagination');
-                
+
                 var sites = allSitesData[categoryName] || [];
-                
+
                 contentDiv.empty();
-                
+
                 if (sites.length > 0) {{
                     if (enablePagination) {{
                         var startIndex = 0;
                         var endIndex = Math.min(startIndex + itemsPerPage, sites.length);
-                        
+
                         for (var i = startIndex; i < endIndex; i++) {{
                             var site = sites[i];
                             var siteHtml = `<div class="site-item" data-index="${{i}}">
-                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('redirect.html?url=${{encodeURIComponent(site.url)}}&name=${{encodeURIComponent(site.name)}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
+                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('{asset_prefix}redirect.html?url=${{encodeURIComponent(site.url)}}&name=${{encodeURIComponent(site.name)}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
                                     <div class="xe-comment-entry">
                                         <a class="xe-user-img">
                                             <img src="${{site.icon}}" data-src="${{site.icon}}" class="lozad img-circle" width="40">
@@ -560,7 +804,7 @@ def generate_html():
                         for (var i = 0; i < sites.length; i++) {{
                             var site = sites[i];
                             var siteHtml = `<div class="site-item" data-index="${{i}}">
-                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('redirect.html?url=${{encodeURIComponent(site.url)}}&name=${{encodeURIComponent(site.name)}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
+                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('{asset_prefix}redirect.html?url=${{encodeURIComponent(site.url)}}&name=${{encodeURIComponent(site.name)}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
                                     <div class="xe-comment-entry">
                                         <a class="xe-user-img">
                                             <img src="${{site.icon}}" data-src="${{site.icon}}" class="lozad img-circle" width="40">
@@ -578,49 +822,49 @@ def generate_html():
                         }}
                     }}
                 }}
-                
+
                 if (leftPagination.length > 0 && enablePagination) {{
                     var totalPages = Math.ceil(categoryData[categoryName] / itemsPerPage);
-                    
+
                     if (totalPages > 1) {{
                         leftPagination.find('.prev-page').prop('disabled', true);
                         rightPagination.find('.next-page').prop('disabled', totalPages <= 1);
                     }}
                 }}
             }});
-            
+
             observer.observe();
-            
+
             function changePage(categoryName, pageNum) {{
                 var categoryRow = $('.category-row[data-category="' + categoryName + '"]');
                 var contentDiv = categoryRow.find('.category-content');
                 var leftPagination = categoryRow.find('.pagination-left');
                 var rightPagination = categoryRow.find('.pagination-right');
                 var enablePagination = categoryRow.data('pagination');
-                
+
                 contentDiv.css('opacity', '0.5');
-                
+
                 if (leftPagination.length > 0 && enablePagination) {{
                     leftPagination.find('button').prop('disabled', true);
                     rightPagination.find('button').prop('disabled', true);
                 }}
-                
+
                 setTimeout(function() {{
                     var sites = allSitesData[categoryName] || [];
-                    
+
                     currentPage[categoryName] = pageNum;
                     var totalPages = Math.ceil(categoryData[categoryName] / itemsPerPage);
-                    
+
                     contentDiv.empty();
-                    
+
                     if (sites.length > 0 && enablePagination) {{
                         var startIndex = (pageNum - 1) * itemsPerPage;
                         var endIndex = Math.min(startIndex + itemsPerPage, sites.length);
-                        
+
                         for (var i = startIndex; i < endIndex; i++) {{
                             var site = sites[i];
                             var siteHtml = `<div class="site-item" data-index="${{i}}">
-                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('redirect.html?url=${{encodeURIComponent(site.url)}}&name=${{encodeURIComponent(site.name)}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
+                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('{asset_prefix}redirect.html?url=${{encodeURIComponent(site.url)}}&name=${{encodeURIComponent(site.name)}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
                                     <div class="xe-comment-entry">
                                         <a class="xe-user-img">
                                             <img src="${{site.icon}}" data-src="${{site.icon}}" class="lozad img-circle" width="40">
@@ -637,18 +881,18 @@ def generate_html():
                             contentDiv.append(siteHtml);
                         }}
                     }}
-                    
+
                     if (leftPagination.length > 0 && enablePagination) {{
                         leftPagination.find('.prev-page').prop('disabled', pageNum === 1);
                         rightPagination.find('.next-page').prop('disabled', pageNum === totalPages);
                     }}
-                    
+
                     contentDiv.css('opacity', '1');
-                    
+
                     observer.observe();
                 }}, 300);
             }}
-            
+
             $('.smooth').click(function(e) {{
                 var href = $(this).attr("href");
                 var pos = $(href).position().top - 30;
@@ -659,7 +903,7 @@ def generate_html():
                     scrollTop: pos
                 }}, 1000);
             }});
-            
+
             // 分页按钮点击事件委托
             $(document).on('click', '.prev-page', function(e) {{
                 e.preventDefault();
@@ -669,7 +913,7 @@ def generate_html():
                     changePage(categoryName, currentPageNum - 1);
                 }}
             }});
-            
+
             $(document).on('click', '.next-page', function(e) {{
                 e.preventDefault();
                 var categoryName = $(this).data('category');
@@ -684,33 +928,61 @@ def generate_html():
         }});
     </script>
     <!-- Bottom Scripts -->
-    <script src="assets/js/bootstrap.min.js"></script> 
-    <script src="assets/js/TweenMax.min.js"></script>  
-    <script src="assets/js/resizeable.js"></script>    
-    <script src="assets/js/joinable.js"></script>      
-    <script src="assets/js/xenon-api.js"></script>     
-    <script src="assets/js/xenon-toggles.js"></script> 
-    <!-- JavaScripts initializations and stuff -->        
-    <script src="assets/js/xenon-custom.js"></script>  
+    <script src="{asset_prefix}assets/js/bootstrap.min.js"></script>
+    <script src="{asset_prefix}assets/js/TweenMax.min.js"></script>
+    <script src="{asset_prefix}assets/js/resizeable.js"></script>
+    <script src="{asset_prefix}assets/js/joinable.js"></script>
+    <script src="{asset_prefix}assets/js/xenon-api.js"></script>
+    <script src="{asset_prefix}assets/js/xenon-toggles.js"></script>
+    <!-- JavaScripts initializations and stuff -->
+    <script src="{asset_prefix}assets/js/xenon-custom.js"></script>
 </body>
 
 </html>
 '''
-    
-    print("保存HTML文件...")
-    output_path = os.path.join(os.path.dirname(__file__), '..', 'index.html')
-    
-    # 备份现有的index.html文件
+
+    # 保存到对应语言目录
+    output_dir = os.path.join(project_root, lang)
+    os.makedirs(output_dir, exist_ok=True)
+    output_path = os.path.join(output_dir, 'index.html')
+
+    # 备份
     if os.path.exists(output_path):
-        backup_path = os.path.join(os.path.dirname(__file__), '..', 'index.html.backup')
-        import shutil
+        backup_path = output_path + '.backup'
         shutil.copy2(output_path, backup_path)
-        print("已备份现有index.html文件到index.html.backup")
-    
+
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(html)
-    
-    print("生成完成！文件：index.html")
+
+    print(f"生成完成！文件：{lang}/index.html ({len(html)} bytes)")
+    return output_path
+
+
+def main():
+    parser = argparse.ArgumentParser(description='生成导航站HTML（支持中英文）')
+    parser.add_argument('--lang', choices=['cn', 'en', 'all'], default='all',
+                        help='生成语言版本（默认all）')
+    args = parser.parse_args()
+
+    print("=" * 60)
+    print("生成导航站HTML（中英文双语）")
+    print("=" * 60)
+
+    if args.lang in ('cn', 'all'):
+        print()
+        generate_html('cn')
+
+    if args.lang in ('en', 'all'):
+        print()
+        generate_html('en')
+
+    print()
+    print("=" * 60)
+    print("全部生成完成！")
+    print("  - cn/index.html (中文)")
+    print("  - en/index.html (英文)")
+    print("=" * 60)
+
 
 if __name__ == '__main__':
-    generate_html()
+    main()

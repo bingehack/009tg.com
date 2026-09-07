@@ -3,13 +3,17 @@
 *.pyc
 __pycache__/
 
-# 例外：tools文件夹下的Python脚本
+# 例外：tools目录下的Python脚本需要同步
 !tools/*.py
+!tools/crawler/*.py
 !tools/test_scripts/*.py
 
 # 数据文件
 *.json
+# 例外：主数据文件和favicon映射需要同步
+!完整版导航.json
 !favicon_mapping.json
+!tools/category_translation.json
 
 # 临时文件
 *.tmp
@@ -26,3 +30,7 @@ Thumbs.db
 
 # 日志文件
 *.log
+
+# 备份文件
+*.backup
+*.bak

@@ -44,6 +44,10 @@ from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.parse import urlparse
 
+# 抑制SSL警告
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 
 class SiteValidator:
     """站点有效性检测器"""

@@ -49,7 +49,7 @@ def extract_invalid_sites_from_html(html_file):
         
         # 提取所有href中的URL（更精确的匹配）
         import re
-        pattern = r'href="(https://[^"]+)" target="_blank"'
+        pattern = r'href="(https?://[^"]+)" target="_blank"'
         matches = re.findall(pattern, content)
         invalid_urls.update(matches)
     

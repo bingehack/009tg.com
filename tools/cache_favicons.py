@@ -190,7 +190,7 @@ def cache_favicons(json_file, cache_dir):
     cached_domains = {}
     
     # 默认图标路径
-    default_icon_path = "../assets/images/logos/default.png"
+    default_icon_path = "assets/images/logos/default.png"
     
     for i, site in enumerate(sites, 1):
         domain = get_domain_from_url(site['url'])

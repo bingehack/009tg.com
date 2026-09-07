@@ -1,353 +1,548 @@
 # 009tg下海导航
 
-一个专注于创业、副业、投资、跨境电商等领域的网址导航网站。
+一个专注于创业、副业、投资、跨境电商、AI工具等领域的网址导航网站，纯静态部署在 Cloudflare Pages。
 
 ## 项目简介
 
-009tg下海导航致力于打造国内最好的互联网上优质网站网址大全，收录了全网好用强大的网站网址和软件，包括创业、副业、投资、跨境电商、营销工具、AI工具、社交媒体、独立站、广告投放、生活、休闲、办公、工具、资源等超全面的网址和职业技巧内容，让您的上网体验更便捷更放心。
+009tg下海导航致力于打造国内最好的互联网优质网站网址大全，收录了全网好用强大的网站网址和软件，包括创业、副业、投资、跨境电商、营销工具、AI工具、社交媒体、独立站、广告投放、生活、休闲、办公、工具、资源等超全面的网址和职业技巧内容。
 
 ## 项目特性
 
-- 🎯 精选优质网站，覆盖创业、副业、投资、跨境电商等多个领域
-- 📱 响应式设计，支持桌面端和移动端访问
-- 🌍 多语言支持（中文、英文）
-- 🚀 基于Bootstrap前端框架，轻量高效
-- 📦 纯静态网站，部署简单快速
-- 🔍 站点有效性检测，确保链接可用
-- 🎨 本地favicon缓存，提升加载速度
+- 精选优质网站，覆盖创业、副业、投资、跨境电商、AI工具等多个领域
+- 响应式设计，支持桌面端和移动端访问
+- 纯静态网站，部署简单快速（Cloudflare Pages）
+- 本地 favicon 缓存，提升加载速度
+- 三层分离数据架构（raw/ → build_data.py → 完整版导航.json → generate_new_html.py）
+- 统一分类映射表，抓取层与分类层解耦
+- 自动化抓取框架，支持服务端渲染站和纯JS渲染站
+
+## 当前数据规模
+
+- 分类数：105
+- 站点数：2447
+- 已抓取源站：4个（AI地带、Tbox导航、图钉AI、AIH超级导航站）
 
 ## 项目结构
 
 ```
 009tg.com/
-├── assets/              # 静态资源文件
-│   ├── css/            # 样式文件
-│   ├── js/             # JavaScript文件
-│   ├── images/         # 图片资源
-│   └── favicons/      # 网站图标缓存
-├── cn/                 # 中文版本
-│   ├── index.html      # 中文首页
-│   └── about.html     # 关于页面
-├── en/                 # 英文版本
-│   ├── index.html      # 英文首页
-│   └── about.html     # 关于页面
-├── tools/              # 开发工具脚本
-│   ├── README.md       # 工具说明文档
-│   ├── generate_new_html.py  # HTML生成脚本
-│   ├── cache_favicons.py  # Favicon缓存脚本
-│   ├── check_sites_validity.py  # 站点有效性检测
-│   ├── add_default_src.py  # 为Google favicon服务添加默认src属性
-│   ├── fix_javascript_escape.py  # 修复JavaScript模板变量转义
-│   ├── fix_javascript_img.py  # 修复动态生成的img标签
-│   └── ...           # 其他工具脚本
-├── index.html          # 根目录首页（中文）
-├── 404.html           # 404错误页面
-├── README.md           # 项目说明文档
-├── 完整版导航.json     # 网站数据源
-└── favicon_mapping.json # Favicon映射文件
+├── assets/                    # 静态资源文件
+│   ├── css/                  # 样式文件
+│   ├── js/                   # JavaScript文件
+│   ├── images/               # 图片资源（含默认图标 default.png）
+│   │   └── logos/            # 设计类网站图标
+│   └── favicons/             # 网站favicon缓存（MD5命名PNG）
+├── raw/                       # 抓取原始数据（按源站+分类分文件）
+│   ├── README.md
+│   ├── _template.json
+│   ├── AI地带_*.json          # AI地带抓取结果（17个分类）
+│   ├── Tbox导航_*.json        # Tbox导航抓取结果（16个分类）
+│   ├── 图钉AI导航_*.json      # 图钉AI抓取结果（22个分类）
+│   └── AIH超级导航站_*.json   # AIH抓取结果（22个分类）
+├── tools/                     # 开发工具脚本
+│   ├── README.md
+│   ├── build_data.py          # 【核心】合并raw/数据到完整版导航.json
+│   ├── generate_new_html.py   # 【核心】从JSON生成HTML
+│   ├── cache_favicons.py      # 【核心】批量下载favicon
+│   ├── category_mapping.yaml  # 【核心】统一分类映射表
+│   ├── check_sites_validity.py # 站点有效性检测
+│   ├── remove_invalid_sites.py # 删除无效站点
+│   ├── list_categories.py     # 查看分类结构
+│   ├── cleanup_json.py        # JSON清理（删除冗余字段）
+│   ├── verify_cleanup.py      # 数据完整性验证
+│   ├── check_all_favicons.py  # 检查favicon文件有效性
+│   ├── fix_favicon_urls.py    # 修复favicon URL格式
+│   ├── add_default_src.py     # 为图片添加默认src属性
+│   ├── fix_javascript_escape.py # 修复JS转义变量
+│   ├── fix_javascript_img.py  # 修复JS动态生成的img标签
+│   └── crawler/               # 抓取脚本目录
+│       ├── README.md
+│       ├── crawler_utils.py   # 通用工具模块（请求、去重、输出等）
+│       ├── _template.py       # 抓取脚本模板
+│       ├── crawl_aididai.py   # AI地带抓取脚本
+│       ├── crawl_tbox.py      # Tbox导航抓取脚本
+│       ├── crawl_tudingai.py  # 图钉AI抓取脚本
+│       └── crawl_aih.py       # AIH超级导航站抓取脚本
+├── index.html                  # 生成的首页（中文）
+├── 404.html                   # 404错误页面
+├── redirect.html              # 跳转页面
+├── 完整版导航.json             # 【核心】网站数据源（合并后的完整数据）
+├── favicon_mapping.json       # 域名→本地favicon路径映射
+├── README.md                   # 本文件
+└── LICENSE
 ```
 
-## 快速开始
+## 三层分离数据架构
 
-### 本地运行
+```
+抓取脚本(crawl_*.py) → raw/目录(按分类分文件) → build_data.py(按映射表归类合并) → 完整版导航.json → generate_new_html.py → index.html
+```
+
+### 各层职责
+
+1. **raw/ 层**：抓取脚本输出的原始数据，每个源站每个分类一个JSON文件，便于追溯和增量更新
+2. **build_data.py**：扫描raw/下所有JSON，按`category_mapping.yaml`映射表归类，域名双重去重，自动分配id，合并到完整版导航.json
+3. **完整版导航.json**：合并后的完整数据，是HTML生成的唯一数据源
+4. **generate_new_html.py**：读取完整版导航.json和favicon_mapping.json，生成index.html
+
+### 为什么这样设计
+
+- **可追溯**：每个站点都能追溯到来源（raw/文件名）
+- **增量更新**：新增抓取源站只需添加raw文件，不影响已有数据
+- **分类集中管理**：所有分类映射在category_mapping.yaml，新增源站只需追加映射规则
+- **去重安全**：build_data.py按域名双重去重（已有数据+raw内），不会重复添加
+
+## 核心数据文件说明
+
+### 完整版导航.json
+
+网站的唯一数据源，结构如下：
+
+```json
+{
+  "groups": [
+    {
+      "id": 10,
+      "name": "AI工具",
+      "order_num": 1,
+      "parent_id": null,
+      "sites": []
+    },
+    {
+      "id": 11,
+      "name": "AI常用工具",
+      "order_num": 1,
+      "parent_id": 10,
+      "sites": [
+        {
+          "id": 1,
+          "group_id": 11,
+          "name": "站点名",
+          "url": "https://example.com",
+          "icon": "assets/favicons/xxx.png",
+          "description": "站点描述",
+          "notes": "",
+          "order_num": 1,
+          "is_public": true,
+          "created_at": "2026-01-01",
+          "updated_at": "2026-01-01"
+        }
+      ]
+    }
+  ],
+  "version": "1.0",
+  "exportDate": "2026-09-05"
+}
+```
+
+- `parent_id: null` 表示一级分类
+- `parent_id: 10` 表示父分类是id=10的分类
+- 一级分类的`sites`通常为空，站点都放在子分类下
+
+### category_mapping.yaml
+
+统一分类映射表，抓取层与分类层解耦的核心。结构如下：
+
+```yaml
+_default:
+  parent_category: AI工具
+  fallback_category: AI常用工具
+
+AI地带:
+  AI写作工具: AI写作工具
+  AI视频工具: AI视频工具
+  ...
+
+Tbox导航:
+  AI工具: AI常用工具
+  多媒体工具: 素材编辑
+  ...
+
+图钉AI导航:
+  聊天机器: AI对话
+  图像绘画: AI图像工具
+  ...
+
+AIH超级导航站:
+  写作辅助: AI写作工具
+  办公效率: AI办公工具
+  ...
+```
+
+- `_default.parent_category`：新建分类时的默认父分类
+- `_default.fallback_category`：未匹配分类时的兜底分类
+- 每个源站下列出"源分类名: 目标分类名"
+- 目标分类名必须是完整版导航.json中已存在的分类名
+- build_data.py会先按"父分类+分类名"精确匹配，失败时降级全局匹配
+
+### favicon_mapping.json
+
+域名到本地favicon路径的映射：
+
+```json
+{
+  "example.com": "assets/favicons/abc123.png",
+  "another.com": "assets/favicons/def456.png"
+}
+```
+
+- generate_new_html.py读取此映射，为每个站点设置icon字段
+- 下载失败的站点会复制默认图标`assets/images/logos/default.png`
+
+## 工具脚本说明
+
+### 核心脚本（日常使用）
+
+| 脚本 | 功能 | 用法 |
+|---|---|---|
+| `build_data.py` | 合并raw/数据到完整版导航.json | `python tools/build_data.py` |
+| `generate_new_html.py` | 从JSON生成HTML | `python tools/generate_new_html.py` |
+| `cache_favicons.py` | 批量下载favicon（多源重试+默认图标兜底） | `python tools/cache_favicons.py` |
+| `check_sites_validity.py` | 检测站点有效性（并发+超时+第三方API验证） | `python tools/check_sites_validity.py` |
+| `remove_invalid_sites.py` | 从JSON删除无效站点（需先生成检测报告） | `python tools/remove_invalid_sites.py` |
+
+### 辅助脚本
+
+| 脚本 | 功能 |
+|---|---|
+| `list_categories.py` | 查看分类结构（一级/二级/站点数） |
+| `cleanup_json.py` | JSON清理（删除冗余的顶层sites和configs字段） |
+| `verify_cleanup.py` | 数据完整性验证 |
+| `check_all_favicons.py` | 检查favicon文件有效性，删除无效PNG |
+| `fix_favicon_urls.py` | 修复favicon URL格式 |
+| `add_default_src.py` | 为懒加载图片添加默认src属性 |
+| `fix_javascript_escape.py` | 修复JS模板变量转义 |
+| `fix_javascript_img.py` | 修复JS动态生成的img标签 |
+
+### 抓取脚本（tools/crawler/）
+
+| 脚本 | 目标站 | 站点类型 | 数据获取方式 | 新增站点 |
+|---|---|---|---|---|
+| `crawl_aididai.py` | AI地带 (aididai.cn) | 服务端渲染 | HTML解析+详情页base64解码 | 605 |
+| `crawl_tbox.py` | Tbox导航 (tboxn.com) | 服务端渲染 | HTML解析+data-url属性 | 197 |
+| `crawl_tudingai.py` | 图钉AI (tudingai.com) | 服务端渲染 | HTML解析+data-url属性 | 183 |
+| `crawl_aih.py` | AIH超级导航站 (aimomap.cn) | 纯JS渲染 | 直接下载data.json | 317 |
+
+通用工具模块 `crawler_utils.py` 提供：
+- `fetch_page()`：抓取网页，带随机UA、重试、编码检测
+- `get_domain()`：提取域名（小写，去www）
+- `normalize_url()`：规范化URL
+- `is_valid_site_url()`：判断是否为有效工具站
+- `load_existing_domains()`：加载已有域名去重池
+- `save_raw_output()`：保存为标准raw格式JSON
+- `print_crawl_summary()`：打印抓取统计
+
+## 完整操作流程
+
+### 日常维护流程（添加/修改站点后）
 
 ```bash
-# 使用Python内置服务器
-cd 009tg.com
+# 1. 编辑完整版导航.json添加或修改网站
+# （或通过抓取脚本自动添加）
+
+# 2. 检测新站点有效性（可选）
+python tools/check_sites_validity.py
+
+# 3. 下载/更新favicon
+python tools/cache_favicons.py
+
+# 4. 重新生成HTML
+python tools/generate_new_html.py
+
+# 5. 本地预览
+python -m http.server 8000
+# 访问 http://localhost:8000
+
+# 6. 提交部署
+git add .
+git commit -m "更新站点数据"
+git push
+```
+
+### 抓取新站点的完整流程
+
+```bash
+# 1. 编写抓取脚本（参考下方"新增抓取源站步骤"）
+# 复制模板后修改
+cp tools/crawler/_template.py tools/crawler/crawl_新站.py
+
+# 2. 运行抓取脚本
+python tools/crawler/crawl_新站.py
+# 输出到 raw/新站_分类名.json
+
+# 3. 在category_mapping.yaml中添加分类映射
+# 编辑 tools/category_mapping.yaml，追加：
+# 新站:
+#   源分类名: 目标分类名
+
+# 4. 合并数据到完整版导航.json
+python tools/build_data.py
+# 会自动备份为 完整版导航.json.build_backup
+
+# 5. 下载新站点的favicon
+python tools/cache_favicons.py
+
+# 6. 重新生成HTML
+python tools/generate_new_html.py
+
+# 7. 本地预览验证
 python -m http.server 8000
 
-# 访问
-# 中文版：http://localhost:8000
-# 英文版：http://localhost:8000/en/
+# 8. 提交部署
+git add .
+git commit -m "添加从XX站抓取的新站点"
+git push
 ```
 
-### 添加新网站
-
-1. 编辑 `完整版导航.json` 文件
-2. 运行工具脚本更新网站：
+### 清理无效站点流程
 
 ```bash
-# 1. 检测新添加的站点是否有效
+# 1. 检测站点有效性
 python tools/check_sites_validity.py
+# 生成 site_validity_report.html 和 connection_failed_sites.html
 
-# 2. 下载新站点的favicon
-python tools/cache_favicons.py
+# 2. 查看检测报告，确认要删除的站点
+# （注意：国外站点超时可能是国内网络问题，不一定是真失效）
 
-# 3. 重新生成HTML文件
-python tools/generate_new_html.py
-```
-
-## 工具脚本使用
-
-项目提供了多个工具脚本用于网站维护，所有脚本都包含详细的使用说明。
-
-### 核心工具脚本
-
-#### 1. HTML生成脚本
-
-**[generate_new_html.py](tools/generate_new_html.py)** - 生成新的导航网站HTML文件
-
-```bash
-python tools/generate_new_html.py
-```
-
-功能：
-- 读取JSON数据生成完整的HTML结构
-- 支持多级分类导航菜单
-- 生成内容区域（支持翻页功能）
-- 使用本地缓存的favicon
-- 自动备份现有的index.html文件
-
-#### 2. Favicon缓存脚本
-
-**[cache_favicons.py](tools/cache_favicons.py)** - 批量下载并缓存网站图标
-
-```bash
-python tools/cache_favicons.py
-```
-
-功能：
-- 从JSON数据中提取所有网站URL
-- 使用多个favicon源（Google、Yandex、Statvoo、FaviconExtractor）尝试下载
-- 使用MD5哈希生成唯一的文件名
-- 生成域名到图标的映射关系文件
-- 支持断点续传（已存在的文件跳过下载）
-
-#### 3. 站点有效性检测脚本
-
-**[check_sites_validity.py](tools/check_sites_validity.py)** - 检测网站链接是否有效
-
-```bash
-# 基本检测（不删除数据）
-python tools/check_sites_validity.py
-
-# 检测并删除无效站点
-python tools/check_sites_validity.py --delete
-
-# 自定义超时时间（默认10秒）
-python tools/check_sites_validity.py --timeout 15
-
-# 指定JSON文件路径
-python tools/check_sites_validity.py --file 完整版导航.json
-```
-
-功能：
-- 批量检测网站列表中的站点是否可以正常访问
-- 对每个URL进行HTTP访问测试（支持超时设置）
-- 识别无法访问的站点（超时、连接错误、HTTP错误等）
-- 生成检测报告，列出所有无效站点
-- 支持将无效站点从JSON数据中安全删除
-
-#### 4. 删除无效站点脚本
-
-**[remove_invalid_sites.py](tools/remove_invalid_sites.py)** - 从JSON数据中删除无效站点
-
-```bash
+# 3. 删除无效站点
 python tools/remove_invalid_sites.py
+# 自动备份、删除、重新生成HTML
+
+# 4. 提交部署
+git add .
+git commit -m "清理无效站点"
+git push
 ```
 
-功能：
-- 从HTML报告中提取无效URL
-- 自动备份原始JSON文件
-- 从JSON数据中删除无效站点
-- 自动重新生成HTML文件
+## 新增抓取源站步骤
 
-注意：需要先运行 check_sites_validity.py 生成 connection_failed_sites.html 报告
+### 步骤1：分析目标站结构
 
-#### 5. 检查所有favicon脚本
+先确定目标站的数据获取方式：
 
-**[check_all_favicons.py](tools/check_all_favicons.py)** - 扫描并检查所有favicon文件的有效性
+**类型A：服务端渲染站**（HTML中直接包含工具卡片）
+- 用浏览器查看页面源代码，搜索工具名称
+- 如果能在HTML中找到，就是服务端渲染
+- 需要分析：分类容器选择器、工具卡片选择器、名称/描述/URL的获取方式
+
+**类型B：纯JS渲染站**（HTML中没有工具内容，靠JS动态加载）
+- 页面源代码中找不到工具名称
+- 解决方案：
+  1. 检查是否有独立的JSON数据文件（如data.json、api/data）
+  2. 检查HTML中是否有内联的JS变量（如`const allSites = [...]`）
+  3. 用浏览器开发者工具Network面板抓API请求
+  4. 以上都不行才考虑Selenium/Playwright
+
+### 步骤2：复制模板并修改
 
 ```bash
-python tools/check_all_favicons.py
+cp tools/crawler/_template.py tools/crawler/crawl_目标站.py
 ```
 
-功能：
-- 扫描assets/favicons目录
-- 检查所有PNG文件的有效性
-- 删除无效的PNG文件
+修改内容：
+1. **CONFIG区**：source_name、base_url（或data_url）
+2. **数据获取逻辑**：
+   - 服务端渲染：用fetch_page下载HTML，BeautifulSoup解析
+   - 纯JS渲染：直接用requests下载JSON文件，json.loads解析
+3. **解析函数**：提取分类名、站点名、URL、描述
+4. **URL清理**：去除追踪参数（utm_、ref、channel等）
+5. **名称清理**：去除推荐标记（"荐"、"新"等）
 
-### HTML修复工具脚本
+### 步骤3：添加分类映射
 
-#### 6. 修复favicon URL格式
+编辑 `tools/category_mapping.yaml`，在末尾追加：
 
-**[fix_favicon_urls.py](tools/fix_favicon_urls.py)** - 修复JSON数据文件中的favicon URL格式
-
-```bash
-python tools/fix_favicon_urls.py
+```yaml
+目标站名称:
+  源分类名1: 目标分类名1
+  源分类名2: 目标分类名2
+  ...
 ```
 
-功能：
-- 将错误的URL格式`https://www.faviconextractor.com/favicon/{domain}?larger=true`
-- 修复为正确的格式`https://www.faviconextractor.com/api/favicon/{domain}`
+- 目标分类名必须是完整版导航.json中已存在的分类
+- 不确定的分类可以先映射到兜底分类（AI常用工具），后续人工调整
+- 运行build_data.py时会显示每个分类的匹配结果，便于检查
 
-#### 7. 添加默认src属性
-
-**[add_default_src.py](tools/add_default_src.py)** - 为使用Google favicon服务的图片添加默认src属性
+### 步骤4：测试运行
 
 ```bash
-python tools/add_default_src.py
+# 语法检查
+python -m py_compile tools/crawler/crawl_目标站.py
+
+# 运行抓取
+python tools/crawler/crawl_目标站.py
+
+# 检查raw/输出
+ls raw/目标站_*.json
 ```
 
-功能：
-- 修复Google favicon服务超时导致的图标显示问题
-- 为懒加载图片提供fallback
-- 支持多个HTML文件（index.html, cn/index.html, en/index.html）
-
-#### 8. 修复JavaScript转义变量
-
-**[fix_javascript_escape.py](tools/fix_javascript_escape.py)** - 修复动态生成的img标签中的转义变量问题
+### 步骤5：合并验证
 
 ```bash
-python tools/fix_javascript_escape.py
-```
+# 合并
+python tools/build_data.py
+# 检查输出：匹配现有分类数、新建分类数、成功添加数
 
-功能：
-- 移除错误的反斜杠转义
-- 支持多个HTML文件（index.html, cn/index.html, en/index.html）
-
-#### 9. 修复JavaScript动态生成的img标签
-
-**[fix_javascript_img.py](tools/fix_javascript_img.py)** - 为JavaScript动态生成的img标签添加src属性
-
-```bash
-python tools/fix_javascript_img.py
-```
-
-功能：
-- 为懒加载图片添加src属性
-- 支持多个HTML文件（index.html, cn/index.html, en/index.html）
-
-### 测试脚本
-
-test_scripts目录包含一些测试和临时脚本，用于开发和调试：
-
-- **[check_sites.py](tools/test_scripts/check_sites.py)** - 检查特定站点
-- **[check_png.py](tools/test_scripts/check_png.py)** - 检查PNG文件头
-- **[check_png_file.py](tools/test_scripts/check_png_file.py)** - 检查PNG文件有效性
-- **[fix_url_format.py](tools/test_scripts/fix_url_format.py)** - 修复JSON数据文件中的URL格式
-- **[fix_html.py](tools/test_scripts/fix_html.py)** - 修复HTML文件中的资源引用路径和标题信息
-- **[fix_issues.py](tools/test_scripts/fix_issues.py)** - 修复导航网站中的各种问题
-- **[simple_generate.py](tools/test_scripts/simple_generate.py)** - 生成简单版本的HTML导航文件
-- **[keep_style_generate.py](tools/test_scripts/keep_style_generate.py)** - 保持原有风格生成新的导航网站
-- **[convert_json_to_html.py](tools/test_scripts/convert_json_to_html.py)** - 将JSON格式的导航数据转换为HTML页面
-- **[fix_all_html.py](tools/test_scripts/fix_all_html.py)** - 为所有HTML文件中的懒加载图片添加src属性
-- **[fix_lazy_loading.py](tools/test_scripts/fix_lazy_loading.py)** - 为HTML文件中的懒加载图片添加src属性
-- **[fix_bugs.py](tools/test_scripts/fix_bugs.py)** - 修复3个bug（关于本站链接、favicon路径、语言切换器）
-- **[generate_nested_nav.py](tools/test_scripts/generate_nested_nav.py)** - 生成带有嵌套导航菜单的HTML文件
-- **[generate_english.py](tools/test_scripts/generate_english.py)** - 将中文版HTML文件翻译为英文版本
-
-### 常用命令
-
-```bash
-# 检测站点有效性
-python tools/check_sites_validity.py
-
-# 删除无效站点
-python tools/remove_invalid_sites.py
-
-# 更新favicon缓存
+# 下载favicon
 python tools/cache_favicons.py
 
-# 重新生成HTML
+# 生成HTML
 python tools/generate_new_html.py
 
-# 修复已知问题
-python tools/add_default_src.py
-python tools/fix_javascript_escape.py
-python tools/fix_javascript_img.py
+# 本地预览
+python -m http.server 8000
 ```
 
-## 部署到Cloudflare Pages
+## 部署到 Cloudflare Pages
 
 ### 前置条件
 
-1. **GitHub账号**：确保你有GitHub账号
-2. **代码仓库**：将本项目代码推送到GitHub仓库
-3. **Cloudflare账号**：确保你有Cloudflare账号
+1. GitHub账号
+2. Cloudflare账号
+3. 项目代码已推送到GitHub仓库
 
 ### 部署步骤
 
-#### 步骤1：创建GitHub仓库
-
-1. 访问 [GitHub](https://github.com/new) 创建新仓库
-2. 仓库名称：`009tg.com`
-3. 设置为Public公开仓库
-4. 点击"Create repository"创建仓库
-
-#### 步骤2：推送代码到GitHub
+#### 步骤1：推送代码到GitHub
 
 ```bash
-# 初始化Git仓库（如果还没有）
 cd 009tg.com
 git init
 git add .
 git commit -m "Initial commit"
-
-# 配置远程仓库（替换为你的GitHub用户名）
-git remote add origin https://github.com/你的GitHub用户名/009tg.com.git
-
-# 推送到GitHub
+git remote add origin https://github.com/你的用户名/009tg.com.git
 git push -u origin master
 ```
 
-#### 步骤3：在Cloudflare Pages中连接仓库
+#### 步骤2：在Cloudflare Pages中连接仓库
 
 1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/)
 2. 进入 **Workers & Pages** → **Create a project**
 3. 点击 **Connect to Git**
 4. 选择 **GitHub**，授权Cloudflare访问你的GitHub账号
-5. 选择你创建的仓库
-6. 点击 **Begin setup** 开始部署
+5. 选择你的仓库（009tg.com）
+6. 点击 **Begin setup**
+
+#### 步骤3：配置构建参数
+
+由于是纯静态网站，不需要构建命令：
+
+- **Framework preset**：None
+- **Build command**：留空
+- **Build output directory**：`/`（根目录）
+
+点击 **Save and Deploy** 开始部署。
 
 #### 步骤4：配置自定义域名
 
 1. 在Cloudflare Pages项目中，点击 **Custom domains**
-2. 添加你的自定义域名，例如：`009tg.com`
-3. 按照提示配置DNS记录：
-   - 添加CNAME记录指向你的Pages域名
-   - 或使用Cloudflare提供的Nameservers
-
-4. 等待SSL证书自动生成（通常需要几分钟）
+2. 点击 **Set up a custom domain**
+3. 输入你的域名，例如：`009tg.com`
+4. Cloudflare会自动配置DNS记录（如果域名在Cloudflare管理）
+5. 如果域名不在Cloudflare，需要手动添加CNAME记录指向你的Pages域名
+6. 等待SSL证书自动生成（通常几分钟）
 
 #### 步骤5：验证部署
 
 1. 访问你的自定义域名：`https://009tg.com`
-2. 确认网站正常访问
-3. 每次推送代码到GitHub，Cloudflare会自动重新部署
+2. 确认网站正常访问，所有链接和图标正常
 
 ### 自动部署
 
-Cloudflare Pages支持自动部署，当你推送代码到GitHub时：
+Cloudflare Pages支持Git自动部署：
+- 每次推送代码到GitHub的master分支，Cloudflare会自动重新部署
+- 通常1-2分钟内完成
+- 可以在Cloudflare Dashboard → Pages项目 → Deployments查看部署历史和日志
 
-- Cloudflare会自动检测到新的提交
-- 自动构建和部署网站
-- 通常在1-2分钟内完成部署
-- 可以在Cloudflare Dashboard查看部署日志
+### 部署注意事项
+
+1. **.gitignore**：确保不要提交临时文件（分析脚本、临时HTML等）
+2. **大文件**：favicon目录可能有上千个PNG文件，首次推送可能较慢
+3. **404页面**：项目已包含404.html，Cloudflare Pages会自动使用
+4. **缓存**：Cloudflare会缓存静态资源，更新后可能需要强制刷新（Ctrl+F5）
+
+## 本地预览
+
+```bash
+cd 009tg.com
+python -m http.server 8000
+```
+
+访问：
+- 中文版：http://localhost:8000
+
+## 常见问题
+
+### Q: 如何添加新网站？
+
+A: 有两种方式：
+1. **手动添加**：编辑 `完整版导航.json`，按照现有格式添加站点信息，然后运行 `python tools/generate_new_html.py` 重新生成HTML
+2. **自动抓取**：编写抓取脚本从同类导航站批量抓取，参考"新增抓取源站步骤"
+
+### Q: 网站图标不显示（破裂）怎么办？
+
+A: 按以下步骤排查：
+1. 运行 `python tools/cache_favicons.py` 重新下载favicon
+2. 检查 `assets/images/logos/default.png` 默认图标是否存在
+3. 检查 `favicon_mapping.json` 中对应域名的映射路径是否正确
+4. 检查 `assets/favicons/` 下对应的PNG文件是否存在
+5. 重新生成HTML：`python tools/generate_new_html.py`
+
+注意：cache_favicons.py下载失败的站点会自动复制默认图标，不会出现破裂。
+
+### Q: 如何检测无效链接？
+
+A: 运行 `python tools/check_sites_validity.py`，脚本会检测所有站点并生成报告。注意：国外站点超时可能是国内网络问题，不一定是真失效，建议人工确认后再删除。
+
+### Q: 抓取脚本运行很慢怎么办？
+
+A: 抓取速度主要取决于目标站的响应速度和反爬策略。可以：
+1. 调整crawler_utils.py中fetch_page的timeout和retries参数
+2. 调整请求延迟（默认1-3秒）
+3. 对于纯JS渲染站，直接下载JSON文件比解析HTML快得多
+4. 后台运行：`python tools/crawler/crawl_xxx.py &`
+
+### Q: build_data.py 出现分类重复创建怎么办？
+
+A: 检查category_mapping.yaml中的目标分类名是否与完整版导航.json中的分类名完全一致（包括空格、大小写）。build_data.py会先按"父分类+分类名"精确匹配，失败时降级全局匹配。如果仍然创建了重复分类，说明目标分类名拼写错误。
+
+### Q: 如何回滚数据？
+
+A: build_data.py每次运行前会自动备份为 `完整版导航.json.build_backup`。如需回滚：
+```bash
+cp 完整版导航.json.build_backup 完整版导航.json
+python tools/generate_new_html.py
+```
+
+其他备份文件：
+- `完整版导航.json.cleanup_backup`：清理前的完整备份
+- `完整版导航.json.premapping_backup`：方案2实施前备份
+- `完整版导航.json.fingerprint_backup`：分类调整前备份
 
 ## 技术栈
 
-- **前端框架**：Bootstrap 3.x
-- **样式框架**：Xenon
+- **前端框架**：Bootstrap 3.x + Xenon
 - **图标库**：Font Awesome, Linecons
-- **JavaScript**：jQuery, TweenMax, Lozad (懒加载)
+- **JavaScript**：jQuery, TweenMax, Lozad（懒加载）
 - **开发工具**：Python 3.x
+- **依赖库**：requests, beautifulsoup4, pyyaml
+- **部署平台**：Cloudflare Pages
 
 ## 维护指南
 
 ### 定期维护任务
 
-1. **站点有效性检测**（每周）
+1. **站点有效性检测**（每月）
    ```bash
    python tools/check_sites_validity.py
    ```
 
-2. **删除无效站点**（根据检测结果）
+2. **删除无效站点**（根据检测结果，人工确认后）
    ```bash
    python tools/remove_invalid_sites.py
    ```
 
-3. **更新favicon缓存**（每月）
+3. **更新favicon缓存**（新增站点后）
    ```bash
    python tools/cache_favicons.py
    ```
@@ -357,56 +552,13 @@ Cloudflare Pages支持自动部署，当你推送代码到GitHub时：
    python tools/generate_new_html.py
    ```
 
-### 数据更新流程
-
-1. 编辑 `完整版导航.json` 添加或修改网站
-2. 运行 `check_sites_validity.py` 验证新站点
-3. 运行 `cache_favicons.py` 下载favicon
-4. 运行 `generate_new_html.py` 重新生成HTML
-5. 提交代码到GitHub触发自动部署
-
-## 最新修复
-
-### 2026-01-17
-
-- **添加Google AdSense代码**：在所有网页的`<head>`标签之间添加了AdSense代码，包括index.html、cn/index.html、en/index.html、redirect.html等所有HTML文件
-- **更新HTML生成脚本**：修改generate_new_html.py，确保新生成的HTML文件自动包含AdSense代码
-- **修复英文版内容问题**：发现英文版index.html包含中文内容，运行generate_english.py脚本生成正确的英文版本
-- **修复英文版图标路径**：更新generate_english.py脚本，修复JavaScript数据中的图标路径（从"assets/favicons/"改为"../assets/favicons/"）
-- **修复cn/index.html图标路径**：创建fix_cn_paths.py脚本，修复cn/index.html中的资源路径和JavaScript图标路径
-- **修复redirect.html链接**：修复cn/index.html和en/index.html中的redirect.html链接路径，确保正确跳转到根目录的redirect.html页面
-- **优化多语言版本路径管理**：统一处理根目录、cn/、en/三个版本的资源路径，确保图标和链接正常工作
-- **优化所有Python脚本的使用说明**：为所有工具脚本添加了详细的使用说明文档，包括用途、功能概述、使用方法和主要特性
-- **更新README.md文档**：完善了工具脚本使用说明，添加了核心工具脚本、HTML修复工具脚本和测试脚本的详细说明
-- **添加脚本文档注释**：所有Python脚本都包含了标准化的文档注释，便于理解和使用
-
-### 2026-01-16
-
-- **修复faviconextractor.com API格式错误**：将错误的URL格式`https://www.faviconextractor.com/favicon/{domain}?larger=true`修复为正确的`https://www.faviconextractor.com/api/favicon/{domain}`
-- **修复JSON数据中的URL格式**：将包含路径的URL（如`https://echodata.work/home.html`）修复为只包含域名的格式（如`https://echodata.work`）
-- **修复Google favicon服务超时问题**：为使用Google favicon服务的图片添加默认src属性，避免显示小地球图标
-- **修复JavaScript模板变量转义**：修复动态生成的img标签中的转义变量问题
-- **修复不分页分类的显示问题**：JavaScript代码现在会跳过`data-pagination="False"`的分类，保留静态HTML内容
-- **优化HTML生成脚本**：使用本地favicon文件而不是在线服务，提升加载速度
-- **成功缓存1164个favicon**：使用修复后的API格式成功下载了所有网站的favicon图标
-
-## 常见问题
-
-### Q: 如何添加新网站？
-
-A: 编辑 `完整版导航.json` 文件，按照现有格式添加网站信息，然后运行 `python tools/generate_new_html.py` 重新生成HTML。
-
-### Q: 网站图标不显示怎么办？
-
-A: 运行 `python tools/cache_favicons.py` 重新下载favicon，或者手动将图标文件放到 `assets/favicons/` 目录。
-
-### Q: 如何检测无效链接？
-
-A: 运行 `python tools/check_sites_validity.py`，脚本会检测所有站点并生成报告。
-
-### Q: 英文版本如何更新？
-
-A: 运行 `python tools/generate_new_html.py` 会生成中文版本的HTML文件。英文版本需要单独维护。
+5. **抓取新站点**（按需）
+   ```bash
+   python tools/crawler/crawl_新站.py
+   python tools/build_data.py
+   python tools/cache_favicons.py
+   python tools/generate_new_html.py
+   ```
 
 ## License
 
@@ -421,4 +573,4 @@ A: 运行 `python tools/generate_new_html.py` 会生成中文版本的HTML文件
 
 ---
 
-⭐ 如果这个项目对你有帮助，请给个Star支持一下！
+如果这个项目对你有帮助，请给个Star支持一下！
