@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>All Sites</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "Yoyofans", "url": "https://yoyofans.co", "description": "Yoyofans is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/2b191089d106e76c00eb3fda3eff8894.png"}, {"name": "HK-likes", "url": "https://www.hk-likes.com", "description": "HK-likes provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/43328f91534d1dffd529e1348db2730c.png"}, {"name": "SocialBoss", "url": "https://socialboss.org", "description": "SocialBoss is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/0a48a3a89a69dd6615a64c9b26105c86.png"}, {"name": "Social-viral", "url": "https://like.tg", "description": "Social-viral is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/01f77bca026d38dc846cad13ba33fca4.png"}, {"name": "SidesMedia", "url": "https://sidesmedia.com", "description": "SidesMedia provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/8ba388e649ce8b8f9eb34540018fc20a.png"}, {"name": "Tokupgrade", "url": "https://tokupgrade.com", "description": "Tokupgrade is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/7c4e4c34b343283695989cf85fc76fe6.png"}, {"name": "Tokcaptain", "url": "https://tokcaptain.com", "description": "Tokcaptain is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/711ae409b537f8d510ad431279b8bc90.png"}, {"name": "Mrpopular", "url": "https://cn.mrpopular.net", "description": "Mrpopular provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/dde1073ae3e9683777b41b9296a09ed8.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

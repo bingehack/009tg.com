@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>全部站点</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "ITPUB", "url": "http://www.itpub.net", "description": "ITPUB是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/01e2d23d7bb69dd70fb9045924aa4487.png"}, {"name": "太平洋电脑网", "url": "https://www.pconline.com.cn", "description": "太平洋电脑网为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/96a93661bff61c99ac4e5071d753e839.png"}, {"name": "美国主机侦探", "url": "https://www.idcspy.com", "description": "美国主机侦探是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/a6b58dcea39f6494aa3051e65eb7a6d5.png"}, {"name": "WebHostingTalk", "url": "https://www.webhostingtalk.cn", "description": "Web Hosting Talk 提供最新的虚拟主机,VPS技术,云主机,独立主机,服务器最新资讯,是海外VPS主机交流的聚集地。", "icon": "../../assets/favicons/75ad663061286648e22a5625bb2b29b8.png"}, {"name": "LowEndTalk", "url": "https://www.lowendtalk.com", "description": "LowEndTalk为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/30476cec166311284d67e552c6de8e17.png"}, {"name": "Hostloc", "url": "http://www.hostloc.com", "description": "Hostloc是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/41827ac0411507bb3d70cf74759c8c21.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

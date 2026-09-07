@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>全部站点</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "DailyLetter: News Tailored for You", "url": "https://dailyletter.news", "description": "DailyLetter: News Tailored for You是一个AI资讯平台，提供人工智能行业新闻、技术动态、产品评测等内容，适用于AI从业者、技术爱好者、投资者等人群。", "icon": "../../assets/favicons/f4700c328ebf82435f5f49a4dbd9b34e.png"}, {"name": "Trends for GPTs", "url": "https://trends.gapier.com", "description": "Trends for GPTs专注于人工智能领域的信息传播，涵盖大模型、机器学习、计算机视觉等前沿技术，帮助用户及时了解AI行业发展趋势。", "icon": "../../assets/favicons/c704128bdbcb2dbe04f201925aec7fe3.png"}, {"name": "nexlev.io", "url": "https://nexlev.io", "description": "借助人工智能驱动的 NexLev.io 发现尚未开发的 YouTube 利基市场", "icon": "../../assets/favicons/289b626dc68924e5157c355ea259ab71.png"}, {"name": "revisely.com", "url": "https://revisely.com", "description": "revisely.com是一个AI资讯平台，提供人工智能行业新闻、技术动态、产品评测等内容，适用于AI从业者、技术爱好者、投资者等人群。", "icon": "../../assets/favicons/0fc07a456edad1bb48e7f0ec53e20a84.png"}, {"name": "Panda", "url": "http://usepanda.com", "description": "A smart news reader built for productivity.", "icon": "../../assets/favicons/713bd9599d5031aba39521cb7d20335f.png"}, {"name": "chatterquant.com", "url": "https://chatterquant.com", "description": "chatterquant.com是一个人工智能垂直媒体，提供深度报道、行业分析、专家观点等内容，是AI从业者获取行业资讯的重要渠道。", "icon": "../../assets/favicons/ce3581c58d25846f95747170a62c071e.png"}, {"name": "indexbox.io", "url": "https://indexbox.io", "description": "indexbox.io是一个AI资讯平台，提供人工智能行业新闻、技术动态、产品评测等内容，适用于AI从业者、技术爱好者、投资者等人群。", "icon": "../../assets/favicons/ef5932d16cd16e75fa48c9fa268748a2.png"}, {"name": "tettra.co", "url": "https://tettra.co", "description": "tettra.co专注于人工智能领域的信息传播，涵盖大模型、机器学习、计算机视觉等前沿技术，帮助用户及时了解AI行业发展趋势。", "icon": "../../assets/favicons/b0e4f413795629d9d547b80040341aa5.png"}, {"name": "报告查一查", "url": "https://report.seedsufe.com", "description": "报告查一查是一个人工智能垂直媒体，提供深度报道、行业分析、专家观点等内容，是AI从业者获取行业资讯的重要渠道。", "icon": "../../assets/favicons/3d21b1677db4e0640ca7933a88d1c774.png"}, {"name": "LMArena", "url": "https://lmarena.ai", "description": "全球最大的众包 AI 盲测竞技场，让你亲手投票决定 GPT、Claude、Gemini 谁更强！", "icon": "../../assets/favicons/0c81b040f8cd3e7b0ba869f2f6c5cd1d.png"}, {"name": "Artificial Analysis", "url": "https://artificialanalysis.ai", "description": "Artificial Analysis专注于人工智能领域的信息传播，涵盖大模型、机器学习、计算机视觉等前沿技术，帮助用户及时了解AI行业发展趋势。", "icon": "../../assets/favicons/7e29d80c0f1e12e75cb254a9eb00add0.png"}, {"name": "Claw-Eval", "url": "https://claw-eval.github.io", "description": "针对AI Agent 基准评测平台，评估AI智能体在真实业务场景中的表现。", "icon": "../../assets/favicons/be0780d33258ccf05b10c31d17c0f8ad.png"}, {"name": "PinchBench", "url": "https://pinchbench.com", "description": "专为AI Agent（ OpenClaw）开发的基准测试平台", "icon": "../../assets/favicons/5f065168ccb969dddc3da9a6d201b11c.png"}, {"name": "GDPval", "url": "https://evals.openai.com", "description": "GDPval专注于人工智能领域的信息传播，涵盖大模型、机器学习、计算机视觉等前沿技术，帮助用户及时了解AI行业发展趋势。", "icon": "../../assets/favicons/1c3ea7bd46b2cd0547e8e26a079eeddc.png"}, {"name": "AI Ping", "url": "https://aiping.cn", "description": "AI Ping 是一款由清华系团队打造的免费大模型服务性能评测平台，通过7x24小时实时监控与多维度对比，为开发者提供客观、全面的选型参考，助力AI应用高效稳定落地。", "icon": "../../assets/favicons/5da4c5d4745d698d4b3a4753a74aeda0.png"}, {"name": "LLM Mafia Game", "url": "https://dash.opennumbers.xyz", "description": "LLM Mafia Game是一个AI资讯平台，提供人工智能行业新闻、技术动态、产品评测等内容，适用于AI从业者、技术爱好者、投资者等人群。", "icon": "../../assets/favicons/7711734af81dec58531445f8dde054c3.png"}, {"name": "VBench", "url": "https://vchitect.github.io/VBench-project", "description": "VBench专注于人工智能领域的信息传播，涵盖大模型、机器学习、计算机视觉等前沿技术，帮助用户及时了解AI行业发展趋势。", "icon": "../../assets/favicons/b0fa08b33977ca1682f10a59c26a95f4.png"}, {"name": "C-Eval", "url": "https://cevalbenchmark.com/index_zh.html", "description": "C-Eval是一个人工智能垂直媒体，提供深度报道、行业分析、专家观点等内容，是AI从业者获取行业资讯的重要渠道。", "icon": "../../assets/favicons/4b6e9b95e3740e65d1dfde3a98815cf0.png"}, {"name": "Prompt Hunt", "url": "https://prompthunt.com", "description": "Prompt Hunt是一个AI资讯平台，提供人工智能行业新闻、技术动态、产品评测等内容，适用于AI从业者、技术爱好者、投资者等人群。", "icon": "../../assets/favicons/f8a71715111dffad16398ae7585139bf.png"}, {"name": "Midlibrary", "url": "https://www.midlibrary.io", "description": "Midlibrary专注于人工智能领域的信息传播，涵盖大模型、机器学习、计算机视觉等前沿技术，帮助用户及时了解AI行业发展趋势。", "icon": "../../assets/favicons/060e164c517bda3f2f1b887787075e1b.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

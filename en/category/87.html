@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>All Sites</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "Algopix", "url": "https://algopix.com", "description": "Algopix is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/c64da358c780b2a91b973aa26a7e542d.png"}, {"name": "AMZScout", "url": "https://amzscout.net", "description": "AMZScout provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/856dfef2c3591e74df9da36a87249f19.png"}, {"name": "Jungle Scout", "url": "https://www.junglescout.cn", "description": "Jungle Scout is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/16ed2fa34faf422e92d21889ba2f9ea2.png"}, {"name": "Helium 10", "url": "https://www.helium10.com", "description": "Helium 10 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/c104f7253053ace6d6584a2fb8f6e2a6.png"}, {"name": "Salehoo", "url": "https://www.salehoo.com", "description": "Salehoo provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/2d2a128c3bbe27ae0dd15edb4a60d64b.png"}, {"name": "Spocket", "url": "https://www.spocket.co", "description": "Spocket is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/dc626c568a96407e8ce62bed381869a7.png"}, {"name": "EtsyHunt", "url": "https://etsyhunt.com", "description": "EtsyHunt is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/9ff6cda9dadabb22978b8ca63c978c3b.png"}, {"name": "coupang数据分析平台", "url": "https://www.sellerwell.com", "description": "coupang数据分析平台 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/157f22c11139dd60d31b4cedc4c9e7c6.png"}, {"name": "EasyYa易芽", "url": "https://easyya.com", "description": "EasyYa易芽 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/1dba2f944709fd0288ce204c7a171f59.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>All Sites</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "Godaddy", "url": "https://www.godaddy.com", "description": "Godaddy is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/4e6dcd00c3d9d0de1ca33fdca6555af6.png"}, {"name": "BT宝塔", "url": "https://www.bt.cn", "description": "BT宝塔 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/d5e4a35305ea41e3065637e64f6a6daf.png"}, {"name": "万网", "url": "https://wanwang.aliyun.com", "description": "万网 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/645857fffcd6f50253b7d9c3f1f8df0e.png"}, {"name": "Name.com", "url": "https://www.name.com", "description": "Name.com is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/aa031e1d886916365c97346e58b07a95.png"}, {"name": "Namecheap", "url": "https://www.namecheap.com", "description": "Namecheap provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/037995c4fef69c9ade390ca21e00809b.png"}, {"name": "Network Solutions", "url": "https://www.networksolutions.com", "description": "Network Solutions is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/124313a09b59d811119f11a23f780a43.png"}, {"name": "Tucows", "url": "https://www.tucows.com", "description": "Tucows is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/ff1e745cd1e1a0316f4320b845573233.png"}, {"name": "enom", "url": "https://www.enom.com", "description": "enom provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/859a92ebab30c92ba85819fd508e6290.png"}, {"name": "Gandi", "url": "https://www.gandi.net", "description": "Gandi is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/5d2c93f801265346a6b73d71dd1a9bc8.png"}, {"name": "Porkbun", "url": "https://porkbun.com", "description": "Porkbun is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/354268c690726385858a80981c6ce4a8.png"}, {"name": "新网", "url": "https://m.xinnet.com", "description": "新网 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/858c4061daee75b0eb690a7d97836172.png"}, {"name": "CrazyDomains", "url": "https://www.crazydomains.com", "description": "CrazyDomains is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/4b029d5accc4f0ea42a83cf4b4b0da9a.png"}, {"name": "西部数码", "url": "http://www.west.cn", "description": "西部数码 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/a513fd575e80262e8de51f8b431bc424.png"}, {"name": "爱名网", "url": "https://www.22.cn", "description": "爱名网 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/77e3a490f6fcfcf27cb520ee575096a9.png"}, {"name": "Domain.com", "url": "https://www.domain.com", "description": "Domain.com is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/60acb4ffa4ed6fa2384b3db9c8a76690.png"}, {"name": "Google Domains", "url": "https://domains.google", "description": "Google Domains is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/00b59d52581c85f75c09fbc8dcdc045b.png"}, {"name": "NameSilo", "url": "https://www.namesilo.com", "description": "NameSilo provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/1c7dd34f4c989b7a9a4a65a5bc7d3f2c.png"}, {"name": "Dynadot", "url": "https://www.dynadot.com", "description": "Dynadot is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/ee54fa7f2d33de9bcb0df8602a6b0cfc.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>All Sites</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "Mailchimp", "url": "https://mailchimp.com", "description": "Mailchimp is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/647c5fe1060e7ef85eb2733a230abff8.png"}, {"name": "Mailerlite", "url": "https://www.mailerlite.com", "description": "Mailerlite provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/8e35e8138350c47e0c2765aab1a05890.png"}, {"name": "Sendgrid", "url": "https://sendgrid.com", "description": "Sendgrid is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/bb96d7530c509ca13e7988a376178636.png"}, {"name": "Aweber", "url": "https://www.aweber.com", "description": "Aweber is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/dc50c4b83317d7d43e705f56a89b23f3.png"}, {"name": "Activecampaign", "url": "https://www.activecampaign.com", "description": "Activecampaign provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/0590ed7b11c7beebb55e5f792205ba17.png"}, {"name": "电子邮件签名生成器", "url": "https://free-email-signature-generator.vercel.app", "description": "电子邮件签名生成器 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/e5d4e232dd9a70a54613cf82744e2d67.png"}, {"name": "InboxReads", "url": "https://inboxreads.co", "description": "InboxReads is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/5ba9c6c91115825799eeee978e529834.png"}, {"name": "Groupmail", "url": "https://group-mail.com", "description": "Groupmail provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/f1b9d719bde84e5af5948fa17e3d1e77.png"}, {"name": "红帽云邮", "url": "https://www.redmaomail.com", "description": "红帽云邮 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/d8705c575a02385e9f6dd31a6c75d58c.png"}, {"name": "Focussend", "url": "https://www.focussend.com", "description": "Focussend is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/b4ea0b578708cdf16fbcdd8284983061.png"}, {"name": "webpower", "url": "https://www.webpowerchina.com", "description": "webpower provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/62465f69bb5dd4d3b9ec30ce5d750d0e.png"}, {"name": "Sendinblue", "url": "https://www.sendinblue.com", "description": "Sendinblue is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/5b6b343fb3f83725eeea98fd62fa636d.png"}, {"name": "Klaviyo", "url": "https://www.klaviyo.com", "description": "Klaviyo is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/e1d4774685dbe3fc93271d7df9f87934.png"}, {"name": "Drip", "url": "https://www.drip.com", "description": "Drip provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/089615844f8ea62afc8ab140014aa1cb.png"}, {"name": "Campaign Monitor", "url": "https://www.campaignmonitor.com", "description": "Campaign Monitor is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/366d198652066259dcdfd4fa97e8f005.png"}, {"name": "GetResponse", "url": "https://www.getresponse.com", "description": "GetResponse is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/298a5de5a3bca7a4666838206bad5852.png"}, {"name": "Constant Contact", "url": "https://www.constantcontact.com", "description": "Constant Contact provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/1857c38b90d3b1060d5e31a41eff4b84.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

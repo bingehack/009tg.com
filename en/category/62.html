@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>All Sites</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "站长工具", "url": "http://tool.chinaz.com", "description": "站长工具 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/9ca3197dc88e015633abba9b6dfd52e6.png"}, {"name": "网站信用评估", "url": "https://www.scamdoc.com", "description": "网站信用评估 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/9594c17a10549bbb0a832ae6b2af105d.png"}, {"name": "Publicwww", "url": "https://publicwww.com", "description": "Publicwww is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/81d7cea5555d1ff5b70898b42a74857b.png"}, {"name": "检测网址标红", "url": "https://transparencyreport.google.com", "description": "检测网址标红 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/4229103b9fad3dd07f95231e527b9dbe.png"}, {"name": "网站时光机", "url": "https://web.archive.org", "description": "网站时光机 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/e5516eb5686a18e24b3f0841b0ecbd08.png"}, {"name": "查看ip环境", "url": "https://whoer.net", "description": "查看ip环境 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/6e68181667a0a3652608d23b031c9420.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

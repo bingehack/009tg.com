@@ -636,7 +636,8 @@ def generate_category_page(category, parent_category, children, all_sites_in_cat
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            {f'''
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -661,6 +662,7 @@ def generate_category_page(category, parent_category, children, all_sites_in_cat
                     </div>
                 </div>
             </div>
+            ''' if total_sites > 0 else ''}
 
             <!-- 子分类入口（一级分类页面） -->
             {f'''
@@ -686,7 +688,8 @@ def generate_category_page(category, parent_category, children, all_sites_in_cat
             </div>
             ''' if related_html else ''}
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            {f'''
             <div class="row">
                 <div class="col-md-12">
                     <h3>{all_sites_text}</h3>
@@ -698,6 +701,7 @@ def generate_category_page(category, parent_category, children, all_sites_in_cat
                     </div>
                 </div>
             </div>
+            ''' if total_sites > 0 else ''}
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -714,6 +718,7 @@ def generate_category_page(category, parent_category, children, all_sites_in_cat
         </div>
     </div>
 
+    {f'''
     <script>
         var allSites = {sites_js};
         var currentPage = 1;
@@ -796,6 +801,7 @@ def generate_category_page(category, parent_category, children, all_sites_in_cat
             }});
         }});
     </script>
+    ''' if total_sites > 0 else ''}
 
     <script src="{asset_prefix}assets/js/bootstrap.min.js"></script>
     <script src="{asset_prefix}assets/js/TweenMax.min.js"></script>

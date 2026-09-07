@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>All Sites</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "Bitstamp", "url": "https://www.bitstamp.net", "description": "Bitstamp is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/c33538169870c41a870358200959b23b.png"}, {"name": "BingX", "url": "https://www.bingx.com", "description": "BingX provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/a8831a02cc38487840e789508fe1ebc3.png"}, {"name": "Bitget", "url": "https://www.bitget.com", "description": "Bitget is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/cf143393051119340f68de252102734c.png"}, {"name": "MEXC", "url": "https://www.mexc.com", "description": "MEXC is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/ee6828252f343002eb9bd65d4a4a6f02.png"}, {"name": "KuCoin", "url": "https://www.kucoin.com", "description": "KuCoin provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/aef0f3adc4021d0cf3e1988ca4b2ae89.png"}, {"name": "Gate.io", "url": "https://gate.io", "description": "Gate.io is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/d9d1787516a4cf7f64f1f1ac25b793a4.png"}, {"name": "Upbit", "url": "https://upbit.com", "description": "Upbit is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/1ae80c06b68aa0adcc5e50c1debb6eab.png"}, {"name": "Bybit", "url": "http://www.bybit.com", "description": "Bybit provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/9cf24dc5de11ae99eb308ddc9fb08972.png"}, {"name": "OKX", "url": "https://www.okx.com", "description": "OKX is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/14b3b09827055d509b5b843547681e18.png"}, {"name": "Bitfinex", "url": "https://www.bitfinex.com", "description": "Bitfinex is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/6fe77db69c686eb5114c4b831d7c32fc.png"}, {"name": "Kraken", "url": "https://www.kraken.com", "description": "Kraken provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/335843e7c8bd3f2f92870f3df2d1d77e.png"}, {"name": "Huobi Global", "url": "https://www.htx.com", "description": "Huobi Global is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/b5adc24f786619e3478eea814ec32692.png"}, {"name": "Coinbase", "url": "https://www.coinbase.com", "description": "Coinbase is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/d5c5c85e129eb37139f8528b5c71ec3f.png"}, {"name": "Binance", "url": "https://www.binance.com", "description": "Binance provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/c36c86abfb601d334e5797335c2ca5e5.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

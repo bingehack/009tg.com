@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>全部站点</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "snapmail邮箱", "url": "https://www.snapmail.cc", "description": "snapmail邮箱是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/bca884ecbbc9f9eff1c3f18f271d899e.png"}, {"name": "Yopmail", "url": "http://www.yopmail.com", "description": "Yopmail为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/3192c35352cd159824ded2fe79458dbe.png"}, {"name": "Tempail", "url": "https://tempail.com", "description": "Tempail是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/218430e2da46eacc651e24b93022cb93.png"}, {"name": "Mailinator", "url": "https://www.mailinator.com", "description": "Mailinator是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/4beb6b09bd1d05f1e51f3cce1bf2a4ba.png"}, {"name": "10minutemail", "url": "https://10minutemail.net", "description": "10minutemail为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/fbd855e7b1b6d34fd89e8de51241e173.png"}, {"name": "24小时邮箱", "url": "http://24mail.chacuo.net", "description": "24小时邮箱是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/6ce9eac96a623d200aaa74d70a190c8b.png"}, {"name": "Guerrillamail", "url": "https://www.guerrillamail.com", "description": "Guerrillamail是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/ac245441b6dbdb1fea24f975afe9140d.png"}, {"name": "Crazymailing", "url": "https://www.crazymailing.com", "description": "Crazymailing为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/b30c0376c18ea97867107929d3628277.png"}, {"name": "脆球邮箱", "url": "https://mail.cuiqiu.com", "description": "脆球邮箱是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/e0303cdf4187db77c3fd8cf7ae803d5d.png"}, {"name": "Inboxkitten", "url": "https://inboxkitten.com", "description": "Inboxkitten是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/3d9d15a2a7675a815475f8c71edd735b.png"}, {"name": "Getnada", "url": "https://getnada.com", "description": "Getnada为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/324bf98d42dbfeed98678e748e9b3d65.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

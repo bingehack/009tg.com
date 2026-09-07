@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>All Sites</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "FedEx", "url": "https://www.fedex.com", "description": "FedEx is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/b7de6b43ee3cad31c69502f387a474c7.png"}, {"name": "UPS", "url": "https://www.ups.com", "description": "UPS provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/ae135b43e7b3886c476cc28f9db639b9.png"}, {"name": "DHL", "url": "https://www.dhl.com", "description": "DHL is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/519feabf1483576d630ea28f88a24255.png"}, {"name": "顺丰国际", "url": "https://intl.sf-express.com", "description": "顺丰国际 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/87ed410498519b51fc6a3db03f8b0852.png"}, {"name": "E邮宝", "url": "http://www.epacket.com.cn", "description": "E邮宝 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/747b6752389370bd1019f5be96e5c06c.png"}, {"name": "万邦速达", "url": "http://www.wanbexpress.com", "description": "万邦速达 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/1630de77598247886894410756d12a18.png"}, {"name": "飞鸟", "url": "http://www.tn-exp.com", "description": "飞鸟 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/452c34fb579d178a959123e1210da24e.png"}, {"name": "云途", "url": "https://www.yunexpress.com", "description": "云途 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/fd0b8dab32eab9485f7b04386d46a765.png"}, {"name": "原飞航", "url": "http://www.yfhex.com", "description": "原飞航 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/abb0e3cbd978f9d0bcf66279df9465f9.png"}, {"name": "递四方", "url": "http://express.4px.com", "description": "递四方 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/4d4bb868013447ecebe2156d8a8220a6.png"}, {"name": "皇家物流", "url": "https://www.pfcexpress.com", "description": "皇家物流 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/f659d972dda376f655a906004a5e8d89.png"}, {"name": "美通供应链", "url": "http://aafgzx.nextsls.com", "description": "美通供应链 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/afd4fdd82b279518ddf620bfe7e1e546.png"}, {"name": "Kuehne + Nagel", "url": "https://home.kuehne-nagel.com", "description": "Kuehne + Nagel is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/57f2932a3001d63e8622ce0821fc6f07.png"}, {"name": "C.H. Robinson", "url": "https://www.chrobinson.com", "description": "C.H. Robinson provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/72d16b5b81afaa19f646b18709f430d3.png"}, {"name": "DSV", "url": "https://www.dsv.com", "description": "DSV is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/55dbd685547ad2463647cdc9adcf7a77.png"}, {"name": "Expeditors International", "url": "https://www.expeditors.com", "description": "Expeditors International is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/e45ffb6eecb9ccbe4a71eb53a71a81c5.png"}, {"name": "Geodis", "url": "https://geodis.com", "description": "Geodis provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/7fb52037a380190b795ab3cf37e4a2cf.png"}, {"name": "Nippon Express", "url": "https://www.nipponexpress.com", "description": "Nippon Express is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/73d3a6487ecd3a57ca75d2df3d29451d.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

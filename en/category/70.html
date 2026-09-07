@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>All Sites</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "敏感词处理工具", "url": "https://igfonts.io", "description": "敏感词处理工具 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/a6ce554b2dbe8b664ffee085df7662a1.png"}, {"name": "Bestrewriter", "url": "https://bestrewriter.com", "description": "Bestrewriter provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/213bff18aa9a622b1da27dd3188a4200.png"}, {"name": "标题生成器", "url": "https://www.contentrow.com", "description": "标题生成器 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/ad2d90b2af06bed2614b8f96fa5fee57.png"}, {"name": "Deepl翻译", "url": "https://www.deepl.com", "description": "Deepl翻译 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/a37c98028e5ad5cc06db1f3210f520b6.png"}, {"name": "Grammarly语法", "url": "https://www.grammarly.com", "description": "Grammarly语法 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/f2d6a23275af76adfa5153b1f8b3ed2f.png"}, {"name": "句子控", "url": "https://www.juzikong.com", "description": "句子控 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/7008fae27b1118017148c09fb32c8476.png"}, {"name": "Giiso写作机器人", "url": "https://www.giiso.com", "description": "Giiso写作机器人 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/95fb45947ce38f1e487bb2c418ddac4a.png"}, {"name": "Topys", "url": "https://www.topys.cn", "description": "Topys provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/a52cecdbe608597c646d1f1afaa29c72.png"}, {"name": "易撰网", "url": "http://www.yizhuan5.com", "description": "易撰网 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/3f60eb02e1af92da74fcfaf5ef5834f8.png"}, {"name": "Draft", "url": "https://draftjs.org", "description": "Draft is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/5d5441ef287e862350c70ccf46ae4bc3.png"}, {"name": "Diffchecker", "url": "https://www.diffchecker.com", "description": "Diffchecker provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/1724da126451fd70df2f8873ac5e990c.png"}, {"name": "HubSpot博客创意生成器", "url": "https://www.hubspot.com", "description": "HubSpot博客创意生成器 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/11d27dbc311a0cb292e5dea488bb6a39.png"}, {"name": "海明威编辑器", "url": "https://hemingwayapp.com", "description": "海明威编辑器 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/1612b3e8ab33038d5be087b3f250829e.png"}, {"name": "Copyscape", "url": "https://www.copyscape.com", "description": "Copyscape provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/cc6f23effb3215ae18513d7ffe7753d3.png"}, {"name": "符号库", "url": "https://www.fuhaoku.net", "description": "符号库 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/896bb1284816ce41f83dfb8f94635cf2.png"}, {"name": "广告特殊字体", "url": "https://yaytext.com", "description": "广告特殊字体 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/dc1e4b676e56b0a18639f25ba3470778.png"}, {"name": "Get Emoji", "url": "https://getemoji.com", "description": "Get Emoji provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/ce9dbcf6a85d265c88bb9db2ac18077b.png"}, {"name": "EmojiCopy", "url": "https://www.emojicopy.com", "description": "EmojiCopy is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/b542f417de2c7c48e33db74b0b6365a0.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

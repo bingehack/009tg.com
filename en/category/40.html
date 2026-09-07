@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>All Sites</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "ChainSecurity", "url": "https://chainsecurity.com", "description": "ChainSecurity is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/ca05c25d10c3be7470ef7b143f18b0c9.png"}, {"name": "SCSA", "url": "https://www.smartcontractsecurityalliance.com", "description": "SCSA provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/383c1f039905883e41e79ff87a089700.png"}, {"name": "QuillAudits", "url": "https://audits.quillhash.com", "description": "QuillAudits is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/6dcfd0ff606cb2a07afe295a44c20370.png"}, {"name": "SmartDec", "url": "https://smartdec.net", "description": "SmartDec is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/12826848ab11f75eb92362217aff21d1.png"}, {"name": "Cryptorank", "url": "https://cryptorank.io", "description": "Cryptorank provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/ecfe3df0f5a8024c9ec6a10037365560.png"}, {"name": "比特鹰", "url": "https://www.biteagle.xyz", "description": "比特鹰 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/8dd26c515a8a1573b0224c85a00e89bc.png"}, {"name": "Crypto Briefing", "url": "https://cryptobriefing.com", "description": "Crypto Briefing is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/1ba155f3a837870afd5b917b62b8ba07.png"}, {"name": "The Merkle", "url": "https://themerkle.com", "description": "The Merkle provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/0ab9d806edbd8452666ec00022420394.png"}, {"name": "CoinSpectator", "url": "https://coinspectator.com", "description": "CoinSpectator is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/231da3fe5de3908ced64a35bcc448537.png"}, {"name": "CryptoSlate", "url": "https://cryptoslate.com", "description": "CryptoSlate is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/0a73b76132419f9b4f4b09ec6c0e3be1.png"}, {"name": "Null Tx", "url": "https://nulltx.com", "description": "Null Tx provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/ead209999937c20f06b1890f6593883d.png"}, {"name": "TodayOnChain", "url": "https://www.todayonchain.com", "description": "TodayOnChain is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/d5d59288fe71b8b5bc76bfb81c3ed296.png"}, {"name": "Blockonomi", "url": "https://blockonomi.com", "description": "Blockonomi is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/94dc492ab28fe68ae97d3ffc5d4166d8.png"}, {"name": "Coinpost", "url": "https://coinpost.jp", "description": "Coinpost provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/99a031b25f9f462c73855da37ed7327a.png"}, {"name": "Messari", "url": "https://messari.io", "description": "Messari is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/ab165ec126c4066f43452ff94b0c3d08.png"}, {"name": "Coincenter", "url": "https://www.coincenter.org", "description": "Coincenter is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/0da2df978349ba3c10e5cb10c3fb0dcd.png"}, {"name": "BitcoinWarrior", "url": "https://bitcoinwarrior.net", "description": "BitcoinWarrior provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/a76c271dcda6a0265907f1759e1592fe.png"}, {"name": "99bitcoins", "url": "https://99bitcoins.com", "description": "99bitcoins is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/e3097a10417087343e9c8093237e9c00.png"}, {"name": "Bitcoinist", "url": "https://bitcoinist.com", "description": "Bitcoinist is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/178aa28d43874a0ef3dcbdf94a67d09f.png"}, {"name": "CryptoNews", "url": "https://cryptonews.com", "description": "CryptoNews provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/3282cbbe8c2fb3610d7330a32bcfcb9d.png"}, {"name": "NewsBTC", "url": "https://www.newsbtc.com", "description": "NewsBTC is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/5fb9aedbf841917c67ec4082720ba24d.png"}, {"name": "CoinTelegraph", "url": "https://cointelegraph.com", "description": "CoinTelegraph is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/2a54a7b48621c6b0016da60102c7d9f1.png"}, {"name": "TheBitcoinNews", "url": "https://thebitcoinnews.com", "description": "TheBitcoinNews provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/124a7f6a6133813a7adea7a895ee921a.png"}, {"name": "LetstalkBitcoin", "url": "https://letstalkbitcoin.com", "description": "LetstalkBitcoin is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/8794a2b09cf03336d745e68725d2d168.png"}, {"name": "BitcoinMagazine", "url": "https://bitcoinmagazine.com", "description": "BitcoinMagazine is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/73d59db70f32197b50a97aab9aeede7c.png"}, {"name": "CoinDesk", "url": "https://www.coindesk.com", "description": "CoinDesk provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/019483ba93cc4f69e630e7e0268bf981.png"}, {"name": "MakersPlace", "url": "https://makersplace.com", "description": "MakersPlace is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/ca46f77d1516bb445389f6df7edd999d.png"}, {"name": "CryptoSlam", "url": "https://www.cryptoslam.io", "description": "CryptoSlam is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/6bfb560c0c46b40e49ebedaebf4a1ef3.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

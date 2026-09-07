@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>全部站点</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "Adobe Spark", "url": "https://www.adobe.com", "description": "Adobe Spark是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/e2b3f8990ced074503375950e24ba3e5.png"}, {"name": "SharpSpring Ads", "url": "https://sharpspring.com", "description": "可以定位到Facebook广告那些没有转化或购买的情况下离开网站的用户", "icon": "../../assets/favicons/c21f147c8900ba9a8a2dee1bbb049a78.png"}, {"name": "Adstage", "url": "https://www.adstage.io", "description": "Adstage是一个让你优化Adwords、Bing、Facebook、Twitter和linkedln的广告工具", "icon": "../../assets/favicons/9b1b5fe37a43de6936188727f64f7bed.png"}, {"name": "Qwaya", "url": "https://www.qwaya.com", "description": "Qwaya是针对facebook和instagram的专业广告工具", "icon": "../../assets/favicons/909c98f4bf0d096397a08663b91c243d.png"}, {"name": "AdEspresso", "url": "https://adespresso.com", "description": "AdEspresso为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/0417117bbc13eee4797ff4a6f36e65e0.png"}, {"name": "Revealbot", "url": "https://revealbot.com", "description": "Revealbot是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/f8fddea53dacd6d6c106c32a7587beec.png"}, {"name": "audtools受众工具", "url": "https://www.audtools.com", "description": "audtools受众工具是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/0045170b81b03c8c58ece71895c0c609.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

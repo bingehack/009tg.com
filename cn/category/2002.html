@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>全部站点</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "ZeroGPT Plus", "url": "https://www.zerogpt.plus", "description": "多功能AI内容检测和文本处理平台，支持AI文本检测、人文化、抄袭检测、摘要改写等，提供API企业集成。", "icon": "../../assets/favicons/29153be68289e354e995fa0666093320.png"}, {"name": "GPTZero", "url": "https://gptzero.me", "description": "GPTZero利用人工智能技术识别AI生成内容，支持多种检测维度和报告输出，帮助用户确保内容原创性和质量。", "icon": "../../assets/favicons/1cf768e1303018b5dd88784d453df49a.png"}, {"name": "CopyLeaks", "url": "https://copyleaks.com", "description": "CopyLeaks是一个智能内容检测平台，提供AI检测、查重、润色等功能，帮助创作者和教育机构提升内容质量和学术诚信。", "icon": "../../assets/favicons/dbcd76778cdb8629066e99106312c744.png"}, {"name": "AI Humanize", "url": "https://aihumanize.io", "description": "AI Humanize是一款AI内容检测工具，支持AI文本检测、抄袭检测、内容质量评估等功能，适用于学术写作、内容创作、教育评估等场景。", "icon": "../../assets/favicons/926f42814973d9616bebf91d1135b45d.png"}, {"name": "Originality.AI", "url": "https://originality.ai", "description": "Originality.AI利用人工智能技术识别AI生成内容，支持多种检测维度和报告输出，帮助用户确保内容原创性和质量。", "icon": "../../assets/favicons/1b4d7b6030c8c42dfbb669d00b41849d.png"}, {"name": "phrasly.ai", "url": "https://phrasly.ai", "description": "phrasly.ai是一个智能内容检测平台，提供AI检测、查重、润色等功能，帮助创作者和教育机构提升内容质量和学术诚信。", "icon": "../../assets/favicons/41698b8f2ee28e6cc6415aed321b55c4.png"}, {"name": "Magic Translate", "url": "https://magictranslate.io", "description": "Magic Translate是一款AI内容检测工具，支持AI文本检测、抄袭检测、内容质量评估等功能，适用于学术写作、内容创作、教育评估等场景。", "icon": "../../assets/favicons/01ff7116711d74d3e8a88bfe9333c175.png"}, {"name": "PANORA News App", "url": "https://www.panoraapp.com", "description": "PANORA News App利用人工智能技术识别AI生成内容，支持多种检测维度和报告输出，帮助用户确保内容原创性和质量。", "icon": "../../assets/favicons/997e8e22a4c37eaaea82beb51fc5bcbe.png"}, {"name": "Beam AI Takeoff Software", "url": "https://www.ibeam.ai", "description": "基于人工智能、用户友好且基于云的施工起飞软件。节省 90% 的起飞时间，并将处理量增加 30%。", "icon": "../../assets/favicons/034f19bd4a41036352e70ebc7f50264c.png"}, {"name": "rulta.com", "url": "https://rulta.com", "description": "利用 Rulta 的 DMCA 删除服务保护您的品牌和内容。", "icon": "../../assets/favicons/a27482b297697f7cf7f2ddf0c9eca40c.png"}, {"name": "gptinf.com", "url": "https://gptinf.com", "description": "gptinf.com利用人工智能技术识别AI生成内容，支持多种检测维度和报告输出，帮助用户确保内容原创性和质量。", "icon": "../../assets/favicons/3078229633b7ed58173fbbf4e58ebf48.png"}, {"name": "plagiarismcheck.org", "url": "https://plagiarismcheck.org", "description": "plagiarismcheck.org是一个智能内容检测平台，提供AI检测、查重、润色等功能，帮助创作者和教育机构提升内容质量和学术诚信。", "icon": "../../assets/favicons/36d29fa4e237d21af0a159deddc517e2.png"}, {"name": "StudyCorgi ChatGPT Detector", "url": "https://studycorgi.com/free-writing-tools/chat-gpt-detector", "description": "StudyCorgi ChatGPT Detector是一款AI内容检测工具，支持AI文本检测、抄袭检测、内容质量评估等功能，适用于学术写作、内容创作、教育评估等场景。", "icon": "../../assets/favicons/8ad4800207e65e4b3084e16b18d4fecb.png"}, {"name": "睿小鉴AI鉴伪智能体", "url": "https://agent.ruijianai.com", "description": "睿小鉴AI检测智能体是全模态AI内容鉴伪交互产品，支持图片、文本、音频、视频的AI生成检测、PS篡改检测、Deepfake识别、声音克隆检测与换脸检测，输出可解释性检测报告。中国科学院计算所孵化，已接入国家反诈中心APP。", "icon": "../../assets/favicons/49f6dd89459016a0abe1ef80920f20b0.png"}, {"name": "X Detector", "url": "https://xdetector.ai", "description": "X Detector是一个智能内容检测平台，提供AI检测、查重、润色等功能，帮助创作者和教育机构提升内容质量和学术诚信。", "icon": "../../assets/favicons/b0f6ca1dacfa87881ef3d68556b8c7ad.png"}, {"name": "Secur3D", "url": "https://secur3d.ai", "description": "Secur3D是一款AI内容检测工具，支持AI文本检测、抄袭检测、内容质量评估等功能，适用于学术写作、内容创作、教育评估等场景。", "icon": "../../assets/favicons/f87e69d4a5b7b7bc141d4fd0f00f3ec0.png"}, {"name": "LexiGym", "url": "https://lexigym.app", "description": "LexiGym利用人工智能技术识别AI生成内容，支持多种检测维度和报告输出，帮助用户确保内容原创性和质量。", "icon": "../../assets/favicons/23996767e820ecf88e565e89caebea10.png"}, {"name": "Your-AI", "url": "https://your-ai.net", "description": "Your-AI是一个智能内容检测平台，提供AI检测、查重、润色等功能，帮助创作者和教育机构提升内容质量和学术诚信。", "icon": "../../assets/favicons/d0a5352a9bbc45e07b07605de5827075.png"}, {"name": "Super Tech Fans", "url": "https://supertechfans.com", "description": "Super Tech Fans是一款AI内容检测工具，支持AI文本检测、抄袭检测、内容质量评估等功能，适用于学术写作、内容创作、教育评估等场景。", "icon": "../../assets/favicons/3f3ddebcb1367d56549aa6f1d6cea98b.png"}, {"name": "Skiley", "url": "https://skiley.net", "description": "一个 Spotify 集成的网络应用程序，用于播放列表管理、曲目发现等。", "icon": "../../assets/favicons/ae734d74480e77e6cb1a56b1efacc830.png"}, {"name": "SaaSlidator", "url": "https://saaslidator.com", "description": "SaaSlidator是一个智能内容检测平台，提供AI检测、查重、润色等功能，帮助创作者和教育机构提升内容质量和学术诚信。", "icon": "../../assets/favicons/708d9f1416d450779d16a0b5dc620489.png"}, {"name": "Rejoy", "url": "https://rejoy.app", "description": "Rejoy是一款AI内容检测工具，支持AI文本检测、抄袭检测、内容质量评估等功能，适用于学术写作、内容创作、教育评估等场景。", "icon": "../../assets/favicons/2a3d3fd9aef72299b18d0aca766ffe83.png"}, {"name": "Link:RE", "url": "https://linkre.thenurim.life", "description": "Link:RE利用人工智能技术识别AI生成内容，支持多种检测维度和报告输出，帮助用户确保内容原创性和质量。", "icon": "../../assets/favicons/a14d0eb20f99791026f2cc9b33be7032.png"}, {"name": "Huntd", "url": "https://huntd.xyz", "description": "Huntd是一个智能内容检测平台，提供AI检测、查重、润色等功能，帮助创作者和教育机构提升内容质量和学术诚信。", "icon": "../../assets/favicons/f3493fffcbc7dafb01f1e6f6153eb5a9.png"}, {"name": "GetBotAI", "url": "https://getbot.ai", "description": "GetBotAI是一款AI内容检测工具，支持AI文本检测、抄袭检测、内容质量评估等功能，适用于学术写作、内容创作、教育评估等场景。", "icon": "../../assets/favicons/6083161d846216f37911421154b5144e.png"}, {"name": "Eleo.ai", "url": "https://eleo.ai", "description": "一个人工智能驱动的平台，可自动执行文档创建、图像生成和聊天机器人管理，从而节省时间并提高生产力。", "icon": "../../assets/favicons/7e2de01a0ee9799c20bf8dc47ad830d9.png"}, {"name": "Coloring Pages Every Day", "url": "https://coloringpages.day", "description": "Coloring Pages Every Day是一个智能内容检测平台，提供AI检测、查重、润色等功能，帮助创作者和教育机构提升内容质量和学术诚信。", "icon": "../../assets/favicons/4293dccbcf84af7b64587322d4698983.png"}, {"name": "Changeup", "url": "http://www.changeup.ai", "description": "Changeup是一款AI内容检测工具，支持AI文本检测、抄袭检测、内容质量评估等功能，适用于学术写作、内容创作、教育评估等场景。", "icon": "../../assets/favicons/6ae0dd8f554d7d235a0d0a5d60d1e478.png"}, {"name": "BP Doctor Med 14", "url": "https://bpdoctormed.com", "description": "BP Doctor Med 14利用人工智能技术识别AI生成内容，支持多种检测维度和报告输出，帮助用户确保内容原创性和质量。", "icon": "../../assets/favicons/126b1c865f04b7565a35fe2730e62ce1.png"}, {"name": "AI Employe", "url": "https://aiemploye.com", "description": "使用 AI 支持的 RPA Chrome 扩展程序自动执行任务。每周都会节省一些时间。", "icon": "../../assets/favicons/0edf7cbf0d79a32095f4c0ca7d540314.png"}, {"name": "plag.lv", "url": "https://plag.lv", "description": "plag.lv是一款AI内容检测工具，支持AI文本检测、抄袭检测、内容质量评估等功能，适用于学术写作、内容创作、教育评估等场景。", "icon": "../../assets/favicons/9e834a6dc815ec80a686cbac9326ce1a.png"}, {"name": "hidemy.ai", "url": "https://hidemy.ai", "description": "hidemy.ai利用人工智能技术识别AI生成内容，支持多种检测维度和报告输出，帮助用户确保内容原创性和质量。", "icon": "../../assets/favicons/373e711df168050f8ca73d2b8511670c.png"}, {"name": "noplagio.it", "url": "https://noplagio.it", "description": "noplagio.it是一个智能内容检测平台，提供AI检测、查重、润色等功能，帮助创作者和教育机构提升内容质量和学术诚信。", "icon": "../../assets/favicons/dc9ed36a3f82e8a3ebebdc7d0f30463b.png"}, {"name": "pdfai.io", "url": "https://pdfai.io", "description": "PDFAI.io是一款AI驱动的PDF文档交互工具，用户上传PDF后可通过自然语言对话提取信息、生成摘要，大幅提升文档阅读效率。", "icon": "../../assets/favicons/1955effc938b7970e54194602f9f1f8b.png"}, {"name": "protectstar.com", "url": "https://protectstar.com", "description": "protectstar.com利用人工智能技术识别AI生成内容，支持多种检测维度和报告输出，帮助用户确保内容原创性和质量。", "icon": "../../assets/favicons/1fb5aaa7541a61f20d7c9aa12711c8fa.png"}, {"name": "Writecream AI Content Detector", "url": "https://www.writecream.com/ai-content-detector", "description": "Writecream AI Content Detector是一个智能内容检测平台，提供AI检测、查重、润色等功能，帮助创作者和教育机构提升内容质量和学术诚信。", "icon": "../../assets/favicons/e966499fd8bdd5c9c08535ce6efe9929.png"}, {"name": "Sapling AI Content Detector", "url": "https://sapling.ai/utilities/ai-content-detector", "description": "Sapling AI Content Detector是一款AI内容检测工具，支持AI文本检测、抄袭检测、内容质量评估等功能，适用于学术写作、内容创作、教育评估等场景。", "icon": "../../assets/favicons/abdb8020e3674a1a1bb5ef6d99857266.png"}, {"name": "GPT Detector", "url": "https://x.writefull.com/gpt-detector", "description": "GPT Detector利用人工智能技术识别AI生成内容，支持多种检测维度和报告输出，帮助用户确保内容原创性和质量。", "icon": "../../assets/favicons/1b0b9ea931c6a2cec5017a065fb7aa25.png"}, {"name": "Winston AI", "url": "https://gowinston.ai", "description": "Winston AI是一个智能内容检测平台，提供AI检测、查重、润色等功能，帮助创作者和教育机构提升内容质量和学术诚信。", "icon": "../../assets/favicons/c479083272fdf0f972aaa7b664758fe9.png"}, {"name": "Hive AI 检测器", "url": "https://hivemoderation.com/ai-generated-content-detection", "description": "Hive AI 检测器是一款AI内容检测工具，支持AI文本检测、抄袭检测、内容质量评估等功能，适用于学术写作、内容创作、教育评估等场景。", "icon": "../../assets/favicons/fa7a2c3fb8d89abe03a4c432dfeeedc6.png"}, {"name": "朱雀大模型检测", "url": "https://matrix.tencent.com/ai-detect", "description": "朱雀大模型检测利用人工智能技术识别AI生成内容，支持多种检测维度和报告输出，帮助用户确保内容原创性和质量。", "icon": "../../assets/favicons/b18a31b7888ef8a0a2238939764b82d2.png"}, {"name": "AI检测器", "url": "https://openai-openai-detector.hf.space", "description": "AI检测器是一个智能内容检测平台，提供AI检测、查重、润色等功能，帮助创作者和教育机构提升内容质量和学术诚信。", "icon": "../../assets/favicons/94522af00425bbe35c04a282fd46dbdb.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

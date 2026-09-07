@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>All Sites</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "Adobe Spark", "url": "https://www.adobe.com", "description": "Adobe Spark is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/e2b3f8990ced074503375950e24ba3e5.png"}, {"name": "SharpSpring Ads", "url": "https://sharpspring.com", "description": "SharpSpring Ads provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/c21f147c8900ba9a8a2dee1bbb049a78.png"}, {"name": "Adstage", "url": "https://www.adstage.io", "description": "Adstage is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/9b1b5fe37a43de6936188727f64f7bed.png"}, {"name": "Qwaya", "url": "https://www.qwaya.com", "description": "Qwaya is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/909c98f4bf0d096397a08663b91c243d.png"}, {"name": "AdEspresso", "url": "https://adespresso.com", "description": "AdEspresso provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/0417117bbc13eee4797ff4a6f36e65e0.png"}, {"name": "Revealbot", "url": "https://revealbot.com", "description": "Revealbot is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/f8fddea53dacd6d6c106c32a7587beec.png"}, {"name": "audtools受众工具", "url": "https://www.audtools.com", "description": "audtools受众工具 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/0045170b81b03c8c58ece71895c0c609.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

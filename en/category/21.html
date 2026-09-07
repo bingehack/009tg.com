@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>All Sites</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "CJ Affiliate", "url": "https://www.cj.com", "description": "CJ Affiliate is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/23bb55c302c7e5db6976cc51ee75df78.png"}, {"name": "ShareAsale", "url": "https://www.shareasale.com", "description": "ShareAsale provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/802c1659fe8844c4513575befd0f1fb6.png"}, {"name": "ClickBank", "url": "https://www.clickbank.com", "description": "ClickBank is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/e4f520cceeb9c9329043792aea39eb22.png"}, {"name": "Market health", "url": "https://www.markethealth.com", "description": "Market health is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/4b9c805ee6dc645c77f8edac8382b64d.png"}, {"name": "eBay Partner Network", "url": "https://partnernetwork.ebay.com", "description": "eBay Partner Network provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/9dd46cdd7be6773623c9e386d85f5213.png"}, {"name": "Amazon affiliate", "url": "https://affiliate-program.amazon.com", "description": "Amazon affiliate is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/54a885db1c9fca120b9c5de4a3f16f98.png"}, {"name": "Admitad", "url": "https://www.admitad.com", "description": "Admitad is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/098b2e6adb92340535f87ca12e5bf629.png"}, {"name": "Awin", "url": "https://www.awin.com", "description": "Awin provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/2dfd0f2b9c6909d0902630dfc1df056d.png"}, {"name": "Adcombo", "url": "https://adcombo.com", "description": "Adcombo is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/cf4f0a7e771cea7258919afc49512a91.png"}, {"name": "Convert2media", "url": "https://convert2media.com", "description": "Convert2media is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/c5a11b544342b88330997ebe95f62543.png"}, {"name": "GiddyUp", "url": "https://giddyup.io", "description": "GiddyUp provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/a61f6e480d1088ff80a1554178260dd8.png"}, {"name": "Post Affiliate Pro", "url": "https://www.postaffiliatepro.com", "description": "Post Affiliate Pro is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/0189d5f9e45e60656f82e9e3f30da2c3.png"}, {"name": "PartnerStack", "url": "https://partnerstack.com", "description": "PartnerStack is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/2983e3d67330193abe20f9f51a6b0035.png"}, {"name": "Partnerize", "url": "https://partnerize.com", "description": "Partnerize provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/e6f9ba289b3c32f86c5fd8247300b279.png"}, {"name": "Impact Radius", "url": "https://impact.com", "description": "Impact Radius is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/57c23855c2a5acfeee120d91efa3da4b.png"}, {"name": "Avangate Affiliate Network", "url": "https://www.avangatenetwork.com", "description": "Avangate Affiliate Network is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/e8f9b94c2a9508d922c4ffc25aed72d9.png"}, {"name": "Pepperjam Network", "url": "https://www.pepperjam.com", "description": "Pepperjam Network provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/88b7e3bcbeccee6037d4035f56d00942.png"}, {"name": "AvantLink", "url": "https://www.avantlink.com", "description": "AvantLink is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/e32e07646a264fc50b3b76ae823f28ba.png"}, {"name": "FlexOffers", "url": "https://www.flexoffers.com", "description": "FlexOffers is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/c0b35b5d3fb5815969bc00abfe522cfe.png"}, {"name": "Rakuten Marketing", "url": "https://rakutenadvertising.com", "description": "Rakuten Marketing provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/27e38c3631833bc7ae7e680289a45c1d.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

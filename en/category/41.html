@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>All Sites</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "市场行情", "url": "https://www.google.com", "description": "市场行情 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/0a137b375cc3881a70e186ce2172c8d1.png"}, {"name": "货币趋势", "url": "https://www.google.com", "description": "货币趋势 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/0a137b375cc3881a70e186ce2172c8d1.png"}, {"name": "CryptoPanic", "url": "https://cryptopanic.com", "description": "CryptoPanic is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/50a3876d052ea20ba929ab7ff777d810.png"}, {"name": "BitcoinTalk", "url": "https://bitcointalk.org", "description": "BitcoinTalk is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/041d428e3f3e9a9a1fe17643dcd98648.png"}, {"name": "CryptoSlate", "url": "https://cryptoslate.com", "description": "CryptoSlate provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/0a73b76132419f9b4f4b09ec6c0e3be1.png"}, {"name": "Decrypt", "url": "https://decrypt.co", "description": "Decrypt is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/9c116d0beb7b444f14e117896d566cdf.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>All Sites</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "DeFi Pulse", "url": "https://defipulse.com", "description": "DeFi Pulse is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/c29a9627258c36fe87faefbf928681d1.png"}, {"name": "The Block", "url": "https://www.theblock.co", "description": "The Block provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/ce1068342aabd1e8bcf5dd9c9d88319c.png"}, {"name": "CoinMarketCap", "url": "https://coinmarketcap.com", "description": "CoinMarketCap is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/74d5e2b50b966d18aebd9a8a5c91f10d.png"}, {"name": "MyToken", "url": "https://www.mytokencap.com", "description": "MyToken is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/351de1ca0d0f6b4cff0eb12f1d0c7432.png"}, {"name": "Coin Metrics", "url": "https://coinmetrics.io", "description": "Coin Metrics provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/e57549183fbe414e72eeac7a0e914fe6.png"}, {"name": "Token Terminal", "url": "https://tokenterminal.com", "description": "Token Terminal is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/2cc06f0066346a43c1336cdb0e4cdd98.png"}, {"name": "蜜蜂查", "url": "https://mifengcha.com", "description": "蜜蜂查 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/521d581b6c6e719952cd26e6a145c194.png"}, {"name": "IntoTheBlock", "url": "https://www.intotheblock.com", "description": "IntoTheBlock provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/37ec1d196523a070fa7a06aca9136dfc.png"}, {"name": "CoinMarketCal", "url": "https://coinmarketcal.com", "description": "CoinMarketCal is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/e3e77446ff9b3ddf3e6fdbb5bc73c2de.png"}, {"name": "Messari", "url": "https://messari.io", "description": "Messari is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/ab165ec126c4066f43452ff94b0c3d08.png"}, {"name": "Coingecko", "url": "https://www.coingecko.com", "description": "Coingecko provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/a3b4c975d86f06e3e40822de2f685764.png"}, {"name": "TradingView", "url": "https://www.tradingview.com", "description": "TradingView is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/84ea80fab7315a2f6446f2aedca0019f.png"}, {"name": "Glassnode", "url": "https://glassnode.com", "description": "Glassnode is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/2884b474e54115a08c001b4539a8a66f.png"}, {"name": "AICoin", "url": "https://www.aicoin.com", "description": "AICoin provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/5cff2555b2a75bb103715d62846f901c.png"}, {"name": "PlayToEarn.net", "url": "https://playtoearn.net", "description": "PlayToEarn.net is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/53921fe46971ad49a7d2f889ee68a82d.png"}, {"name": "Dune Analytics", "url": "https://dune.com", "description": "Dune Analytics is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/4dc30917808825d9962b245c16a45c72.png"}, {"name": "Whale Alert", "url": "https://whale-alert.io", "description": "Whale Alert provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/54e1f2025ee56ef8a8007561759641b8.png"}, {"name": "Look into Bitcoin", "url": "https://www.lookintobitcoin.com", "description": "Look into Bitcoin is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/1bd03641fb0c6c234aaf19a550a58c74.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

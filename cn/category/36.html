@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>全部站点</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "云片OTP短信", "url": "https://www.yunpian.com", "description": "云片OTP短信是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/b9fa00f8c57613445bc0699e11b9b1c9.png"}, {"name": "秒赛科技", "url": "https://www.shmiaosai.com", "description": "专业短信验证码平台服务商，提供用户注册、登录、支付确认等各种手机验证码短信场景", "icon": "../../assets/favicons/5a8d5f30c916cdacfcc951608c97061c.png"}, {"name": "SUBMAIL赛邮云通信", "url": "https://www.mysubmail.com", "description": "致力于为企业用户打造一站式云通信平台,提供全功能的云端通信服务、互联网营销能力、企业PaaS服务", "icon": "../../assets/favicons/633725cf14c163693d209f898b3bb465.png"}, {"name": "⽜信云", "url": "https://www.nxcloud.com", "description": "一家以技术驱动为核心的云通信公司，通过优质的短信通道，与全球客户建立紧密的联系。", "icon": "../../assets/favicons/56a158df5f0da865affca395ac5232e2.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

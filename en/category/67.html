@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>All Sites</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "Gmail", "url": "https://www.gmail.com", "description": "Gmail is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/908f6bbf6da814abaf917c4e7bb9e36f.png"}, {"name": "CapCut", "url": "https://www.capcut.com", "description": "CapCut provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/0381a8fc905c938395b273789d3b7ae5.png"}, {"name": "Zoom", "url": "https://zoom.us", "description": "Zoom is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/f10625aea284974d73f4d2323b7ac610.png"}, {"name": "Quora", "url": "https://www.quora.com", "description": "Quora is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/42126c8e7dac32d82164d4ab9255bce8.png"}, {"name": "Reddit", "url": "https://www.reddit.com", "description": "Reddit provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/e3c04a783dae53fae0422e3a955bc02a.png"}, {"name": "Flickr", "url": "https://www.flickr.com", "description": "Flickr is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/9f99e4830b8d4f6c7af9527d1abce7a8.png"}, {"name": "Pinterest", "url": "https://www.pinterest.com", "description": "Pinterest is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/2015bcbe4e762b1fe17bc9e4a02a62dc.png"}, {"name": "Tumblr", "url": "https://www.tumblr.com", "description": "Tumblr provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/e9523a7d95d51825cd27dc647116b50c.png"}, {"name": "TikTok", "url": "https://www.tiktok.com", "description": "TikTok is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/6835616d82c0e39c0e0b0036ee2e73fe.png"}, {"name": "Youtube", "url": "https://www.youtube.com", "description": "Youtube is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/ab3201c6103205c14f6e56b11b2fcd46.png"}, {"name": "Kiwix", "url": "https://kiwix.org/en", "description": "Kiwix provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/1d3f4152cc510c9f38fb42bfe2a61113.png"}, {"name": "豆包输入法", "url": "https://shurufa.doubao.com", "description": "豆包输入法 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/a3a537d004e2b62acd31438e3846457f.png"}, {"name": "一个木函", "url": "https://woodbox.app", "description": "一个木函 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/da27af9977b8410cd13b8854d238f0fb.png"}, {"name": "F-Droid", "url": "https://f-droid.org/zh_Hans", "description": "F-Droid provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/d13a9738a9b715a314ebcfa551008c6f.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

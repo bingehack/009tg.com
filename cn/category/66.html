@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>全部站点</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "Gmarket", "url": "https://www.gmarket.co.kr", "description": "Gmarket是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/3971d1506154c1dab0ced85b1e69bb22.png"}, {"name": "Tokopedia", "url": "https://www.tokopedia.com", "description": "Tokopedia为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/6535be5c441986d272056899e86620ce.png"}, {"name": "Lazada", "url": "https://www.lazada.com", "description": "Lazada Group (Lazada ) 是由Maximilian Bittner于2012 年在Rocket Internet的支持下创立的国际电子商务公司，由阿里巴巴集团拥有。", "icon": "../../assets/favicons/6e012798a40a5619a29652026e520089.png"}, {"name": "AliExpress", "url": "https://www.aliexpress.com", "description": "全球速卖通（中文：全球速卖通）是一家总部位于中国的在线零售服务，由阿里巴巴集团拥有。", "icon": "../../assets/favicons/df25104ee6baaccba981e4d00769b0cd.png"}, {"name": "Wish", "url": "https://www.wish.com", "description": "Wish是一个美国在线电子商务平台，用于卖家和买家之间的交易。", "icon": "../../assets/favicons/bf1f0ec26551805d4036eb5993836bb6.png"}, {"name": "Shopee", "url": "https://www.shopee.com", "description": "虾皮购物（英语：Shopee），之前称为虾皮拍卖，是一个线上电子商务平台。", "icon": "../../assets/favicons/35ccab4774baa987f1279f216a0a0846.png"}, {"name": "Spotify", "url": "https://www.spotify.com", "description": "Spotify是一家瑞典线上音乐串流媒体平台，目前是全球最大的串流音乐服务商", "icon": "../../assets/favicons/c61ebe0a2eb5ca66120c3453b3806075.png"}, {"name": "Amazon", "url": "https://www.amazon.com", "description": "亚马逊公司是一家总部位于美国西雅图的跨国电子商务企业，目前是全球最大的网际网路线上零售商之一。", "icon": "../../assets/favicons/f156d5b5031a7759f68de035e3285b92.png"}, {"name": "eBay", "url": "https://www.ebay.com", "description": "eBay（中文：电子湾、亿贝、易贝）是可让全球民众上网买卖物品的线上拍卖及购物网站。", "icon": "../../assets/favicons/ec8d0824af960d007b204e1b5ab5729a.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

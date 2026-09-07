@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>全部站点</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "谷歌插件商店", "url": "https://chrome.google.com", "description": "谷歌插件商店是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/b7ae51e8e9fa7961566ce81f3abe685f.png"}, {"name": "SocialAnalyzer", "url": "https://chrome.google.com", "description": "Social Analyzer 是一个社交媒体监控和分析的免费工具,可以从FB视频中寻找niche产品", "icon": "../../assets/favicons/b7ae51e8e9fa7961566ce81f3abe685f.png"}, {"name": "EmailDrop", "url": "https://chrome.google.com", "description": "谷歌插件，采集Facebook/Ins/Linkedln上的用户邮箱", "icon": "../../assets/favicons/b7ae51e8e9fa7961566ce81f3abe685f.png"}, {"name": "Web Scraper", "url": "https://chrome.google.com", "description": "Web Scraper是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/b7ae51e8e9fa7961566ce81f3abe685f.png"}, {"name": "Cookie-Editor", "url": "https://chrome.google.com", "description": "Cookie-Editor为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/b7ae51e8e9fa7961566ce81f3abe685f.png"}, {"name": "AITDK SEO Extension", "url": "https://chromewebstore.google.com", "description": "AITDK SEO Extension 是一款多功能浏览器扩展，旨在提供全面的网站分析。凭借其强大的功能，AITDK SEO Extension 可跟踪网站流量、执行 Whois 查询、关键词密度检查并进行 SEO 分析。", "icon": "../../assets/favicons/eee3031b861baaf241e7809c9931b547.png"}, {"name": "PPSPY", "url": "https://chromewebstore.google.com", "description": "一款Shopify店铺分析工具，可帮助您快速了解竞争对手的店铺及其畅销产品。", "icon": "../../assets/favicons/eee3031b861baaf241e7809c9931b547.png"}, {"name": "Email Hunter", "url": "https://chromewebstore.google.com", "description": "Email Hunter为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/eee3031b861baaf241e7809c9931b547.png"}, {"name": "Speed Tracer", "url": "https://code.google.com", "description": "Speed Tracer是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/575f601775630326519d3f74ead0e7be.png"}, {"name": "Resolution Test", "url": "https://chrome.google.com", "description": "Resolution Test是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/b7ae51e8e9fa7961566ce81f3abe685f.png"}, {"name": "FireBug Lite", "url": "https://chrome.google.com", "description": "FireBug Lite为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/b7ae51e8e9fa7961566ce81f3abe685f.png"}, {"name": "Session Buddy", "url": "https://sessionbuddy.com", "description": "Session Buddy是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/7f0b1c0571f9cd978060bd4ac5940aca.png"}, {"name": "Growth Bar", "url": "https://www.growthbarseo.com", "description": "Growth Bar是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/dfa47a4db25c225e9362e03019ae8657.png"}, {"name": "SEOquake", "url": "https://www.seoquake.com", "description": "一款浏览器插件，可以为用户提供网站的搜索引擎优化（SEO）指标和分析工具", "icon": "../../assets/favicons/858b35dee3a459e0f7344ddf64481a56.png"}, {"name": "Turbo Ad Finder", "url": "https://chrome.google.com", "description": "Turbo Ad Finder是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/b7ae51e8e9fa7961566ce81f3abe685f.png"}, {"name": "LastPass", "url": "https://chrome.google.com", "description": "LastPass是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/b7ae51e8e9fa7961566ce81f3abe685f.png"}, {"name": "有道词典划词", "url": "https://chrome.google.com", "description": "有道词典划词为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/b7ae51e8e9fa7961566ce81f3abe685f.png"}, {"name": "Click&Clean", "url": "https://chrome.google.com", "description": "Click&Clean是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/b7ae51e8e9fa7961566ce81f3abe685f.png"}, {"name": "指纹伪装", "url": "https://mybrowseraddon.com", "description": "指纹伪装是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/ea81f9efd0d7b9d9e2a0cbbfc7a6f2c0.png"}, {"name": "GoFullPage", "url": "https://gofullpage.com", "description": "GoFullPage为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/acdd32530d4384733fd8eadeb8b6e6e6.png"}, {"name": "OpenUserJS", "url": "https://openuserjs.org", "description": "浏览器外挂脚本仓库，网站添加新功能、修改界面、修复Bug，屏蔽网页广告", "icon": "../../assets/favicons/1f853d6da1ce4e5063177147609021a6.png"}, {"name": "Userscript.Zone", "url": "https://www.userscript.zone", "description": "Userscript.Zone是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/cdf01f20dfc6fb7a274d42ccb8716fd2.png"}, {"name": "沉浸式翻译", "url": "https://immersivetranslate.com/zh-Hans", "description": "沉浸式翻译为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/5c3f4a6727dd8e9fa8736be9e483680c.png"}, {"name": "Imageye", "url": "https://imageye.net", "description": "Imageye是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/ecf029443370c8a75e3d04929f0118d7.png"}, {"name": "极客侧边栏", "url": "https://www.geeksidebar.com", "description": "极客侧边栏是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/58170753d015317898f01e31774917b7.png"}, {"name": "uBlock", "url": "https://ublockorigin.com/zh", "description": "uBlock为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/3df315b2ff6059c9ebee5a51ca60291f.png"}, {"name": "AdGuard", "url": "https://adguard.com/zh_cn/license.html", "description": "AdGuard是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/8202ec5cbdc1e645fab61b419c328300.png"}, {"name": "Global Speed", "url": "https://microsoftedge.microsoft.com/addons/detail/global-speed-%E8%A7%86%E9%A2%91%E9%80%9F%E5%BA%A6%E6%8E%A7%E5%88%B6/mjhlabbcmjflkpjknnicihkfnmbdfced", "description": "Global Speed是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/4ae33420a986f3fa204dafd2ae7ef09f.png"}, {"name": "SuperCopy 超级复制", "url": "https://enablecopy.com/zh_CN", "description": "SuperCopy 超级复制为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/01fcef1b8ae0b6859e7a106e0adba43b.png"}, {"name": "油猴 (Tampermonkey)", "url": "https://www.tampermonkey.net", "description": "油猴 (Tampermonkey)是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/8140b5743bf9a6b74619bb8bda365462.png"}, {"name": "Crx搜搜", "url": "https://www.crxsoso.com", "description": "Crx搜搜是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/26d20e00b7fc79df624139ef96df50c3.png"}, {"name": "CrxDL", "url": "https://crxdl.com", "description": "CrxDL为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/6ba502a16372e2512ea73320476773b2.png"}, {"name": "Greasy Fork", "url": "https://greasyfork.org/zh-CN/scripts", "description": "Greasy Fork是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/bf6242cc3039bff31a7815dff8ee247b.png"}, {"name": "极简插件", "url": "https://chrome.zzzmh.cn", "description": "极简插件是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/48084287c1fc197c33d31ea1b4048709.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

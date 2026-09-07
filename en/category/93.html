@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>All Sites</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "1688跨境专供", "url": "https://kj.1688.com", "description": "1688跨境专供 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/28e0c6b902146066168de5452d93c497.png"}, {"name": "中国制造网", "url": "https://cn.made-in-china.com", "description": "中国制造网 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/54d21c2f4e5f6db3ed3f82a7a9a2a37e.png"}, {"name": "环球资源网", "url": "https://www.globalsources.com", "description": "环球资源网 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/b06fb78e589504a201a10da43f81904d.png"}, {"name": "物托帮", "url": "https://votobo.mabangerp.com", "description": "物托帮 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/72288d70dc2c1f7cd24f089a64de9392.png"}, {"name": "义乌购", "url": "https://www.yiwugo.com", "description": "义乌购 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/a16ac2dc0ce19bab6fa3f4870884a3cf.png"}, {"name": "买购网", "url": "https://www.maigoo.com", "description": "买购网 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/13020e4d4388e08c58013e949e8b41e7.png"}, {"name": "黄页88网", "url": "https://www.huangye88.com", "description": "黄页88网 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/6e54e2cf431f2ec255bf4702ab81f353.png"}, {"name": "百度爱采购", "url": "https://b2b.baidu.com", "description": "百度爱采购 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/3474eeac624844bb2b9982b3e28eb437.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

@@ -183,31 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><i class="fa-check-circle" style="margin-right: 8px;"></i>Features</h4>
-                        </div>
-                        <div class="panel-body" style="padding: 0;">
-                            <ul class="list-group" style="margin-bottom: 0;">
-                                <li class="list-group-item"><i class="fa-check-circle" style="color: #5cb85c; margin-right: 8px;"></i>Multi-platform store management</li><li class="list-group-item"><i class="fa-check-circle" style="color: #5cb85c; margin-right: 8px;"></i>Smart product research</li><li class="list-group-item"><i class="fa-check-circle" style="color: #5cb85c; margin-right: 8px;"></i>Inventory sync</li><li class="list-group-item"><i class="fa-check-circle" style="color: #5cb85c; margin-right: 8px;"></i>Order automation</li><li class="list-group-item"><i class="fa-check-circle" style="color: #5cb85c; margin-right: 8px;"></i>Profit calculation</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><i class="fa-users" style="margin-right: 8px;"></i>Use Cases</h4>
-                        </div>
-                        <div class="panel-body">
-                            <p style="font-size: 14px; line-height: 1.8; margin: 0;">Suitable for cross-border sellers, foreign trade enterprises, and supply chain managers who need efficient store operations. Can be used for store management, product research, inventory management, order processing, financial accounting and more.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -265,18 +242,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>All Sites</h3>
-                    <div class="category-content" id="sites-container"></div>
-                    <div class="pagination-controls">
-                        <button class="btn btn-default" id="prev-page" disabled><i class="fa fa-chevron-left"></i> Previous</button>
-                        <span class="page-info" id="page-info"></span>
-                        <button class="btn btn-default" id="next-page">Next <i class="fa fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
+            <!-- 站点列表（仅当有站点时显示） -->
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -293,88 +260,7 @@
         </div>
     </div>
 
-    <script>
-        var allSites = [];
-        var currentPage = 1;
-        var itemsPerPage = 32;
-        var totalPages = Math.ceil(allSites.length / itemsPerPage);
-
-        function calculateItemsPerPage() {
-            var windowWidth = $(window).width();
-            if (windowWidth > 1400) return 32; // 8列 × 4行
-            if (windowWidth > 1200) return 24; // 6列 × 4行
-            if (windowWidth > 992) return 16;  // 4列 × 4行
-            if (windowWidth > 768) return 12;  // 3列 × 4行
-            return 8; // 2列 × 4行
-        }
-
-        function renderPage(pageNum) {
-            var container = $('#sites-container');
-            container.empty();
-            container.css('opacity', '0.5');
-
-            setTimeout(function() {
-                var start = (pageNum - 1) * itemsPerPage;
-                var end = Math.min(start + itemsPerPage, allSites.length);
-
-                for (var i = start; i < end; i++) {
-                    var site = allSites[i];
-                    var siteHtml = '<div class="site-item">' +
-                        '<div class="xe-widget xe-conversations box2 label-info" onclick="window.open(\'' + '../../redirect.html?url=' + encodeURIComponent(site.url) + '&name=' + encodeURIComponent(site.name) + '\', \'_blank\')" data-toggle="tooltip" data-placement="bottom" title="' + site.url + '">' +
-                            '<div class="xe-comment-entry">' +
-                                '<a class="xe-user-img"><img src="' + site.icon + '" class="lozad img-circle" width="40" alt="' + site.name + '"></a>' +
-                                '<div class="xe-comment">' +
-                                    '<a href="#" class="xe-user-name overflowClip_1"><strong>' + site.name + '</strong></a>' +
-                                    '<p class="overflowClip_2">' + site.description + '</p>' +
-                                '</div>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>';
-                    container.append(siteHtml);
-                }
-
-                container.css('opacity', '1');
-                if (typeof lozad !== 'undefined') {
-                    var observer = lozad();
-                    observer.observe();
-                }
-            }, 200);
-
-            $('#page-info').text('Page ' + pageNum + ' / ' + totalPages + ' ');
-            $('#prev-page').prop('disabled', pageNum === 1);
-            $('#next-page').prop('disabled', pageNum === totalPages);
-        }
-
-        $(document).ready(function() {
-            itemsPerPage = calculateItemsPerPage();
-            totalPages = Math.ceil(allSites.length / itemsPerPage);
-            renderPage(1);
-
-            $('#prev-page').click(function() {
-                if (currentPage > 1) {
-                    currentPage--;
-                    renderPage(currentPage);
-                }
-            });
-
-            $('#next-page').click(function() {
-                if (currentPage < totalPages) {
-                    currentPage++;
-                    renderPage(currentPage);
-                }
-            });
-
-            $(window).resize(function() {
-                var newItemsPerPage = calculateItemsPerPage();
-                if (newItemsPerPage !== itemsPerPage) {
-                    itemsPerPage = newItemsPerPage;
-                    totalPages = Math.ceil(allSites.length / itemsPerPage);
-                    currentPage = 1;
-                    renderPage(1);
-                }
-            });
-        });
-    </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

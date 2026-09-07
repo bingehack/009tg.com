@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -297,7 +299,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>All Sites</h3>
@@ -309,6 +312,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -325,6 +329,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "Sexo 博客", "url": "https://invisibleman.dpdns.org", "description": "Sexo 博客 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/c00f5a5795130a909f978a73fce74027.png"}, {"name": "Libretv", "url": "https://tv.safesystem.dpdns.org", "description": "Libretv provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/093bca42950dbc02ab00f74e58b5d918.png"}, {"name": "账号星球", "url": "http://accboyinvman.acceboy.com", "description": "账号星球 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/7dadb4e62aa7584241decf0aa741471a.png"}];
         var currentPage = 1;
@@ -407,6 +412,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

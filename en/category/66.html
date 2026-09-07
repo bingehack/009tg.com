@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>All Sites</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "Gmarket", "url": "https://www.gmarket.co.kr", "description": "Gmarket is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/3971d1506154c1dab0ced85b1e69bb22.png"}, {"name": "Tokopedia", "url": "https://www.tokopedia.com", "description": "Tokopedia provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/6535be5c441986d272056899e86620ce.png"}, {"name": "Lazada", "url": "https://www.lazada.com", "description": "Lazada is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/6e012798a40a5619a29652026e520089.png"}, {"name": "AliExpress", "url": "https://www.aliexpress.com", "description": "AliExpress is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/df25104ee6baaccba981e4d00769b0cd.png"}, {"name": "Wish", "url": "https://www.wish.com", "description": "Wish provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/bf1f0ec26551805d4036eb5993836bb6.png"}, {"name": "Shopee", "url": "https://www.shopee.com", "description": "Shopee is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/35ccab4774baa987f1279f216a0a0846.png"}, {"name": "Spotify", "url": "https://www.spotify.com", "description": "Spotify is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/c61ebe0a2eb5ca66120c3453b3806075.png"}, {"name": "Amazon", "url": "https://www.amazon.com", "description": "Amazon provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/f156d5b5031a7759f68de035e3285b92.png"}, {"name": "eBay", "url": "https://www.ebay.com", "description": "eBay is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/ec8d0824af960d007b204e1b5ab5729a.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>全部站点</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "BandwagonHost", "url": "https://bandwagonhost.com", "description": "BandwagonHost是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/e4ca51da2f598587bbfe143b811252d7.png"}, {"name": "DigitalOcean", "url": "https://www.digitalocean.com", "description": "DigitalOcean为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/ff769e0d0106fa8ce33ac2d366b7fbab.png"}, {"name": "Godaddy", "url": "https://www.godaddy.com", "description": "Godaddy是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/4e6dcd00c3d9d0de1ca33fdca6555af6.png"}, {"name": "Linode", "url": "https://www.linode.com", "description": "Linode是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/99efbe510fe27f367ee08949dd0f7d9c.png"}, {"name": "HawkHost", "url": "https://www.hawkhost.com", "description": "HawkHost为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/401ecd078c3d2769345e86ba5cffe844.png"}, {"name": "HostDare", "url": "https://manage.hostdare.com", "description": "主要运作美国西海岸的主机业务，特别是亚洲优化线路，支持支付宝付款", "icon": "../../assets/favicons/787a7a5596b628687f868872fdf769fe.png"}, {"name": "Host1Plus", "url": "https://www.heficed.com", "description": "Host1Plus是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/4a7f51567e0659d471a3c93db4b3b75d.png"}, {"name": "HostWinds", "url": "https://www.hostwinds.com", "description": "一家真正在做低价管理型服务器主机业务的公司，国外口碑好到爆炸！", "icon": "../../assets/favicons/bd5aba2f22e9d875e77c20cc3ea5db89.png"}, {"name": "Digital-vm", "url": "https://digital-vm.com", "description": "15个可选数据中心,日本新加坡机房多，速度快，支持支付宝付款", "icon": "../../assets/favicons/42c2c73c25c5c4bc7cb91f5e5a252e07.png"}, {"name": "亚马逊AWS", "url": "https://aws.amazon.com", "description": "亚马逊AWS是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/117573fb9bbce23141f4560f5fa3496c.png"}, {"name": "Azure", "url": "https://azure.microsoft.com", "description": "Azure为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/5a7931c7b588d801e8f5fb5314fcc18a.png"}, {"name": "兰博云", "url": "https://www.lambocloud.com", "description": "新马首家一站式网站制作，营销，云服务器代理，论坛等一站式推广公司", "icon": "../../assets/favicons/a68d1b3bb5b6c355c3639ac9a13d894c.png"}, {"name": "A2 Hosting", "url": "https://www.a2hosting.com", "description": "A2 Hosting是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/dd3fda0268692973a2b2e1ddd6c0bcc3.png"}, {"name": "Hostinger", "url": "https://www.hostinger.com", "description": "Hostinger为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/514fbe52ff9be37e76d5f23828b97c9a.png"}, {"name": "LiquidWeb", "url": "https://www.liquidweb.com", "description": "一家虚拟私有服务器（VPS），云服务器，专用服务器和基础架构即服务（IaaS）提供商", "icon": "../../assets/favicons/64d72d6b563586d4c9f49fbbe52761ee.png"}, {"name": "ScalaHosting", "url": "https://www.scalahosting.com", "description": "ScalaHosting是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/f707a26c17714ca67b09ee68a559c4d5.png"}, {"name": "Bluehost", "url": "https://www.bluehost.com", "description": "Bluehost为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/45f402c4b70baa2cf13d3639dd83b792.png"}, {"name": "Kamatera", "url": "https://www.kamatera.com", "description": "Kamatera是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/0da93da8d65c483cafa17c116a99046b.png"}, {"name": "CloudCone", "url": "https://cloudcone.com", "description": "CloudCone是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/7dc15d82d0aa6f3ce66c33c91cb22c06.png"}, {"name": "BuyVM", "url": "https://www.buyvm.net", "description": "BuyVM为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/2b82cae93684eb4ae6a7de3636e1c380.png"}, {"name": "DMIT", "url": "https://www.dmit.io", "description": "DMIT是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/0a794a123fbc4e8a74ea3c815245180f.png"}, {"name": "RackNerd", "url": "https://www.racknerd.com", "description": "RackNerd是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/3c3dca6a4771b9b7c0469232a5eed34e.png"}, {"name": "VirMach", "url": "https://virmach.com", "description": "VirMach为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/0691eb92c8e1509dc35747e6ed11b59d.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

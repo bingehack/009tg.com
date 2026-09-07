@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>全部站点</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "市场行情", "url": "https://www.google.com", "description": "市场行情是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/0a137b375cc3881a70e186ce2172c8d1.png"}, {"name": "货币趋势", "url": "https://www.google.com", "description": "货币趋势为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/0a137b375cc3881a70e186ce2172c8d1.png"}, {"name": "CryptoPanic", "url": "https://cryptopanic.com", "description": "CryptoPanic是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/50a3876d052ea20ba929ab7ff777d810.png"}, {"name": "BitcoinTalk", "url": "https://bitcointalk.org", "description": "BitcoinTalk是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/041d428e3f3e9a9a1fe17643dcd98648.png"}, {"name": "CryptoSlate", "url": "https://cryptoslate.com", "description": "CryptoSlate为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/0a73b76132419f9b4f4b09ec6c0e3be1.png"}, {"name": "Decrypt", "url": "https://decrypt.co", "description": "专注于报道加密货币、区块链技术、隐私、去中心化应用（DApps）以及相关领域的新闻和信息", "icon": "../../assets/favicons/9c116d0beb7b444f14e117896d566cdf.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

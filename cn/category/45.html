@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>全部站点</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "imToken", "url": "https://token.im", "description": "imToken是一款专为移动设备设计的数字资产钱包应用，它支持多种数字资产的存储和管理。", "icon": "../../assets/favicons/a44d785d8373f78889d4b98e9f811759.png"}, {"name": "Exodus", "url": "https://www.exodus.com", "description": "Exodus 是一款设计精美、操作简便的多加密货币钱包，降低加密货币的使用门槛，使得非技术用户也能轻松安全地管理他们的资产。", "icon": "../../assets/favicons/cb98d88f10a48dc955cf4a26766543dc.png"}, {"name": "Trust Wallet", "url": "https://trustwallet.com", "description": "Trust Wallet 是一个多功能的移动加密货币钱包，由加密货币交易所 Binance 支持。作为一个开源的移动应用程序，Trust Wallet 为用户提供了存储、发送和接收多种加密货币的功能。", "icon": "../../assets/favicons/90da835410e6c52e431385a94665fbe9.png"}, {"name": "MetaMask", "url": "https://metamask.io", "description": "MetaMask 是一款流行的加密货币钱包，以浏览器扩展程序和移动应用程序的形式存在，主要用于与以太坊区块链以及基于以太坊的ERC-20代币进行交互。", "icon": "../../assets/favicons/df5ce09644ad2046a9a37ab0464b24ed.png"}, {"name": "Trezor", "url": "https://trezor.io", "description": "Trezor Model T 和 Trezor One 是由 SatoshiLabs 生产的硬件钱包，它们是用于存储加密货币的物理设备，提供高安全性的冷存储解决方案。", "icon": "../../assets/favicons/2ab6da9125ae07f8a89df91a013a9d72.png"}, {"name": "Ledger Nano", "url": "https://www.ledger.com", "description": "Ledger Nano S 和 Ledger Nano X 是由 Ledger 公司生产的硬件钱包，专为存储加密货币而设计。硬件钱包被认为是一种冷存储解决方案，因为它们允许用户将其加密资产存储在离线环境中，从而提供了比在线钱包（热存储）更高级别的安全性。", "icon": "../../assets/favicons/7875c7b3280f6ff579d887512cb8009d.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>

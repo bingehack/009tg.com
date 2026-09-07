@@ -183,7 +183,8 @@
                 </div>
             </div>
 
-            <!-- 功能特点和适用场景 -->
+            <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-default">
@@ -208,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 子分类入口（一级分类页面） -->
             
@@ -224,7 +226,8 @@
             </div>
             
 
-            <!-- 站点列表 -->
+            <!-- 站点列表（仅当有站点时显示） -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <h3>全部站点</h3>
@@ -236,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -252,6 +256,7 @@
         </div>
     </div>
 
+    
     <script>
         var allSites = [{"name": "Bitstamp", "url": "https://www.bitstamp.net", "description": "Bitstamp 创立于 2011 年，是历史相当悠久的中心化交易所 (CEX) 之一，服务于全球 100 个以上国家的近 400 万名用户。", "icon": "../../assets/favicons/c33538169870c41a870358200959b23b.png"}, {"name": "BingX", "url": "https://www.bingx.com", "description": "BingX 提供多样化的产品和服务，包括现货、衍生品、跟单交易和资产管理 - 所有这些都是为满足从初学者到专业人士的用户不断变化的需求而设计的。", "icon": "../../assets/favicons/a8831a02cc38487840e789508fe1ebc3.png"}, {"name": "Bitget", "url": "https://www.bitget.com", "description": "Bitget 是一家位于塞舌尔的加密货币交易所，为 100 个国家/地区的 2000 多万用户提供支持，专注于复制交易和各种智能交易工具。", "icon": "../../assets/favicons/cf143393051119340f68de252102734c.png"}, {"name": "MEXC", "url": "https://www.mexc.com", "description": "MEXC成立于 2018 年，是一家采用高性能大宗交易撮合技术的中心化交易所。", "icon": "../../assets/favicons/ee6828252f343002eb9bd65d4a4a6f02.png"}, {"name": "KuCoin", "url": "https://www.kucoin.com", "description": "KuCoin 是一家加密货币交易所，其创办主旨为“促进全球数字价值的自由流通”。", "icon": "../../assets/favicons/aef0f3adc4021d0cf3e1988ca4b2ae89.png"}, {"name": "Gate.io", "url": "https://gate.io", "description": "Gate.io 是一家中心化加密货币交易所，用户可在此交易多种加密货币和代币。", "icon": "../../assets/favicons/d9d1787516a4cf7f64f1f1ac25b793a4.png"}, {"name": "Upbit", "url": "https://upbit.com", "description": "Upbit是韩国交易量最大的加密货币交易所。用户可在该平台上以韩元 (KRW) 交易多种加密货币与比特币对。", "icon": "../../assets/favicons/1ae80c06b68aa0adcc5e50c1debb6eab.png"}, {"name": "Bybit", "url": "http://www.bybit.com", "description": "Bybit 是一家上架了 100 种以上加密货币、超过100 种加密衍生品合约的中心化交易所 (CEX)。它有 500 万名以上的注册用户。该交易所于2018 年在新加坡成立。它是全球排名前5名的加密衍生品交易所。", "icon": "../../assets/favicons/9cf24dc5de11ae99eb308ddc9fb08972.png"}, {"name": "OKX", "url": "https://www.okx.com", "description": "OKX 是设立于塞舌尔的加密货币中心化交易所 (CEX) 和钱包平台，服务于全球数百万客户。该交易所提供包括现货和简单期权在内的基本交易，以及包括保证金、期货、永续合同和期权在内的衍生品。", "icon": "../../assets/favicons/14b3b09827055d509b5b843547681e18.png"}, {"name": "Bitfinex", "url": "https://www.bitfinex.com", "description": "Bitfinex 是一家成立于2012年的加密货币交易所，它以提供高级交易功能和高流动性而在全球交易者中享有盛誉。", "icon": "../../assets/favicons/6fe77db69c686eb5114c4b831d7c32fc.png"}, {"name": "Kraken", "url": "https://www.kraken.com", "description": "Kraken 提供多样化的交易对，包括各种加密货币与法币之间的交易。它是为数不多的提供加密货币到法币直接交易的平台之一，这使得用户可以方便地将加密货币兑换成美元、欧元等主要货币。", "icon": "../../assets/favicons/335843e7c8bd3f2f92870f3df2d1d77e.png"}, {"name": "Huobi Global", "url": "https://www.htx.com", "description": "Huobi Global 是一家成立于2013年的国际加密货币交易所，最初起源于中国，后因政策原因迁移至海外，成为全球领先的数字资产交易平台之一。", "icon": "../../assets/favicons/b5adc24f786619e3478eea814ec32692.png"}, {"name": "Coinbase", "url": "https://www.coinbase.com", "description": "Coinbase 是一家总部位于美国的加密货币交易所，它是最早为用户提供买卖比特币等加密货币服务的平台之一。", "icon": "../../assets/favicons/d5c5c85e129eb37139f8528b5c71ec3f.png"}, {"name": "Binance", "url": "https://www.binance.com", "description": "Binance 是全球领先的加密货币交易平台之一，以其庞大的交易量、广泛的加密货币交易对选择以及多样化的金融服务而闻名。", "icon": "../../assets/favicons/c36c86abfb601d334e5797335c2ca5e5.png"}];
         var currentPage = 1;
@@ -334,6 +339,7 @@
             });
         });
     </script>
+    
 
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/TweenMax.min.js"></script>
