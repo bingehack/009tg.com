@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-zh="单位换算器 - 009TG 工具箱" data-en="Unit Converter - 009TG Toolbox">单位换算器 - 009TG 工具箱</title>
+<meta name="description" content="免费在线单位换算工具，支持长度、重量、温度、存储容量、面积、体积、速度等常用单位互转。">
+<meta name="keywords" content="单位换算,长度换算,重量换算,温度换算,存储换算,面积换算,在线换算器">
+<meta name="author" content="009TG">
+<meta name="theme-color" content="#1a1d23">
+<style>
+:root {
+  --bg-main: #1a1d23;
+  --bg-content: #22262e;
+  --bg-card: #2a2f38;
+  --bg-card-hover: #333945;
+  --bg-navbar: #22262e;
+  --bg-input: #2a2f38;
+  --bg-btn: #3a7bd5;
+  --bg-btn-hover: #2c62aa;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-muted: #707070;
+  --border-color: #3a3f48;
+  --link-color: #5dade2;
+  --link-hover: #85c1e9;
+  --accent: #3a7bd5;
+  --accent-light: #5dade2;
+  --success: #27ae60;
+  --error: #e74c3c;
+  --warning: #f39c12;
+  --shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg-main);color:var(--text-primary);line-height:1.6;min-height:100vh}
+a{color:var(--link-color);text-decoration:none}a:hover{color:var(--link-hover)}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;background:var(--bg-navbar);border-bottom:1px solid var(--border-color);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:.5rem}
+.navbar .brand{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:1.1rem;color:var(--text-primary)}
+.navbar .brand svg{width:28px;height:28px;fill:var(--accent-light)}
+.navbar .nav-links{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.navbar .nav-links a{font-size:.9rem;color:var(--text-secondary);transition:color .2s}
+.navbar .nav-links a:hover{color:var(--link-color)}
+.lang-switch{display:flex;align-items:center;gap:.25rem;background:var(--bg-card);border:1px solid var(--border-color);border-radius:20px;padding:2px}
+.lang-switch button{background:none;border:none;color:var(--text-muted);font-size:.8rem;padding:.25rem .6rem;border-radius:16px;cursor:pointer;transition:all .2s}
+.lang-switch button.active{background:var(--accent);color:#fff}
+.container{max-width:1100px;margin:0 auto;padding:1.5rem}
+.card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow)}
+.card-title{font-size:1.15rem;font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;color:var(--text-primary)}
+.card-title .icon{font-size:1.3rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.55rem 1.1rem;background:var(--bg-btn);color:#fff;border:none;border-radius:6px;font-size:.9rem;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--bg-btn-hover)}
+.btn-secondary{background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color)}
+.btn-secondary:hover{background:var(--bg-card-hover)}
+.btn-success{background:var(--success)}
+.btn-sm{padding:.35rem .75rem;font-size:.8rem}
+input,textarea,select{width:100%;padding:.6rem .8rem;background:var(--bg-input);border:1px solid var(--border-color);border-radius:6px;color:var(--text-primary);font-size:.9rem;font-family:inherit;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
+textarea{resize:vertical;min-height:120px}
+label{display:block;margin-bottom:.35rem;font-size:.85rem;color:var(--text-secondary)}
+.form-row{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.form-row .form-group{flex:1;min-width:200px}
+.form-group{margin-bottom:1rem}
+.result-area{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:1rem;margin-top:1rem;min-height:60px;white-space:pre-wrap;word-break:break-word;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:.85rem;color:var(--text-secondary);max-height:400px;overflow:auto}
+.result-area.success{border-color:var(--success);color:var(--text-primary)}
+.result-area.error{border-color:var(--error);color:var(--error)}
+.tabs{display:flex;gap:.25rem;border-bottom:2px solid var(--border-color);margin-bottom:1rem}
+.tab-btn{padding:.5rem 1rem;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:.9rem;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab-btn.active{color:var(--accent-light);border-bottom-color:var(--accent-light)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.tool-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.25rem;transition:all .2s;cursor:pointer}
+.tool-card:hover{background:var(--bg-card-hover);transform:translateY(-2px);box-shadow:var(--shadow)}
+.tool-card .tool-icon{font-size:2rem;margin-bottom:.5rem}
+.tool-card .tool-name{font-weight:600;margin-bottom:.25rem;color:var(--text-primary)}
+.tool-card .tool-desc{font-size:.8rem;color:var(--text-muted);line-height:1.4}
+.badge{display:inline-block;padding:.15rem .45rem;border-radius:4px;font-size:.7rem;font-weight:600;text-transform:uppercase}
+.badge-api{background:rgba(58,123,213,.2);color:var(--accent-light)}
+.badge-offline{background:rgba(39,174,96,.2);color:var(--success)}
+.footer{text-align:center;padding:2rem 1rem;color:var(--text-muted);font-size:.8rem;border-top:1px solid var(--border-color);margin-top:2rem}
+.copy-hint{font-size:.75rem;color:var(--text-muted);margin-top:.35rem}
+.action-bar{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.footer-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem}
+.footer-links a{font-size:.8rem;color:var(--text-muted);transition:color .2s}
+.footer-links a:hover{color:var(--link-color)}
+@media(max-width:640px){
+  .container{padding:1rem}
+  .navbar{padding:.6rem 1rem}
+  .navbar .brand{font-size:1rem}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .form-row{flex-direction:column;gap:.5rem}
+}
+.hidden{display:none!important}
+
+.unit-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem}
+.unit-row input{flex:1}
+.unit-row select{flex:1;min-width:120px}
+.unit-arrow{font-size:1.2rem;color:var(--text-muted);flex:0 0 auto}
+.unit-result{font-size:1.1rem;color:var(--accent-light);font-weight:600;margin-top:.5rem}
+.unit-list{font-size:.85rem;color:var(--text-secondary);margin-top:1rem}
+.unit-list table{width:100%;border-collapse:collapse}
+.unit-list th,.unit-list td{padding:.4rem .6rem;text-align:left;border-bottom:1px solid var(--border-color)}
+.unit-list th{color:var(--text-primary);font-weight:600}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="/cn/" class="brand">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    <span data-zh="009TG 工具箱" data-en="009TG Toolbox">009TG 工具箱</span>
+  </a>
+  <div class="nav-links">
+    <a href="/cn/" data-zh="&#8592; 返回站点首页" data-en="&#8592; Back to Site Home">&#8592; 返回站点首页</a>
+    <a href="./index.html" data-zh="&#8592; 返回工具集首页" data-en="&#8592; Back to Tools Home">&#8592; 返回工具集首页</a>
+    <div class="lang-switch">
+      <button data-lang="zh" class="active">中</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </div>
+</nav>
+<div class="container">
+<h1 style="font-size:1.4rem;margin-bottom:1rem" data-zh="单位换算器" data-en="Unit Converter">单位换算器</h1>
+
+<div class="card">
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="length" data-zh="长度" data-en="Length">长度</button>
+    <button class="tab-btn" data-tab="weight" data-zh="重量" data-en="Weight">重量</button>
+    <button class="tab-btn" data-tab="temperature" data-zh="温度" data-en="Temperature">温度</button>
+    <button class="tab-btn" data-tab="data" data-zh="存储" data-en="Data">存储</button>
+    <button class="tab-btn" data-tab="area" data-zh="面积" data-en="Area">面积</button>
+    <button class="tab-btn" data-tab="speed" data-zh="速度" data-en="Speed">速度</button>
+  </div>
+
+  <div id="panel-length" class="tab-panel active">
+    <div class="unit-row">
+      <input type="number" id="len-in" value="1" step="any" oninput="convertUnit('length')">
+      <select id="len-from" onchange="convertUnit('length')">
+        <option value="m">m</option><option value="km">km</option><option value="cm">cm</option><option value="mm">mm</option>
+        <option value="mi">mi</option><option value="yd">yd</option><option value="ft">ft</option><option value="in">in</option>
+        <option value="nm">nm</option><option value="um">μm</option>
+      </select>
+      <span class="unit-arrow">&#8594;</span>
+      <select id="len-to" onchange="convertUnit('length')">
+        <option value="ft">ft</option><option value="m">m</option><option value="km">km</option><option value="cm">cm</option><option value="mm">mm</option>
+        <option value="mi">mi</option><option value="yd">yd</option><option value="in">in</option>
+        <option value="nm">nm</option><option value="um">μm</option>
+      </select>
+    </div>
+    <div class="unit-result" id="len-result"></div>
+    <div class="unit-list" id="len-all"></div>
+  </div>
+
+  <div id="panel-weight" class="tab-panel">
+    <div class="unit-row">
+      <input type="number" id="w-in" value="1" step="any" oninput="convertUnit('weight')">
+      <select id="w-from" onchange="convertUnit('weight')">
+        <option value="kg">kg</option><option value="g">g</option><option value="mg">mg</option>
+        <option value="t">t</option><option value="lb">lb</option><option value="oz">oz</option>
+      </select>
+      <span class="unit-arrow">&#8594;</span>
+      <select id="w-to" onchange="convertUnit('weight')">
+        <option value="lb">lb</option><option value="kg">kg</option><option value="g">g</option><option value="mg">mg</option>
+        <option value="t">t</option><option value="oz">oz</option>
+      </select>
+    </div>
+    <div class="unit-result" id="w-result"></div>
+    <div class="unit-list" id="w-all"></div>
+  </div>
+
+  <div id="panel-temperature" class="tab-panel">
+    <div class="unit-row">
+      <input type="number" id="temp-in" value="25" step="any" oninput="convertUnit('temperature')">
+      <select id="temp-from" onchange="convertUnit('temperature')">
+        <option value="c">&#176;C</option><option value="f">&#176;F</option><option value="k">K</option>
+      </select>
+      <span class="unit-arrow">&#8594;</span>
+      <select id="temp-to" onchange="convertUnit('temperature')">
+        <option value="f">&#176;F</option><option value="c">&#176;C</option><option value="k">K</option>
+      </select>
+    </div>
+    <div class="unit-result" id="temp-result"></div>
+    <div class="unit-list" id="temp-all"></div>
+  </div>
+
+  <div id="panel-data" class="tab-panel">
+    <div class="unit-row">
+      <input type="number" id="d-in" value="1" step="any" oninput="convertUnit('data')">
+      <select id="d-from" onchange="convertUnit('data')">
+        <option value="b">B</option><option value="kb">KB</option><option value="mb">MB</option>
+        <option value="gb">GB</option><option value="tb">TB</option><option value="pb">PB</option>
+      </select>
+      <span class="unit-arrow">&#8594;</span>
+      <select id="d-to" onchange="convertUnit('data')">
+        <option value="mb">MB</option><option value="b">B</option><option value="kb">KB</option>
+        <option value="gb">GB</option><option value="tb">TB</option><option value="pb">PB</option>
+      </select>
+    </div>
+    <div class="unit-result" id="d-result"></div>
+    <div class="unit-list" id="d-all"></div>
+  </div>
+
+  <div id="panel-area" class="tab-panel">
+    <div class="unit-row">
+      <input type="number" id="a-in" value="1" step="any" oninput="convertUnit('area')">
+      <select id="a-from" onchange="convertUnit('area')">
+        <option value="m2">m&#178;</option><option value="km2">km&#178;</option><option value="cm2">cm&#178;</option>
+        <option value="ha">ha</option><option value="ac">ac</option><option value="ft2">ft&#178;</option>
+      </select>
+      <span class="unit-arrow">&#8594;</span>
+      <select id="a-to" onchange="convertUnit('area')">
+        <option value="ft2">ft&#178;</option><option value="m2">m&#178;</option><option value="km2">km&#178;</option>
+        <option value="cm2">cm&#178;</option><option value="ha">ha</option><option value="ac">ac</option>
+      </select>
+    </div>
+    <div class="unit-result" id="a-result"></div>
+    <div class="unit-list" id="a-all"></div>
+  </div>
+
+  <div id="panel-speed" class="tab-panel">
+    <div class="unit-row">
+      <input type="number" id="s-in" value="1" step="any" oninput="convertUnit('speed')">
+      <select id="s-from" onchange="convertUnit('speed')">
+        <option value="ms">m/s</option><option value="kmh">km/h</option><option value="mph">mph</option>
+        <option value="kn">kn</option><option value="fts">ft/s</option>
+      </select>
+      <span class="unit-arrow">&#8594;</span>
+      <select id="s-to" onchange="convertUnit('speed')">
+        <option value="kmh">km/h</option><option value="ms">m/s</option><option value="mph">mph</option>
+        <option value="kn">kn</option><option value="fts">ft/s</option>
+      </select>
+    </div>
+    <div class="unit-result" id="s-result"></div>
+    <div class="unit-list" id="s-all"></div>
+  </div>
+</div>
+</div>
+<footer class="footer">
+  <div class="footer-links">
+    <a href="/about.html" data-zh="关于我们" data-en="About">关于我们</a>
+    <a href="/privacy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+    <a href="/contact.html" data-zh="联系我们" data-en="Contact">联系我们</a>
+    <a href="/disclaimer.html" data-zh="免责声明" data-en="Disclaimer">免责声明</a>
+  </div>
+  <p data-zh="009TG 工具箱 - 免费实用的在线工具集合" data-en="009TG Toolbox - Free & Practical Online Tools">009TG 工具箱 - 免费实用的在线工具集合</p>
+</footer>
+<script>
+const i18nData={
+  zh:{
+    home:'站点首页',tools:'工具集首页',lang:'English',backHome:'返回站点首页',backTools:'返回工具集首页',
+    run:'运行',clear:'清空',copy:'复制',copied:'已复制',inputPlaceholder:'请输入...',
+    error:'错误',loading:'加载中...',noResult:'暂无结果'
+  },
+  en:{
+    home:'Site Home',tools:'Tools Home',lang:'中文',backHome:'Back to Site Home',backTools:'Back to Tools Home',
+    run:'Run',clear:'Clear',copy:'Copy',copied:'Copied',inputPlaceholder:'Enter...',
+    error:'Error',loading:'Loading...',noResult:'No result'
+  }
+};
+let currentLang='zh';
+function setLang(l){
+  currentLang=l;
+  document.documentElement.lang=l==='zh'?'zh-CN':'en';
+  document.querySelectorAll('[data-zh],[data-en]').forEach(el=>{
+    if(el.tagName==='INPUT'&&el.hasAttribute('placeholder')){
+      el.placeholder=el.getAttribute('data-'+l);
+    }else if(el.tagName==='TITLE'){
+      document.title=el.getAttribute('data-'+l)||document.title;
+    }else{
+      el.textContent=el.getAttribute('data-'+l)||el.textContent;
+    }
+  });
+  document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  localStorage.setItem('tools-lang',l);
+}
+function t(key){return(i18nData[currentLang]||i18nData.zh)[key]||key;}
+document.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('tools-lang')||'zh';
+  setLang(saved);
+  document.querySelectorAll('.lang-switch button').forEach(b=>{
+    b.addEventListener('click',()=>setLang(b.dataset.lang));
+  });
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      const panel=document.getElementById('panel-'+btn.dataset.tab);
+      if(panel)panel.classList.add('active');
+    });
+  });
+  ['length','weight','temperature','data','area','speed'].forEach(c=>convertUnit(c));
+});
+function escapeHtml(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+function copyText(t){navigator.clipboard.writeText(t).then(()=>alert(t('copied'))).catch(()=>{});}
+
+const units={
+  length:{base:'m',factors:{m:1,km:1000,cm:.01,mm:.001,mi:1609.344,yd:.9144,ft:.3048,in:.0254,nm:1e-9,um:1e-6}},
+  weight:{base:'kg',factors:{kg:1,g:.001,mg:1e-6,t:1000,lb:.45359237,oz:.0283495}},
+  data:{base:'b',factors:{b:1,kb:1024,mb:1048576,gb:1073741824,tb:1099511627776,pb:1125899906842624}},
+  area:{base:'m2',factors:{m2:1,km2:1e6,cm2:1e-4,ha:1e4,ac:4046.856,ft2:.092903}},
+  speed:{base:'ms',factors:{ms:1,kmh:.277778,mph:.44704,kn:.514444,fts:.3048}}
+};
+function convertTemp(v,from,to){
+  let c;
+  if(from==='c')c=v;else if(from==='f')c=(v-32)*5/9;else if(from==='k')c=v-273.15;
+  if(to==='c')return c;else if(to==='f')return c*9/5+32;else if(to==='k')return c+273.15;
+  return c;
+}
+function formatNum(n){
+  if(Math.abs(n)<1e-6||Math.abs(n)>1e9)return n.toExponential(4);
+  return parseFloat(n.toPrecision(10)).toString();
+}
+function convertUnit(type){
+  if(type==='temperature'){
+    const v=parseFloat(document.getElementById('temp-in').value)||0;
+    const from=document.getElementById('temp-from').value;
+    const to=document.getElementById('temp-to').value;
+    const r=convertTemp(v,from,to);
+    const labels={c:'°C',f:'°F',k:'K'};
+    document.getElementById('temp-result').textContent=formatNum(r)+' '+labels[to];
+    let html='<table><tr><th>'+(currentLang==='zh'?'单位':'Unit')+'</th><th>'+(currentLang==='zh'?'值':'Value')+'</th></tr>';
+    ['c','f','k'].forEach(u=>{html+='<tr><td>'+labels[u]+'</td><td>'+formatNum(convertTemp(v,from,u))+'</td></tr>';});
+    html+='</table>';
+    document.getElementById('temp-all').innerHTML=html;
+    return;
+  }
+  const u=units[type];if(!u)return;
+  const prefix={length:'len',weight:'w',temperature:'temp',data:'d',area:'a',speed:'s'}[type];
+  const v=parseFloat(document.getElementById(prefix+'-in').value)||0;
+  const from=document.getElementById(prefix+'-from').value;
+  const to=document.getElementById(prefix+'-to').value;
+  const base=v*u.factors[from];
+  const r=base/u.factors[to];
+  document.getElementById(prefix+'-result').textContent=formatNum(r);
+  let html='<table><tr><th>'+(currentLang==='zh'?'单位':'Unit')+'</th><th>'+(currentLang==='zh'?'值':'Value')+'</th></tr>';
+  Object.keys(u.factors).forEach(k=>{html+='<tr><td>'+k+'</td><td>'+formatNum(base/u.factors[k])+'</td></tr>';});
+  html+='</table>';
+  document.getElementById(prefix+'-all').innerHTML=html;
+}
+</script>
+</body>
+</html>

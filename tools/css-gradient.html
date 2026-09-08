@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-zh="CSS 渐变与阴影 - 009TG 工具箱" data-en="CSS Gradient & Shadow - 009TG Toolbox">CSS 渐变与阴影 - 009TG 工具箱</title>
+<meta name="description" content="免费在线 CSS 渐变生成器与盒阴影生成器，支持线性/径向渐变多色标编辑和实时预览，纯前端离线可用。">
+<meta name="keywords" content="CSS渐变生成器,盒阴影生成器,linear-gradient,radial-gradient,box-shadow,CSS工具">
+<meta name="author" content="009TG">
+<meta name="theme-color" content="#1a1d23">
+<style>
+:root {
+  --bg-main: #1a1d23;
+  --bg-content: #22262e;
+  --bg-card: #2a2f38;
+  --bg-card-hover: #333945;
+  --bg-navbar: #22262e;
+  --bg-input: #2a2f38;
+  --bg-btn: #3a7bd5;
+  --bg-btn-hover: #2c62aa;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-muted: #707070;
+  --border-color: #3a3f48;
+  --link-color: #5dade2;
+  --link-hover: #85c1e9;
+  --accent: #3a7bd5;
+  --accent-light: #5dade2;
+  --success: #27ae60;
+  --error: #e74c3c;
+  --warning: #f39c12;
+  --shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg-main);color:var(--text-primary);line-height:1.6;min-height:100vh}
+a{color:var(--link-color);text-decoration:none}a:hover{color:var(--link-hover)}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;background:var(--bg-navbar);border-bottom:1px solid var(--border-color);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:.5rem}
+.navbar .brand{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:1.1rem;color:var(--text-primary)}
+.navbar .brand svg{width:28px;height:28px;fill:var(--accent-light)}
+.navbar .nav-links{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.navbar .nav-links a{font-size:.9rem;color:var(--text-secondary);transition:color .2s}
+.navbar .nav-links a:hover{color:var(--link-color)}
+.lang-switch{display:flex;align-items:center;gap:.25rem;background:var(--bg-card);border:1px solid var(--border-color);border-radius:20px;padding:2px}
+.lang-switch button{background:none;border:none;color:var(--text-muted);font-size:.8rem;padding:.25rem .6rem;border-radius:16px;cursor:pointer;transition:all .2s}
+.lang-switch button.active{background:var(--accent);color:#fff}
+.container{max-width:1100px;margin:0 auto;padding:1.5rem}
+.card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow)}
+.card-title{font-size:1.15rem;font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;color:var(--text-primary)}
+.card-title .icon{font-size:1.3rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.55rem 1.1rem;background:var(--bg-btn);color:#fff;border:none;border-radius:6px;font-size:.9rem;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--bg-btn-hover)}
+.btn-secondary{background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color)}
+.btn-secondary:hover{background:var(--bg-card-hover)}
+.btn-success{background:var(--success)}
+.btn-sm{padding:.35rem .75rem;font-size:.8rem}
+.btn-danger{background:var(--error)}
+input,textarea,select{width:100%;padding:.6rem .8rem;background:var(--bg-input);border:1px solid var(--border-color);border-radius:6px;color:var(--text-primary);font-size:.9rem;font-family:inherit;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
+textarea{resize:vertical;min-height:120px}
+label{display:block;margin-bottom:.35rem;font-size:.85rem;color:var(--text-secondary)}
+.form-row{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.form-row .form-group{flex:1;min-width:200px}
+.form-group{margin-bottom:1rem}
+.result-area{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:1rem;margin-top:1rem;min-height:60px;white-space:pre-wrap;word-break:break-word;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:.85rem;color:var(--text-secondary);max-height:400px;overflow:auto}
+.result-area.success{border-color:var(--success);color:var(--text-primary)}
+.result-area.error{border-color:var(--error);color:var(--error)}
+.tabs{display:flex;gap:.25rem;border-bottom:2px solid var(--border-color);margin-bottom:1rem}
+.tab-btn{padding:.5rem 1rem;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:.9rem;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab-btn.active{color:var(--accent-light);border-bottom-color:var(--accent-light)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.tool-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.25rem;transition:all .2s;cursor:pointer}
+.tool-card:hover{background:var(--bg-card-hover);transform:translateY(-2px);box-shadow:var(--shadow)}
+.tool-card .tool-icon{font-size:2rem;margin-bottom:.5rem}
+.tool-card .tool-name{font-weight:600;margin-bottom:.25rem;color:var(--text-primary)}
+.tool-card .tool-desc{font-size:.8rem;color:var(--text-muted);line-height:1.4}
+.badge{display:inline-block;padding:.15rem .45rem;border-radius:4px;font-size:.7rem;font-weight:600;text-transform:uppercase}
+.badge-api{background:rgba(58,123,213,.2);color:var(--accent-light)}
+.badge-offline{background:rgba(39,174,96,.2);color:var(--success)}
+.footer{text-align:center;padding:2rem 1rem;color:var(--text-muted);font-size:.8rem;border-top:1px solid var(--border-color);margin-top:2rem}
+.copy-hint{font-size:.75rem;color:var(--text-muted);margin-top:.35rem}
+.action-bar{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem;margin:1rem 0}
+.stat-box{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:.75rem;text-align:center}
+.stat-box .stat-value{font-size:1.4rem;font-weight:700;color:var(--accent-light)}
+.stat-box .stat-label{font-size:.75rem;color:var(--text-muted);margin-top:.25rem}
+.preview-box{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:1rem;margin-top:1rem;min-height:120px;display:flex;align-items:center;justify-content:center}
+.color-stop{display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem}
+.color-stop input[type="color"]{width:40px;height:32px;padding:0;border:none;background:none;cursor:pointer}
+.footer-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem}
+.footer-links a{font-size:.8rem;color:var(--text-muted);transition:color .2s}
+.footer-links a:hover{color:var(--link-color)}
+@media(max-width:640px){
+  .container{padding:1rem}
+  .navbar{padding:.6rem 1rem}
+  .navbar .brand{font-size:1rem}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .form-row{flex-direction:column;gap:.5rem}
+}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="/cn/" class="brand">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    <span data-zh="009TG 工具箱" data-en="009TG Toolbox">009TG 工具箱</span>
+  </a>
+  <div class="nav-links">
+    <a href="/cn/" data-zh="&#8592; 返回站点首页" data-en="&#8592; Back to Site Home">&#8592; 返回站点首页</a>
+    <a href="./index.html" data-zh="&#8592; 返回工具集首页" data-en="&#8592; Back to Tools Home">&#8592; 返回工具集首页</a>
+    <div class="lang-switch">
+      <button data-lang="zh" class="active">中</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </div>
+</nav>
+<div class="container">
+<h1 style="font-size:1.4rem;margin-bottom:1rem" data-zh="CSS 渐变与阴影" data-en="CSS Gradient & Shadow">CSS 渐变与阴影</h1>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#127912;</span><span data-zh="CSS 渐变生成器" data-en="CSS Gradient Generator">CSS 渐变生成器</span></div>
+  <div class="form-row">
+    <div class="form-group">
+      <label data-zh="类型" data-en="Type">类型</label>
+      <select id="grad-type" onchange="updateGradient()">
+        <option value="linear" data-zh="线性渐变" data-en="Linear">线性渐变</option>
+        <option value="radial" data-zh="径向渐变" data-en="Radial">径向渐变</option>
+      </select>
+    </div>
+    <div class="form-group" id="angle-group">
+      <label data-zh="角度 (<span id='angval'>90</span>deg)" data-en="Angle (<span id='angval'>90</span>deg)">角度 (<span id="angval">90</span>deg)</label>
+      <input type="range" id="grad-angle" min="0" max="360" value="90" oninput="document.getElementById('angval').textContent=this.value; updateGradient()">
+    </div>
+  </div>
+  <div class="form-group">
+    <label data-zh="色标" data-en="Color Stops">色标</label>
+    <div id="color-stops">
+      <div class="color-stop"><input type="color" value="#3a7bd5" oninput="updateGradient()"><input type="text" value="0%" style="width:80px" oninput="updateGradient()"><button class="btn btn-sm btn-danger" onclick="removeColorStop(this)" data-zh="删除" data-en="Del">删除</button></div>
+      <div class="color-stop"><input type="color" value="#2a2f38" oninput="updateGradient()"><input type="text" value="100%" style="width:80px" oninput="updateGradient()"><button class="btn btn-sm btn-danger" onclick="removeColorStop(this)" data-zh="删除" data-en="Del">删除</button></div>
+    </div>
+    <button class="btn btn-sm btn-secondary" onclick="addColorStop()" style="margin-top:.5rem" data-zh="+ 添加色标" data-en="+ Add Color Stop">+ 添加色标</button>
+  </div>
+  <div class="preview-box" id="grad-preview" style="height:180px;border-radius:8px"></div>
+  <div class="form-group" style="margin-top:1rem">
+    <label data-zh="生成的 CSS" data-en="Generated CSS">生成的 CSS</label>
+    <div id="grad-css" class="result-area success" style="margin-top:0"></div>
+    <button class="btn btn-sm btn-secondary" onclick="copyText(document.getElementById('grad-css').textContent)" data-zh="复制 CSS" data-en="Copy CSS">复制 CSS</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#9632;</span><span data-zh="CSS 盒阴影生成器" data-en="CSS Box Shadow Generator">CSS 盒阴影生成器</span></div>
+  <div class="form-row">
+    <div class="form-group">
+      <label data-zh="X 偏移" data-en="X Offset">X 偏移</label>
+      <input type="range" id="shadow-x" min="-50" max="50" value="4" oninput="updateShadow()">
+    </div>
+    <div class="form-group">
+      <label data-zh="Y 偏移" data-en="Y Offset">Y 偏移</label>
+      <input type="range" id="shadow-y" min="-50" max="50" value="4" oninput="updateShadow()">
+    </div>
+    <div class="form-group">
+      <label data-zh="模糊半径" data-en="Blur">模糊半径</label>
+      <input type="range" id="shadow-blur" min="0" max="100" value="12" oninput="updateShadow()">
+    </div>
+    <div class="form-group">
+      <label data-zh="扩展半径" data-en="Spread">扩展半径</label>
+      <input type="range" id="shadow-spread" min="-20" max="50" value="0" oninput="updateShadow()">
+    </div>
+    <div class="form-group">
+      <label data-zh="颜色" data-en="Color">颜色</label>
+      <input type="color" id="shadow-color" value="#000000" oninput="updateShadow()">
+    </div>
+  </div>
+  <div class="preview-box" id="shadow-preview" style="height:120px">
+    <div style="width:100px;height:60px;background:var(--bg-card);border:1px solid var(--border-color);border-radius:6px" id="shadow-box"></div>
+  </div>
+  <div class="form-group" style="margin-top:1rem">
+    <label data-zh="生成的 CSS" data-en="Generated CSS">生成的 CSS</label>
+    <div id="shadow-css" class="result-area success" style="margin-top:0"></div>
+    <button class="btn btn-sm btn-secondary" onclick="copyText(document.getElementById('shadow-css').textContent)" data-zh="复制 CSS" data-en="Copy CSS">复制 CSS</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#128161;</span><span data-zh="使用说明" data-en="How to Use">使用说明</span></div>
+  <div data-zh="本工具是一款免费的 CSS 渐变与盒阴影生成器，帮助前端开发者和设计师快速生成兼容现代浏览器的 CSS 代码。渐变生成器支持线性渐变和径向渐变两种类型，您可以添加多个色标并调整它们的位置，实时预览效果并复制生成的 CSS 代码。盒阴影生成器则通过可视化的滑块调整偏移、模糊、扩展和颜色参数，实时预览阴影效果。所有生成的 CSS 代码均使用标准语法，兼容 Chrome、Firefox、Safari、Edge 等主流浏览器。使用方式非常简单：调节各参数滑块和色标，预览区域会实时更新，满意后点击「复制 CSS」即可将代码粘贴到您的样式表中。无论是设计网站 Hero 区域的视觉背景、制作卡片悬浮效果，还是为按钮添加精致的渐变色彩，本工具都能帮您快速迭代并导出可直接使用的 CSS 代码。生成的代码兼容主流浏览器，无需额外添加前缀或 polyfill，直接复制到样式表中即可生效。通过实时预览功能，您可以直观地看到每一次参数调整带来的视觉变化，直到获得理想的配色和阴影效果为止。" data-en="This free CSS gradient and box shadow generator helps frontend developers and designers quickly produce modern browser-compatible CSS code. The gradient generator supports linear and radial gradients with multiple color stops that you can position freely, with real-time preview and copyable CSS. The box shadow generator uses visual sliders for offset, blur, spread, and color, with live preview. All generated CSS uses standard syntax compatible with Chrome, Firefox, Safari, and Edge. Simply adjust the sliders and color stops, watch the preview update in real time, and click 'Copy CSS' when satisfied.Whether designing hero section backgrounds, creating card hover effects, or adding elegant gradient colors to buttons, this tool helps you quickly iterate and export ready-to-use CSS code. The generated code is compatible with mainstream browsers without additional prefixes or polyfills — just copy it into your stylesheet and it works.With the real-time preview feature, you can intuitively see the visual changes brought by each parameter adjustment until you achieve the ideal color and shadow effects.">
+    本工具是一款免费的 CSS 渐变与盒阴影生成器，帮助前端开发者和设计师快速生成兼容现代浏览器的 CSS 代码。渐变生成器支持线性渐变和径向渐变两种类型，您可以添加多个色标并调整它们的位置，实时预览效果并复制生成的 CSS 代码。盒阴影生成器则通过可视化的滑块调整偏移、模糊、扩展和颜色参数，实时预览阴影效果。所有生成的 CSS 代码均使用标准语法，兼容 Chrome、Firefox、Safari、Edge 等主流浏览器。使用方式非常简单：调节各参数滑块和色标，预览区域会实时更新，满意后点击「复制 CSS」即可将代码粘贴到您的样式表中。
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#10067;</span><span data-zh="常见问题" data-en="FAQ">常见问题</span></div>
+  <div style="margin-bottom:.75rem">
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q1: 生成的 CSS 兼容旧版浏览器吗？" data-en="Q1: Is the generated CSS compatible with older browsers?">Q1: 生成的 CSS 兼容旧版浏览器吗？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="生成的 CSS 使用标准语法，兼容所有现代浏览器（Chrome、Firefox、Safari、Edge）。IE11 及以下版本不支持 CSS 渐变，但已极少使用。" data-en="Generated CSS uses standard syntax and is compatible with all modern browsers (Chrome, Firefox, Safari, Edge). IE11 and below do not support CSS gradients but are rarely used today.">生成的 CSS 使用标准语法，兼容所有现代浏览器（Chrome、Firefox、Safari、Edge）。IE11 及以下版本不支持 CSS 渐变，但已极少使用。</p>
+  </div>
+  <div style="margin-bottom:.75rem">
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q2: 可以添加多少个色标？" data-en="Q2: How many color stops can I add?">Q2: 可以添加多少个色标？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="理论上没有限制，但建议控制在 5-7 个以内以保证性能和视觉效果。" data-en="There is no hard limit, but 5-7 stops are recommended for performance and visual clarity.">理论上没有限制，但建议控制在 5-7 个以内以保证性能和视觉效果。</p>
+  </div>
+  <div style="margin-bottom:.75rem">
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q3: 径向渐变的中心点可以调整吗？" data-en="Q3: Can the radial gradient center be adjusted?">Q3: 径向渐变的中心点可以调整吗？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="当前版本使用默认中心点（center）。如需更复杂的径向渐变（如椭圆、指定中心位置），可在生成的基础代码上手动修改 CSS 属性。" data-en="The current version uses the default center. For more complex radial gradients (ellipse, custom center), manually edit the generated base CSS.">当前版本使用默认中心点（center）。如需更复杂的径向渐变（如椭圆、指定中心位置），可在生成的基础代码上手动修改 CSS 属性。</p>
+  </div>
+  <div style="margin-bottom:.75rem">
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q4: 盒阴影支持内阴影吗？" data-en="Q4: Does the box shadow generator support inset shadows?">Q4: 盒阴影支持内阴影吗？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="当前版本生成的是外阴影。如需内阴影（inset），可在复制的 CSS 代码中的 box-shadow 值前手动添加 inset 关键字。" data-en="This version generates outer shadows. For inset shadows, manually add the 'inset' keyword before the copied box-shadow value.">当前版本生成的是外阴影。如需内阴影（inset），可在复制的 CSS 代码中的 box-shadow 值前手动添加 inset 关键字。</p>
+  </div>
+  <div>
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q5: 颜色格式支持哪些？" data-en="Q5: What color formats are supported?">Q5: 颜色格式支持哪些？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="色标使用浏览器原生颜色选择器，输出格式为 HEX（如 #3a7bd5）。如需 RGBA 或其他格式，可在复制后手动转换。" data-en="Color stops use the browser's native color picker, outputting HEX format (e.g., #3a7bd5). For RGBA or other formats, convert manually after copying.">色标使用浏览器原生颜色选择器，输出格式为 HEX（如 #3a7bd5）。如需 RGBA 或其他格式，可在复制后手动转换。</p>
+  </div>
+</div>
+
+</div>
+<footer class="footer">
+  <div class="footer-links">
+    <a href="/about.html" data-zh="关于我们" data-en="About">关于我们</a>
+    <a href="/privacy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+    <a href="/contact.html" data-zh="联系我们" data-en="Contact">联系我们</a>
+    <a href="/disclaimer.html" data-zh="免责声明" data-en="Disclaimer">免责声明</a>
+  </div>
+  <p data-zh="009TG 工具箱 - 免费实用的在线工具集合" data-en="009TG Toolbox - Free & Practical Online Tools">009TG 工具箱 - 免费实用的在线工具集合</p>
+</footer>
+<script>
+const i18nData={
+  zh:{
+    home:'站点首页',tools:'工具集首页',lang:'English',backHome:'返回站点首页',backTools:'返回工具集首页',
+    run:'运行',clear:'清空',copy:'复制',copied:'已复制',inputPlaceholder:'请输入...',
+    error:'错误',loading:'加载中...',noResult:'暂无结果'
+  },
+  en:{
+    home:'Site Home',tools:'Tools Home',lang:'中文',backHome:'Back to Site Home',backTools:'Back to Tools Home',
+    run:'Run',clear:'Clear',copy:'Copy',copied:'Copied',inputPlaceholder:'Enter...',
+    error:'Error',loading:'Loading...',noResult:'No result'
+  }
+};
+let currentLang='zh';
+function setLang(l){
+  currentLang=l;
+  document.documentElement.lang=l==='zh'?'zh-CN':'en';
+  document.querySelectorAll('[data-zh],[data-en]').forEach(el=>{
+    if(el.tagName==='INPUT'&&el.hasAttribute('placeholder')){
+      el.placeholder=el.getAttribute('data-'+l);
+    }else if(el.tagName==='TITLE'){
+      document.title=el.getAttribute('data-'+l)||document.title;
+    }else{
+      el.textContent=el.getAttribute('data-'+l)||el.textContent;
+    }
+  });
+  document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  localStorage.setItem('tools-lang',l);
+}
+function t(key){return(i18nData[currentLang]||i18nData.zh)[key]||key;}
+document.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('tools-lang')||'zh';
+  setLang(saved);
+  document.querySelectorAll('.lang-switch button').forEach(b=>{
+    b.addEventListener('click',()=>setLang(b.dataset.lang));
+  });
+});
+function escapeHtml(t){
+  const d=document.createElement('div');d.textContent=t;return d.innerHTML;
+}
+function copyText(t){
+  navigator.clipboard.writeText(t).then(()=>alert(t_i18n('copied'))).catch(()=>{});
+}
+function t_i18n(key){return(i18nData[currentLang]||i18nData.zh)[key]||key;}
+</script>
+<script>
+function addColorStop(){
+  const container=document.getElementById('color-stops');
+  const div=document.createElement('div'); div.className='color-stop';
+  div.innerHTML='<input type="color" value="#5dade2" oninput="updateGradient()"><input type="text" value="50%" style="width:80px" oninput="updateGradient()"><button class="btn btn-sm btn-danger" onclick="removeColorStop(this)" data-zh="删除" data-en="Del">删除</button>';
+  container.appendChild(div); updateGradient();
+}
+function removeColorStop(btn){
+  const stops=document.getElementById('color-stops').children;
+  if(stops.length<=2){alert('At least 2 color stops required');return;}
+  btn.parentElement.remove(); updateGradient();
+}
+function updateGradient(){
+  const type=document.getElementById('grad-type').value;
+  const angle=document.getElementById('grad-angle').value;
+  const stops=Array.from(document.getElementById('color-stops').children).map(row=>{
+    const color=row.children[0].value;
+    const pos=row.children[1].value;
+    return color+' '+pos;
+  }).join(', ');
+  let css='';
+  if(type==='linear'){
+    css='linear-gradient('+angle+'deg, '+stops+')';
+    document.getElementById('angle-group').style.display='block';
+  }else{
+    css='radial-gradient(circle, '+stops+')';
+    document.getElementById('angle-group').style.display='none';
+  }
+  document.getElementById('grad-preview').style.background=css;
+  document.getElementById('grad-css').textContent='background: '+css+';';
+}
+function updateShadow(){
+  const x=document.getElementById('shadow-x').value;
+  const y=document.getElementById('shadow-y').value;
+  const blur=document.getElementById('shadow-blur').value;
+  const spread=document.getElementById('shadow-spread').value;
+  const color=document.getElementById('shadow-color').value;
+  const css=x+'px '+y+'px '+blur+'px '+spread+'px '+color;
+  document.getElementById('shadow-box').style.boxShadow=css;
+  document.getElementById('shadow-css').textContent='box-shadow: '+css+';';
+}
+updateGradient(); updateShadow();
+</script>
+</body>
+</html>

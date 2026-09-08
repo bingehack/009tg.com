@@ -39,8 +39,9 @@ PAGES = {
                         <li>网站维护和安全防护</li>
                     </ul>
                     <h5>三、Cookie使用</h5>
-                    <p>本网站使用Cookie来改善用户体验。Cookie是存储在您浏览器中的小型文本文件，用于记住您的偏好设置。您可以通过浏览器设置禁用Cookie，但这可能影响网站的部分功能。</p>
-                    <p>第三方广告商（如Google）可能使用Cookie来展示基于您访问记录的广告。您可以通过访问Google广告设置页面来管理个性化广告偏好。</p>
+                    <p><strong>3.1 本站自身存储</strong>：本站为改善用户体验，可能使用极少量的浏览器本地存储（localStorage）来记录您的主题偏好（深色/浅色模式）和语言偏好（中文/英文）。这些信息仅保存在您的本地浏览器中，不会上传至任何服务器。</p>
+                    <p><strong>3.2 第三方广告Cookie</strong>：本站使用 Google AdSense 等第三方广告服务来展示广告。Google 及其合作伙伴可能使用 Cookie 来收集信息，以便：展示与您兴趣相关的个性化广告、衡量广告效果并优化广告投放、防止欺诈性广告活动。Google 使用广告 Cookie 使 Google 及其合作伙伴能够根据您访问本站及其他网站的情况向您投放广告。</p>
+                    <p>您可以通过以下方式管理或退出个性化广告：访问 <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google 广告设置</a> 关闭个性化广告；访问 <a href="https://www.aboutads.info" target="_blank" rel="noopener">About Ads</a> 选择退出基于兴趣的广告；在浏览器设置中清除或阻止第三方 Cookie。请注意，即使您选择退出个性化广告，您仍可能看到非个性化广告。</p>
                     <h5>四、第三方服务</h5>
                     <p>本网站使用以下第三方服务：</p>
                     <ul>
@@ -85,8 +86,9 @@ PAGES = {
                         <li>Website maintenance and security protection</li>
                     </ul>
                     <h5>3. Cookie Usage</h5>
-                    <p>This website uses cookies to improve user experience. Cookies are small text files stored in your browser to remember your preferences. You can disable cookies through your browser settings, but this may affect some website features.</p>
-                    <p>Third-party advertisers (such as Google) may use cookies to display ads based on your visit history. You can manage personalized ad preferences by visiting the Google Ads Settings page.</p>
+                    <p><strong>3.1 Site Storage</strong>: To improve user experience, this site may use a minimal amount of browser local storage (localStorage) to remember your theme preference (dark/light mode) and language preference (Chinese/English). This information is stored only in your local browser and is never uploaded to any server.</p>
+                    <p><strong>3.2 Third-Party Advertising Cookies</strong>: This site uses third-party advertising services such as Google AdSense to display ads. Google and its partners may use cookies to collect information in order to: display personalized ads relevant to your interests, measure ad performance and optimize ad delivery, and prevent fraudulent ad activity. Google uses advertising cookies to enable Google and its partners to serve ads to you based on your visit to this site and/or other websites.</p>
+                    <p>You can manage or opt out of personalized advertising by: visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google Ads Settings</a> to turn off personalized ads; visiting <a href="https://www.aboutads.info" target="_blank" rel="noopener">About Ads</a> to opt out of interest-based advertising; or clearing or blocking third-party cookies in your browser settings. Please note that even if you opt out of personalized advertising, you may still see non-personalized ads.</p>
                     <h5>4. Third-Party Services</h5>
                     <p>This website uses the following third-party services:</p>
                     <ul>
@@ -317,6 +319,13 @@ PAGES = {
                             </div>
                         </div>
                     </div>
+                    <h5>以下情况无需联系</h5>
+                    <ul>
+                        <li><strong>申请收录网站</strong>：本站收录标准由站长自行决定，暂不接受公开申请，请勿发送收录请求</li>
+                        <li><strong>交换友情链接</strong>：本站暂不开放友链交换，请勿发送友链请求</li>
+                        <li><strong>广告投放咨询</strong>：本站仅使用 Google AdSense 自动广告，不接受其他广告合作，请勿发送广告投放邮件</li>
+                        <li><strong>SEO优化/建站推广</strong>：本站不接受SEO优化、建站推广等商业服务推销</li>
+                    </ul>
                     <h5>注意事项</h5>
                     <ul>
                         <li>请在邮件中清晰描述您的问题或需求，以便我们更快地处理</li>
@@ -397,6 +406,13 @@ PAGES = {
                             </div>
                         </div>
                     </div>
+                    <h5>No Need to Contact For</h5>
+                    <ul>
+                        <li><strong>Website Submission Requests</strong>: Inclusion criteria are determined by the webmaster; public submissions are not currently accepted. Please do not send inclusion requests.</li>
+                        <li><strong>Link Exchange</strong>: This site does not currently open for link exchange. Please do not send link exchange requests.</li>
+                        <li><strong>Advertising Inquiries</strong>: This site only uses Google AdSense auto ads and does not accept other advertising partnerships. Please do not send advertising emails.</li>
+                        <li><strong>SEO Optimization / Website Promotion</strong>: This site does not accept SEO optimization, website promotion, or other commercial service pitches.</li>
+                    </ul>
                     <h5>Notes</h5>
                     <ul>
                         <li>Please clearly describe your question or request in the email so we can process it faster</li>

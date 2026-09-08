@@ -48,6 +48,25 @@ for cat_id in category_ids:
     urls.append((f'https://009tg.com/cn/category/{cat_id}.html', 'weekly', '0.7'))
     urls.append((f'https://009tg.com/en/category/{cat_id}.html', 'weekly', '0.7'))
 
+# Adult隔离区页面（无广告版本）
+adult_category_ids = [1, 9, 77]
+for cat_id in adult_category_ids:
+    urls.append((f'https://009tg.com/cn/adult/{cat_id}.html', 'monthly', '0.5'))
+    urls.append((f'https://009tg.com/en/adult/{cat_id}.html', 'monthly', '0.5'))
+
+# 站长工具页面
+tool_pages = [
+    'index.html', 'ip.html', 'dns.html', 'whois.html', 'http.html', 'port.html',
+    'base64.html', 'url.html', 'timestamp.html', 'img-base64.html',
+    'json.html', 'regex.html', 'jwt.html', 'uuid-hash.html', 'cron.html',
+    'diff.html', 'robots.html', 'schema.html', 'og-preview.html', 'utm.html',
+    'mortgage.html', 'tax.html', 'unit.html', 'date-calc.html',
+    'password.html', 'qrcode.html', 'color.html', 'css-gradient.html',
+    'image-compress.html', 'word-count.html',
+]
+for tool_page in tool_pages:
+    urls.append((f'https://009tg.com/tools/{tool_page}', 'monthly', '0.6'))
+
 # 文章页面
 article_count = 0
 articles_path = os.path.join(project_root, 'data', 'articles.json')

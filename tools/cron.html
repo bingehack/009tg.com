@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-zh="Cron 表达式 - 009TG 工具箱" data-en="Cron Expression - 009TG Toolbox">Cron 表达式 - 009TG 工具箱</title>
+<meta name="description" content="免费在线 Cron 表达式生成与解析工具，支持五段式标准 cron、常用预设、自然语言描述和未来执行时间计算。">
+<meta name="keywords" content="Cron表达式,定时任务,crontab,Linux定时器,在线Cron工具">
+<meta name="author" content="009TG">
+<meta name="theme-color" content="#1a1d23">
+<style>
+:root {
+  --bg-main: #1a1d23;
+  --bg-content: #22262e;
+  --bg-card: #2a2f38;
+  --bg-card-hover: #333945;
+  --bg-navbar: #22262e;
+  --bg-input: #2a2f38;
+  --bg-btn: #3a7bd5;
+  --bg-btn-hover: #2c62aa;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-muted: #707070;
+  --border-color: #3a3f48;
+  --link-color: #5dade2;
+  --link-hover: #85c1e9;
+  --accent: #3a7bd5;
+  --accent-light: #5dade2;
+  --success: #27ae60;
+  --error: #e74c3c;
+  --warning: #f39c12;
+  --shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg-main);color:var(--text-primary);line-height:1.6;min-height:100vh}
+a{color:var(--link-color);text-decoration:none}a:hover{color:var(--link-hover)}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;background:var(--bg-navbar);border-bottom:1px solid var(--border-color);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:.5rem}
+.navbar .brand{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:1.1rem;color:var(--text-primary)}
+.navbar .brand svg{width:28px;height:28px;fill:var(--accent-light)}
+.navbar .nav-links{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.navbar .nav-links a{font-size:.9rem;color:var(--text-secondary);transition:color .2s}
+.navbar .nav-links a:hover{color:var(--link-color)}
+.lang-switch{display:flex;align-items:center;gap:.25rem;background:var(--bg-card);border:1px solid var(--border-color);border-radius:20px;padding:2px}
+.lang-switch button{background:none;border:none;color:var(--text-muted);font-size:.8rem;padding:.25rem .6rem;border-radius:16px;cursor:pointer;transition:all .2s}
+.lang-switch button.active{background:var(--accent);color:#fff}
+.container{max-width:1100px;margin:0 auto;padding:1.5rem}
+.card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow)}
+.card-title{font-size:1.15rem;font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;color:var(--text-primary)}
+.card-title .icon{font-size:1.3rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.55rem 1.1rem;background:var(--bg-btn);color:#fff;border:none;border-radius:6px;font-size:.9rem;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--bg-btn-hover)}
+.btn-secondary{background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color)}
+.btn-secondary:hover{background:var(--bg-card-hover)}
+.btn-success{background:var(--success)}
+.btn-sm{padding:.35rem .75rem;font-size:.8rem}
+.btn-danger{background:var(--error)}
+input,textarea,select{width:100%;padding:.6rem .8rem;background:var(--bg-input);border:1px solid var(--border-color);border-radius:6px;color:var(--text-primary);font-size:.9rem;font-family:inherit;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
+textarea{resize:vertical;min-height:120px}
+label{display:block;margin-bottom:.35rem;font-size:.85rem;color:var(--text-secondary)}
+.form-row{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.form-row .form-group{flex:1;min-width:200px}
+.form-group{margin-bottom:1rem}
+.result-area{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:1rem;margin-top:1rem;min-height:60px;white-space:pre-wrap;word-break:break-word;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:.85rem;color:var(--text-secondary);max-height:400px;overflow:auto}
+.result-area.success{border-color:var(--success);color:var(--text-primary)}
+.result-area.error{border-color:var(--error);color:var(--error)}
+.tabs{display:flex;gap:.25rem;border-bottom:2px solid var(--border-color);margin-bottom:1rem}
+.tab-btn{padding:.5rem 1rem;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:.9rem;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab-btn.active{color:var(--accent-light);border-bottom-color:var(--accent-light)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.tool-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.25rem;transition:all .2s;cursor:pointer}
+.tool-card:hover{background:var(--bg-card-hover);transform:translateY(-2px);box-shadow:var(--shadow)}
+.tool-card .tool-icon{font-size:2rem;margin-bottom:.5rem}
+.tool-card .tool-name{font-weight:600;margin-bottom:.25rem;color:var(--text-primary)}
+.tool-card .tool-desc{font-size:.8rem;color:var(--text-muted);line-height:1.4}
+.badge{display:inline-block;padding:.15rem .45rem;border-radius:4px;font-size:.7rem;font-weight:600;text-transform:uppercase}
+.badge-api{background:rgba(58,123,213,.2);color:var(--accent-light)}
+.badge-offline{background:rgba(39,174,96,.2);color:var(--success)}
+.footer{text-align:center;padding:2rem 1rem;color:var(--text-muted);font-size:.8rem;border-top:1px solid var(--border-color);margin-top:2rem}
+.copy-hint{font-size:.75rem;color:var(--text-muted);margin-top:.35rem}
+.action-bar{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem;margin:1rem 0}
+.stat-box{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:.75rem;text-align:center}
+.stat-box .stat-value{font-size:1.4rem;font-weight:700;color:var(--accent-light)}
+.stat-box .stat-label{font-size:.75rem;color:var(--text-muted);margin-top:.25rem}
+.preview-box{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:1rem;margin-top:1rem;min-height:120px;display:flex;align-items:center;justify-content:center}
+.color-stop{display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem}
+.color-stop input[type="color"]{width:40px;height:32px;padding:0;border:none;background:none;cursor:pointer}
+.footer-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem}
+.footer-links a{font-size:.8rem;color:var(--text-muted);transition:color .2s}
+.footer-links a:hover{color:var(--link-color)}
+@media(max-width:640px){
+  .container{padding:1rem}
+  .navbar{padding:.6rem 1rem}
+  .navbar .brand{font-size:1rem}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .form-row{flex-direction:column;gap:.5rem}
+}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="/cn/" class="brand">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    <span data-zh="009TG 工具箱" data-en="009TG Toolbox">009TG 工具箱</span>
+  </a>
+  <div class="nav-links">
+    <a href="/cn/" data-zh="&#8592; 返回站点首页" data-en="&#8592; Back to Site Home">&#8592; 返回站点首页</a>
+    <a href="./index.html" data-zh="&#8592; 返回工具集首页" data-en="&#8592; Back to Tools Home">&#8592; 返回工具集首页</a>
+    <div class="lang-switch">
+      <button data-lang="zh" class="active">中</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </div>
+</nav>
+<div class="container">
+<h1 style="font-size:1.4rem;margin-bottom:1rem" data-zh="Cron 表达式" data-en="Cron Expression">Cron 表达式</h1>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#9200;</span><span data-zh="Cron 表达式" data-en="Cron Expression">Cron 表达式</span></div>
+  <div class="form-group">
+    <label data-zh="常用预设" data-en="Common Presets">常用预设</label>
+    <select id="cron-preset" onchange="applyPreset()">
+      <option value="" data-zh="-- 选择预设 --" data-en="-- Select Preset --">-- 选择预设 --</option>
+      <option value="* * * * *" data-zh="每分钟" data-en="Every minute">每分钟</option>
+      <option value="0 * * * *" data-zh="每小时" data-en="Every hour">每小时</option>
+      <option value="0 0 * * *" data-zh="每天零点" data-en="Daily at midnight">每天零点</option>
+      <option value="0 0 * * 0" data-zh="每周日零点" data-en="Weekly (Sunday midnight)">每周日零点</option>
+      <option value="0 0 1 * *" data-zh="每月1号零点" data-en="Monthly (1st at midnight)">每月1号零点</option>
+      <option value="0 0 * * 1-5" data-zh="工作日零点" data-en="Weekdays at midnight">工作日零点</option>
+      <option value="*/5 * * * *" data-zh="每5分钟" data-en="Every 5 minutes">每5分钟</option>
+      <option value="0 9 * * 1" data-zh="每周一上午9点" data-en="Monday 9 AM">每周一上午9点</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label data-zh="分钟 (0-59)" data-en="Minute (0-59)">分钟 (0-59)</label>
+      <input type="text" id="cron-m" value="0" placeholder="*" oninput="parseCron()">
+    </div>
+    <div class="form-group">
+      <label data-zh="小时 (0-23)" data-en="Hour (0-23)">小时 (0-23)</label>
+      <input type="text" id="cron-h" value="0" placeholder="*" oninput="parseCron()">
+    </div>
+    <div class="form-group">
+      <label data-zh="日期 (1-31)" data-en="Day of month (1-31)">日期 (1-31)</label>
+      <input type="text" id="cron-d" value="*" placeholder="*" oninput="parseCron()">
+    </div>
+    <div class="form-group">
+      <label data-zh="月份 (1-12)" data-en="Month (1-12)">月份 (1-12)</label>
+      <input type="text" id="cron-M" value="*" placeholder="*" oninput="parseCron()">
+    </div>
+    <div class="form-group">
+      <label data-zh="星期 (0-6, 0=周日)" data-en="Weekday (0-6, 0=Sun)">星期 (0-6, 0=周日)</label>
+      <input type="text" id="cron-w" value="*" placeholder="*" oninput="parseCron()">
+    </div>
+  </div>
+  <div class="form-group">
+    <label data-zh="Cron 表达式" data-en="Cron Expression">Cron 表达式</label>
+    <input type="text" id="cron-expr" value="0 0 * * *" readonly style="font-family:monospace">
+  </div>
+  <div id="cron-desc" style="padding:.75rem;background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;color:var(--text-secondary);font-size:.9rem;margin-bottom:1rem"></div>
+  <div class="card-title" style="margin-top:1rem"><span class="icon">&#128197;</span><span data-zh="未来执行时间" data-en="Next Execution Times">未来执行时间</span></div>
+  <div id="cron-next" style="font-family:monospace;font-size:.85rem;color:var(--text-secondary)"></div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#128161;</span><span data-zh="使用说明" data-en="How to Use">使用说明</span></div>
+  <div data-zh="本工具是一款 Cron 表达式解析与生成器，支持标准五段式 cron（分钟 小时 日期 月份 星期），适用于 Linux crontab、定时任务调度、CI/CD 流水线等多种场景。您可以通过下拉菜单选择常用预设来快速填入，也可以手动编辑每个字段。字段支持标准 cron 语法：星号 * 表示任意值，逗号 , 表示列表（如 1,3,5），连字符 - 表示范围（如 1-5），斜杠 / 表示步长（如 */15 表示每15分钟）。工具会实时将 cron 表达式解析为中英文自然语言描述，并计算未来 5 次执行时间，方便您验证表达式是否正确。所有计算均在浏览器本地完成，无需联网。无论是设置服务器定时备份任务、配置 CI/CD 自动构建触发器，还是规划邮件营销的发送节奏，准确的 Cron 表达式都是基础设施自动化的基础。本工具的自然语言描述功能特别适合不熟悉 Cron 语法的团队成员快速理解和确认调度规则。通过实时解析和自然语言描述，即使是刚接触 Cron 的新手也能快速掌握表达式的含义，减少因语法错误导致的任务调度故障。" data-en="This tool is a Cron expression parser and generator supporting the standard 5-field format (minute hour day month weekday), suitable for Linux crontab, scheduled tasks, CI/CD pipelines, and more. Choose a common preset from the dropdown for quick fill, or edit each field manually. Fields support standard cron syntax: * = any value, , = list (e.g., 1,3,5), - = range (e.g., 1-5), / = step (e.g., */15 = every 15 minutes). The tool parses the expression into a natural-language description in Chinese and English, and calculates the next 5 execution times so you can verify correctness. All computation is done locally in the browser.Whether setting up server scheduled backups, configuring CI/CD auto-build triggers, or planning email marketing send cadences, accurate Cron expressions are the foundation of infrastructure automation. This tool's natural language description feature is especially helpful for team members unfamiliar with Cron syntax to quickly understand and confirm scheduling rules.Through real-time parsing and natural language descriptions, even Cron beginners can quickly grasp expression meanings and reduce scheduling failures caused by syntax errors.">
+    本工具是一款 Cron 表达式解析与生成器，支持标准五段式 cron（分钟 小时 日期 月份 星期），适用于 Linux crontab、定时任务调度、CI/CD 流水线等多种场景。您可以通过下拉菜单选择常用预设来快速填入，也可以手动编辑每个字段。字段支持标准 cron 语法：星号 * 表示任意值，逗号 , 表示列表（如 1,3,5），连字符 - 表示范围（如 1-5），斜杠 / 表示步长（如 */15 表示每15分钟）。工具会实时将 cron 表达式解析为中英文自然语言描述，并计算未来 5 次执行时间，方便您验证表达式是否正确。所有计算均在浏览器本地完成，无需联网。
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#10067;</span><span data-zh="常见问题" data-en="FAQ">常见问题</span></div>
+  <div style="margin-bottom:.75rem">
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q1: 什么是 Cron 表达式？" data-en="Q1: What is a Cron expression?">Q1: 什么是 Cron 表达式？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="Cron 表达式是一种用于定义定时任务执行时间规则的字符串格式，由五个字段组成，分别表示分钟、小时、日期、月份和星期几。广泛用于 Linux 系统的 crontab 和各类定时任务调度系统。" data-en="A Cron expression is a string format used to define scheduled task execution rules, consisting of five fields: minute, hour, day of month, month, and day of week. Widely used in Linux crontab and various scheduling systems.">Cron 表达式是一种用于定义定时任务执行时间规则的字符串格式，由五个字段组成，分别表示分钟、小时、日期、月份和星期几。广泛用于 Linux 系统的 crontab 和各类定时任务调度系统。</p>
+  </div>
+  <div style="margin-bottom:.75rem">
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q2: 日期和星期字段同时指定会怎样？" data-en="Q2: What happens if both day and weekday are specified?">Q2: 日期和星期字段同时指定会怎样？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="在标准 cron 中，日期和星期字段不是「且」关系而是「或」关系——只要其中一个条件满足就会执行。如果您需要「且」关系，大多数现代调度器（如 Quartz）需要额外配置。" data-en="In standard cron, the day-of-month and weekday fields have an OR relationship, not AND — the job runs if either condition matches. For an AND relationship, most modern schedulers (like Quartz) require additional configuration.">在标准 cron 中，日期和星期字段不是「且」关系而是「或」关系——只要其中一个条件满足就会执行。如果您需要「且」关系，大多数现代调度器（如 Quartz）需要额外配置。</p>
+  </div>
+  <div style="margin-bottom:.75rem">
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q3: 为什么某些月份没有31号？" data-en="Q3: Why do some months not have the 31st?">Q3: 为什么某些月份没有31号？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="计算未来执行时间时，工具会自动跳过不存在的日期（如2月30日、4月31日等），只返回实际存在的日期时间。" data-en="When calculating next execution times, the tool automatically skips non-existent dates (e.g., Feb 30, Apr 31) and only returns valid date-times.">计算未来执行时间时，工具会自动跳过不存在的日期（如2月30日、4月31日等），只返回实际存在的日期时间。</p>
+  </div>
+  <div style="margin-bottom:.75rem">
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q4: 支持秒级 Cron 吗？" data-en="Q4: Is second-level cron supported?">Q4: 支持秒级 Cron 吗？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="本工具遵循标准 Unix 五段式 cron（分钟级）。部分调度框架（如 Spring、Quartz）支持六段式（含秒），本工具暂不支持秒级字段。" data-en="This tool follows standard Unix 5-field cron (minute-level). Some frameworks (Spring, Quartz) support 6-field cron with seconds, which is not supported here.">本工具遵循标准 Unix 五段式 cron（分钟级）。部分调度框架（如 Spring、Quartz）支持六段式（含秒），本工具暂不支持秒级字段。</p>
+  </div>
+  <div>
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q5: 未来执行时间计算准确吗？" data-en="Q5: How accurate are the next execution times?">Q5: 未来执行时间计算准确吗？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="计算基于您设备的本地时间，并按标准 cron 规则逐分钟匹配。对于大多数常规表达式，结果与 Linux crontab 的行为一致。" data-en="Calculations are based on your device's local time and match minute-by-minute against standard cron rules. For most common expressions, results match Linux crontab behavior.">计算基于您设备的本地时间，并按标准 cron 规则逐分钟匹配。对于大多数常规表达式，结果与 Linux crontab 的行为一致。</p>
+  </div>
+</div>
+
+</div>
+<footer class="footer">
+  <div class="footer-links">
+    <a href="/about.html" data-zh="关于我们" data-en="About">关于我们</a>
+    <a href="/privacy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+    <a href="/contact.html" data-zh="联系我们" data-en="Contact">联系我们</a>
+    <a href="/disclaimer.html" data-zh="免责声明" data-en="Disclaimer">免责声明</a>
+  </div>
+  <p data-zh="009TG 工具箱 - 免费实用的在线工具集合" data-en="009TG Toolbox - Free & Practical Online Tools">009TG 工具箱 - 免费实用的在线工具集合</p>
+</footer>
+<script>
+const i18nData={
+  zh:{
+    home:'站点首页',tools:'工具集首页',lang:'English',backHome:'返回站点首页',backTools:'返回工具集首页',
+    run:'运行',clear:'清空',copy:'复制',copied:'已复制',inputPlaceholder:'请输入...',
+    error:'错误',loading:'加载中...',noResult:'暂无结果'
+  },
+  en:{
+    home:'Site Home',tools:'Tools Home',lang:'中文',backHome:'Back to Site Home',backTools:'Back to Tools Home',
+    run:'Run',clear:'Clear',copy:'Copy',copied:'Copied',inputPlaceholder:'Enter...',
+    error:'Error',loading:'Loading...',noResult:'No result'
+  }
+};
+let currentLang='zh';
+function setLang(l){
+  currentLang=l;
+  document.documentElement.lang=l==='zh'?'zh-CN':'en';
+  document.querySelectorAll('[data-zh],[data-en]').forEach(el=>{
+    if(el.tagName==='INPUT'&&el.hasAttribute('placeholder')){
+      el.placeholder=el.getAttribute('data-'+l);
+    }else if(el.tagName==='TITLE'){
+      document.title=el.getAttribute('data-'+l)||document.title;
+    }else{
+      el.textContent=el.getAttribute('data-'+l)||el.textContent;
+    }
+  });
+  document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  localStorage.setItem('tools-lang',l);
+}
+function t(key){return(i18nData[currentLang]||i18nData.zh)[key]||key;}
+document.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('tools-lang')||'zh';
+  setLang(saved);
+  document.querySelectorAll('.lang-switch button').forEach(b=>{
+    b.addEventListener('click',()=>setLang(b.dataset.lang));
+  });
+});
+function escapeHtml(t){
+  const d=document.createElement('div');d.textContent=t;return d.innerHTML;
+}
+function copyText(t){
+  navigator.clipboard.writeText(t).then(()=>alert(t_i18n('copied'))).catch(()=>{});
+}
+function t_i18n(key){return(i18nData[currentLang]||i18nData.zh)[key]||key;}
+</script>
+<script>
+function applyPreset(){
+  const v=document.getElementById('cron-preset').value;
+  if(!v)return;
+  const parts=v.split(' ');
+  document.getElementById('cron-m').value=parts[0];
+  document.getElementById('cron-h').value=parts[1];
+  document.getElementById('cron-d').value=parts[2];
+  document.getElementById('cron-M').value=parts[3];
+  document.getElementById('cron-w').value=parts[4];
+  parseCron();
+}
+function parseCron(){
+  const m=document.getElementById('cron-m').value.trim();
+  const h=document.getElementById('cron-h').value.trim();
+  const d=document.getElementById('cron-d').value.trim();
+  const M=document.getElementById('cron-M').value.trim();
+  const w=document.getElementById('cron-w').value.trim();
+  const expr=[m,h,d,M,w].join(' ');
+  document.getElementById('cron-expr').value=expr;
+  const descEl=document.getElementById('cron-desc');
+  const nextEl=document.getElementById('cron-next');
+  try{
+    const desc=describeCron(m,h,d,M,w);
+    descEl.textContent=desc.zh+' / '+desc.en;
+    const next=nextExecutions(m,h,d,M,w,5);
+    nextEl.innerHTML=next.map((dt,i)=>'<div style="padding:.25rem 0">'+(i+1)+'. '+dt.toLocaleString()+'</div>').join('');
+  }catch(e){
+    descEl.textContent='Error: '+e.message;
+    nextEl.innerHTML='';
+  }
+}
+function matchField(value,field){
+  if(field==='*')return true;
+  if(field.includes(',')){return field.split(',').some(p=>matchField(value,p.trim()));}
+  if(field.includes('/')){const [base,step]=field.split('/'); const start=base==='*'?0:parseInt(base); return (value-start)%parseInt(step)===0 && value>=start;}
+  if(field.includes('-')){const [a,b]=field.split('-').map(Number); return value>=a && value<=b;}
+  return value===parseInt(field);
+}
+function nextExecutions(mStr,hStr,dStr,MStr,wStr,count){
+  const now=new Date(); now.setSeconds(0); now.setMilliseconds(0);
+  const next=[]; let cursor=new Date(now.getTime());
+  while(next.length<count){
+    cursor.setMinutes(cursor.getMinutes()+1);
+    const M=cursor.getMonth()+1, d=cursor.getDate(), h=cursor.getHours(), m=cursor.getMinutes(), w=cursor.getDay();
+    if(matchField(m,mStr)&&matchField(h,hStr)&&matchField(d,dStr)&&matchField(M,MStr)&&matchField(w,wStr)){next.push(new Date(cursor));}
+    if(cursor.getTime()-now.getTime()>366*24*60*60*1000)break;
+  }
+  return next;
+}
+function describeCron(m,h,d,M,w){
+  const parts=[];
+  const zhParts=[];
+  const enParts=[];
+  const describe=(field,unit,units)=>{
+    if(field==='*')return null;
+    if(field.includes(','))return {zh:unit+'为 '+field, en:units+' = '+field};
+    if(field.includes('/')){const step=field.split('/')[1]; return {zh:'每 '+step+' '+unit, en:'Every '+step+' '+units};}
+    if(field.includes('-'))return {zh:unit+' '+field, en:units+' '+field};
+    return {zh:unit+' '+field, en:units+' '+field};
+  };
+  const mDesc=describe(m,'分钟','minutes');
+  const hDesc=describe(h,'小时','hours');
+  const dDesc=describe(d,'日期','days');
+  const MDesc=describe(M,'月份','months');
+  const wDesc=describe(w,'星期','weekdays');
+  if(!mDesc&&!hDesc&&!dDesc&&!MDesc&&!wDesc)return {zh:'每分钟执行', en:'Every minute'};
+  const all=[mDesc,hDesc,dDesc,MDesc,wDesc].filter(Boolean);
+  return {zh:'在 '+all.map(x=>x.zh).join('，')+' 执行', en:'At '+all.map(x=>x.en).join(', ')};
+}
+parseCron();
+</script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-zh="robots.txt 生成器 - 009TG 工具箱" data-en="robots.txt Generator - 009TG Toolbox">robots.txt 生成器 - 009TG 工具箱</title>
+<meta name="description" content="免费在线 robots.txt 生成器，支持 Allow/Disallow/Sitemap 可视化编辑，含常见预设和 AI 爬虫屏蔽规则。">
+<meta name="keywords" content="robots.txt生成器,SEO,爬虫控制,Sitemap,AI爬虫屏蔽,网站管理员工具">
+<meta name="author" content="009TG">
+<meta name="theme-color" content="#1a1d23">
+<style>
+:root {
+  --bg-main: #1a1d23;
+  --bg-content: #22262e;
+  --bg-card: #2a2f38;
+  --bg-card-hover: #333945;
+  --bg-navbar: #22262e;
+  --bg-input: #2a2f38;
+  --bg-btn: #3a7bd5;
+  --bg-btn-hover: #2c62aa;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-muted: #707070;
+  --border-color: #3a3f48;
+  --link-color: #5dade2;
+  --link-hover: #85c1e9;
+  --accent: #3a7bd5;
+  --accent-light: #5dade2;
+  --success: #27ae60;
+  --error: #e74c3c;
+  --warning: #f39c12;
+  --shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg-main);color:var(--text-primary);line-height:1.6;min-height:100vh}
+a{color:var(--link-color);text-decoration:none}a:hover{color:var(--link-hover)}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;background:var(--bg-navbar);border-bottom:1px solid var(--border-color);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:.5rem}
+.navbar .brand{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:1.1rem;color:var(--text-primary)}
+.navbar .brand svg{width:28px;height:28px;fill:var(--accent-light)}
+.navbar .nav-links{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.navbar .nav-links a{font-size:.9rem;color:var(--text-secondary);transition:color .2s}
+.navbar .nav-links a:hover{color:var(--link-color)}
+.lang-switch{display:flex;align-items:center;gap:.25rem;background:var(--bg-card);border:1px solid var(--border-color);border-radius:20px;padding:2px}
+.lang-switch button{background:none;border:none;color:var(--text-muted);font-size:.8rem;padding:.25rem .6rem;border-radius:16px;cursor:pointer;transition:all .2s}
+.lang-switch button.active{background:var(--accent);color:#fff}
+.container{max-width:1100px;margin:0 auto;padding:1.5rem}
+.card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow)}
+.card-title{font-size:1.15rem;font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;color:var(--text-primary)}
+.card-title .icon{font-size:1.3rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.55rem 1.1rem;background:var(--bg-btn);color:#fff;border:none;border-radius:6px;font-size:.9rem;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--bg-btn-hover)}
+.btn-secondary{background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color)}
+.btn-secondary:hover{background:var(--bg-card-hover)}
+.btn-success{background:var(--success)}
+.btn-sm{padding:.35rem .75rem;font-size:.8rem}
+.btn-danger{background:var(--error)}
+input,textarea,select{width:100%;padding:.6rem .8rem;background:var(--bg-input);border:1px solid var(--border-color);border-radius:6px;color:var(--text-primary);font-size:.9rem;font-family:inherit;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
+textarea{resize:vertical;min-height:120px}
+label{display:block;margin-bottom:.35rem;font-size:.85rem;color:var(--text-secondary)}
+.form-row{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.form-row .form-group{flex:1;min-width:200px}
+.form-group{margin-bottom:1rem}
+.result-area{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:1rem;margin-top:1rem;min-height:60px;white-space:pre-wrap;word-break:break-word;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:.85rem;color:var(--text-secondary);max-height:400px;overflow:auto}
+.result-area.success{border-color:var(--success);color:var(--text-primary)}
+.result-area.error{border-color:var(--error);color:var(--error)}
+.tabs{display:flex;gap:.25rem;border-bottom:2px solid var(--border-color);margin-bottom:1rem}
+.tab-btn{padding:.5rem 1rem;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:.9rem;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab-btn.active{color:var(--accent-light);border-bottom-color:var(--accent-light)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.tool-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.25rem;transition:all .2s;cursor:pointer}
+.tool-card:hover{background:var(--bg-card-hover);transform:translateY(-2px);box-shadow:var(--shadow)}
+.tool-card .tool-icon{font-size:2rem;margin-bottom:.5rem}
+.tool-card .tool-name{font-weight:600;margin-bottom:.25rem;color:var(--text-primary)}
+.tool-card .tool-desc{font-size:.8rem;color:var(--text-muted);line-height:1.4}
+.badge{display:inline-block;padding:.15rem .45rem;border-radius:4px;font-size:.7rem;font-weight:600;text-transform:uppercase}
+.badge-api{background:rgba(58,123,213,.2);color:var(--accent-light)}
+.badge-offline{background:rgba(39,174,96,.2);color:var(--success)}
+.footer{text-align:center;padding:2rem 1rem;color:var(--text-muted);font-size:.8rem;border-top:1px solid var(--border-color);margin-top:2rem}
+.copy-hint{font-size:.75rem;color:var(--text-muted);margin-top:.35rem}
+.action-bar{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem;margin:1rem 0}
+.stat-box{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:.75rem;text-align:center}
+.stat-box .stat-value{font-size:1.4rem;font-weight:700;color:var(--accent-light)}
+.stat-box .stat-label{font-size:.75rem;color:var(--text-muted);margin-top:.25rem}
+.preview-box{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:1rem;margin-top:1rem;min-height:120px;display:flex;align-items:center;justify-content:center}
+.color-stop{display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem}
+.color-stop input[type="color"]{width:40px;height:32px;padding:0;border:none;background:none;cursor:pointer}
+.footer-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem}
+.footer-links a{font-size:.8rem;color:var(--text-muted);transition:color .2s}
+.footer-links a:hover{color:var(--link-color)}
+@media(max-width:640px){
+  .container{padding:1rem}
+  .navbar{padding:.6rem 1rem}
+  .navbar .brand{font-size:1rem}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .form-row{flex-direction:column;gap:.5rem}
+}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="/cn/" class="brand">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    <span data-zh="009TG 工具箱" data-en="009TG Toolbox">009TG 工具箱</span>
+  </a>
+  <div class="nav-links">
+    <a href="/cn/" data-zh="&#8592; 返回站点首页" data-en="&#8592; Back to Site Home">&#8592; 返回站点首页</a>
+    <a href="./index.html" data-zh="&#8592; 返回工具集首页" data-en="&#8592; Back to Tools Home">&#8592; 返回工具集首页</a>
+    <div class="lang-switch">
+      <button data-lang="zh" class="active">中</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </div>
+</nav>
+<div class="container">
+<h1 style="font-size:1.4rem;margin-bottom:1rem" data-zh="robots.txt 生成器" data-en="robots.txt Generator">robots.txt 生成器</h1>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#129302;</span><span data-zh="robots.txt 生成器" data-en="robots.txt Generator">robots.txt 生成器</span></div>
+  <div class="form-group">
+    <label data-zh="常用预设" data-en="Common Presets">常用预设</label>
+    <select id="robots-preset" onchange="applyRobotsPreset()">
+      <option value="" data-zh="-- 选择预设 --" data-en="-- Select Preset --">-- 选择预设 --</option>
+      <option value="allow" data-zh="全部放行" data-en="Allow All">全部放行</option>
+      <option value="disallow" data-zh="全部禁止" data-en="Disallow All">全部禁止</option>
+      <option value="ai" data-zh="屏蔽 AI 爬虫" data-en="Block AI Crawlers">屏蔽 AI 爬虫</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label data-zh="User-agent" data-en="User-agent">User-agent</label>
+    <input type="text" id="robots-ua" value="*" placeholder="* 或具体爬虫名称" data-zh="* 表示所有爬虫" data-en="* means all crawlers" oninput="genRobots()">
+  </div>
+  <div class="form-group">
+    <label data-zh="Allow 路径" data-en="Allow Paths">Allow 路径</label>
+    <div id="allow-items">
+      <div class="form-row" style="align-items:flex-end"><div class="form-group"><input type="text" class="allow-path" value="/" placeholder="/path/" oninput="genRobots()"></div><button class="btn btn-sm btn-danger" onclick="removePath(this,'allow')" data-zh="删除" data-en="Del">删除</button></div>
+    </div>
+    <button class="btn btn-sm btn-secondary" onclick="addPath('allow')" style="margin-top:.5rem" data-zh="+ 添加 Allow" data-en="+ Add Allow">+ 添加 Allow</button>
+  </div>
+  <div class="form-group">
+    <label data-zh="Disallow 路径" data-en="Disallow Paths">Disallow 路径</label>
+    <div id="disallow-items">
+      <div class="form-row" style="align-items:flex-end"><div class="form-group"><input type="text" class="disallow-path" placeholder="/admin/ /private/" oninput="genRobots()"></div><button class="btn btn-sm btn-danger" onclick="removePath(this,'disallow')" data-zh="删除" data-en="Del">删除</button></div>
+    </div>
+    <button class="btn btn-sm btn-secondary" onclick="addPath('disallow')" style="margin-top:.5rem" data-zh="+ 添加 Disallow" data-en="+ Add Disallow">+ 添加 Disallow</button>
+  </div>
+  <div class="form-group">
+    <label data-zh="Sitemap URL" data-en="Sitemap URL">Sitemap URL</label>
+    <input type="text" id="robots-sitemap" placeholder="https://example.com/sitemap.xml" oninput="genRobots()">
+  </div>
+  <div class="form-group" style="margin-top:1rem">
+    <label data-zh="生成的 robots.txt" data-en="Generated robots.txt">生成的 robots.txt</label>
+    <pre id="robots-result" class="result-area success" style="margin-top:0"></pre>
+    <div class="action-bar">
+      <button class="btn btn-sm btn-secondary" onclick="copyRobots()" data-zh="复制" data-en="Copy">复制</button>
+      <button class="btn btn-sm btn-secondary" onclick="downloadRobots()" data-zh="下载 robots.txt" data-en="Download robots.txt">下载 robots.txt</button>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#128161;</span><span data-zh="使用说明" data-en="How to Use">使用说明</span></div>
+  <div data-zh="robots.txt 是网站根目录下的一个纯文本文件，用于告诉搜索引擎爬虫哪些页面可以抓取、哪些页面应该忽略。正确配置 robots.txt 对于 SEO 至关重要：它可以防止私密页面（如后台管理、用户中心）被索引，避免搜索引擎浪费抓取配额在不重要的页面上，同时也可以引导爬虫关注网站地图（Sitemap）。本工具提供可视化编辑界面，您可以添加多条 Allow 和 Disallow 规则，指定特定的 User-agent（如 Googlebot、Bingbot），并附加 Sitemap 地址。工具还内置了三种常用预设：「全部放行」允许所有爬虫访问所有页面；「全部禁止」阻止所有爬虫抓取任何内容（适用于测试环境）；「屏蔽 AI 爬虫」则专门阻止 GPTBot、CCBot 等人工智能训练数据抓取机器人。生成后请将内容保存为 robots.txt 文件并上传到网站根目录。定期审查和更新 robots.txt 是网站 SEO 健康检查的重要环节。本工具允许您快速生成针对不同爬虫的精细化规则，例如允许 Google 抓取全部内容但限制 Bing 的访问频率，或者专门屏蔽数据挖掘机器人。清晰的规则列表有助于团队协作和后期维护。" data-en="robots.txt is a plain text file in the website root directory that tells search engine crawlers which pages to crawl and which to ignore. Proper robots.txt configuration is crucial for SEO: it prevents private pages (admin panels, user centers) from being indexed, avoids wasting crawl budget on unimportant pages, and can guide crawlers to your sitemap. This tool provides a visual editor where you can add multiple Allow and Disallow rules, specify User-agents (e.g., Googlebot, Bingbot), and attach a Sitemap URL. Three common presets are built in: 'Allow All' permits all crawlers to access all pages; 'Disallow All' blocks all crawlers (useful for staging environments); 'Block AI Crawlers' specifically blocks GPTBot, CCBot, and other AI training data crawlers. Save the generated content as robots.txt and upload it to your website root directory.Regularly reviewing and updating robots.txt is an important part of website SEO health checks. This tool allows you to quickly generate granular rules for different crawlers, such as allowing Google to crawl all content while limiting Bing's access frequency, or specifically blocking data mining bots. A clear rule list facilitates team collaboration and future maintenance.">
+    robots.txt 是网站根目录下的一个纯文本文件，用于告诉搜索引擎爬虫哪些页面可以抓取、哪些页面应该忽略。正确配置 robots.txt 对于 SEO 至关重要：它可以防止私密页面（如后台管理、用户中心）被索引，避免搜索引擎浪费抓取配额在不重要的页面上，同时也可以引导爬虫关注网站地图（Sitemap）。本工具提供可视化编辑界面，您可以添加多条 Allow 和 Disallow 规则，指定特定的 User-agent（如 Googlebot、Bingbot），并附加 Sitemap 地址。工具还内置了三种常用预设：「全部放行」允许所有爬虫访问所有页面；「全部禁止」阻止所有爬虫抓取任何内容（适用于测试环境）；「屏蔽 AI 爬虫」则专门阻止 GPTBot、CCBot 等人工智能训练数据抓取机器人。生成后请将内容保存为 robots.txt 文件并上传到网站根目录。
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#10067;</span><span data-zh="常见问题" data-en="FAQ">常见问题</span></div>
+  <div style="margin-bottom:.75rem">
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q1: robots.txt 能阻止页面被索引吗？" data-en="Q1: Can robots.txt prevent pages from being indexed?">Q1: robots.txt 能阻止页面被索引吗？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="robots.txt 只能阻止爬虫抓取页面内容，但不能阻止页面被索引。如果其他网站链接到该页面，搜索引擎仍可能将其列入索引（仅显示 URL 而无内容摘要）。如需彻底阻止索引，请使用页面级的 meta robots 标签 noindex。" data-en="robots.txt only prevents crawlers from fetching page content, not from indexing it. If other sites link to the page, search engines may still index it (showing only the URL without a snippet). To fully prevent indexing, use the page-level meta robots tag with noindex.">robots.txt 只能阻止爬虫抓取页面内容，但不能阻止页面被索引。如果其他网站链接到该页面，搜索引擎仍可能将其列入索引（仅显示 URL 而无内容摘要）。如需彻底阻止索引，请使用页面级的 meta robots 标签 noindex。</p>
+  </div>
+  <div style="margin-bottom:.75rem">
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q2: 为什么需要屏蔽 AI 爬虫？" data-en="Q2: Why block AI crawlers?">Q2: 为什么需要屏蔽 AI 爬虫？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="部分 AI 公司（如 OpenAI、Anthropic、Common Crawl）使用网络爬虫抓取公开网页内容用于训练大语言模型。如果您不希望自己的内容被用于 AI 训练，可以通过 robots.txt 阻止这些专门的爬虫。" data-en="Some AI companies (OpenAI, Anthropic, Common Crawl) use web crawlers to collect publicly available web content for training large language models. If you do not want your content used for AI training, you can block these specific crawlers via robots.txt.">部分 AI 公司（如 OpenAI、Anthropic、Common Crawl）使用网络爬虫抓取公开网页内容用于训练大语言模型。如果您不希望自己的内容被用于 AI 训练，可以通过 robots.txt 阻止这些专门的爬虫。</p>
+  </div>
+  <div style="margin-bottom:.75rem">
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q3: Sitemap 地址是必须的吗？" data-en="Q3: Is the Sitemap address required?">Q3: Sitemap 地址是必须的吗？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="不是必须的，但强烈建议添加。在 robots.txt 中声明 Sitemap 地址可以帮助搜索引擎更快、更完整地发现和抓取您网站的所有页面。" data-en="Not required, but strongly recommended. Declaring a Sitemap URL in robots.txt helps search engines discover and crawl all pages on your site more quickly and completely.">不是必须的，但强烈建议添加。在 robots.txt 中声明 Sitemap 地址可以帮助搜索引擎更快、更完整地发现和抓取您网站的所有页面。</p>
+  </div>
+  <div style="margin-bottom:.75rem">
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q4: Allow 和 Disallow 的优先级如何？" data-en="Q4: What is the priority of Allow vs Disallow?">Q4: Allow 和 Disallow 的优先级如何？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="在 Google 等现代搜索引擎中，Allow 的优先级高于 Disallow，且路径匹配更具体的规则优先。例如 Disallow: / 配合 Allow: /public/ 可以实现只放行 public 目录。" data-en="In modern search engines like Google, Allow takes priority over Disallow, and more specific path matches take precedence. For example, Disallow: / combined with Allow: /public/ achieves blocking everything except the public directory.">在 Google 等现代搜索引擎中，Allow 的优先级高于 Disallow，且路径匹配更具体的规则优先。例如 Disallow: / 配合 Allow: /public/ 可以实现只放行 public 目录。</p>
+  </div>
+  <div>
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q5: robots.txt 文件应该放在哪里？" data-en="Q5: Where should the robots.txt file be placed?">Q5: robots.txt 文件应该放在哪里？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="robots.txt 必须放在网站的根目录下，且文件名必须全小写。例如 https://example.com/robots.txt。子目录中的 robots.txt 不会被搜索引擎识别。" data-en="robots.txt must be placed in the website root directory with an all-lowercase filename. For example: https://example.com/robots.txt. robots.txt files in subdirectories are not recognized by search engines.">robots.txt 必须放在网站的根目录下，且文件名必须全小写。例如 https://example.com/robots.txt。子目录中的 robots.txt 不会被搜索引擎识别。</p>
+  </div>
+</div>
+
+</div>
+<footer class="footer">
+  <div class="footer-links">
+    <a href="/about.html" data-zh="关于我们" data-en="About">关于我们</a>
+    <a href="/privacy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+    <a href="/contact.html" data-zh="联系我们" data-en="Contact">联系我们</a>
+    <a href="/disclaimer.html" data-zh="免责声明" data-en="Disclaimer">免责声明</a>
+  </div>
+  <p data-zh="009TG 工具箱 - 免费实用的在线工具集合" data-en="009TG Toolbox - Free & Practical Online Tools">009TG 工具箱 - 免费实用的在线工具集合</p>
+</footer>
+<script>
+const i18nData={
+  zh:{
+    home:'站点首页',tools:'工具集首页',lang:'English',backHome:'返回站点首页',backTools:'返回工具集首页',
+    run:'运行',clear:'清空',copy:'复制',copied:'已复制',inputPlaceholder:'请输入...',
+    error:'错误',loading:'加载中...',noResult:'暂无结果'
+  },
+  en:{
+    home:'Site Home',tools:'Tools Home',lang:'中文',backHome:'Back to Site Home',backTools:'Back to Tools Home',
+    run:'Run',clear:'Clear',copy:'Copy',copied:'Copied',inputPlaceholder:'Enter...',
+    error:'Error',loading:'Loading...',noResult:'No result'
+  }
+};
+let currentLang='zh';
+function setLang(l){
+  currentLang=l;
+  document.documentElement.lang=l==='zh'?'zh-CN':'en';
+  document.querySelectorAll('[data-zh],[data-en]').forEach(el=>{
+    if(el.tagName==='INPUT'&&el.hasAttribute('placeholder')){
+      el.placeholder=el.getAttribute('data-'+l);
+    }else if(el.tagName==='TITLE'){
+      document.title=el.getAttribute('data-'+l)||document.title;
+    }else{
+      el.textContent=el.getAttribute('data-'+l)||el.textContent;
+    }
+  });
+  document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  localStorage.setItem('tools-lang',l);
+}
+function t(key){return(i18nData[currentLang]||i18nData.zh)[key]||key;}
+document.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('tools-lang')||'zh';
+  setLang(saved);
+  document.querySelectorAll('.lang-switch button').forEach(b=>{
+    b.addEventListener('click',()=>setLang(b.dataset.lang));
+  });
+});
+function escapeHtml(t){
+  const d=document.createElement('div');d.textContent=t;return d.innerHTML;
+}
+function copyText(t){
+  navigator.clipboard.writeText(t).then(()=>alert(t_i18n('copied'))).catch(()=>{});
+}
+function t_i18n(key){return(i18nData[currentLang]||i18nData.zh)[key]||key;}
+</script>
+<script>
+const presets={
+  allow:{ua:'*',allow:['/'],disallow:[],sitemap:''},
+  disallow:{ua:'*',allow:[],disallow:['/'],sitemap:''},
+  ai:{ua:'*',allow:['/'],disallow:[],sitemap:'',extra:'User-agent: GPTBot\nDisallow: /\nUser-agent: CCBot\nDisallow: /\nUser-agent: ChatGPT-User\nDisallow: /\nUser-agent: Google-Extended\nDisallow: /\nUser-agent: anthropic-ai\nDisallow: /\n'}
+};
+function applyRobotsPreset(){
+  const key=document.getElementById('robots-preset').value;
+  if(!key)return;
+  const p=presets[key];
+  document.getElementById('robots-ua').value=p.ua;
+  setPaths('allow',p.allow);
+  setPaths('disallow',p.disallow);
+  document.getElementById('robots-sitemap').value=p.sitemap;
+  genRobots();
+}
+function setPaths(type,paths){
+  const container=document.getElementById(type+'-items');
+  container.innerHTML='';
+  if(paths.length===0){
+    const div=document.createElement('div'); div.className='form-row'; div.style.alignItems='flex-end';
+    div.innerHTML='<div class="form-group"><input type="text" class="'+type+'-path" placeholder="/path/" oninput="genRobots()"></div><button class="btn btn-sm btn-danger" onclick="removePath(this,\''+type+'\')">Del</button>';
+    container.appendChild(div);
+  }else{
+    paths.forEach(path=>{
+      const div=document.createElement('div'); div.className='form-row'; div.style.alignItems='flex-end';
+      div.innerHTML='<div class="form-group"><input type="text" class="'+type+'-path" value="'+escapeHtml(path)+'" placeholder="/path/" oninput="genRobots()"></div><button class="btn btn-sm btn-danger" onclick="removePath(this,\''+type+'\')">Del</button>';
+      container.appendChild(div);
+    });
+  }
+}
+function addPath(type){
+  const container=document.getElementById(type+'-items');
+  const div=document.createElement('div'); div.className='form-row'; div.style.alignItems='flex-end';
+  div.innerHTML='<div class="form-group"><input type="text" class="'+type+'-path" placeholder="/path/" oninput="genRobots()"></div><button class="btn btn-sm btn-danger" onclick="removePath(this,\''+type+'\')">Del</button>';
+  container.appendChild(div);
+}
+function removePath(btn,type){const items=document.getElementById(type+'-items').children; if(items.length<=1)return; btn.parentElement.remove(); genRobots();}
+function genRobots(){
+  const ua=document.getElementById('robots-ua').value||'*';
+  const allows=Array.from(document.querySelectorAll('.allow-path')).map(el=>el.value.trim()).filter(Boolean);
+  const disallows=Array.from(document.querySelectorAll('.disallow-path')).map(el=>el.value.trim()).filter(Boolean);
+  const sitemap=document.getElementById('robots-sitemap').value.trim();
+  let lines=[];
+  lines.push('User-agent: '+ua);
+  allows.forEach(p=>lines.push('Allow: '+p));
+  disallows.forEach(p=>lines.push('Disallow: '+p));
+  const presetKey=document.getElementById('robots-preset').value;
+  if(presetKey==='ai'&&presets.ai.extra)lines.push(''); lines.push(presets.ai.extra.trim());
+  if(sitemap)lines.push(''); lines.push('Sitemap: '+sitemap);
+  document.getElementById('robots-result').textContent=lines.join('\n');
+}
+function copyRobots(){const t=document.getElementById('robots-result').textContent; if(t)copyText(t);}
+function downloadRobots(){
+  const blob=new Blob([document.getElementById('robots-result').textContent],{type:'text/plain'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='robots.txt'; a.click();
+}
+genRobots();
+</script>
+</body>
+</html>

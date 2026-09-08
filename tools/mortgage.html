@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-zh="房贷计算器 - 009TG 工具箱" data-en="Mortgage Calculator - 009TG Toolbox">房贷计算器 - 009TG 工具箱</title>
+<meta name="description" content="免费在线房贷计算器，支持等额本息与等额本金两种还款方式，附复利计算模式。">
+<meta name="keywords" content="房贷计算器,等额本息,等额本金,月供计算,贷款利息,复利计算">
+<meta name="author" content="009TG">
+<meta name="theme-color" content="#1a1d23">
+<style>
+:root {
+  --bg-main: #1a1d23;
+  --bg-content: #22262e;
+  --bg-card: #2a2f38;
+  --bg-card-hover: #333945;
+  --bg-navbar: #22262e;
+  --bg-input: #2a2f38;
+  --bg-btn: #3a7bd5;
+  --bg-btn-hover: #2c62aa;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-muted: #707070;
+  --border-color: #3a3f48;
+  --link-color: #5dade2;
+  --link-hover: #85c1e9;
+  --accent: #3a7bd5;
+  --accent-light: #5dade2;
+  --success: #27ae60;
+  --error: #e74c3c;
+  --warning: #f39c12;
+  --shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg-main);color:var(--text-primary);line-height:1.6;min-height:100vh}
+a{color:var(--link-color);text-decoration:none}a:hover{color:var(--link-hover)}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;background:var(--bg-navbar);border-bottom:1px solid var(--border-color);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:.5rem}
+.navbar .brand{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:1.1rem;color:var(--text-primary)}
+.navbar .brand svg{width:28px;height:28px;fill:var(--accent-light)}
+.navbar .nav-links{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.navbar .nav-links a{font-size:.9rem;color:var(--text-secondary);transition:color .2s}
+.navbar .nav-links a:hover{color:var(--link-color)}
+.lang-switch{display:flex;align-items:center;gap:.25rem;background:var(--bg-card);border:1px solid var(--border-color);border-radius:20px;padding:2px}
+.lang-switch button{background:none;border:none;color:var(--text-muted);font-size:.8rem;padding:.25rem .6rem;border-radius:16px;cursor:pointer;transition:all .2s}
+.lang-switch button.active{background:var(--accent);color:#fff}
+.container{max-width:1100px;margin:0 auto;padding:1.5rem}
+.card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow)}
+.card-title{font-size:1.15rem;font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;color:var(--text-primary)}
+.card-title .icon{font-size:1.3rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.55rem 1.1rem;background:var(--bg-btn);color:#fff;border:none;border-radius:6px;font-size:.9rem;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--bg-btn-hover)}
+.btn-secondary{background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color)}
+.btn-secondary:hover{background:var(--bg-card-hover)}
+.btn-success{background:var(--success)}
+.btn-sm{padding:.35rem .75rem;font-size:.8rem}
+input,textarea,select{width:100%;padding:.6rem .8rem;background:var(--bg-input);border:1px solid var(--border-color);border-radius:6px;color:var(--text-primary);font-size:.9rem;font-family:inherit;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
+textarea{resize:vertical;min-height:120px}
+label{display:block;margin-bottom:.35rem;font-size:.85rem;color:var(--text-secondary)}
+.form-row{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.form-row .form-group{flex:1;min-width:200px}
+.form-group{margin-bottom:1rem}
+.result-area{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:1rem;margin-top:1rem;min-height:60px;white-space:pre-wrap;word-break:break-word;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:.85rem;color:var(--text-secondary);max-height:400px;overflow:auto}
+.result-area.success{border-color:var(--success);color:var(--text-primary)}
+.result-area.error{border-color:var(--error);color:var(--error)}
+.tabs{display:flex;gap:.25rem;border-bottom:2px solid var(--border-color);margin-bottom:1rem}
+.tab-btn{padding:.5rem 1rem;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:.9rem;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab-btn.active{color:var(--accent-light);border-bottom-color:var(--accent-light)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.tool-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.25rem;transition:all .2s;cursor:pointer}
+.tool-card:hover{background:var(--bg-card-hover);transform:translateY(-2px);box-shadow:var(--shadow)}
+.tool-card .tool-icon{font-size:2rem;margin-bottom:.5rem}
+.tool-card .tool-name{font-weight:600;margin-bottom:.25rem;color:var(--text-primary)}
+.tool-card .tool-desc{font-size:.8rem;color:var(--text-muted);line-height:1.4}
+.badge{display:inline-block;padding:.15rem .45rem;border-radius:4px;font-size:.7rem;font-weight:600;text-transform:uppercase}
+.badge-api{background:rgba(58,123,213,.2);color:var(--accent-light)}
+.badge-offline{background:rgba(39,174,96,.2);color:var(--success)}
+.footer{text-align:center;padding:2rem 1rem;color:var(--text-muted);font-size:.8rem;border-top:1px solid var(--border-color);margin-top:2rem}
+.copy-hint{font-size:.75rem;color:var(--text-muted);margin-top:.35rem}
+.action-bar{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.footer-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem}
+.footer-links a{font-size:.8rem;color:var(--text-muted);transition:color .2s}
+.footer-links a:hover{color:var(--link-color)}
+@media(max-width:640px){
+  .container{padding:1rem}
+  .navbar{padding:.6rem 1rem}
+  .navbar .brand{font-size:1rem}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .form-row{flex-direction:column;gap:.5rem}
+}
+.hidden{display:none!important}
+
+.calc-result{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:1rem;margin-top:1rem}
+.calc-result .big-num{font-size:1.5rem;font-weight:700;color:var(--accent-light)}
+.calc-result .result-row{display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid var(--border-color);font-size:.9rem}
+.calc-result .result-row:last-child{border-bottom:none}
+.calc-result .result-row .r-label{color:var(--text-secondary)}
+.calc-result .result-row .r-value{font-weight:600}
+.formula-box{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:1rem;font-size:.85rem;color:var(--text-secondary);font-family:monospace;line-height:1.8;margin-top:1rem}
+.ad-content{font-size:.9rem;color:var(--text-secondary);line-height:1.8}
+.ad-content h3{font-size:1rem;color:var(--text-primary);margin:1rem 0 .5rem}
+.ad-content p{margin:.4rem 0}
+.ad-content ul{margin:.4rem 0 .4rem 1.2rem}
+.ad-content li{margin:.2rem 0}
+.faq-item{margin-bottom:1rem}
+.faq-item .faq-q{font-weight:600;color:var(--text-primary);margin-bottom:.25rem}
+.faq-item .faq-a{color:var(--text-secondary);font-size:.9rem}
+.schedule-table{width:100%;border-collapse:collapse;font-size:.8rem;margin-top:.5rem}
+.schedule-table th,.schedule-table td{padding:.35rem .4rem;border-bottom:1px solid var(--border-color);text-align:right}
+.schedule-table th{text-align:left;color:var(--text-primary);font-weight:600;background:var(--bg-main)}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="/cn/" class="brand">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    <span data-zh="009TG 工具箱" data-en="009TG Toolbox">009TG 工具箱</span>
+  </a>
+  <div class="nav-links">
+    <a href="/cn/" data-zh="&#8592; 返回站点首页" data-en="&#8592; Back to Site Home">&#8592; 返回站点首页</a>
+    <a href="./index.html" data-zh="&#8592; 返回工具集首页" data-en="&#8592; Back to Tools Home">&#8592; 返回工具集首页</a>
+    <div class="lang-switch">
+      <button data-lang="zh" class="active">中</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </div>
+</nav>
+<div class="container">
+<h1 style="font-size:1.4rem;margin-bottom:1rem" data-zh="房贷计算器" data-en="Mortgage Calculator">房贷计算器</h1>
+
+<div class="card">
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="epp" data-zh="等额本息" data-en="Equal Principal+Interest">等额本息</button>
+    <button class="tab-btn" data-tab="ep" data-zh="等额本金" data-en="Equal Principal">等额本金</button>
+    <button class="tab-btn" data-tab="ci" data-zh="复利计算" data-en="Compound Interest">复利计算</button>
+  </div>
+
+  <div id="panel-epp" class="tab-panel active">
+    <div class="form-row">
+      <div class="form-group">
+        <label data-zh="贷款金额（万元）" data-en="Loan Amount (10k)">贷款金额（万元）</label>
+        <input type="number" id="epp-amount" value="100" step="any" oninput="calcEpp()">
+      </div>
+      <div class="form-group">
+        <label data-zh="年利率（%）" data-en="Annual Rate (%)">年利率（%）</label>
+        <input type="number" id="epp-rate" value="3.85" step="any" oninput="calcEpp()">
+      </div>
+      <div class="form-group">
+        <label data-zh="贷款年限" data-en="Loan Term (Years)">贷款年限</label>
+        <input type="number" id="epp-years" value="30" step="1" oninput="calcEpp()">
+      </div>
+    </div>
+    <div class="calc-result" id="epp-result"></div>
+    <div class="formula-box" data-zh="公式：月供 = 本金 × 月利率 × (1+月利率)^期数 ÷ [(1+月利率)^期数 - 1]" data-en="Formula: Payment = P × r × (1+r)^n ÷ [(1+r)^n - 1]">
+      公式：月供 = 本金 × 月利率 × (1+月利率)^期数 ÷ [(1+月利率)^期数 - 1]
+    </div>
+  </div>
+
+  <div id="panel-ep" class="tab-panel">
+    <div class="form-row">
+      <div class="form-group">
+        <label data-zh="贷款金额（万元）" data-en="Loan Amount (10k)">贷款金额（万元）</label>
+        <input type="number" id="ep-amount" value="100" step="any" oninput="calcEp()">
+      </div>
+      <div class="form-group">
+        <label data-zh="年利率（%）" data-en="Annual Rate (%)">年利率（%）</label>
+        <input type="number" id="ep-rate" value="3.85" step="any" oninput="calcEp()">
+      </div>
+      <div class="form-group">
+        <label data-zh="贷款年限" data-en="Loan Term (Years)">贷款年限</label>
+        <input type="number" id="ep-years" value="30" step="1" oninput="calcEp()">
+      </div>
+    </div>
+    <div class="calc-result" id="ep-result"></div>
+    <div class="formula-box" data-zh="公式：月供 = (本金÷期数) + (本金-已还本金) × 月利率" data-en="Formula: Payment = (P÷n) + (P - repaid) × r">
+      公式：月供 = (本金÷期数) + (本金-已还本金) × 月利率
+    </div>
+    <div id="ep-schedule-wrap" style="margin-top:1rem"></div>
+  </div>
+
+  <div id="panel-ci" class="tab-panel">
+    <div class="form-row">
+      <div class="form-group">
+        <label data-zh="本金" data-en="Principal">本金</label>
+        <input type="number" id="ci-principal" value="100000" step="any" oninput="calcCi()">
+      </div>
+      <div class="form-group">
+        <label data-zh="年利率（%）" data-en="Annual Rate (%)">年利率（%）</label>
+        <input type="number" id="ci-rate" value="5" step="any" oninput="calcCi()">
+      </div>
+      <div class="form-group">
+        <label data-zh="年限" data-en="Years">年限</label>
+        <input type="number" id="ci-years" value="10" step="1" oninput="calcCi()">
+      </div>
+    </div>
+    <div class="form-group">
+      <label data-zh="复利频次" data-en="Compounding Frequency">复利频次</label>
+      <select id="ci-freq" onchange="calcCi()">
+        <option value="1" data-zh="每年" data-en="Annually">每年</option>
+        <option value="4" data-zh="每季" data-en="Quarterly">每季</option>
+        <option value="12" selected data-zh="每月" data-en="Monthly">每月</option>
+        <option value="365" data-zh="每日" data-en="Daily">每日</option>
+      </select>
+    </div>
+    <div class="calc-result" id="ci-result"></div>
+    <div class="formula-box" data-zh="公式：本利和 = 本金 × (1 + 年利率/频次)^(频次×年限)" data-en="Formula: A = P × (1 + r/freq)^(freq×years)">
+      公式：本利和 = 本金 × (1 + 年利率/频次)^(频次×年限)
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#128214;</span><span data-zh="使用说明" data-en="User Guide">使用说明</span></div>
+  <div class="ad-content" data-zh="" data-en="">
+    <div data-lang-content="zh">
+      <h3>用途与适用场景</h3>
+      <p>本房贷计算器适用于购房贷款、商业贷款、公积金贷款等场景的月供与总利息估算。无论您是准备购房的首次置业者，还是希望对比不同还款方式的已有贷款人，都可以使用本工具快速获得还款概览。</p>
+      <p>等额本息模式下，每月还款金额固定，适合收入稳定、希望规划固定支出的借款人；等额本金模式下，每月本金固定、利息逐月递减，前期还款压力较大但总利息更少，适合前期资金充裕的借款人。</p>
+      <h3>使用步骤</h3>
+      <ul>
+        <li>选择还款方式：在「等额本息」「等额本金」「复利计算」三个标签页之间切换。</li>
+        <li>输入贷款金额：以万元为单位填写贷款总额。</li>
+        <li>输入年利率：填写银行给出的贷款年利率（如 3.85%）。</li>
+        <li>输入贷款年限：以年为单位填写贷款期限（常见为 10-30 年）。</li>
+        <li>查看结果：页面自动计算并展示月供、还款总额、支付利息总额等关键数据。</li>
+        <li>等额本金模式可展开查看前 12 期逐月还款明细。</li>
+      </ul>
+      <h3>FAQ</h3>
+      <div class="faq-item">
+        <div class="faq-q">Q1：计算结果与银行实际扣款完全一致吗？</div>
+        <div class="faq-a">本工具按标准数学公式计算，结果与银行口径基本一致，但实际扣款可能因计息天数差异（大小月）、利率调整、提前还款等因素存在微小差异，请以银行账单为准。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q2：等额本息和等额本金哪种更划算？</div>
+        <div class="faq-a">等额本金总利息更少，但前期月供较高；等额本息月供固定、前期压力小但总利息较多。选择哪种方式取决于您的收入结构和现金流规划。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q3：LPR 利率调整后如何重新计算？</div>
+        <div class="faq-a">当 LPR 调整时，您可将新的执行利率填入「年利率」字段，即可重新计算后续月供。注意等额本息模式下，利率调整后银行通常会保持月供基本不变、调整还款期限。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q4：复利计算模式适用于什么场景？</div>
+        <div class="faq-a">复利计算适用于投资增值、存款收益、理财回报等非贷款场景，帮助您估算本金在复利增长下的终值。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q5：组合贷款（公积金+商业）怎么算？</div>
+        <div class="faq-a">建议分别计算公积金贷款部分和商业贷款部分，然后将两组结果相加，即可获得组合贷款的总月供和总利息。</div>
+      </div>
+    </div>
+    <div data-lang-content="en" style="display:none">
+      <h3>Purpose & Use Cases</h3>
+      <p>This mortgage calculator is designed for estimating monthly payments and total interest for home purchase loans, commercial loans, and provident fund loans. Whether you are a first-time homebuyer or an existing borrower comparing repayment methods, this tool provides a quick repayment overview.</p>
+      <p>Equal Principal+Interest (EPP) mode offers fixed monthly payments, suitable for borrowers with stable income who prefer predictable expenses. Equal Principal (EP) mode has fixed principal and decreasing interest, resulting in higher early payments but lower total interest, ideal for those with ample initial funds.</p>
+      <h3>How to Use</h3>
+      <ul>
+        <li>Select repayment method: Switch between "Equal Principal+Interest", "Equal Principal", and "Compound Interest" tabs.</li>
+        <li>Enter loan amount: Input the total loan amount in ten-thousands.</li>
+        <li>Enter annual interest rate: Fill in the annual rate provided by your bank (e.g. 3.85%).</li>
+        <li>Enter loan term: Input the loan duration in years (commonly 10-30 years).</li>
+        <li>View results: The page automatically calculates and displays monthly payment, total repayment, and total interest.</li>
+        <li>Equal Principal mode can expand to show the first 12 months of repayment details.</li>
+      </ul>
+      <h3>FAQ</h3>
+      <div class="faq-item">
+        <div class="faq-q">Q1: Do the results exactly match my bank statement?</div>
+        <div class="faq-a">This tool uses standard mathematical formulas and should align closely with bank calculations. However, actual deductions may vary slightly due to day-count differences, rate adjustments, or early repayments. Always refer to your bank statement as the final authority.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q2: Which is better, EPP or EP?</div>
+        <div class="faq-a">EP has lower total interest but higher initial payments. EPP has fixed payments with lower initial burden but higher total interest. The choice depends on your income structure and cash flow planning.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q3: How do I recalculate after an LPR rate adjustment?</div>
+        <div class="faq-a">Enter the new effective rate in the "Annual Rate" field to recalculate. Note that for EPP loans, banks typically keep the monthly payment roughly unchanged and adjust the remaining term instead.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q4: What is the compound interest mode for?</div>
+        <div class="faq-a">Compound interest mode is for investment growth, deposit returns, and wealth management scenarios. It helps estimate the future value of principal under compound growth.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q5: How do I calculate a combined loan?</div>
+        <div class="faq-a">Calculate the provident fund portion and the commercial loan portion separately, then add the two results together for the combined total monthly payment and total interest.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<footer class="footer">
+  <div class="footer-links">
+    <a href="/about.html" data-zh="关于我们" data-en="About">关于我们</a>
+    <a href="/privacy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+    <a href="/contact.html" data-zh="联系我们" data-en="Contact">联系我们</a>
+    <a href="/disclaimer.html" data-zh="免责声明" data-en="Disclaimer">免责声明</a>
+  </div>
+  <p data-zh="009TG 工具箱 - 免费实用的在线工具集合" data-en="009TG Toolbox - Free & Practical Online Tools">009TG 工具箱 - 免费实用的在线工具集合</p>
+</footer>
+<script>
+const i18nData={
+  zh:{
+    home:'站点首页',tools:'工具集首页',lang:'English',backHome:'返回站点首页',backTools:'返回工具集首页',
+    run:'运行',clear:'清空',copy:'复制',copied:'已复制',inputPlaceholder:'请输入...',
+    error:'错误',loading:'加载中...',noResult:'暂无结果'
+  },
+  en:{
+    home:'Site Home',tools:'Tools Home',lang:'中文',backHome:'Back to Site Home',backTools:'Back to Tools Home',
+    run:'Run',clear:'Clear',copy:'Copy',copied:'Copied',inputPlaceholder:'Enter...',
+    error:'Error',loading:'Loading...',noResult:'No result'
+  }
+};
+let currentLang='zh';
+function setLang(l){
+  currentLang=l;
+  document.documentElement.lang=l==='zh'?'zh-CN':'en';
+  document.querySelectorAll('[data-zh],[data-en]').forEach(el=>{
+    if(el.tagName==='INPUT'&&el.hasAttribute('placeholder')){
+      el.placeholder=el.getAttribute('data-'+l);
+    }else if(el.tagName==='TITLE'){
+      document.title=el.getAttribute('data-'+l)||document.title;
+    }else if(el.tagName==='OPTION'){
+      el.textContent=el.getAttribute('data-'+l)||el.textContent;
+    }else{
+      el.textContent=el.getAttribute('data-'+l)||el.textContent;
+    }
+  });
+  document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  localStorage.setItem('tools-lang',l);
+  // Toggle AdSense content language
+  document.querySelectorAll('[data-lang-content]').forEach(el=>{
+    el.style.display=el.dataset.langContent===l?'block':'none';
+  });
+}
+function t(key){return(i18nData[currentLang]||i18nData.zh)[key]||key;}
+document.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('tools-lang')||'zh';
+  setLang(saved);
+  document.querySelectorAll('.lang-switch button').forEach(b=>{
+    b.addEventListener('click',()=>setLang(b.dataset.lang));
+  });
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      const panel=document.getElementById('panel-'+btn.dataset.tab);
+      if(panel)panel.classList.add('active');
+    });
+  });
+  calcEpp();calcEp();calcCi();
+});
+function escapeHtml(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+function copyText(t){navigator.clipboard.writeText(t).then(()=>alert(t('copied'))).catch(()=>{});}
+
+function fmtMoney(n){return n.toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function calcEpp(){
+  const P=parseFloat(document.getElementById('epp-amount').value)*10000;
+  const r=parseFloat(document.getElementById('epp-rate').value)/100/12;
+  const n=parseInt(document.getElementById('epp-years').value)*12;
+  const el=document.getElementById('epp-result');
+  if(!P||!n||isNaN(r)){el.innerHTML='';return;}
+  const payment=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  const total=payment*n;
+  const interest=total-P;
+  const lang=currentLang;
+  el.innerHTML='<div class="big-num">'+fmtMoney(payment)+{zh:' 元/月',en:' /month'}[lang]+'</div>'+
+    '<div class="result-row"><span class="r-label">'+{zh:'还款总额',en:'Total Repayment'}[lang]+'</span><span class="r-value">'+fmtMoney(total)+{zh:' 元',en:' CNY'}[lang]+'</span></div>'+
+    '<div class="result-row"><span class="r-label">'+{zh:'支付利息',en:'Total Interest'}[lang]+'</span><span class="r-value">'+fmtMoney(interest)+{zh:' 元',en:' CNY'}[lang]+'</span></div>'+
+    '<div class="result-row"><span class="r-label">'+{zh:'贷款本金',en:'Principal'}[lang]+'</span><span class="r-value">'+fmtMoney(P)+{zh:' 元',en:' CNY'}[lang]+'</span></div>'+
+    '<div class="result-row"><span class="r-label">'+{zh:'还款期数',en:'Payments'}[lang]+'</span><span class="r-value">'+n+{zh:' 期',en:' months'}[lang]+'</span></div>';
+}
+function calcEp(){
+  const P=parseFloat(document.getElementById('ep-amount').value)*10000;
+  const r=parseFloat(document.getElementById('ep-rate').value)/100/12;
+  const n=parseInt(document.getElementById('ep-years').value)*12;
+  const el=document.getElementById('ep-result');
+  const sw=document.getElementById('ep-schedule-wrap');
+  if(!P||!n||isNaN(r)){el.innerHTML='';sw.innerHTML='';return;}
+  const principalMonth=P/n;
+  let totalInterest=0;
+  let firstMonth=0,lastMonth=0;
+  let scheduleHtml='<table class="schedule-table"><tr><th>'+{zh:'期数',en:'#'}[currentLang]+'</th><th>'+{zh:'月供',en:'Payment'}[currentLang]+'</th><th>'+{zh:'本金',en:'Principal'}[currentLang]+'</th><th>'+{zh:'利息',en:'Interest'}[currentLang]+'</th><th>'+{zh:'剩余本金',en:'Balance'}[currentLang]+'</th></tr>';
+  for(let i=1;i<=n;i++){
+    const interest=(P-principalMonth*(i-1))*r;
+    const payment=principalMonth+interest;
+    totalInterest+=interest;
+    if(i===1)firstMonth=payment;
+    if(i===n)lastMonth=payment;
+    if(i<=12){
+      scheduleHtml+='<tr><td>'+i+'</td><td>'+fmtMoney(payment)+'</td><td>'+fmtMoney(principalMonth)+'</td><td>'+fmtMoney(interest)+'</td><td>'+fmtMoney(Math.max(0,P-principalMonth*i))+'</td></tr>';
+    }
+  }
+  if(n>12)scheduleHtml+='<tr><td colspan="5" style="text-align:center;color:var(--text-muted)">... '+{zh:'共',en:'Total'}[currentLang]+' '+n+' '+{zh:'期',en:'payments'}[currentLang]+' ...</td></tr>';
+  scheduleHtml+='</table>';
+  const lang=currentLang;
+  el.innerHTML='<div class="big-num">'+fmtMoney(firstMonth)+{zh:' 元/月 (首月)',en:' /month (1st)'}[lang]+'</div>'+
+    '<div class="result-row"><span class="r-label">'+{zh:'末月月供',en:'Last Payment'}[lang]+'</span><span class="r-value">'+fmtMoney(lastMonth)+{zh:' 元',en:' CNY'}[lang]+'</span></div>'+
+    '<div class="result-row"><span class="r-label">'+{zh:'还款总额',en:'Total Repayment'}[lang]+'</span><span class="r-value">'+fmtMoney(P+totalInterest)+{zh:' 元',en:' CNY'}[lang]+'</span></div>'+
+    '<div class="result-row"><span class="r-label">'+{zh:'支付利息',en:'Total Interest'}[lang]+'</span><span class="r-value">'+fmtMoney(totalInterest)+{zh:' 元',en:' CNY'}[lang]+'</span></div>'+
+    '<div class="result-row"><span class="r-label">'+{zh:'贷款本金',en:'Principal'}[lang]+'</span><span class="r-value">'+fmtMoney(P)+{zh:' 元',en:' CNY'}[lang]+'</span></div>';
+  sw.innerHTML='<div style="font-size:.85rem;color:var(--text-secondary);margin-bottom:.25rem">'+{zh:'前 12 期明细',en:'First 12 Payments'}[lang]+'</div>'+scheduleHtml;
+}
+function calcCi(){
+  const P=parseFloat(document.getElementById('ci-principal').value);
+  const r=parseFloat(document.getElementById('ci-rate').value)/100;
+  const y=parseInt(document.getElementById('ci-years').value);
+  const f=parseInt(document.getElementById('ci-freq').value);
+  const el=document.getElementById('ci-result');
+  if(!P||!y||isNaN(r)||!f){el.innerHTML='';return;}
+  const A=P*Math.pow(1+r/f,f*y);
+  const interest=A-P;
+  const lang=currentLang;
+  el.innerHTML='<div class="big-num">'+fmtMoney(A)+{zh:' 元',en:' CNY'}[lang]+'</div>'+
+    '<div class="result-row"><span class="r-label">'+{zh:'本金',en:'Principal'}[lang]+'</span><span class="r-value">'+fmtMoney(P)+{zh:' 元',en:' CNY'}[lang]+'</span></div>'+
+    '<div class="result-row"><span class="r-label">'+{zh:'利息收益',en:'Interest Earned'}[lang]+'</span><span class="r-value">'+fmtMoney(interest)+{zh:' 元',en:' CNY'}[lang]+'</span></div>'+
+    '<div class="result-row"><span class="r-label">'+{zh:'收益率',en:'Return Rate'}[lang]+'</span><span class="r-value">'+((A/P-1)*100).toFixed(2)+'%</span></div>';
+}
+</script>
+</body>
+</html>

@@ -524,7 +524,125 @@ def generate_recent_and_hot(groups, favicon_mapping, lang='cn', asset_prefix='..
             </div>
     '''
     
-    return recent_html + hot_html
+    # 生成站长工具板块
+    if lang == 'cn':
+        tools_title = '站长工具'
+        tools_subtitle = '免费在线工具集合，提升工作效率'
+        tools_view_all = '查看全部'
+        tools_categories = [
+            ('网络工具', [
+                ('IP查询', 'ip.html'),
+                ('DNS查询', 'dns.html'),
+                ('WHOIS查询', 'whois.html'),
+                ('HTTP检测', 'http.html'),
+                ('端口扫描', 'port.html'),
+            ]),
+            ('编码转换', [
+                ('Base64编解码', 'base64.html'),
+                ('URL编解码', 'url.html'),
+                ('时间戳转换', 'timestamp.html'),
+                ('图片转Base64', 'img-base64.html'),
+            ]),
+            ('开发工具', [
+                ('JSON格式化', 'json.html'),
+                ('正则表达式', 'regex.html'),
+                ('JWT解析', 'jwt.html'),
+                ('UUID/哈希', 'uuid-hash.html'),
+            ]),
+            ('计算工具', [
+                ('房贷计算', 'mortgage.html'),
+                ('个税计算', 'tax.html'),
+                ('单位换算', 'unit.html'),
+                ('日期计算', 'date-calc.html'),
+            ]),
+            ('文本/图片', [
+                ('密码生成器', 'password.html'),
+                ('二维码生成', 'qrcode.html'),
+                ('颜色工具', 'color.html'),
+                ('CSS渐变', 'css-gradient.html'),
+            ]),
+        ]
+    else:
+        tools_title = 'Webmaster Tools'
+        tools_subtitle = 'Free online tools to boost your productivity'
+        tools_view_all = 'View All'
+        tools_categories = [
+            ('Network', [
+                ('IP Lookup', 'ip.html'),
+                ('DNS Lookup', 'dns.html'),
+                ('WHOIS Lookup', 'whois.html'),
+                ('HTTP Check', 'http.html'),
+                ('Port Scan', 'port.html'),
+            ]),
+            ('Encoding', [
+                ('Base64', 'base64.html'),
+                ('URL Encode', 'url.html'),
+                ('Timestamp', 'timestamp.html'),
+                ('Img to Base64', 'img-base64.html'),
+            ]),
+            ('Developer', [
+                ('JSON Formatter', 'json.html'),
+                ('Regex Tester', 'regex.html'),
+                ('JWT Decoder', 'jwt.html'),
+                ('UUID/Hash', 'uuid-hash.html'),
+            ]),
+            ('Calculator', [
+                ('Mortgage', 'mortgage.html'),
+                ('Income Tax', 'tax.html'),
+                ('Unit Converter', 'unit.html'),
+                ('Date Calculator', 'date-calc.html'),
+            ]),
+            ('Text/Image', [
+                ('Password Gen', 'password.html'),
+                ('QR Code', 'qrcode.html'),
+                ('Color Picker', 'color.html'),
+                ('CSS Gradient', 'css-gradient.html'),
+            ]),
+        ]
+    
+    tools_html = '''
+            <!-- 站长工具 -->
+            <div class="row" style="margin-bottom: 30px;">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="display: flex; justify-content: space-between; align-items: center;">
+                            <h3 class="panel-title" style="font-size: 18px; font-weight: 600;">
+                                <i class="fa-wrench" style="margin-right: 8px; color: #27ae60;"></i>''' + tools_title + '''
+                                <small style="color: #999; margin-left: 10px; font-size: 13px;">''' + tools_subtitle + '''</small>
+                            </h3>
+                            <a href="../tools/index.html" style="font-size: 13px; color: #337ab7; text-decoration: none;">''' + tools_view_all + ''' <i class="fa-angle-right"></i></a>
+                        </div>
+                        <div class="panel-body" style="padding: 15px;">
+                            <div class="row">
+    '''
+    
+    for cat_name, tools in tools_categories:
+        tools_html += '''
+                                <div class="col-md-15 col-sm-3 col-xs-6" style="margin-bottom: 15px;">
+                                    <div style="font-size: 13px; font-weight: 600; color: #333; margin-bottom: 8px; padding-bottom: 5px; border-bottom: 1px solid #eee;">''' + cat_name + '''</div>
+                                    <ul style="list-style: none; padding: 0; margin: 0;">
+        '''
+        for tool_name, tool_file in tools:
+            tools_html += '''
+                                        <li style="margin-bottom: 5px;">
+                                            <a href="../tools/''' + tool_file + '''" style="font-size: 12px; color: #666; text-decoration: none; display: block; padding: 3px 0; transition: color 0.2s;"
+                                               onmouseover="this.style.color='#337ab7'" onmouseout="this.style.color='#666'">''' + tool_name + '''</a>
+                                        </li>
+            '''
+        tools_html += '''
+                                    </ul>
+                                </div>
+        '''
+    
+    tools_html += '''
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    '''
+    
+    return recent_html + hot_html + tools_html
 
 
 def generate_language_switcher(lang='cn'):
