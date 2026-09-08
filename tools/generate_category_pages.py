@@ -1055,18 +1055,6 @@ def generate_category_page(category, parent_category, children, all_sites_in_cat
             </div>
             ''' if total_sites > 0 else ''}
 
-            <!-- 底部 -->
-            <footer class="main-footer sticky footer-type-1">
-                <div class="footer-inner">
-                    <div class="footer-text">
-                        &copy; 2017 - 2026
-                        <a href="../index.html"><strong>009tg下海导航</strong></a> design by <a href="https://invisibleman.dpdns.org/" target="_blank"><strong>Invisible Man</strong></a>
-                    </div>
-                    <div class="go-up">
-                        <a href="#" rel="go-top"><i class="fa-angle-up"></i></a>
-                    </div>
-                </div>
-            </footer>
         </div>
     </div>
 
