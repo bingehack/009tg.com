@@ -674,6 +674,24 @@ def generate_html(lang='cn'):
         </div>
     </footer>'''
 
+    # 回到顶部浮动按钮（原生JS实现，不依赖框架）
+    back_to_top_html = '''
+    <style>
+        .back-to-top {position:fixed;bottom:30px;right:30px;width:44px;height:44px;background-color:#337ab7;color:#fff;border:none;border-radius:50%;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.25);z-index:9999;display:none;align-items:center;justify-content:center;transition:all .3s;}
+        .back-to-top.show{display:flex;}
+        .back-to-top:hover{background-color:#286090;transform:translateY(-2px);}
+        .back-to-top svg{width:20px;height:20px;fill:#fff;}
+        [data-theme="dark"] .back-to-top{background-color:#4a90d9;}
+        @media (max-width:768px){.back-to-top{bottom:20px;right:20px;width:40px;height:40px;}}
+    </style>
+    <button class="back-to-top" onclick="backToTop()" title="''' + ('回到顶部' if lang == 'cn' else 'Back to Top') + '''">
+        <svg viewBox="0 0 24 24"><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg>
+    </button>
+    <script>
+        function backToTop(){var s={p:window.scrollY||document.documentElement.scrollTop},t=performance.now();function a(n){var e=Math.min((n-t)/300,1);window.scrollTo(0,s.p*(1-Math.pow(1-e,3)));e<1&&requestAnimationFrame(a)}requestAnimationFrame(a)}
+        window.addEventListener('scroll',function(){var b=document.querySelector('.back-to-top');if(b){window.scrollY>300?b.classList.add('show'):b.classList.remove('show')}});
+    </script>'''
+
     print(f"生成完整HTML ({lang})...")
     html = f'''<!DOCTYPE html>
 <html lang="{html_lang}">
@@ -1303,7 +1321,7 @@ def generate_html(lang='cn'):
                                 <div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href='{asset_prefix}site/${{site.id}}.html'" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
                                     <div class="xe-comment-entry">
                                         <a class="xe-user-img">
-                                            <img src="${{site.icon}}" data-src="${{site.icon}}" class="lozad img-circle" width="40">
+                                            <img src="${{site.icon}}" data-src="${{site.icon}}" class="lozad img-circle" width="40" onerror="this.onerror=null;this.src='{asset_prefix}assets/images/logos/default.png'">
                                         </a>
                                         <div class="xe-comment">
                                             <a href="#" class="xe-user-name overflowClip_1">
@@ -1323,7 +1341,7 @@ def generate_html(lang='cn'):
                                 <div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href='{asset_prefix}site/${{site.id}}.html'" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
                                     <div class="xe-comment-entry">
                                         <a class="xe-user-img">
-                                            <img src="${{site.icon}}" data-src="${{site.icon}}" class="lozad img-circle" width="40">
+                                            <img src="${{site.icon}}" data-src="${{site.icon}}" class="lozad img-circle" width="40" onerror="this.onerror=null;this.src='{asset_prefix}assets/images/logos/default.png'">
                                         </a>
                                         <div class="xe-comment">
                                             <a href="#" class="xe-user-name overflowClip_1">
@@ -1383,7 +1401,7 @@ def generate_html(lang='cn'):
                                 <div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href='{asset_prefix}site/${{site.id}}.html'" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
                                     <div class="xe-comment-entry">
                                         <a class="xe-user-img">
-                                            <img src="${{site.icon}}" data-src="${{site.icon}}" class="lozad img-circle" width="40">
+                                            <img src="${{site.icon}}" data-src="${{site.icon}}" class="lozad img-circle" width="40" onerror="this.onerror=null;this.src='{asset_prefix}assets/images/logos/default.png'">
                                         </a>
                                         <div class="xe-comment">
                                             <a href="#" class="xe-user-name overflowClip_1">
@@ -1558,7 +1576,7 @@ def generate_html(lang='cn'):
 
         function highlightText(text, query) {{
             if (!query) return text;
-            var regex = new RegExp('(' + query.replace(/[.*+?^${{}}()|[\]\\\\]/g, '\\\\$&') + ')', 'gi');
+            var regex = new RegExp('(' + query.replace(/[.*+?^${{}}()|[\\]\\\\]/g, '\\\\$&') + ')', 'gi');
             return text.replace(regex, '<span style="color: #337ab7; font-weight: 700;">$1</span>');
         }}
 
@@ -1626,6 +1644,7 @@ def generate_html(lang='cn'):
     <!-- JavaScripts initializations and stuff -->
     <script src="{asset_prefix}assets/js/xenon-custom.js"></script>
     {footer_html}
+    {back_to_top_html}
 </body>
 
 </html>
