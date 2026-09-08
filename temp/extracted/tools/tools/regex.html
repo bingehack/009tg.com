@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-zh="正则表达式测试 - 009TG 工具箱" data-en="Regex Tester - 009TG Toolbox">正则表达式测试 - 009TG 工具箱</title>
+<meta name="description" content="免费在线正则表达式测试工具，输入正则与测试文本，高亮显示匹配结果，支持替换和分组捕获。">
+<meta name="keywords" content="正则表达式测试,regex,正则匹配,在线正则工具,正则替换">
+<meta name="author" content="009TG">
+<meta name="theme-color" content="#1a1d23">
+<style>
+:root {
+  --bg-main: #1a1d23;
+  --bg-content: #22262e;
+  --bg-card: #2a2f38;
+  --bg-card-hover: #333945;
+  --bg-navbar: #22262e;
+  --bg-input: #2a2f38;
+  --bg-btn: #3a7bd5;
+  --bg-btn-hover: #2c62aa;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-muted: #707070;
+  --border-color: #3a3f48;
+  --link-color: #5dade2;
+  --link-hover: #85c1e9;
+  --accent: #3a7bd5;
+  --accent-light: #5dade2;
+  --success: #27ae60;
+  --error: #e74c3c;
+  --warning: #f39c12;
+  --shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg-main);color:var(--text-primary);line-height:1.6;min-height:100vh}
+a{color:var(--link-color);text-decoration:none}a:hover{color:var(--link-hover)}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;background:var(--bg-navbar);border-bottom:1px solid var(--border-color);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:.5rem}
+.navbar .brand{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:1.1rem;color:var(--text-primary)}
+.navbar .brand svg{width:28px;height:28px;fill:var(--accent-light)}
+.navbar .nav-links{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.navbar .nav-links a{font-size:.9rem;color:var(--text-secondary);transition:color .2s}
+.navbar .nav-links a:hover{color:var(--link-color)}
+.lang-switch{display:flex;align-items:center;gap:.25rem;background:var(--bg-card);border:1px solid var(--border-color);border-radius:20px;padding:2px}
+.lang-switch button{background:none;border:none;color:var(--text-muted);font-size:.8rem;padding:.25rem .6rem;border-radius:16px;cursor:pointer;transition:all .2s}
+.lang-switch button.active{background:var(--accent);color:#fff}
+.container{max-width:1100px;margin:0 auto;padding:1.5rem}
+.card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow)}
+.card-title{font-size:1.15rem;font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;color:var(--text-primary)}
+.card-title .icon{font-size:1.3rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.55rem 1.1rem;background:var(--bg-btn);color:#fff;border:none;border-radius:6px;font-size:.9rem;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--bg-btn-hover)}
+.btn-secondary{background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color)}
+.btn-secondary:hover{background:var(--bg-card-hover)}
+.btn-success{background:var(--success)}
+.btn-sm{padding:.35rem .75rem;font-size:.8rem}
+input,textarea,select{width:100%;padding:.6rem .8rem;background:var(--bg-input);border:1px solid var(--border-color);border-radius:6px;color:var(--text-primary);font-size:.9rem;font-family:inherit;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
+textarea{resize:vertical;min-height:120px}
+label{display:block;margin-bottom:.35rem;font-size:.85rem;color:var(--text-secondary)}
+.form-row{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.form-row .form-group{flex:1;min-width:200px}
+.form-group{margin-bottom:1rem}
+.result-area{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:1rem;margin-top:1rem;min-height:60px;white-space:pre-wrap;word-break:break-word;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:.85rem;color:var(--text-secondary);max-height:400px;overflow:auto}
+.result-area.success{border-color:var(--success);color:var(--text-primary)}
+.result-area.error{border-color:var(--error);color:var(--error)}
+.tabs{display:flex;gap:.25rem;border-bottom:2px solid var(--border-color);margin-bottom:1rem}
+.tab-btn{padding:.5rem 1rem;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:.9rem;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab-btn.active{color:var(--accent-light);border-bottom-color:var(--accent-light)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.tool-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.25rem;transition:all .2s;cursor:pointer}
+.tool-card:hover{background:var(--bg-card-hover);transform:translateY(-2px);box-shadow:var(--shadow)}
+.tool-card .tool-icon{font-size:2rem;margin-bottom:.5rem}
+.tool-card .tool-name{font-weight:600;margin-bottom:.25rem;color:var(--text-primary)}
+.tool-card .tool-desc{font-size:.8rem;color:var(--text-muted);line-height:1.4}
+.badge{display:inline-block;padding:.15rem .45rem;border-radius:4px;font-size:.7rem;font-weight:600;text-transform:uppercase}
+.badge-api{background:rgba(58,123,213,.2);color:var(--accent-light)}
+.badge-offline{background:rgba(39,174,96,.2);color:var(--success)}
+.footer{text-align:center;padding:2rem 1rem;color:var(--text-muted);font-size:.8rem;border-top:1px solid var(--border-color);margin-top:2rem}
+.copy-hint{font-size:.75rem;color:var(--text-muted);margin-top:.35rem}
+.action-bar{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.footer-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem}
+.footer-links a{font-size:.8rem;color:var(--text-muted);transition:color .2s}
+.footer-links a:hover{color:var(--link-color)}
+@media(max-width:640px){
+  .container{padding:1rem}
+  .navbar{padding:.6rem 1rem}
+  .navbar .brand{font-size:1rem}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .form-row{flex-direction:column;gap:.5rem}
+}
+.hidden{display:none!important}
+
+.regex-flags{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;font-size:.85rem;color:var(--text-secondary)}
+.regex-flags label{display:flex;align-items:center;gap:.3rem;cursor:pointer;margin-bottom:0}
+.regex-output{white-space:pre-wrap;word-break:break-word;font-family:"SFMono-Regular",Consolas,monospace;font-size:.9rem;line-height:1.8;padding:1rem;background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;min-height:120px;max-height:400px;overflow:auto}
+.regex-output .match-hl{background:rgba(58,123,213,.35);border-radius:3px;padding:1px 2px}
+.regex-output .match-grp{background:rgba(39,174,96,.35);border-radius:3px;padding:1px 2px}
+.regex-output .match-err{color:var(--error)}
+.match-table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:.85rem}
+.match-table th,.match-table td{padding:.5rem .6rem;border-bottom:1px solid var(--border-color);text-align:left}
+.match-table th{color:var(--text-primary);font-weight:600;background:var(--bg-main)}
+.match-table td{font-family:monospace}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="/cn/" class="brand">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    <span data-zh="009TG 工具箱" data-en="009TG Toolbox">009TG 工具箱</span>
+  </a>
+  <div class="nav-links">
+    <a href="/cn/" data-zh="&#8592; 返回站点首页" data-en="&#8592; Back to Site Home">&#8592; 返回站点首页</a>
+    <a href="./index.html" data-zh="&#8592; 返回工具集首页" data-en="&#8592; Back to Tools Home">&#8592; 返回工具集首页</a>
+    <div class="lang-switch">
+      <button data-lang="zh" class="active">中</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </div>
+</nav>
+<div class="container">
+<h1 style="font-size:1.4rem;margin-bottom:1rem" data-zh="正则表达式测试" data-en="Regex Tester">正则表达式测试</h1>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#128269;</span><span data-zh="正则与测试文本" data-en="Pattern & Test Text">正则与测试文本</span></div>
+  <div class="form-group">
+    <label data-zh="正则表达式（不含两侧斜杠）" data-en="Regular Expression (without slashes)">正则表达式（不含两侧斜杠）</label>
+    <input type="text" id="regex-pattern" placeholder="\d{3}-\d{4}" oninput="runRegex()">
+  </div>
+  <div class="regex-flags">
+    <label><input type="checkbox" id="flag-g" checked onchange="runRegex()"> g <span data-zh="全局匹配" data-en="Global">全局匹配</span></label>
+    <label><input type="checkbox" id="flag-i" onchange="runRegex()"> i <span data-zh="忽略大小写" data-en="Ignore case">忽略大小写</span></label>
+    <label><input type="checkbox" id="flag-m" onchange="runRegex()"> m <span data-zh="多行模式" data-en="Multiline">多行模式</span></label>
+    <label><input type="checkbox" id="flag-s" onchange="runRegex()"> s <span data-zh="点号匹配换行" data-en="DotAll">点号匹配换行</span></label>
+  </div>
+  <div class="form-group">
+    <label data-zh="测试文本" data-en="Test Text">测试文本</label>
+    <textarea id="regex-text" rows="6" placeholder="Hello 123-4567 world&#10;Test 987-6543 here" oninput="runRegex()"></textarea>
+  </div>
+  <div class="action-bar">
+    <button class="btn" onclick="runRegex()" data-zh="运行匹配" data-en="Run Match">运行匹配</button>
+    <button class="btn btn-secondary" onclick="clearRegex()" data-zh="清空" data-en="Clear">清空</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="highlight" data-zh="高亮结果" data-en="Highlight">高亮结果</button>
+    <button class="tab-btn" data-tab="table" data-zh="匹配列表" data-en="Match List">匹配列表</button>
+    <button class="tab-btn" data-tab="replace" data-zh="替换测试" data-en="Replace Test">替换测试</button>
+  </div>
+  <div id="panel-highlight" class="tab-panel active">
+    <div class="card-title" style="margin-top:0"><span class="icon">&#128204;</span><span data-zh="匹配高亮" data-en="Highlighted Matches">匹配高亮</span></div>
+    <div id="regex-highlight" class="regex-output"></div>
+  </div>
+  <div id="panel-table" class="tab-panel">
+    <div class="card-title" style="margin-top:0"><span class="icon">&#128202;</span><span data-zh="匹配详情" data-en="Match Details">匹配详情</span></div>
+    <div id="regex-table" class="result-area" style="padding:0;background:transparent;border:none"></div>
+  </div>
+  <div id="panel-replace" class="tab-panel">
+    <div class="card-title" style="margin-top:0"><span class="icon">&#128260;</span><span data-zh="替换测试" data-en="Replace Test">替换测试</span></div>
+    <div class="form-group">
+      <label data-zh="替换为" data-en="Replace with">替换为</label>
+      <input type="text" id="regex-repl" placeholder="$1" oninput="runReplace()">
+    </div>
+    <div id="regex-replace-out" class="regex-output"></div>
+  </div>
+</div>
+</div>
+<footer class="footer">
+  <div class="footer-links">
+    <a href="/about.html" data-zh="关于我们" data-en="About">关于我们</a>
+    <a href="/privacy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+    <a href="/contact.html" data-zh="联系我们" data-en="Contact">联系我们</a>
+    <a href="/disclaimer.html" data-zh="免责声明" data-en="Disclaimer">免责声明</a>
+  </div>
+  <p data-zh="009TG 工具箱 - 免费实用的在线工具集合" data-en="009TG Toolbox - Free & Practical Online Tools">009TG 工具箱 - 免费实用的在线工具集合</p>
+</footer>
+<script>
+const i18nData={
+  zh:{
+    home:'站点首页',tools:'工具集首页',lang:'English',backHome:'返回站点首页',backTools:'返回工具集首页',
+    run:'运行',clear:'清空',copy:'复制',copied:'已复制',inputPlaceholder:'请输入...',
+    error:'错误',loading:'加载中...',noResult:'暂无结果'
+  },
+  en:{
+    home:'Site Home',tools:'Tools Home',lang:'中文',backHome:'Back to Site Home',backTools:'Back to Tools Home',
+    run:'Run',clear:'Clear',copy:'Copy',copied:'Copied',inputPlaceholder:'Enter...',
+    error:'Error',loading:'Loading...',noResult:'No result'
+  }
+};
+let currentLang='zh';
+function setLang(l){
+  currentLang=l;
+  document.documentElement.lang=l==='zh'?'zh-CN':'en';
+  document.querySelectorAll('[data-zh],[data-en]').forEach(el=>{
+    if(el.tagName==='INPUT'&&el.hasAttribute('placeholder')){
+      el.placeholder=el.getAttribute('data-'+l);
+    }else if(el.tagName==='TITLE'){
+      document.title=el.getAttribute('data-'+l)||document.title;
+    }else{
+      el.textContent=el.getAttribute('data-'+l)||el.textContent;
+    }
+  });
+  document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  localStorage.setItem('tools-lang',l);
+}
+function t(key){return(i18nData[currentLang]||i18nData.zh)[key]||key;}
+document.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('tools-lang')||'zh';
+  setLang(saved);
+  document.querySelectorAll('.lang-switch button').forEach(b=>{
+    b.addEventListener('click',()=>setLang(b.dataset.lang));
+  });
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      const panel=document.getElementById('panel-'+btn.dataset.tab);
+      if(panel)panel.classList.add('active');
+    });
+  });
+});
+function escapeHtml(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+function copyText(t){navigator.clipboard.writeText(t).then(()=>alert(t('copied'))).catch(()=>{});}
+
+function clearRegex(){
+  document.getElementById('regex-pattern').value='';
+  document.getElementById('regex-text').value='';
+  document.getElementById('regex-highlight').innerHTML='';
+  document.getElementById('regex-table').innerHTML='';
+  document.getElementById('regex-replace-out').innerHTML='';
+}
+function getFlags(){
+  let f='';
+  if(document.getElementById('flag-g').checked)f+='g';
+  if(document.getElementById('flag-i').checked)f+='i';
+  if(document.getElementById('flag-m').checked)f+='m';
+  if(document.getElementById('flag-s').checked)f+='s';
+  return f;
+}
+function runRegex(){
+  const pattern=document.getElementById('regex-pattern').value;
+  const text=document.getElementById('regex-text').value;
+  const flags=getFlags();
+  const hl=document.getElementById('regex-highlight');
+  const tbl=document.getElementById('regex-table');
+  if(!pattern){hl.textContent='';tbl.innerHTML='';return;}
+  let re;
+  try{re=new RegExp(pattern,flags);}
+  catch(e){hl.innerHTML='<span class="match-err">'+escapeHtml(t('error')+': '+e.message)+'</span>';tbl.innerHTML='';return;}
+  const matches=[];
+  if(flags.includes('g')){
+    let m;
+    while((m=re.exec(text))!==null){
+      matches.push(m);
+      if(m[0]===''){re.lastIndex++;}
+    }
+  }else{
+    const m=re.exec(text);
+    if(m)matches.push(m);
+  }
+  renderHighlight(text,matches);
+  renderTable(matches);
+  runReplace();
+}
+function renderHighlight(text,matches){
+  const el=document.getElementById('regex-highlight');
+  if(matches.length===0){el.textContent=text||'(empty)';return;}
+  let html='';
+  let last=0;
+  matches.forEach((m,mi)=>{
+    html+=escapeHtml(text.slice(last,m.index));
+    html+='<span class="match-hl" title="Match '+(mi+1)+'">'+escapeHtml(m[0])+'</span>';
+    last=m.index+m[0].length;
+  });
+  html+=escapeHtml(text.slice(last));
+  el.innerHTML=html;
+}
+function renderTable(matches){
+  const el=document.getElementById('regex-table');
+  if(matches.length===0){el.innerHTML='<p style="color:var(--text-muted)">'+t('noResult')+'</p>';return;}
+  let html='<table class="match-table"><tr><th>#</th><th>Match</th><th>Index</th><th>Groups</th></tr>';
+  matches.forEach((m,i)=>{
+    const groups=[];
+    for(let j=1;j<m.length;j++){if(m[j]!==undefined)groups.push('$'+j+'='+JSON.stringify(m[j]));}
+    html+='<tr><td>'+(i+1)+'</td><td>'+escapeHtml(m[0])+'</td><td>'+m.index+'</td><td>'+escapeHtml(groups.join(', ')||'-')+'</td></tr>';
+  });
+  html+='</table>';
+  el.innerHTML=html;
+}
+function runReplace(){
+  const pattern=document.getElementById('regex-pattern').value;
+  const text=document.getElementById('regex-text').value;
+  const repl=document.getElementById('regex-repl').value;
+  const flags=getFlags();
+  const el=document.getElementById('regex-replace-out');
+  if(!pattern){el.textContent='';return;}
+  let re;
+  try{re=new RegExp(pattern,flags);}
+  catch(e){el.innerHTML='<span class="match-err">'+escapeHtml(t('error')+': '+e.message)+'</span>';return;}
+  el.textContent=text.replace(re,repl);
+}
+</script>
+</body>
+</html>

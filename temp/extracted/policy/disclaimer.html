@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Invisible man">
+<title>免责声明 - 009tg</title>
+<meta name="description" content="009tg下海导航免责声明。本站仅做链接收录与索引，不对第三方站点内容负责。了解使用本站的风险与责任边界。">
+<meta name="keywords" content="免责声明,使用条款,第三方链接,侵权处理,内容免责,风险自负">
+<meta name="theme-color" content="#1a1d23">
+<style>
+:root {
+  --bg: #f4f4f4; --bg-content: #ffffff; --bg-card: #ffffff; --bg-nav: #ffffff;
+  --text: #373e4a; --text-secondary: #6c757d; --text-muted: #979898;
+  --border: #e4e6e9; --link: #337ab7; --link-hover: #23527c;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08); --radius: 6px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+[data-theme="dark"] {
+  --bg: #1a1d23; --bg-content: #22262e; --bg-card: #2a2f38; --bg-nav: #22262e;
+  --text: #e0e0e0; --text-secondary: #a0a0a0; --text-muted: #707070;
+  --border: #3a3f48; --link: #5dade2; --link-hover: #85c1e9;
+  --shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font); background-color: var(--bg); color: var(--text);
+  line-height: 1.7; min-height: 100vh; display: flex; flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+a { color: var(--link); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--link-hover); text-decoration: underline; }
+.navbar {
+  background-color: var(--bg-nav); border-bottom: 1px solid var(--border);
+  padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100; transition: background-color 0.3s, border-color 0.3s;
+}
+.nav-left { display: flex; align-items: center; gap: 20px; }
+.nav-logo { font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: 0.5px; }
+.nav-logo a { color: inherit; text-decoration: none; }
+.nav-logo a:hover { color: var(--link); }
+.nav-links { display: flex; align-items: center; gap: 18px; list-style: none; }
+.nav-links a { font-size: 14px; color: var(--text-secondary); }
+.nav-links a:hover { color: var(--link); }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-btn {
+  background: transparent; border: 1px solid var(--border); color: var(--text-secondary);
+  padding: 5px 12px; border-radius: var(--radius); cursor: pointer; font-size: 13px;
+  transition: all 0.2s; font-family: inherit;
+}
+.nav-btn:hover { border-color: var(--link); color: var(--link); }
+.nav-btn.active { background: var(--link); color: #fff; border-color: var(--link); }
+.nav-btn.active:hover { background: var(--link-hover); border-color: var(--link-hover); }
+.theme-btn {
+  background: transparent; border: none; color: var(--text-secondary); cursor: pointer;
+  font-size: 16px; padding: 6px; border-radius: 50%; transition: background 0.2s;
+  width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+}
+.theme-btn:hover { background: rgba(128,128,128,0.15); }
+.main-content {
+  flex: 1; max-width: 800px; width: 100%; margin: 0 auto; padding: 40px 24px;
+}
+.page-header { text-align: center; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.page-header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+.page-header p { color: var(--text-secondary); font-size: 15px; }
+.card {
+  background-color: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 28px; margin-bottom: 20px; box-shadow: var(--shadow);
+  transition: background-color 0.3s, border-color 0.3s;
+}
+.card h2 { font-size: 20px; font-weight: 600; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.card h3 { font-size: 17px; font-weight: 600; margin: 20px 0 10px; }
+.card p { margin-bottom: 12px; color: var(--text-secondary); }
+.card ul, .card ol { margin: 10px 0 10px 22px; color: var(--text-secondary); }
+.card li { margin-bottom: 6px; }
+.card strong { color: var(--text); }
+.footer {
+  background-color: var(--bg-nav); border-top: 1px solid var(--border);
+  padding: 28px 24px; text-align: center; transition: background-color 0.3s, border-color 0.3s;
+}
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px; margin-bottom: 14px; font-size: 14px; }
+.footer-links a { color: var(--text-secondary); }
+.footer-links a:hover { color: var(--link); }
+.footer-copy { font-size: 13px; color: var(--text-muted); }
+@media (max-width: 600px) {
+  .navbar { padding: 0 14px; height: 50px; }
+  .nav-logo { font-size: 16px; }
+  .nav-links { display: none; }
+  .main-content { padding: 24px 16px; }
+  .page-header h1 { font-size: 22px; }
+  .card { padding: 20px 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-left">
+    <div class="nav-logo"><a href="/cn/">009tg</a></div>
+    <ul class="nav-links">
+      <li><a href="/cn/">首页</a></li>
+      <li><a href="/about.html">关于我们</a></li>
+      <li><a href="/contact.html">联系方式</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <button class="nav-btn" id="btn-zh" onclick="switchLang('zh')">中</button>
+    <button class="nav-btn" id="btn-en" onclick="switchLang('en')">EN</button>
+    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" title="切换主题">&#9789;</button>
+  </div>
+</nav>
+
+<main class="main-content">
+
+  <!-- Chinese -->
+  <div class="lang-zh">
+    <div class="page-header">
+      <h1>免责声明</h1>
+      <p>Disclaimer</p>
+    </div>
+
+    <div class="card">
+      <h2>一、链接收录声明</h2>
+      <p><strong>009tg下海导航</strong>（以下简称"本站"）是一个静态资源导航网站，所有展示的外部链接均来自互联网公开信息。</p>
+      <p>本站仅对第三方网站进行<strong>收录与索引</strong>，提供访问入口，<strong>不控制、不编辑、不审查</strong>任何第三方网站的内容。本站与收录的第三方网站之间不存在任何形式的隶属、合作或代言关系。</p>
+      <p>本站某网站被收录，不代表本站对其内容、产品、服务或立场表示认可、推荐或担保。</p>
+    </div>
+
+    <div class="card">
+      <h2>二、第三方内容免责</h2>
+      <p>用户通过本站链接访问第三方网站时，应自行判断目标网站的内容合法性、安全性与适用性。本站不对以下情况承担任何责任：</p>
+      <ul>
+        <li>第三方网站的内容准确性、完整性、时效性或合法性</li>
+        <li>第三方网站可能存在的恶意软件、病毒或安全漏洞</li>
+        <li>第三方网站的服务中断、数据丢失或访问受限</li>
+        <li>用户在第三方网站进行的任何交易、注册或信息提交行为</li>
+        <li>第三方网站的隐私政策及其对用户数据的处理方式</li>
+      </ul>
+      <p>用户访问第三方网站的风险完全由用户本人承担。</p>
+    </div>
+
+    <div class="card">
+      <h2>三、敏感内容隔离</h2>
+      <p>本站收录的资源涵盖多种类别，其中可能包含成人向、博彩或其他受地域法律限制的敏感内容。对此，本站已采取以下措施：</p>
+      <ul>
+        <li>敏感内容已尽可能隔离在独立分类或标注中</li>
+        <li>相关链接页面已附带适当的年龄提示与访问警示</li>
+        <li>未成年人应在监护人指导下使用本站，避免访问不适宜内容</li>
+      </ul>
+      <p>用户应遵守所在国家/地区的法律法规，自行判断访问特定内容的合法性。因用户违反当地法律而产生的任何后果，本站不承担任何责任。</p>
+    </div>
+
+    <div class="card">
+      <h2>四、知识产权与侵权处理</h2>
+      <p>本站尊重并保护知识产权。如果您认为本站收录的某个链接指向的内容侵犯了您的合法权益（包括但不限于著作权、商标权、肖像权等），请通过以下方式告知我们：</p>
+      <ul>
+        <li>发送邮件至本站站长邮箱（详见<a href="/contact.html">联系方式</a>）</li>
+        <li>提供侵权链接地址、您的权利证明及联系方式</li>
+        <li>说明侵权事实与您的具体诉求</li>
+      </ul>
+      <p>收到有效的侵权通知后，站长将在合理时间内进行核实，并视情况采取删除链接、标注警示等适当措施。</p>
+    </div>
+
+    <div class="card">
+      <h2>五、服务可用性</h2>
+      <p>本站作为个人维护的静态网站，不保证服务的持续可用性。因服务器维护、网络故障、域名变更或其他不可抗力导致的服务中断，本站不承担责任。</p>
+      <p>本站保留随时调整、删除或新增收录链接的权利，无需事先通知。</p>
+    </div>
+
+    <div class="card">
+      <h2>六、政策更新</h2>
+      <p>本免责声明可能随时更新，更新后的条款将直接在本页面发布。继续使用本站即视为您接受更新后的免责声明。</p>
+      <p>如您不同意本免责声明的任何内容，请立即停止使用本站服务。</p>
+    </div>
+  </div>
+
+  <!-- English -->
+  <div class="lang-en" style="display:none">
+    <div class="page-header">
+      <h1>Disclaimer</h1>
+      <p>免责声明</p>
+    </div>
+
+    <div class="card">
+      <h2>1. Link Collection Statement</h2>
+      <p><strong>009tg Navigation</strong> (hereinafter referred to as "this site") is a static resource navigation website. All external links displayed are from publicly available information on the Internet.</p>
+      <p>This site only <strong>collects and indexes</strong> third-party websites, providing access entry points. We <strong>do not control, edit, or review</strong> the content of any third-party website. There is no form of affiliation, cooperation, or endorsement between this site and the collected third-party websites.</p>
+      <p>The inclusion of a website on this site does not indicate our approval, recommendation, or guarantee of its content, products, services, or positions.</p>
+    </div>
+
+    <div class="card">
+      <h2>2. Third-Party Content Disclaimer</h2>
+      <p>When users access third-party websites through links on this site, they should independently judge the legality, security, and applicability of the target website's content. This site is not responsible for the following situations:</p>
+      <ul>
+        <li>The accuracy, completeness, timeliness, or legality of third-party website content</li>
+        <li>Malware, viruses, or security vulnerabilities that may exist on third-party websites</li>
+        <li>Service interruptions, data loss, or access restrictions of third-party websites</li>
+        <li>Any transactions, registrations, or information submission activities users conduct on third-party websites</li>
+        <li>The privacy policies of third-party websites and how they handle user data</li>
+      </ul>
+      <p>The risks of accessing third-party websites are entirely borne by the user.</p>
+    </div>
+
+    <div class="card">
+      <h2>3. Sensitive Content Isolation</h2>
+      <p>Resources collected on this site cover multiple categories, some of which may include adult-oriented, gambling, or other content restricted by regional laws. To address this, we have taken the following measures:</p>
+      <ul>
+        <li>Sensitive content is isolated in independent categories or marked with appropriate labels as much as possible</li>
+        <li>Related link pages include appropriate age warnings and access alerts</li>
+        <li>Minors should use this site under the guidance of a guardian and avoid accessing inappropriate content</li>
+      </ul>
+      <p>Users should comply with the laws and regulations of their country/region and independently judge the legality of accessing specific content. This site is not responsible for any consequences arising from users violating local laws.</p>
+    </div>
+
+    <div class="card">
+      <h2>4. Intellectual Property and Infringement Handling</h2>
+      <p>This site respects and protects intellectual property rights. If you believe that content linked to by a link collected on this site infringes your legitimate rights (including but not limited to copyright, trademark rights, portrait rights, etc.), please inform us through the following methods:</p>
+      <ul>
+        <li>Send an email to the webmaster (see <a href="/contact.html">Contact</a> for details)</li>
+        <li>Provide the infringing link address, your proof of rights, and contact information</li>
+        <li>Explain the infringement facts and your specific requests</li>
+      </ul>
+      <p>Upon receiving a valid infringement notice, the webmaster will verify it within a reasonable time and take appropriate measures such as deleting the link or adding warning labels as appropriate.</p>
+    </div>
+
+    <div class="card">
+      <h2>5. Service Availability</h2>
+      <p>As a static website maintained by an individual, this site does not guarantee continuous service availability. This site is not responsible for service interruptions caused by server maintenance, network failures, domain changes, or other force majeure events.</p>
+      <p>This site reserves the right to adjust, delete, or add collected links at any time without prior notice.</p>
+    </div>
+
+    <div class="card">
+      <h2>6. Policy Updates</h2>
+      <p>This disclaimer may be updated at any time, and the updated terms will be posted directly on this page. Continued use of this site constitutes your acceptance of the updated disclaimer.</p>
+      <p>If you do not agree with any content of this disclaimer, please stop using this site immediately.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="/about.html">关于我们 / About Us</a>
+    <a href="/privacy.html">隐私政策 / Privacy</a>
+    <a href="/contact.html">联系方式 / Contact</a>
+    <a href="/disclaimer.html">免责声明 / Disclaimer</a>
+    <span style="color:var(--text-muted)">|</span>
+    <a href="/cn/">返回首页 / Home</a>
+  </div>
+  <div class="footer-copy">
+    &copy; 009tg.com &middot; <span class="lang-zh">个人独立维护</span><span class="lang-en" style="display:none">Independently Maintained</span>
+  </div>
+</footer>
+
+<script>
+function initTheme() {
+  var saved = localStorage.getItem('theme');
+  if (saved) { document.documentElement.setAttribute('data-theme', saved); }
+  else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+  updateThemeIcon();
+}
+function toggleTheme() {
+  var cur = document.documentElement.getAttribute('data-theme');
+  var next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  updateThemeIcon();
+}
+function updateThemeIcon() {
+  var btn = document.getElementById('theme-btn');
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  btn.innerHTML = isDark ? '&#9788;' : '&#9789;';
+  btn.title = isDark ? 'Switch to Light Mode' : '切换到深色模式';
+}
+function switchLang(lang) {
+  var isEn = lang === 'en';
+  document.querySelectorAll('.lang-zh').forEach(function(el) { el.style.display = isEn ? 'none' : ''; });
+  document.querySelectorAll('.lang-en').forEach(function(el) { el.style.display = isEn ? '' : 'none'; });
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = isEn ? 'en' : 'zh-CN';
+  document.getElementById('btn-zh').classList.toggle('active', !isEn);
+  document.getElementById('btn-en').classList.toggle('active', isEn);
+  var homeLink = document.querySelector('.nav-logo a');
+  if (homeLink) homeLink.href = isEn ? '/en/' : '/cn/';
+}
+function initLang() {
+  var saved = localStorage.getItem('lang');
+  var param = new URLSearchParams(window.location.search).get('lang');
+  switchLang(param || saved || 'zh');
+}
+initTheme(); initLang();
+</script>
+
+</body>
+</html>

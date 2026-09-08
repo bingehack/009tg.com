@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-zh="个税计算器 - 009TG 工具箱" data-en="Income Tax Calculator - 009TG Toolbox">个税计算器 - 009TG 工具箱</title>
+<meta name="description" content="免费在线个人所得税计算器，按中国现行累计预扣预缴税率表计算，支持五险一金比例调整。">
+<meta name="keywords" content="个税计算器,个人所得税,累计预扣预缴,五险一金,工资税后,个税计算">
+<meta name="author" content="009TG">
+<meta name="theme-color" content="#1a1d23">
+<style>
+:root {
+  --bg-main: #1a1d23;
+  --bg-content: #22262e;
+  --bg-card: #2a2f38;
+  --bg-card-hover: #333945;
+  --bg-navbar: #22262e;
+  --bg-input: #2a2f38;
+  --bg-btn: #3a7bd5;
+  --bg-btn-hover: #2c62aa;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-muted: #707070;
+  --border-color: #3a3f48;
+  --link-color: #5dade2;
+  --link-hover: #85c1e9;
+  --accent: #3a7bd5;
+  --accent-light: #5dade2;
+  --success: #27ae60;
+  --error: #e74c3c;
+  --warning: #f39c12;
+  --shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg-main);color:var(--text-primary);line-height:1.6;min-height:100vh}
+a{color:var(--link-color);text-decoration:none}a:hover{color:var(--link-hover)}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;background:var(--bg-navbar);border-bottom:1px solid var(--border-color);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:.5rem}
+.navbar .brand{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:1.1rem;color:var(--text-primary)}
+.navbar .brand svg{width:28px;height:28px;fill:var(--accent-light)}
+.navbar .nav-links{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.navbar .nav-links a{font-size:.9rem;color:var(--text-secondary);transition:color .2s}
+.navbar .nav-links a:hover{color:var(--link-color)}
+.lang-switch{display:flex;align-items:center;gap:.25rem;background:var(--bg-card);border:1px solid var(--border-color);border-radius:20px;padding:2px}
+.lang-switch button{background:none;border:none;color:var(--text-muted);font-size:.8rem;padding:.25rem .6rem;border-radius:16px;cursor:pointer;transition:all .2s}
+.lang-switch button.active{background:var(--accent);color:#fff}
+.container{max-width:1100px;margin:0 auto;padding:1.5rem}
+.card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow)}
+.card-title{font-size:1.15rem;font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;color:var(--text-primary)}
+.card-title .icon{font-size:1.3rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.55rem 1.1rem;background:var(--bg-btn);color:#fff;border:none;border-radius:6px;font-size:.9rem;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--bg-btn-hover)}
+.btn-secondary{background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color)}
+.btn-secondary:hover{background:var(--bg-card-hover)}
+.btn-success{background:var(--success)}
+.btn-sm{padding:.35rem .75rem;font-size:.8rem}
+input,textarea,select{width:100%;padding:.6rem .8rem;background:var(--bg-input);border:1px solid var(--border-color);border-radius:6px;color:var(--text-primary);font-size:.9rem;font-family:inherit;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
+textarea{resize:vertical;min-height:120px}
+label{display:block;margin-bottom:.35rem;font-size:.85rem;color:var(--text-secondary)}
+.form-row{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.form-row .form-group{flex:1;min-width:200px}
+.form-group{margin-bottom:1rem}
+.result-area{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:1rem;margin-top:1rem;min-height:60px;white-space:pre-wrap;word-break:break-word;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:.85rem;color:var(--text-secondary);max-height:400px;overflow:auto}
+.result-area.success{border-color:var(--success);color:var(--text-primary)}
+.result-area.error{border-color:var(--error);color:var(--error)}
+.tabs{display:flex;gap:.25rem;border-bottom:2px solid var(--border-color);margin-bottom:1rem}
+.tab-btn{padding:.5rem 1rem;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:.9rem;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab-btn.active{color:var(--accent-light);border-bottom-color:var(--accent-light)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.tool-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.25rem;transition:all .2s;cursor:pointer}
+.tool-card:hover{background:var(--bg-card-hover);transform:translateY(-2px);box-shadow:var(--shadow)}
+.tool-card .tool-icon{font-size:2rem;margin-bottom:.5rem}
+.tool-card .tool-name{font-weight:600;margin-bottom:.25rem;color:var(--text-primary)}
+.tool-card .tool-desc{font-size:.8rem;color:var(--text-muted);line-height:1.4}
+.badge{display:inline-block;padding:.15rem .45rem;border-radius:4px;font-size:.7rem;font-weight:600;text-transform:uppercase}
+.badge-api{background:rgba(58,123,213,.2);color:var(--accent-light)}
+.badge-offline{background:rgba(39,174,96,.2);color:var(--success)}
+.footer{text-align:center;padding:2rem 1rem;color:var(--text-muted);font-size:.8rem;border-top:1px solid var(--border-color);margin-top:2rem}
+.copy-hint{font-size:.75rem;color:var(--text-muted);margin-top:.35rem}
+.action-bar{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.footer-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem}
+.footer-links a{font-size:.8rem;color:var(--text-muted);transition:color .2s}
+.footer-links a:hover{color:var(--link-color)}
+@media(max-width:640px){
+  .container{padding:1rem}
+  .navbar{padding:.6rem 1rem}
+  .navbar .brand{font-size:1rem}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .form-row{flex-direction:column;gap:.5rem}
+}
+.hidden{display:none!important}
+
+.calc-result{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:1rem;margin-top:1rem}
+.calc-result .big-num{font-size:1.5rem;font-weight:700;color:var(--accent-light)}
+.calc-result .result-row{display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid var(--border-color);font-size:.9rem}
+.calc-result .result-row:last-child{border-bottom:none}
+.calc-result .result-row .r-label{color:var(--text-secondary)}
+.calc-result .result-row .r-value{font-weight:600}
+.tax-rate-table{width:100%;border-collapse:collapse;font-size:.8rem;margin-top:.5rem}
+.tax-rate-table th,.tax-rate-table td{padding:.4rem .5rem;border-bottom:1px solid var(--border-color);text-align:center}
+.tax-rate-table th{background:var(--bg-main);color:var(--text-primary);font-weight:600}
+.tax-rate-table td{color:var(--text-secondary)}
+.tax-rate-table td:first-child,.tax-rate-table th:first-child{text-align:left}
+.ad-content{font-size:.9rem;color:var(--text-secondary);line-height:1.8}
+.ad-content h3{font-size:1rem;color:var(--text-primary);margin:1rem 0 .5rem}
+.ad-content p{margin:.4rem 0}
+.ad-content ul{margin:.4rem 0 .4rem 1.2rem}
+.ad-content li{margin:.2rem 0}
+.faq-item{margin-bottom:1rem}
+.faq-item .faq-q{font-weight:600;color:var(--text-primary);margin-bottom:.25rem}
+.faq-item .faq-a{color:var(--text-secondary);font-size:.9rem}
+.rate-note{background:rgba(243,156,18,.1);border:1px solid rgba(243,156,18,.3);border-radius:6px;padding:.75rem 1rem;font-size:.85rem;color:var(--warning);margin-bottom:1rem}
+.rate-note strong{color:var(--text-primary)}
+.ins-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.35rem}
+.ins-row label{flex:1;margin-bottom:0;font-size:.85rem}
+.ins-row input{flex:0 0 80px;width:80px;text-align:center}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="/cn/" class="brand">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    <span data-zh="009TG 工具箱" data-en="009TG Toolbox">009TG 工具箱</span>
+  </a>
+  <div class="nav-links">
+    <a href="/cn/" data-zh="&#8592; 返回站点首页" data-en="&#8592; Back to Site Home">&#8592; 返回站点首页</a>
+    <a href="./index.html" data-zh="&#8592; 返回工具集首页" data-en="&#8592; Back to Tools Home">&#8592; 返回工具集首页</a>
+    <div class="lang-switch">
+      <button data-lang="zh" class="active">中</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </div>
+</nav>
+<div class="container">
+<h1 style="font-size:1.4rem;margin-bottom:1rem" data-zh="个税计算器" data-en="Income Tax Calculator">个税计算器</h1>
+
+<div class="rate-note">
+  <strong data-zh="税率说明：" data-en="Note:">税率说明：</strong>
+  <span data-zh="以现行中国个人所得税累计预扣预缴税率表为准。各地五险一金比例存在差异，以下数值为常见参考值，请按实际缴纳比例调整。政策调整后需手动更新比例。" data-en="Based on China's current individual income tax cumulative withholding rate table. Social insurance rates vary by city; default values are common references. Please adjust to your actual rates.">
+    以现行中国个人所得税累计预扣预缴税率表为准。各地五险一金比例存在差异，以下数值为常见参考值，请按实际缴纳比例调整。政策调整后需手动更新比例。
+  </span>
+</div>
+
+<div class="card">
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="calc" data-zh="工资个税" data-en="Salary Tax">工资个税</button>
+    <button class="tab-btn" data-tab="rates" data-zh="税率表" data-en="Tax Rates">税率表</button>
+  </div>
+
+  <div id="panel-calc" class="tab-panel active">
+    <div class="form-row">
+      <div class="form-group">
+        <label data-zh="税前月薪（元）" data-en="Monthly Gross Salary (CNY)">税前月薪（元）</label>
+        <input type="number" id="tax-salary" value="15000" step="any" oninput="calcTax()">
+      </div>
+      <div class="form-group">
+        <label data-zh="专项附加扣除（元/月）" data-en="Special Deductions (CNY/mo)">专项附加扣除（元/月）</label>
+        <input type="number" id="tax-deduction" value="0" step="any" oninput="calcTax()">
+      </div>
+    </div>
+    <div class="card-title" style="margin-top:0"><span class="icon">&#128178;</span><span data-zh="五险一金比例（个人部分，%）" data-en="Social Insurance Rates (Personal, %)">五险一金比例（个人部分，%）</span></div>
+    <div style="font-size:.8rem;color:var(--text-muted);margin-bottom:.5rem" data-zh="默认值仅供参考，各地政策不同，请按实际调整" data-en="Defaults are for reference only; adjust to your actual rates">默认值仅供参考，各地政策不同，请按实际调整</div>
+    <div class="grid-2" style="margin-bottom:1rem">
+      <div class="ins-row"><label data-zh="养老保险" data-en="Pension">养老保险</label><input type="number" id="ins-pension" value="8" step="0.1" oninput="calcTax()">%</div>
+      <div class="ins-row"><label data-zh="医疗保险" data-en="Medical">医疗保险</label><input type="number" id="ins-medical" value="2" step="0.1" oninput="calcTax()">%</div>
+      <div class="ins-row"><label data-zh="失业保险" data-en="Unemployment">失业保险</label><input type="number" id="ins-unemp" value="0.5" step="0.1" oninput="calcTax()">%</div>
+      <div class="ins-row"><label data-zh="住房公积金" data-en="Housing Fund">住房公积金</label><input type="number" id="ins-housing" value="7" step="0.1" oninput="calcTax()">%</div>
+    </div>
+    <div class="action-bar">
+      <button class="btn" onclick="calcTax()" data-zh="计算" data-en="Calculate">计算</button>
+    </div>
+    <div class="calc-result" id="tax-result"></div>
+    <div id="tax-detail" style="margin-top:1rem"></div>
+  </div>
+
+  <div id="panel-rates" class="tab-panel">
+    <div class="card-title" style="margin-top:0"><span class="icon">&#128202;</span><span data-zh="累计预扣预缴税率表（年度）" data-en="Cumulative Withholding Tax Rates (Annual)">累计预扣预缴税率表（年度）</span></div>
+    <table class="tax-rate-table">
+      <tr><th data-zh="级数" data-en="Bracket">级数</th><th data-zh="累计应纳税所得额" data-en="Taxable Income">累计应纳税所得额</th><th data-zh="税率" data-en="Rate">税率</th><th data-zh="速算扣除数" data-en="Quick Deduction">速算扣除数</th></tr>
+      <tr><td>1</td><td data-zh="不超过 36,000" data-en="Up to 36,000">不超过 36,000</td><td>3%</td><td>0</td></tr>
+      <tr><td>2</td><td data-zh="36,000 - 144,000" data-en="36,000 - 144,000">36,000 - 144,000</td><td>10%</td><td>2,520</td></tr>
+      <tr><td>3</td><td data-zh="144,000 - 300,000" data-en="144,000 - 300,000">144,000 - 300,000</td><td>20%</td><td>16,920</td></tr>
+      <tr><td>4</td><td data-zh="300,000 - 420,000" data-en="300,000 - 420,000">300,000 - 420,000</td><td>25%</td><td>31,920</td></tr>
+      <tr><td>5</td><td data-zh="420,000 - 660,000" data-en="420,000 - 660,000">420,000 - 660,000</td><td>30%</td><td>52,920</td></tr>
+      <tr><td>6</td><td data-zh="660,000 - 960,000" data-en="660,000 - 960,000">660,000 - 960,000</td><td>35%</td><td>85,920</td></tr>
+      <tr><td>7</td><td data-zh="超过 960,000" data-en="Over 960,000">超过 960,000</td><td>45%</td><td>181,920</td></tr>
+    </table>
+    <div style="font-size:.8rem;color:var(--text-muted);margin-top:.5rem" data-zh="数据来源：《中华人民共和国个人所得税法》及实施条例。政策如有调整请以最新法规为准。" data-en="Source: Individual Income Tax Law of the PRC. Please refer to the latest regulations for updates.">
+      数据来源：《中华人民共和国个人所得税法》及实施条例。政策如有调整请以最新法规为准。
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#128214;</span><span data-zh="使用说明" data-en="User Guide">使用说明</span></div>
+  <div class="ad-content">
+    <div data-lang-content="zh">
+      <h3>用途与适用场景</h3>
+      <p>本个税计算器适用于中国境内工薪阶层按月估算个人所得税及五险一金扣除后的实发工资。无论您是刚入职的新人、准备跳槽的职场人，还是 HR 人员核算薪酬，都可以使用本工具快速了解税前税后差异。</p>
+      <p>计算器严格遵循中国现行个人所得税「累计预扣预缴」计算方法：以当年截至本月累计收入减去累计免税收入、累计减除费用（每月 5000 元）、累计专项扣除（五险一金个人部分）和累计专项附加扣除后的余额为应纳税所得额，按七级超额累进税率计算本月应预扣预缴税额。</p>
+      <h3>使用步骤</h3>
+      <ul>
+        <li>输入税前月薪：填写您的月度税前工资总额。</li>
+        <li>输入专项附加扣除：如子女教育、继续教育、大病医疗、住房贷款利息、住房租金、赡养老人等专项附加扣除的月度合计金额。</li>
+        <li>调整五险一金比例：根据个人实际缴纳比例修改养老保险、医疗保险、失业保险和住房公积金的费率。默认值仅为常见参考值，各地政策差异较大。</li>
+        <li>点击「计算」：页面将展示五险一金扣除额、应纳税所得额、适用税率、应缴个税及税后实发工资。</li>
+        <li>查看全年推演：本工具同时展示当年第 1-12 个月的逐月个税变化，帮助您理解累计预扣预缴的「前低后高」特征。</li>
+      </ul>
+      <h3>FAQ</h3>
+      <div class="faq-item">
+        <div class="faq-q">Q1：为什么年初个税少、年末个税多？</div>
+        <div class="faq-a">累计预扣预缴法下，随着累计收入增加，可能跨越更高税率级距，导致后期适用税率上升。这不是扣税错误，而是税法规定的正常累进现象。次年 3-6 月可通过个税汇算清缴多退少补。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q2：年终奖如何计算？</div>
+        <div class="faq-a">本工具目前仅计算月薪个税。年终奖可选择单独计税或并入综合所得计税，两种方式的税负差异较大，建议结合具体金额另行计算。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q3：五险一金比例和我实际缴纳的不一样怎么办？</div>
+        <div class="faq-a">请直接在输入框中修改为您实际缴纳的比例。不同城市、不同企业的缴纳基数和比例差异很大，默认值仅为常见参考，不代表您的实际情况。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q4：计算结果与工资条不一致？</div>
+        <div class="faq-a">可能原因包括：1）五险一金缴纳基数与月薪不同（设有上下限）；2）存在补充公积金、企业年金等额外扣除；3）存在免税收入或额外扣除项。请以单位 HR 或工资条为准。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q5：专项附加扣除有哪些项目？</div>
+        <div class="faq-a">目前包括：子女教育（每孩每月 2000 元）、3 岁以下婴幼儿照护（每孩每月 2000 元）、继续教育（每月 400 元或当年 3600 元）、大病医疗（据实扣除）、住房贷款利息（每月 1000 元）、住房租金（每月 800-1500 元，按城市）、赡养老人（每月 3000 元）。</div>
+      </div>
+    </div>
+    <div data-lang-content="en" style="display:none">
+      <h3>Purpose & Use Cases</h3>
+      <p>This income tax calculator is designed for salaried employees in China to estimate monthly individual income tax and net pay after social insurance and housing fund deductions. Whether you are a new hire, considering a job change, or an HR professional verifying payroll, this tool helps you quickly understand the difference between gross and net salary.</p>
+      <p>The calculator strictly follows China's current "cumulative withholding" method: taxable income is calculated as cumulative income minus cumulative tax-exempt income, cumulative standard deduction (5,000 CNY/month), cumulative special deductions (personal social insurance contributions), and cumulative special additional deductions. The result is then taxed using the seven-bracket progressive rate table.</p>
+      <h3>How to Use</h3>
+      <ul>
+        <li>Enter monthly gross salary: Input your total monthly pre-tax salary.</li>
+        <li>Enter special additional deductions: Include monthly totals for child education, continuing education, serious illness medical expenses, housing loan interest, housing rent, and elderly parent support.</li>
+        <li>Adjust social insurance rates: Modify pension, medical, unemployment, and housing fund rates according to your actual contributions. Default values are common references and vary significantly by city.</li>
+        <li>Click "Calculate": The page will display social insurance deductions, taxable income, applicable tax rate, tax payable, and net salary.</li>
+        <li>View annual projection: The tool also shows monthly tax changes from month 1 to 12, helping you understand the "lower early, higher later" pattern of cumulative withholding.</li>
+      </ul>
+      <h3>FAQ</h3>
+      <div class="faq-item">
+        <div class="faq-q">Q1: Why is my tax lower at the beginning of the year and higher at the end?</div>
+        <div class="faq-a">Under cumulative withholding, as your cumulative income increases, you may cross into higher tax brackets, causing the applicable rate to rise later in the year. This is not an error but the normal progressive effect mandated by tax law. Annual reconciliation from March to June of the following year allows for refunds or additional payments.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q2: How is year-end bonus taxed?</div>
+        <div class="faq-a">This tool currently calculates monthly salary tax only. Year-end bonuses can be taxed separately or combined with comprehensive income, and the two methods can produce significantly different tax liabilities. We recommend calculating separately based on the specific amount.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q3: What if my social insurance rates differ from the defaults?</div>
+        <div class="faq-a">Please edit the input fields to match your actual contribution rates. Different cities and employers have significantly different contribution bases and rates. The default values are common references and do not represent your specific situation.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q4: Why do the results differ from my payslip?</div>
+        <div class="faq-a">Possible reasons include: 1) Social insurance contribution base differs from gross salary (subject to local min/max limits); 2) Additional deductions such as supplementary housing fund or enterprise annuity; 3) Tax-exempt income or extra deductions. Please refer to your employer's HR department or payslip as the final authority.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q5: What items are included in special additional deductions?</div>
+        <div class="faq-a">Currently included: child education (2,000 CNY per child per month), care for children under 3 (2,000 CNY per child per month), continuing education (400 CNY/month or 3,600 CNY/year), serious illness medical expenses (actual amount), housing loan interest (1,000 CNY/month), housing rent (800-1,500 CNY/month depending on city), and elderly parent support (3,000 CNY/month).</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<footer class="footer">
+  <div class="footer-links">
+    <a href="/about.html" data-zh="关于我们" data-en="About">关于我们</a>
+    <a href="/privacy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+    <a href="/contact.html" data-zh="联系我们" data-en="Contact">联系我们</a>
+    <a href="/disclaimer.html" data-zh="免责声明" data-en="Disclaimer">免责声明</a>
+  </div>
+  <p data-zh="009TG 工具箱 - 免费实用的在线工具集合" data-en="009TG Toolbox - Free & Practical Online Tools">009TG 工具箱 - 免费实用的在线工具集合</p>
+</footer>
+<script>
+const i18nData={
+  zh:{
+    home:'站点首页',tools:'工具集首页',lang:'English',backHome:'返回站点首页',backTools:'返回工具集首页',
+    run:'运行',clear:'清空',copy:'复制',copied:'已复制',inputPlaceholder:'请输入...',
+    error:'错误',loading:'加载中...',noResult:'暂无结果'
+  },
+  en:{
+    home:'Site Home',tools:'Tools Home',lang:'中文',backHome:'Back to Site Home',backTools:'Back to Tools Home',
+    run:'Run',clear:'Clear',copy:'Copy',copied:'Copied',inputPlaceholder:'Enter...',
+    error:'Error',loading:'Loading...',noResult:'No result'
+  }
+};
+let currentLang='zh';
+function setLang(l){
+  currentLang=l;
+  document.documentElement.lang=l==='zh'?'zh-CN':'en';
+  document.querySelectorAll('[data-zh],[data-en]').forEach(el=>{
+    if(el.tagName==='INPUT'&&el.hasAttribute('placeholder')){
+      el.placeholder=el.getAttribute('data-'+l);
+    }else if(el.tagName==='TITLE'){
+      document.title=el.getAttribute('data-'+l)||document.title;
+    }else if(el.tagName==='OPTION'){
+      el.textContent=el.getAttribute('data-'+l)||el.textContent;
+    }else{
+      el.textContent=el.getAttribute('data-'+l)||el.textContent;
+    }
+  });
+  document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  localStorage.setItem('tools-lang',l);
+  document.querySelectorAll('[data-lang-content]').forEach(el=>{
+    el.style.display=el.dataset.langContent===l?'block':'none';
+  });
+  calcTax();
+}
+function t(key){return(i18nData[currentLang]||i18nData.zh)[key]||key;}
+document.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('tools-lang')||'zh';
+  setLang(saved);
+  document.querySelectorAll('.lang-switch button').forEach(b=>{
+    b.addEventListener('click',()=>setLang(b.dataset.lang));
+  });
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      const panel=document.getElementById('panel-'+btn.dataset.tab);
+      if(panel)panel.classList.add('active');
+    });
+  });
+  calcTax();
+});
+function escapeHtml(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+function copyText(t){navigator.clipboard.writeText(t).then(()=>alert(t('copied'))).catch(()=>{});}
+
+function fmtMoney(n){return n.toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2});}
+const TAX_BRACKETS=[
+  {limit:36000,rate:.03,deduct:0},
+  {limit:144000,rate:.10,deduct:2520},
+  {limit:300000,rate:.20,deduct:16920},
+  {limit:420000,rate:.25,deduct:31920},
+  {limit:660000,rate:.30,deduct:52920},
+  {limit:960000,rate:.35,deduct:85920},
+  {limit:Infinity,rate:.45,deduct:181920}
+];
+function calcTaxForMonth(cumulativeTaxable){
+  const bracket=TAX_BRACKETS.find(b=>cumulativeTaxable<=b.limit);
+  const tax=cumulativeTaxable*bracket.rate-bracket.deduct;
+  return{tax:Math.max(0,tax),rate:bracket.rate,bracket};
+}
+function calcTax(){
+  const salary=parseFloat(document.getElementById('tax-salary').value)||0;
+  const deduction=parseFloat(document.getElementById('tax-deduction').value)||0;
+  const pensionRate=parseFloat(document.getElementById('ins-pension').value)||0;
+  const medicalRate=parseFloat(document.getElementById('ins-medical').value)||0;
+  const unempRate=parseFloat(document.getElementById('ins-unemp').value)||0;
+  const housingRate=parseFloat(document.getElementById('ins-housing').value)||0;
+  const totalInsRate=(pensionRate+medicalRate+unempRate+housingRate)/100;
+  const insAmount=salary*totalInsRate;
+  const taxableMonthly=salary-5000-insAmount-deduction;
+  const el=document.getElementById('tax-result');
+  const det=document.getElementById('tax-detail');
+  const lang=currentLang;
+  if(salary<=0){el.innerHTML='';det.innerHTML='';return;}
+  let cumulativeIncome=0,cumulativeIns=0,cumulativeDeduction=0,cumulativeTaxable=0,prevTax=0;
+  let firstMonthTax=0;
+  let schedule=[];
+  for(let m=1;m<=12;m++){
+    cumulativeIncome+=salary;
+    cumulativeIns+=insAmount;
+    cumulativeDeduction+=deduction+5000;
+    cumulativeTaxable+=taxableMonthly;
+    const result=calcTaxForMonth(Math.max(0,cumulativeTaxable));
+    const monthTax=Math.max(0,result.tax-prevTax);
+    if(m===1)firstMonthTax=monthTax;
+    prevTax=result.tax;
+    schedule.push({month:m,ins:insAmount,taxable:Math.max(0,cumulativeTaxable),rate:result.rate*100,monthTax:monthTax,net:salary-insAmount-monthTax,cumulativeTax:result.tax});
+  }
+  const totalTax=schedule[11].cumulativeTax;
+  const totalNet=salary*12-insAmount*12-totalTax;
+  el.innerHTML='<div class="big-num">'+fmtMoney(firstMonthTax)+{zh:' 元/月 (首月)',en:' /month (1st)'}[lang]+'</div>'+
+    '<div class="result-row"><span class="r-label">'+{zh:'五险一金/月',en:'Social Insurance/mo'}[lang]+'</span><span class="r-value">'+fmtMoney(insAmount)+{zh:' 元',en:' CNY'}[lang]+'</span></div>'+
+    '<div class="result-row"><span class="r-label">'+{zh:'税后实发/月',en:'Net Salary/mo'}[lang]+'</span><span class="r-value">'+fmtMoney(schedule[0].net)+{zh:' 元',en:' CNY'}[lang]+'</span></div>'+
+    '<div class="result-row"><span class="r-label">'+{zh:'年缴个税',en:'Annual Tax'}[lang]+'</span><span class="r-value">'+fmtMoney(totalTax)+{zh:' 元',en:' CNY'}[lang]+'</span></div>'+
+    '<div class="result-row"><span class="r-label">'+{zh:'年税后收入',en:'Annual Net'}[lang]+'</span><span class="r-value">'+fmtMoney(totalNet)+{zh:' 元',en:' CNY'}[lang]+'</span></div>';
+  let tbl='<table class="tax-rate-table"><tr><th>'+{zh:'月份',en:'Month'}[lang]+'</th><th>'+{zh:'累计应纳',en:'Cum. Taxable'}[lang]+'</th><th>'+{zh:'税率',en:'Rate'}[lang]+'</th><th>'+{zh:'本月个税',en:'Month Tax'}[lang]+'</th><th>'+{zh:'税后实发',en:'Net Pay'}[lang]+'</th></tr>';
+  schedule.forEach(s=>{
+    tbl+='<tr><td>'+s.month+'</td><td>'+fmtMoney(s.taxable)+'</td><td>'+s.rate.toFixed(0)+'%</td><td>'+fmtMoney(s.monthTax)+'</td><td>'+fmtMoney(s.net)+'</td></tr>';
+  });
+  tbl+='</table>';
+  det.innerHTML='<div style="font-size:.85rem;color:var(--text-secondary);margin-bottom:.25rem">'+{zh:'全年 12 个月推演',en:'12-Month Annual Projection'}[lang]+'</div>'+tbl;
+}
+</script>
+</body>
+</html>

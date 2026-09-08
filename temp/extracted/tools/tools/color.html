@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-zh="颜色转换器 - 009TG 工具箱" data-en="Color Converter - 009TG Toolbox">颜色转换器 - 009TG 工具箱</title>
+<meta name="description" content="免费在线颜色转换工具，支持 HEX、RGB、HSL 互转，附带调色板与明暗变体展示。">
+<meta name="keywords" content="颜色转换,HEX转RGB,RGB转HSL,调色板,颜色工具,在线取色">
+<meta name="author" content="009TG">
+<meta name="theme-color" content="#1a1d23">
+<style>
+:root {
+  --bg-main: #1a1d23;
+  --bg-content: #22262e;
+  --bg-card: #2a2f38;
+  --bg-card-hover: #333945;
+  --bg-navbar: #22262e;
+  --bg-input: #2a2f38;
+  --bg-btn: #3a7bd5;
+  --bg-btn-hover: #2c62aa;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-muted: #707070;
+  --border-color: #3a3f48;
+  --link-color: #5dade2;
+  --link-hover: #85c1e9;
+  --accent: #3a7bd5;
+  --accent-light: #5dade2;
+  --success: #27ae60;
+  --error: #e74c3c;
+  --warning: #f39c12;
+  --shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg-main);color:var(--text-primary);line-height:1.6;min-height:100vh}
+a{color:var(--link-color);text-decoration:none}a:hover{color:var(--link-hover)}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;background:var(--bg-navbar);border-bottom:1px solid var(--border-color);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:.5rem}
+.navbar .brand{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:1.1rem;color:var(--text-primary)}
+.navbar .brand svg{width:28px;height:28px;fill:var(--accent-light)}
+.navbar .nav-links{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.navbar .nav-links a{font-size:.9rem;color:var(--text-secondary);transition:color .2s}
+.navbar .nav-links a:hover{color:var(--link-color)}
+.lang-switch{display:flex;align-items:center;gap:.25rem;background:var(--bg-card);border:1px solid var(--border-color);border-radius:20px;padding:2px}
+.lang-switch button{background:none;border:none;color:var(--text-muted);font-size:.8rem;padding:.25rem .6rem;border-radius:16px;cursor:pointer;transition:all .2s}
+.lang-switch button.active{background:var(--accent);color:#fff}
+.container{max-width:1100px;margin:0 auto;padding:1.5rem}
+.card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow)}
+.card-title{font-size:1.15rem;font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;color:var(--text-primary)}
+.card-title .icon{font-size:1.3rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.55rem 1.1rem;background:var(--bg-btn);color:#fff;border:none;border-radius:6px;font-size:.9rem;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--bg-btn-hover)}
+.btn-secondary{background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color)}
+.btn-secondary:hover{background:var(--bg-card-hover)}
+.btn-success{background:var(--success)}
+.btn-sm{padding:.35rem .75rem;font-size:.8rem}
+input,textarea,select{width:100%;padding:.6rem .8rem;background:var(--bg-input);border:1px solid var(--border-color);border-radius:6px;color:var(--text-primary);font-size:.9rem;font-family:inherit;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
+textarea{resize:vertical;min-height:120px}
+label{display:block;margin-bottom:.35rem;font-size:.85rem;color:var(--text-secondary)}
+.form-row{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.form-row .form-group{flex:1;min-width:200px}
+.form-group{margin-bottom:1rem}
+.result-area{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:1rem;margin-top:1rem;min-height:60px;white-space:pre-wrap;word-break:break-word;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:.85rem;color:var(--text-secondary);max-height:400px;overflow:auto}
+.result-area.success{border-color:var(--success);color:var(--text-primary)}
+.result-area.error{border-color:var(--error);color:var(--error)}
+.tabs{display:flex;gap:.25rem;border-bottom:2px solid var(--border-color);margin-bottom:1rem}
+.tab-btn{padding:.5rem 1rem;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:.9rem;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab-btn.active{color:var(--accent-light);border-bottom-color:var(--accent-light)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.tool-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.25rem;transition:all .2s;cursor:pointer}
+.tool-card:hover{background:var(--bg-card-hover);transform:translateY(-2px);box-shadow:var(--shadow)}
+.tool-card .tool-icon{font-size:2rem;margin-bottom:.5rem}
+.tool-card .tool-name{font-weight:600;margin-bottom:.25rem;color:var(--text-primary)}
+.tool-card .tool-desc{font-size:.8rem;color:var(--text-muted);line-height:1.4}
+.badge{display:inline-block;padding:.15rem .45rem;border-radius:4px;font-size:.7rem;font-weight:600;text-transform:uppercase}
+.badge-api{background:rgba(58,123,213,.2);color:var(--accent-light)}
+.badge-offline{background:rgba(39,174,96,.2);color:var(--success)}
+.footer{text-align:center;padding:2rem 1rem;color:var(--text-muted);font-size:.8rem;border-top:1px solid var(--border-color);margin-top:2rem}
+.copy-hint{font-size:.75rem;color:var(--text-muted);margin-top:.35rem}
+.action-bar{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.footer-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem}
+.footer-links a{font-size:.8rem;color:var(--text-muted);transition:color .2s}
+.footer-links a:hover{color:var(--link-color)}
+@media(max-width:640px){
+  .container{padding:1rem}
+  .navbar{padding:.6rem 1rem}
+  .navbar .brand{font-size:1rem}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .form-row{flex-direction:column;gap:.5rem}
+}
+.hidden{display:none!important}
+
+.color-preview{width:100%;height:120px;border-radius:8px;border:1px solid var(--border-color);margin-bottom:1rem;display:flex;align-items:center;justify-content:center;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+.color-input-row{display:flex;gap:.5rem;align-items:center}
+.color-input-row input{flex:1}
+.color-input-row input[type="color"]{width:48px;height:42px;padding:2px;flex:0 0 auto}
+.palette-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:.5rem;margin-top:1rem}
+.palette-item{height:48px;border-radius:6px;border:1px solid var(--border-color);cursor:pointer;position:relative}
+.palette-item:hover{transform:scale(1.05)}
+.palette-item .palette-label{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);color:#fff;font-size:.65rem;padding:2px 4px;text-align:center;border-radius:0 0 5px 5px}
+.shades-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:2px;margin-top:.5rem}
+.shades-grid .shade{height:36px;border-radius:3px;cursor:pointer}
+.shades-grid .shade:hover{transform:scale(1.1);z-index:2;position:relative}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="/cn/" class="brand">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    <span data-zh="009TG 工具箱" data-en="009TG Toolbox">009TG 工具箱</span>
+  </a>
+  <div class="nav-links">
+    <a href="/cn/" data-zh="&#8592; 返回站点首页" data-en="&#8592; Back to Site Home">&#8592; 返回站点首页</a>
+    <a href="./index.html" data-zh="&#8592; 返回工具集首页" data-en="&#8592; Back to Tools Home">&#8592; 返回工具集首页</a>
+    <div class="lang-switch">
+      <button data-lang="zh" class="active">中</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </div>
+</nav>
+<div class="container">
+<h1 style="font-size:1.4rem;margin-bottom:1rem" data-zh="颜色转换器" data-en="Color Converter">颜色转换器</h1>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#127912;</span><span data-zh="输入颜色" data-en="Input Color">输入颜色</span></div>
+  <div class="form-group">
+    <label data-zh="HEX 颜色值" data-en="HEX Color">HEX 颜色值</label>
+    <div class="color-input-row">
+      <input type="text" id="color-hex" placeholder="#3a7bd5" value="#3a7bd5" oninput="fromHex(this.value)">
+      <input type="color" id="color-picker" value="#3a7bd5" oninput="fromHex(this.value)">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label data-zh="RGB" data-en="RGB">RGB</label>
+      <input type="text" id="color-rgb" placeholder="rgb(58,123,213)" oninput="fromRgb(this.value)">
+    </div>
+    <div class="form-group">
+      <label data-zh="HSL" data-en="HSL">HSL</label>
+      <input type="text" id="color-hsl" placeholder="hsl(214,64%,53%)" oninput="fromHsl(this.value)">
+    </div>
+  </div>
+  <div id="color-preview" class="color-preview" style="background:#3a7bd5;color:#fff">#3a7bd5</div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#127912;</span><span data-zh="明暗变体" data-en="Shades & Tints">明暗变体</span></div>
+  <div style="font-size:.85rem;color:var(--text-secondary);margin-bottom:.5rem" data-zh="点击任意色块可复制 HEX 值" data-en="Click any swatch to copy HEX">点击任意色块可复制 HEX 值</div>
+  <div style="font-size:.8rem;color:var(--text-muted);margin-bottom:.25rem" data-zh="浅色变体 (加白)" data-en="Tints (white added)">浅色变体 (加白)</div>
+  <div id="tints-grid" class="shades-grid"></div>
+  <div style="font-size:.8rem;color:var(--text-muted);margin-top:.75rem;margin-bottom:.25rem" data-zh="深色变体 (加黑)" data-en="Shades (black added)">深色变体 (加黑)</div>
+  <div id="shades-grid" class="shades-grid"></div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#127912;</span><span data-zh="常用调色板" data-en="Common Palette">常用调色板</span></div>
+  <div style="font-size:.85rem;color:var(--text-secondary);margin-bottom:.5rem" data-zh="点击应用颜色" data-en="Click to apply color">点击应用颜色</div>
+  <div id="common-palette" class="palette-grid"></div>
+</div>
+</div>
+<footer class="footer">
+  <div class="footer-links">
+    <a href="/about.html" data-zh="关于我们" data-en="About">关于我们</a>
+    <a href="/privacy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+    <a href="/contact.html" data-zh="联系我们" data-en="Contact">联系我们</a>
+    <a href="/disclaimer.html" data-zh="免责声明" data-en="Disclaimer">免责声明</a>
+  </div>
+  <p data-zh="009TG 工具箱 - 免费实用的在线工具集合" data-en="009TG Toolbox - Free & Practical Online Tools">009TG 工具箱 - 免费实用的在线工具集合</p>
+</footer>
+<script>
+const i18nData={
+  zh:{
+    home:'站点首页',tools:'工具集首页',lang:'English',backHome:'返回站点首页',backTools:'返回工具集首页',
+    run:'运行',clear:'清空',copy:'复制',copied:'已复制',inputPlaceholder:'请输入...',
+    error:'错误',loading:'加载中...',noResult:'暂无结果'
+  },
+  en:{
+    home:'Site Home',tools:'Tools Home',lang:'中文',backHome:'Back to Site Home',backTools:'Back to Tools Home',
+    run:'Run',clear:'Clear',copy:'Copy',copied:'Copied',inputPlaceholder:'Enter...',
+    error:'Error',loading:'Loading...',noResult:'No result'
+  }
+};
+let currentLang='zh';
+function setLang(l){
+  currentLang=l;
+  document.documentElement.lang=l==='zh'?'zh-CN':'en';
+  document.querySelectorAll('[data-zh],[data-en]').forEach(el=>{
+    if(el.tagName==='INPUT'&&el.hasAttribute('placeholder')){
+      el.placeholder=el.getAttribute('data-'+l);
+    }else if(el.tagName==='TITLE'){
+      document.title=el.getAttribute('data-'+l)||document.title;
+    }else{
+      el.textContent=el.getAttribute('data-'+l)||el.textContent;
+    }
+  });
+  document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  localStorage.setItem('tools-lang',l);
+}
+function t(key){return(i18nData[currentLang]||i18nData.zh)[key]||key;}
+document.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('tools-lang')||'zh';
+  setLang(saved);
+  document.querySelectorAll('.lang-switch button').forEach(b=>{
+    b.addEventListener('click',()=>setLang(b.dataset.lang));
+  });
+  initPalette();
+  fromHex('#3a7bd5');
+});
+function escapeHtml(t){
+  const d=document.createElement('div');d.textContent=t;return d.innerHTML;
+}
+function copyText(t){
+  navigator.clipboard.writeText(t).then(()=>alert(t('copied'))).catch(()=>{});
+}
+
+function hexToRgb(hex){
+  hex=hex.replace(/^#/,'');
+  if(hex.length===3)hex=hex.split('').map(c=>c+c).join('');
+  const n=parseInt(hex,16);
+  if(isNaN(n)||hex.length!==6)return null;
+  return{r:(n>>16)&255,g:(n>>8)&255,b:n&255};
+}
+function rgbToHex(r,g,b){
+  return'#'+[r,g,b].map(v=>Math.max(0,Math.min(255,v)).toString(16).padStart(2,'0')).join('');
+}
+function rgbToHsl(r,g,b){
+  r/=255;g/=255;b/=255;
+  const max=Math.max(r,g,b),min=Math.min(r,g,b);
+  let h=0,s=0,l=(max+min)/2;
+  if(max!==min){
+    const d=max-min;
+    s=l>.5?d/(2-max-min):d/(max+min);
+    switch(max){
+      case r:h=(g-b)/d+(g<b?6:0);break;
+      case g:h=(b-r)/d+2;break;
+      case b:h=(r-g)/d+4;break;
+    }
+    h/=6;
+  }
+  return{h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)};
+}
+function hslToRgb(h,s,l){
+  h/=360;s/=100;l/=100;
+  let r,g,b;
+  if(s===0){r=g=b=l;}
+  else{
+    const hue2rgb=(p,q,t)=>{
+      if(t<0)t+=1;if(t>1)t-=1;
+      if(t<1/6)return p+(q-p)*6*t;
+      if(t<1/2)return q;
+      if(t<2/3)return p+(q-p)*(2/3-t)*6;
+      return p;
+    };
+    const q=l<.5?l*(1+s):l+s-l*s;
+    const p=2*l-q;
+    r=hue2rgb(p,q,h+1/3);
+    g=hue2rgb(p,q,h);
+    b=hue2rgb(p,q,h-1/3);
+  }
+  return{r:Math.round(r*255),g:Math.round(g*255),b:Math.round(b*255)};
+}
+function getContrastColor(hex){
+  const rgb=hexToRgb(hex);
+  if(!rgb)return'#fff';
+  const yiq=(rgb.r*299+rgb.g*587+rgb.b*114)/1000;
+  return yiq>=128?'#1a1d23':'#fff';
+}
+function updatePreview(hex){
+  const p=document.getElementById('color-preview');
+  p.style.background=hex;
+  p.style.color=getContrastColor(hex);
+  p.textContent=hex.toUpperCase();
+}
+function fromHex(v){
+  v=v.trim();
+  if(!v.startsWith('#'))v='#'+v;
+  const rgb=hexToRgb(v);
+  if(!rgb)return;
+  document.getElementById('color-hex').value=v;
+  document.getElementById('color-picker').value=v;
+  document.getElementById('color-rgb').value='rgb('+rgb.r+','+rgb.g+','+rgb.b+')';
+  const hsl=rgbToHsl(rgb.r,rgb.g,rgb.b);
+  document.getElementById('color-hsl').value='hsl('+hsl.h+','+hsl.s+'%,'+hsl.l+'%)';
+  updatePreview(v);
+  renderShades(v);
+}
+function fromRgb(v){
+  const m=v.match(/rgba?\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+  if(!m)return;
+  const r=parseInt(m[1]),g=parseInt(m[2]),b=parseInt(m[3]);
+  const hex=rgbToHex(r,g,b);
+  document.getElementById('color-hex').value=hex;
+  document.getElementById('color-picker').value=hex;
+  const hsl=rgbToHsl(r,g,b);
+  document.getElementById('color-hsl').value='hsl('+hsl.h+','+hsl.s+'%,'+hsl.l+'%)';
+  updatePreview(hex);
+  renderShades(hex);
+}
+function fromHsl(v){
+  const m=v.match(/hsla?\s*\(\s*(\d+)\s*,\s*(\d+)%?\s*,\s*(\d+)%?/i);
+  if(!m)return;
+  const h=parseInt(m[1]),s=parseInt(m[2]),l=parseInt(m[3]);
+  const rgb=hslToRgb(h,s,l);
+  const hex=rgbToHex(rgb.r,rgb.g,rgb.b);
+  document.getElementById('color-hex').value=hex;
+  document.getElementById('color-picker').value=hex;
+  document.getElementById('color-rgb').value='rgb('+rgb.r+','+rgb.g+','+rgb.b+')';
+  updatePreview(hex);
+  renderShades(hex);
+}
+function renderShades(hex){
+  const rgb=hexToRgb(hex);
+  if(!rgb)return;
+  const tints=document.getElementById('tints-grid');
+  const shades=document.getElementById('shades-grid');
+  tints.innerHTML='';shades.innerHTML='';
+  for(let i=0;i<10;i++){
+    const t=rgbToHex(
+      Math.round(rgb.r+(255-rgb.r)*i/9),
+      Math.round(rgb.g+(255-rgb.g)*i/9),
+      Math.round(rgb.b+(255-rgb.b)*i/9)
+    );
+    const s=rgbToHex(
+      Math.round(rgb.r*(1-i/9)),
+      Math.round(rgb.g*(1-i/9)),
+      Math.round(rgb.b*(1-i/9))
+    );
+    const te=document.createElement('div');te.className='shade';te.style.background=t;te.title=t;te.onclick=()=>{fromHex(t);copyText(t);};
+    tints.appendChild(te);
+    const se=document.createElement('div');se.className='shade';se.style.background=s;se.title=s;se.onclick=()=>{fromHex(s);copyText(s);};
+    shades.appendChild(se);
+  }
+}
+function initPalette(){
+  const colors=['#e74c3c','#e67e22','#f1c40f','#2ecc71','#1abc9c','#3498db','#9b59b6','#34495e','#e91e63','#ff5722','#795548','#607d8b'];
+  const names={zh:['红','橙','黄','绿','青','蓝','紫','深灰','粉','深橙','棕','蓝灰'],en:['Red','Orange','Yellow','Green','Cyan','Blue','Purple','Dark Gray','Pink','Deep Orange','Brown','Blue Gray']};
+  const grid=document.getElementById('common-palette');
+  colors.forEach((c,i)=>{
+    const d=document.createElement('div');d.className='palette-item';d.style.background=c;
+    const l=document.createElement('div');l.className='palette-label';l.dataset.zh=names.zh[i];l.dataset.en=names.en[i];l.textContent=names.zh[i];l.id='pl-'+i;
+    d.appendChild(l);d.onclick=()=>fromHex(c);
+    grid.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>

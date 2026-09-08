@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Invisible man">
+<title>隐私政策 - 009tg</title>
+<meta name="description" content="009tg下海导航隐私政策与Cookie使用说明。了解我们如何保护您的隐私及Google AdSense广告Cookie的使用方式。">
+<meta name="keywords" content="隐私政策,Cookie,Google AdSense,数据保护,个性化广告,隐私声明">
+<meta name="theme-color" content="#1a1d23">
+<style>
+:root {
+  --bg: #f4f4f4; --bg-content: #ffffff; --bg-card: #ffffff; --bg-nav: #ffffff;
+  --text: #373e4a; --text-secondary: #6c757d; --text-muted: #979898;
+  --border: #e4e6e9; --link: #337ab7; --link-hover: #23527c;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08); --radius: 6px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+[data-theme="dark"] {
+  --bg: #1a1d23; --bg-content: #22262e; --bg-card: #2a2f38; --bg-nav: #22262e;
+  --text: #e0e0e0; --text-secondary: #a0a0a0; --text-muted: #707070;
+  --border: #3a3f48; --link: #5dade2; --link-hover: #85c1e9;
+  --shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font); background-color: var(--bg); color: var(--text);
+  line-height: 1.7; min-height: 100vh; display: flex; flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+a { color: var(--link); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--link-hover); text-decoration: underline; }
+.navbar {
+  background-color: var(--bg-nav); border-bottom: 1px solid var(--border);
+  padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100; transition: background-color 0.3s, border-color 0.3s;
+}
+.nav-left { display: flex; align-items: center; gap: 20px; }
+.nav-logo { font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: 0.5px; }
+.nav-logo a { color: inherit; text-decoration: none; }
+.nav-logo a:hover { color: var(--link); }
+.nav-links { display: flex; align-items: center; gap: 18px; list-style: none; }
+.nav-links a { font-size: 14px; color: var(--text-secondary); }
+.nav-links a:hover { color: var(--link); }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-btn {
+  background: transparent; border: 1px solid var(--border); color: var(--text-secondary);
+  padding: 5px 12px; border-radius: var(--radius); cursor: pointer; font-size: 13px;
+  transition: all 0.2s; font-family: inherit;
+}
+.nav-btn:hover { border-color: var(--link); color: var(--link); }
+.nav-btn.active { background: var(--link); color: #fff; border-color: var(--link); }
+.nav-btn.active:hover { background: var(--link-hover); border-color: var(--link-hover); }
+.theme-btn {
+  background: transparent; border: none; color: var(--text-secondary); cursor: pointer;
+  font-size: 16px; padding: 6px; border-radius: 50%; transition: background 0.2s;
+  width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+}
+.theme-btn:hover { background: rgba(128,128,128,0.15); }
+.main-content {
+  flex: 1; max-width: 800px; width: 100%; margin: 0 auto; padding: 40px 24px;
+}
+.page-header { text-align: center; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.page-header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+.page-header p { color: var(--text-secondary); font-size: 15px; }
+.card {
+  background-color: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 28px; margin-bottom: 20px; box-shadow: var(--shadow);
+  transition: background-color 0.3s, border-color 0.3s;
+}
+.card h2 { font-size: 20px; font-weight: 600; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.card h3 { font-size: 17px; font-weight: 600; margin: 20px 0 10px; }
+.card p { margin-bottom: 12px; color: var(--text-secondary); }
+.card ul, .card ol { margin: 10px 0 10px 22px; color: var(--text-secondary); }
+.card li { margin-bottom: 6px; }
+.card strong { color: var(--text); }
+.update-date { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+.footer {
+  background-color: var(--bg-nav); border-top: 1px solid var(--border);
+  padding: 28px 24px; text-align: center; transition: background-color 0.3s, border-color 0.3s;
+}
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px; margin-bottom: 14px; font-size: 14px; }
+.footer-links a { color: var(--text-secondary); }
+.footer-links a:hover { color: var(--link); }
+.footer-copy { font-size: 13px; color: var(--text-muted); }
+@media (max-width: 600px) {
+  .navbar { padding: 0 14px; height: 50px; }
+  .nav-logo { font-size: 16px; }
+  .nav-links { display: none; }
+  .main-content { padding: 24px 16px; }
+  .page-header h1 { font-size: 22px; }
+  .card { padding: 20px 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-left">
+    <div class="nav-logo"><a href="/cn/">009tg</a></div>
+    <ul class="nav-links">
+      <li><a href="/cn/">首页</a></li>
+      <li><a href="/about.html">关于我们</a></li>
+      <li><a href="/contact.html">联系方式</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <button class="nav-btn" id="btn-zh" onclick="switchLang('zh')">中</button>
+    <button class="nav-btn" id="btn-en" onclick="switchLang('en')">EN</button>
+    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" title="切换主题">&#9789;</button>
+  </div>
+</nav>
+
+<main class="main-content">
+
+  <!-- Chinese -->
+  <div class="lang-zh">
+    <div class="page-header">
+      <h1>隐私政策</h1>
+      <p>Privacy Policy</p>
+      <div class="update-date">最后更新日期：2026年9月8日</div>
+    </div>
+
+    <div class="card">
+      <h2>一、基本信息</h2>
+      <p>本站（<strong>009tg下海导航</strong>）是一个由个人独立维护的静态导航网站。我们高度重视访客的隐私保护，本政策旨在说明本站如何处理与保护您的个人信息。</p>
+    </div>
+
+    <div class="card">
+      <h2>二、数据收集声明</h2>
+      <p><strong>本站作为静态导航站，不主动收集、存储或处理访客的个人身份信息（PII）。</strong></p>
+      <p>您在本站浏览时，我们不会要求您注册账号、填写表单或提供任何个人资料。本站不设置用户登录系统，也不维护用户数据库。</p>
+      <p>然而，与绝大多数网站一样，本站托管服务提供商（Cloudflare）可能会记录基础的访问日志，例如：</p>
+      <ul>
+        <li>IP 地址（用于安全防护与访问分析）</li>
+        <li>浏览器类型与操作系统信息</li>
+        <li>访问时间与页面请求记录</li>
+      </ul>
+      <p>上述日志由托管服务商根据其隐私政策进行管理，站长本人无法直接访问或利用这些数据进行用户画像。</p>
+    </div>
+
+    <div class="card">
+      <h2>三、Cookie 使用说明</h2>
+      <h3>3.1 本站自身 Cookie</h3>
+      <p>本站为改善用户体验，可能使用极少量的浏览器本地存储（localStorage）来记录您的<strong>主题偏好</strong>（深色/浅色模式）和<strong>语言偏好</strong>（中文/英文）。这些信息仅保存在您的本地浏览器中，不会上传至任何服务器。</p>
+      <h3>3.2 第三方广告 Cookie</h3>
+      <p>本站使用 <strong>Google AdSense</strong> 等第三方广告服务来展示广告。Google 及其合作伙伴可能使用 Cookie 来收集信息，以便：</p>
+      <ul>
+        <li>展示与您兴趣相关的个性化广告</li>
+        <li>衡量广告效果并优化广告投放</li>
+        <li>防止欺诈性广告活动</li>
+      </ul>
+      <p>Google 使用广告 Cookie 使 Google 及其合作伙伴能够根据您访问本站及其他网站的情况向您投放广告。</p>
+      <p><strong>您可以通过以下方式管理或退出个性化广告：</strong></p>
+      <ul>
+        <li>访问 <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">Google 广告设置</a> 关闭个性化广告</li>
+        <li>访问 <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">About Ads</a> 选择退出基于兴趣的广告</li>
+        <li>在浏览器设置中清除或阻止第三方 Cookie</li>
+      </ul>
+      <p>请注意，即使您选择退出个性化广告，您仍可能看到非个性化广告。</p>
+    </div>
+
+    <div class="card">
+      <h2>四、第三方网站</h2>
+      <p>本站包含大量指向第三方网站的外部链接。请注意：</p>
+      <ul>
+        <li>每个第三方网站均有其独立的隐私政策和使用条款</li>
+        <li>本站不对任何第三方网站的内容、安全性或隐私实践负责</li>
+        <li>点击外部链接离开本站后，您将不再受本隐私政策的约束</li>
+        <li>建议您在向任何第三方网站提供个人信息前，仔细阅读其隐私政策</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>五、儿童隐私</h2>
+      <p>本站不面向13岁以下儿童提供服务，亦不会有意收集13岁以下儿童的个人信息。如果您认为有儿童向我们提供了个人信息，请通过<a href="/contact.html">联系方式</a>告知我们，我们将尽快删除相关信息。</p>
+    </div>
+
+    <div class="card">
+      <h2>六、政策更新</h2>
+      <p>我们保留随时更新本隐私政策的权利。任何重大变更将在本页面显著位置公布，并更新"最后更新日期"。建议您定期查看本页面以了解最新政策。</p>
+      <p>如果您对本隐私政策有任何疑问，请通过<a href="/contact.html">联系方式</a>与我们取得联系。</p>
+    </div>
+  </div>
+
+  <!-- English -->
+  <div class="lang-en" style="display:none">
+    <div class="page-header">
+      <h1>Privacy Policy</h1>
+      <p>隐私政策</p>
+      <div class="update-date">Last Updated: September 8, 2026</div>
+    </div>
+
+    <div class="card">
+      <h2>1. Overview</h2>
+      <p>This website (<strong>009tg Navigation</strong>) is a static navigation site independently maintained by an individual. We highly value visitor privacy protection, and this policy explains how this site handles and protects your personal information.</p>
+    </div>
+
+    <div class="card">
+      <h2>2. Data Collection Statement</h2>
+      <p><strong>As a static navigation site, we do not actively collect, store, or process visitors' personally identifiable information (PII).</strong></p>
+      <p>When you browse this site, we do not ask you to register an account, fill out forms, or provide any personal information. This site does not have a user login system and does not maintain a user database.</p>
+      <p>However, like most websites, our hosting service provider (Cloudflare) may record basic access logs, such as:</p>
+      <ul>
+        <li>IP address (for security protection and access analysis)</li>
+        <li>Browser type and operating system information</li>
+        <li>Access time and page request records</li>
+      </ul>
+      <p>The above logs are managed by the hosting provider according to its privacy policy. The webmaster cannot directly access or use this data for user profiling.</p>
+    </div>
+
+    <div class="card">
+      <h2>3. Cookie Usage</h2>
+      <h3>3.1 Our Own Cookies</h3>
+      <p>To improve user experience, this site may use a minimal amount of browser local storage (localStorage) to record your <strong>theme preference</strong> (dark/light mode) and <strong>language preference</strong> (Chinese/English). This information is stored only in your local browser and is not uploaded to any server.</p>
+      <h3>3.2 Third-Party Advertising Cookies</h3>
+      <p>This site uses <strong>Google AdSense</strong> and other third-party advertising services to display ads. Google and its partners may use cookies to collect information in order to:</p>
+      <ul>
+        <li>Display personalized ads based on your interests</li>
+        <li>Measure ad effectiveness and optimize ad delivery</li>
+        <li>Prevent fraudulent advertising activities</li>
+      </ul>
+      <p>Google uses advertising cookies to enable Google and its partners to serve ads to you based on your visits to this site and/or other sites on the Internet.</p>
+      <p><strong>You can manage or opt out of personalized advertising through the following methods:</strong></p>
+      <ul>
+        <li>Visit <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">Google Ad Settings</a> to turn off personalized ads</li>
+        <li>Visit <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">About Ads</a> to opt out of interest-based advertising</li>
+        <li>Clear or block third-party cookies in your browser settings</li>
+      </ul>
+      <p>Please note that even if you opt out of personalized advertising, you may still see non-personalized ads.</p>
+    </div>
+
+    <div class="card">
+      <h2>4. Third-Party Websites</h2>
+      <p>This site contains numerous external links to third-party websites. Please note:</p>
+      <ul>
+        <li>Each third-party website has its own independent privacy policy and terms of use</li>
+        <li>This site is not responsible for the content, security, or privacy practices of any third-party website</li>
+        <li>After clicking an external link and leaving this site, you will no longer be bound by this privacy policy</li>
+        <li>We recommend that you carefully read the privacy policy of any third-party website before providing personal information</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>5. Children's Privacy</h2>
+      <p>This site does not target services to children under 13 years of age and does not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, please inform us through our <a href="/contact.html">Contact</a> page, and we will promptly delete the relevant information.</p>
+    </div>
+
+    <div class="card">
+      <h2>6. Policy Updates</h2>
+      <p>We reserve the right to update this privacy policy at any time. Any significant changes will be posted in a prominent position on this page, and the "Last Updated" date will be revised. We recommend that you review this page regularly for the latest policy.</p>
+      <p>If you have any questions about this privacy policy, please contact us through our <a href="/contact.html">Contact</a> page.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="/about.html">关于我们 / About Us</a>
+    <a href="/privacy.html">隐私政策 / Privacy</a>
+    <a href="/contact.html">联系方式 / Contact</a>
+    <a href="/disclaimer.html">免责声明 / Disclaimer</a>
+    <span style="color:var(--text-muted)">|</span>
+    <a href="/cn/">返回首页 / Home</a>
+  </div>
+  <div class="footer-copy">
+    &copy; 009tg.com &middot; <span class="lang-zh">个人独立维护</span><span class="lang-en" style="display:none">Independently Maintained</span>
+  </div>
+</footer>
+
+<script>
+function initTheme() {
+  var saved = localStorage.getItem('theme');
+  if (saved) { document.documentElement.setAttribute('data-theme', saved); }
+  else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+  updateThemeIcon();
+}
+function toggleTheme() {
+  var cur = document.documentElement.getAttribute('data-theme');
+  var next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  updateThemeIcon();
+}
+function updateThemeIcon() {
+  var btn = document.getElementById('theme-btn');
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  btn.innerHTML = isDark ? '&#9788;' : '&#9789;';
+  btn.title = isDark ? 'Switch to Light Mode' : '切换到深色模式';
+}
+function switchLang(lang) {
+  var isEn = lang === 'en';
+  document.querySelectorAll('.lang-zh').forEach(function(el) { el.style.display = isEn ? 'none' : ''; });
+  document.querySelectorAll('.lang-en').forEach(function(el) { el.style.display = isEn ? '' : 'none'; });
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = isEn ? 'en' : 'zh-CN';
+  document.getElementById('btn-zh').classList.toggle('active', !isEn);
+  document.getElementById('btn-en').classList.toggle('active', isEn);
+  var homeLink = document.querySelector('.nav-logo a');
+  if (homeLink) homeLink.href = isEn ? '/en/' : '/cn/';
+}
+function initLang() {
+  var saved = localStorage.getItem('lang');
+  var param = new URLSearchParams(window.location.search).get('lang');
+  switchLang(param || saved || 'zh');
+}
+initTheme(); initLang();
+</script>
+
+</body>
+</html>

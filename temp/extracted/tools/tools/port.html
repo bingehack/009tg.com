@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-zh="端口扫描 - 009TG 工具箱" data-en="Port Scanner - 009TG Toolbox">端口扫描 - 009TG 工具箱</title>
+<meta name="description" content="免费在线端口检测工具，检测域名常用端口是否开放。受浏览器安全限制，仅支持 HTTP/HTTPS 相关端口的间接探测。">
+<meta name="keywords" content="端口扫描,端口检测,网站端口,在线端口工具,端口状态">
+<meta name="author" content="009TG">
+<meta name="theme-color" content="#1a1d23">
+<style>
+:root {
+  --bg-main: #1a1d23;
+  --bg-content: #22262e;
+  --bg-card: #2a2f38;
+  --bg-card-hover: #333945;
+  --bg-navbar: #22262e;
+  --bg-input: #2a2f38;
+  --bg-btn: #3a7bd5;
+  --bg-btn-hover: #2c62aa;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-muted: #707070;
+  --border-color: #3a3f48;
+  --link-color: #5dade2;
+  --link-hover: #85c1e9;
+  --accent: #3a7bd5;
+  --accent-light: #5dade2;
+  --success: #27ae60;
+  --error: #e74c3c;
+  --warning: #f39c12;
+  --shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg-main);color:var(--text-primary);line-height:1.6;min-height:100vh}
+a{color:var(--link-color);text-decoration:none}a:hover{color:var(--link-hover)}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;background:var(--bg-navbar);border-bottom:1px solid var(--border-color);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:.5rem}
+.navbar .brand{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:1.1rem;color:var(--text-primary)}
+.navbar .brand svg{width:28px;height:28px;fill:var(--accent-light)}
+.navbar .nav-links{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.navbar .nav-links a{font-size:.9rem;color:var(--text-secondary);transition:color .2s}
+.navbar .nav-links a:hover{color:var(--link-color)}
+.lang-switch{display:flex;align-items:center;gap:.25rem;background:var(--bg-card);border:1px solid var(--border-color);border-radius:20px;padding:2px}
+.lang-switch button{background:none;border:none;color:var(--text-muted);font-size:.8rem;padding:.25rem .6rem;border-radius:16px;cursor:pointer;transition:all .2s}
+.lang-switch button.active{background:var(--accent);color:#fff}
+.container{max-width:1100px;margin:0 auto;padding:1.5rem}
+.card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow)}
+.card-title{font-size:1.15rem;font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;color:var(--text-primary)}
+.card-title .icon{font-size:1.3rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.55rem 1.1rem;background:var(--bg-btn);color:#fff;border:none;border-radius:6px;font-size:.9rem;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--bg-btn-hover)}
+.btn-secondary{background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color)}
+.btn-secondary:hover{background:var(--bg-card-hover)}
+.btn-success{background:var(--success)}
+.btn-sm{padding:.35rem .75rem;font-size:.8rem}
+input,textarea,select{width:100%;padding:.6rem .8rem;background:var(--bg-input);border:1px solid var(--border-color);border-radius:6px;color:var(--text-primary);font-size:.9rem;font-family:inherit;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
+textarea{resize:vertical;min-height:120px}
+label{display:block;margin-bottom:.35rem;font-size:.85rem;color:var(--text-secondary)}
+.form-row{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.form-row .form-group{flex:1;min-width:200px}
+.form-group{margin-bottom:1rem}
+.result-area{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:1rem;margin-top:1rem;min-height:60px;white-space:pre-wrap;word-break:break-word;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:.85rem;color:var(--text-secondary);max-height:400px;overflow:auto}
+.result-area.success{border-color:var(--success);color:var(--text-primary)}
+.result-area.error{border-color:var(--error);color:var(--error)}
+.tabs{display:flex;gap:.25rem;border-bottom:2px solid var(--border-color);margin-bottom:1rem}
+.tab-btn{padding:.5rem 1rem;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:.9rem;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab-btn.active{color:var(--accent-light);border-bottom-color:var(--accent-light)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.tool-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.25rem;transition:all .2s;cursor:pointer}
+.tool-card:hover{background:var(--bg-card-hover);transform:translateY(-2px);box-shadow:var(--shadow)}
+.tool-card .tool-icon{font-size:2rem;margin-bottom:.5rem}
+.tool-card .tool-name{font-weight:600;margin-bottom:.25rem;color:var(--text-primary)}
+.tool-card .tool-desc{font-size:.8rem;color:var(--text-muted);line-height:1.4}
+.badge{display:inline-block;padding:.15rem .45rem;border-radius:4px;font-size:.7rem;font-weight:600;text-transform:uppercase}
+.badge-api{background:rgba(58,123,213,.2);color:var(--accent-light)}
+.badge-offline{background:rgba(39,174,96,.2);color:var(--success)}
+.footer{text-align:center;padding:2rem 1rem;color:var(--text-muted);font-size:.8rem;border-top:1px solid var(--border-color);margin-top:2rem}
+.copy-hint{font-size:.75rem;color:var(--text-muted);margin-top:.35rem}
+.action-bar{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.footer-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem}
+.footer-links a{font-size:.8rem;color:var(--text-muted);transition:color .2s}
+.footer-links a:hover{color:var(--link-color)}
+@media(max-width:640px){
+  .container{padding:1rem}
+  .navbar{padding:.6rem 1rem}
+  .navbar .brand{font-size:1rem}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .form-row{flex-direction:column;gap:.5rem}
+}
+.hidden{display:none!important}
+
+.port-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.5rem;margin-top:1rem}
+.port-item{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:.6rem .8rem;font-size:.85rem;display:flex;align-items:center;justify-content:space-between}
+.port-item.open{border-color:var(--success)}
+.port-item.closed{border-color:var(--error)}
+.port-item.unknown{border-color:var(--warning)}
+.port-item .port-num{font-weight:600;font-family:monospace}
+.port-item .port-sts{font-size:.75rem}
+.port-item.open .port-sts{color:var(--success)}
+.port-item.closed .port-sts{color:var(--error)}
+.port-item.unknown .port-sts{color:var(--warning)}
+.port-note{background:rgba(243,156,18,.1);border:1px solid rgba(243,156,18,.3);border-radius:6px;padding:.75rem 1rem;font-size:.85rem;color:var(--warning);margin-top:1rem}
+.port-note p{margin:.25rem 0}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="/cn/" class="brand">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    <span data-zh="009TG 工具箱" data-en="009TG Toolbox">009TG 工具箱</span>
+  </a>
+  <div class="nav-links">
+    <a href="/cn/" data-zh="&#8592; 返回站点首页" data-en="&#8592; Back to Site Home">&#8592; 返回站点首页</a>
+    <a href="./index.html" data-zh="&#8592; 返回工具集首页" data-en="&#8592; Back to Tools Home">&#8592; 返回工具集首页</a>
+    <div class="lang-switch">
+      <button data-lang="zh" class="active">中</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </div>
+</nav>
+<div class="container">
+<h1 style="font-size:1.4rem;margin-bottom:1rem" data-zh="端口检测" data-en="Port Scanner">端口检测</h1>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#128268;</span><span data-zh="检测目标域名" data-en="Check Target Domain">检测目标域名</span></div>
+  <div class="form-group">
+    <label data-zh="域名（不含协议和端口）" data-en="Domain (without protocol or port)">域名（不含协议和端口）</label>
+    <input type="text" id="port-domain" placeholder="example.com" value="google.com">
+  </div>
+  <div class="action-bar">
+    <button class="btn" onclick="scanPorts()" data-zh="开始检测" data-en="Scan">开始检测</button>
+    <button class="btn btn-secondary" onclick="clearPort()" data-zh="清空" data-en="Clear">清空</button>
+  </div>
+  <div id="port-grid" class="port-grid"></div>
+  <div id="port-note" class="port-note" style="display:none"></div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#128736;</span><span data-zh="使用说明与限制" data-en="Usage & Limitations">使用说明与限制</span></div>
+  <div class="port-note" style="display:block">
+    <p data-zh="浏览器无法直接创建 TCP Socket，因此本工具采用间接探测方式：" data-en="Browsers cannot directly create TCP sockets, so this tool uses indirect probing:">
+      浏览器无法直接创建 TCP Socket，因此本工具采用间接探测方式：
+    </p>
+    <ul style="margin:.5rem 0 .5rem 1.2rem">
+      <li data-zh="通过 fetch (no-cors) 尝试连接目标端口的 HTTP/HTTPS 服务" data-en="Uses fetch (no-cors) to attempt HTTP/HTTPS connections to target ports">通过 fetch (no-cors) 尝试连接目标端口的 HTTP/HTTPS 服务</li>
+      <li data-zh="连接成功（opaque response）= 端口可能开放；连接超时/失败 = 端口可能关闭或被过滤" data-en="Connection success (opaque response) = port may be open; timeout/failure = port may be closed or filtered">连接成功（opaque response）= 端口可能开放；连接超时/失败 = 端口可能关闭或被过滤</li>
+      <li data-zh="浏览器会拦截部分非 HTTP 端口（如 21/22/25），这些端口无法通过浏览器检测" data-en="Browsers block some non-HTTP ports (e.g. 21/22/25); these cannot be tested from a browser">浏览器会拦截部分非 HTTP 端口（如 21/22/25），这些端口无法通过浏览器检测</li>
+    </ul>
+    <p data-zh="检测结果仅供参考，不代表专业级端口扫描结论。" data-en="Results are for reference only and do not represent professional port scanning conclusions.">
+      检测结果仅供参考，不代表专业级端口扫描结论。
+    </p>
+  </div>
+</div>
+</div>
+<footer class="footer">
+  <div class="footer-links">
+    <a href="/about.html" data-zh="关于我们" data-en="About">关于我们</a>
+    <a href="/privacy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+    <a href="/contact.html" data-zh="联系我们" data-en="Contact">联系我们</a>
+    <a href="/disclaimer.html" data-zh="免责声明" data-en="Disclaimer">免责声明</a>
+  </div>
+  <p data-zh="009TG 工具箱 - 免费实用的在线工具集合" data-en="009TG Toolbox - Free & Practical Online Tools">009TG 工具箱 - 免费实用的在线工具集合</p>
+</footer>
+<script>
+const i18nData={
+  zh:{
+    home:'站点首页',tools:'工具集首页',lang:'English',backHome:'返回站点首页',backTools:'返回工具集首页',
+    run:'运行',clear:'清空',copy:'复制',copied:'已复制',inputPlaceholder:'请输入...',
+    error:'错误',loading:'加载中...',noResult:'暂无结果'
+  },
+  en:{
+    home:'Site Home',tools:'Tools Home',lang:'中文',backHome:'Back to Site Home',backTools:'Back to Tools Home',
+    run:'Run',clear:'Clear',copy:'Copy',copied:'Copied',inputPlaceholder:'Enter...',
+    error:'Error',loading:'Loading...',noResult:'No result'
+  }
+};
+let currentLang='zh';
+function setLang(l){
+  currentLang=l;
+  document.documentElement.lang=l==='zh'?'zh-CN':'en';
+  document.querySelectorAll('[data-zh],[data-en]').forEach(el=>{
+    if(el.tagName==='INPUT'&&el.hasAttribute('placeholder')){
+      el.placeholder=el.getAttribute('data-'+l);
+    }else if(el.tagName==='TITLE'){
+      document.title=el.getAttribute('data-'+l)||document.title;
+    }else{
+      el.textContent=el.getAttribute('data-'+l)||el.textContent;
+    }
+  });
+  document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  localStorage.setItem('tools-lang',l);
+}
+function t(key){return(i18nData[currentLang]||i18nData.zh)[key]||key;}
+document.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('tools-lang')||'zh';
+  setLang(saved);
+  document.querySelectorAll('.lang-switch button').forEach(b=>{
+    b.addEventListener('click',()=>setLang(b.dataset.lang));
+  });
+});
+function escapeHtml(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+function copyText(t){navigator.clipboard.writeText(t).then(()=>alert(t('copied'))).catch(()=>{});}
+
+function clearPort(){
+  document.getElementById('port-domain').value='';
+  document.getElementById('port-grid').innerHTML='';
+  document.getElementById('port-note').style.display='none';
+}
+const PORTS=[
+  {port:80,name:'HTTP',proto:'http'},
+  {port:443,name:'HTTPS',proto:'https'},
+  {port:21,name:'FTP',proto:'http'},
+  {port:22,name:'SSH',proto:'http'},
+  {port:25,name:'SMTP',proto:'http'},
+  {port:110,name:'POP3',proto:'http'},
+  {port:143,name:'IMAP',proto:'http'},
+  {port:3306,name:'MySQL',proto:'http'},
+  {port:3389,name:'RDP',proto:'http'},
+  {port:5432,name:'PostgreSQL',proto:'http'},
+  {port:8080,name:'HTTP-Alt',proto:'http'},
+  {port:8443,name:'HTTPS-Alt',proto:'https'},
+  {port:3000,name:'Dev',proto:'http'},
+  {port:5000,name:'Dev',proto:'http'},
+  {port:8000,name:'Dev',proto:'http'},
+  {port:9000,name:'Dev',proto:'http'},
+];
+async function scanPorts(){
+  const domain=document.getElementById('port-domain').value.trim();
+  const grid=document.getElementById('port-grid');
+  const note=document.getElementById('port-note');
+  const lang=currentLang;
+  if(!domain){grid.innerHTML='';note.style.display='none';return;}
+  grid.innerHTML='';
+  note.style.display='none';
+  // First check DNS resolution
+  const dnsStart=performance.now();
+  let dnsOk=false;
+  try{
+    const ctrl=new AbortController();
+    const tmr=setTimeout(()=>ctrl.abort(),5000);
+    await fetch('https://'+domain+'/favicon.ico',{mode:'no-cors',signal:ctrl.signal});
+    clearTimeout(tmr);
+    dnsOk=true;
+  }catch(e){}
+  if(!dnsOk){
+    try{
+      const ctrl=new AbortController();
+      const tmr=setTimeout(()=>ctrl.abort(),5000);
+      await fetch('http://'+domain+'/favicon.ico',{mode:'no-cors',signal:ctrl.signal});
+      clearTimeout(tmr);
+      dnsOk=true;
+    }catch(e){}
+  }
+  if(!dnsOk){
+    note.style.display='block';
+    note.innerHTML='<p style="color:var(--error)">'+{zh:'域名解析失败或目标无响应',en:'Domain resolution failed or target unresponsive'}[lang]+'</p>';
+    return;
+  }
+  // Scan each port
+  const items=[];
+  PORTS.forEach(p=>{
+    const d=document.createElement('div');
+    d.className='port-item unknown';
+    d.innerHTML='<span class="port-num">'+p.port+'</span><span class="port-sts">'+p.name+'</span>';
+    grid.appendChild(d);
+    items.push({el:d,port:p.port,proto:p.proto,name:p.name});
+  });
+  await Promise.all(items.map(async item=>{
+    const url=item.proto+'://'+domain+':'+item.port;
+    try{
+      const ctrl=new AbortController();
+      const tmr=setTimeout(()=>ctrl.abort(),4000);
+      await fetch(url,{mode:'no-cors',signal:ctrl.signal});
+      clearTimeout(tmr);
+      item.el.className='port-item open';
+      item.el.querySelector('.port-sts').textContent={zh:'可能开放',en:'May be open'}[lang];
+    }catch(e){
+      item.el.className='port-item closed';
+      item.el.querySelector('.port-sts').textContent={zh:'关闭/过滤',en:'Closed/Filtered'}[lang];
+    }
+  }));
+}
+</script>
+</body>
+</html>

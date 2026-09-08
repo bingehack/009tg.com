@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-zh="日期计算器 - 009TG 工具箱" data-en="Date Calculator - 009TG Toolbox">日期计算器 - 009TG 工具箱</title>
+<meta name="description" content="免费在线日期计算器，支持日期加减、日期间隔、工作日计算，浏览器本地运行，无需联网。">
+<meta name="keywords" content="日期计算器,日期间隔,工作日计算,日期加减,在线日期工具">
+<meta name="author" content="009TG">
+<meta name="theme-color" content="#1a1d23">
+<style>
+:root {
+  --bg-main: #1a1d23;
+  --bg-content: #22262e;
+  --bg-card: #2a2f38;
+  --bg-card-hover: #333945;
+  --bg-navbar: #22262e;
+  --bg-input: #2a2f38;
+  --bg-btn: #3a7bd5;
+  --bg-btn-hover: #2c62aa;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-muted: #707070;
+  --border-color: #3a3f48;
+  --link-color: #5dade2;
+  --link-hover: #85c1e9;
+  --accent: #3a7bd5;
+  --accent-light: #5dade2;
+  --success: #27ae60;
+  --error: #e74c3c;
+  --warning: #f39c12;
+  --shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg-main);color:var(--text-primary);line-height:1.6;min-height:100vh}
+a{color:var(--link-color);text-decoration:none}a:hover{color:var(--link-hover)}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;background:var(--bg-navbar);border-bottom:1px solid var(--border-color);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:.5rem}
+.navbar .brand{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:1.1rem;color:var(--text-primary)}
+.navbar .brand svg{width:28px;height:28px;fill:var(--accent-light)}
+.navbar .nav-links{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.navbar .nav-links a{font-size:.9rem;color:var(--text-secondary);transition:color .2s}
+.navbar .nav-links a:hover{color:var(--link-color)}
+.lang-switch{display:flex;align-items:center;gap:.25rem;background:var(--bg-card);border:1px solid var(--border-color);border-radius:20px;padding:2px}
+.lang-switch button{background:none;border:none;color:var(--text-muted);font-size:.8rem;padding:.25rem .6rem;border-radius:16px;cursor:pointer;transition:all .2s}
+.lang-switch button.active{background:var(--accent);color:#fff}
+.container{max-width:1100px;margin:0 auto;padding:1.5rem}
+.card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow)}
+.card-title{font-size:1.15rem;font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;color:var(--text-primary)}
+.card-title .icon{font-size:1.3rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.55rem 1.1rem;background:var(--bg-btn);color:#fff;border:none;border-radius:6px;font-size:.9rem;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--bg-btn-hover)}
+.btn-secondary{background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color)}
+.btn-secondary:hover{background:var(--bg-card-hover)}
+.btn-success{background:var(--success)}
+.btn-sm{padding:.35rem .75rem;font-size:.8rem}
+.btn-danger{background:var(--error)}
+input,textarea,select{width:100%;padding:.6rem .8rem;background:var(--bg-input);border:1px solid var(--border-color);border-radius:6px;color:var(--text-primary);font-size:.9rem;font-family:inherit;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
+textarea{resize:vertical;min-height:120px}
+label{display:block;margin-bottom:.35rem;font-size:.85rem;color:var(--text-secondary)}
+.form-row{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.form-row .form-group{flex:1;min-width:200px}
+.form-group{margin-bottom:1rem}
+.result-area{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:1rem;margin-top:1rem;min-height:60px;white-space:pre-wrap;word-break:break-word;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:.85rem;color:var(--text-secondary);max-height:400px;overflow:auto}
+.result-area.success{border-color:var(--success);color:var(--text-primary)}
+.result-area.error{border-color:var(--error);color:var(--error)}
+.tabs{display:flex;gap:.25rem;border-bottom:2px solid var(--border-color);margin-bottom:1rem}
+.tab-btn{padding:.5rem 1rem;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:.9rem;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab-btn.active{color:var(--accent-light);border-bottom-color:var(--accent-light)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.tool-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:1.25rem;transition:all .2s;cursor:pointer}
+.tool-card:hover{background:var(--bg-card-hover);transform:translateY(-2px);box-shadow:var(--shadow)}
+.tool-card .tool-icon{font-size:2rem;margin-bottom:.5rem}
+.tool-card .tool-name{font-weight:600;margin-bottom:.25rem;color:var(--text-primary)}
+.tool-card .tool-desc{font-size:.8rem;color:var(--text-muted);line-height:1.4}
+.badge{display:inline-block;padding:.15rem .45rem;border-radius:4px;font-size:.7rem;font-weight:600;text-transform:uppercase}
+.badge-api{background:rgba(58,123,213,.2);color:var(--accent-light)}
+.badge-offline{background:rgba(39,174,96,.2);color:var(--success)}
+.footer{text-align:center;padding:2rem 1rem;color:var(--text-muted);font-size:.8rem;border-top:1px solid var(--border-color);margin-top:2rem}
+.copy-hint{font-size:.75rem;color:var(--text-muted);margin-top:.35rem}
+.action-bar{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem;margin:1rem 0}
+.stat-box{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:.75rem;text-align:center}
+.stat-box .stat-value{font-size:1.4rem;font-weight:700;color:var(--accent-light)}
+.stat-box .stat-label{font-size:.75rem;color:var(--text-muted);margin-top:.25rem}
+.preview-box{background:var(--bg-main);border:1px solid var(--border-color);border-radius:6px;padding:1rem;margin-top:1rem;min-height:120px;display:flex;align-items:center;justify-content:center}
+.color-stop{display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem}
+.color-stop input[type="color"]{width:40px;height:32px;padding:0;border:none;background:none;cursor:pointer}
+.footer-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem}
+.footer-links a{font-size:.8rem;color:var(--text-muted);transition:color .2s}
+.footer-links a:hover{color:var(--link-color)}
+@media(max-width:640px){
+  .container{padding:1rem}
+  .navbar{padding:.6rem 1rem}
+  .navbar .brand{font-size:1rem}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .form-row{flex-direction:column;gap:.5rem}
+}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="/cn/" class="brand">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    <span data-zh="009TG 工具箱" data-en="009TG Toolbox">009TG 工具箱</span>
+  </a>
+  <div class="nav-links">
+    <a href="/cn/" data-zh="&#8592; 返回站点首页" data-en="&#8592; Back to Site Home">&#8592; 返回站点首页</a>
+    <a href="./index.html" data-zh="&#8592; 返回工具集首页" data-en="&#8592; Back to Tools Home">&#8592; 返回工具集首页</a>
+    <div class="lang-switch">
+      <button data-lang="zh" class="active">中</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </div>
+</nav>
+<div class="container">
+<h1 style="font-size:1.4rem;margin-bottom:1rem" data-zh="日期计算器" data-en="Date Calculator">日期计算器</h1>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#128197;</span><span data-zh="日期加减" data-en="Date Add/Subtract">日期加减</span></div>
+  <div class="form-row">
+    <div class="form-group">
+      <label data-zh="基准日期" data-en="Base Date">基准日期</label>
+      <input type="date" id="date-base">
+    </div>
+    <div class="form-group">
+      <label data-zh="数值" data-en="Value">数值</label>
+      <input type="number" id="date-num" value="1">
+    </div>
+    <div class="form-group">
+      <label data-zh="单位" data-en="Unit">单位</label>
+      <select id="date-unit">
+        <option value="day" data-zh="天" data-en="Days">天</option>
+        <option value="week" data-zh="周" data-en="Weeks">周</option>
+        <option value="month" data-zh="月" data-en="Months">月</option>
+        <option value="year" data-zh="年" data-en="Years">年</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label data-zh="方向" data-en="Direction">方向</label>
+      <select id="date-dir">
+        <option value="add" data-zh="加" data-en="Add">加</option>
+        <option value="sub" data-zh="减" data-en="Subtract">减</option>
+      </select>
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn" onclick="calcDateAdd()" data-zh="计算" data-en="Calculate">计算</button>
+  </div>
+  <div id="date-add-result" class="result-area success" style="display:none;margin-top:1rem"></div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#128197;</span><span data-zh="日期间隔" data-en="Date Difference">日期间隔</span></div>
+  <div class="form-row">
+    <div class="form-group">
+      <label data-zh="开始日期" data-en="Start Date">开始日期</label>
+      <input type="date" id="date-start">
+    </div>
+    <div class="form-group">
+      <label data-zh="结束日期" data-en="End Date">结束日期</label>
+      <input type="date" id="date-end">
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn" onclick="calcDateDiff()" data-zh="计算间隔" data-en="Calculate Difference">计算间隔</button>
+    <button class="btn btn-secondary" onclick="swapDates()" data-zh="交换日期" data-en="Swap">交换日期</button>
+  </div>
+  <div id="date-diff-result" class="result-area success" style="display:none;margin-top:1rem"></div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#128197;</span><span data-zh="工作日计算" data-en="Workdays">工作日计算</span></div>
+  <div class="form-row">
+    <div class="form-group">
+      <label data-zh="开始日期" data-en="Start Date">开始日期</label>
+      <input type="date" id="wd-start">
+    </div>
+    <div class="form-group">
+      <label data-zh="结束日期" data-en="End Date">结束日期</label>
+      <input type="date" id="wd-end">
+    </div>
+  </div>
+  <p style="font-size:.8rem;color:var(--warning);margin-bottom:.75rem" data-zh="&#9888; 工作日按周一至周五计算，不含法定节假日。" data-en="&#9888; Workdays are calculated as Monday-Friday only, excluding public holidays.">&#9888; 工作日按周一至周五计算，不含法定节假日。</p>
+  <div class="action-bar">
+    <button class="btn" onclick="calcWorkdays()" data-zh="计算工作日" data-en="Calculate Workdays">计算工作日</button>
+  </div>
+  <div id="wd-result" class="result-area success" style="display:none;margin-top:1rem"></div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#128161;</span><span data-zh="使用说明" data-en="How to Use">使用说明</span></div>
+  <div data-zh="本工具是一款免费的在线日期计算器，提供三种常用日期运算功能：日期加减、日期间隔和工作日计算。日期加减支持以天、周、月、年为单位对指定日期进行向前或向后推算，适用于合同到期提醒、项目里程碑规划、优惠券有效期计算等场景。日期间隔功能可以精确计算两个日期之间相差的总天数，并换算为周数和月数（按30天/月近似）。工作日计算功能则统计两个日期之间的工作日数量，其中工作日定义为周一至周五，不包含周六、周日及法定节假日。请注意，由于法定节假日每年不同且各地有差异，本工具不内置节假日数据，仅按周一到周五的固定规则计算。所有运算在浏览器本地完成，无需联网。项目管理中常用本工具计算冲刺周期、合同冷却期、退款期限等关键时间节点。个人用户也可以用它规划旅行日程、计算理财产品的持有天数、或者统计健身打卡的连续记录。简洁直观的界面让日期运算变得轻松快捷。" data-en="This free online date calculator provides three common date operations: add/subtract, difference, and workday count. Date add/subtract supports moving a date forward or backward by days, weeks, months, or years — useful for contract expiry reminders, project milestone planning, and coupon validity checks. Date difference calculates the exact number of days between two dates, plus approximate weeks and months (30 days/month). Workday count tallies business days between two dates, where workdays are defined as Monday through Friday, excluding weekends and public holidays. Note: since public holidays vary by year and region, this tool does not include a holiday database and only counts Mon-Fri. All calculations are done locally in the browser.In project management, this tool is commonly used to calculate sprint cycles, contract cooling-off periods, refund deadlines, and other key time points. Individual users can also use it to plan travel schedules, calculate holding days for financial products, or track consecutive fitness check-in records. The clean, intuitive interface makes date calculations quick and easy.">
+    本工具是一款免费的在线日期计算器，提供三种常用日期运算功能：日期加减、日期间隔和工作日计算。日期加减支持以天、周、月、年为单位对指定日期进行向前或向后推算，适用于合同到期提醒、项目里程碑规划、优惠券有效期计算等场景。日期间隔功能可以精确计算两个日期之间相差的总天数，并换算为周数和月数（按30天/月近似）。工作日计算功能则统计两个日期之间的工作日数量，其中工作日定义为周一至周五，不包含周六、周日及法定节假日。请注意，由于法定节假日每年不同且各地有差异，本工具不内置节假日数据，仅按周一到周五的固定规则计算。所有运算在浏览器本地完成，无需联网。
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="icon">&#10067;</span><span data-zh="常见问题" data-en="FAQ">常见问题</span></div>
+  <div style="margin-bottom:.75rem">
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q1: 月份加减会处理月末吗？" data-en="Q1: Does month addition handle month-end correctly?">Q1: 月份加减会处理月末吗？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="是的。例如 1月31日 加 1个月 会调整为 2月28日（或29日），避免产生不存在的日期。" data-en="Yes. For example, Jan 31 + 1 month adjusts to Feb 28 (or 29), avoiding non-existent dates.">是的。例如 1月31日 加 1个月 会调整为 2月28日（或29日），避免产生不存在的日期。</p>
+  </div>
+  <div style="margin-bottom:.75rem">
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q2: 工作日为什么不包含节假日？" data-en="Q2: Why don't workdays include holidays?">Q2: 工作日为什么不包含节假日？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="法定节假日因年份和国家/地区而异，且会随政策调整。本工具为保证结果的可预期性和跨地区适用性，仅按周一至周五计算，不包含任何节假日。如需精确计算特定地区的节假日，请结合当地日历手动调整。" data-en="Public holidays vary by year, country, and region, and policies change. To ensure predictable and region-agnostic results, this tool only counts Monday-Friday and excludes all holidays. For precise regional holiday calculations, please adjust manually with a local calendar.">法定节假日因年份和国家/地区而异，且会随政策调整。本工具为保证结果的可预期性和跨地区适用性，仅按周一至周五计算，不包含任何节假日。如需精确计算特定地区的节假日，请结合当地日历手动调整。</p>
+  </div>
+  <div style="margin-bottom:.75rem">
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q3: 日期间隔计算是否包含首尾两天？" data-en="Q3: Does date difference include both start and end dates?">Q3: 日期间隔计算是否包含首尾两天？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="日期间隔计算的是两个日期之间相差的天数（结束日期减开始日期）。例如 1月1日 到 1月2日 的间隔为 1 天。如需包含首尾两天，可在结果上加 1。" data-en="Date difference is calculated as end date minus start date. For example, Jan 1 to Jan 2 is 1 day. To include both endpoints, add 1 to the result.">日期间隔计算的是两个日期之间相差的天数（结束日期减开始日期）。例如 1月1日 到 1月2日 的间隔为 1 天。如需包含首尾两天，可在结果上加 1。</p>
+  </div>
+  <div style="margin-bottom:.75rem">
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q4: 支持哪些日期格式输入？" data-en="Q4: What date input formats are supported?">Q4: 支持哪些日期格式输入？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="本工具使用浏览器原生的日期选择器，支持标准的 YYYY-MM-DD 格式输入。您也可以点击输入框使用日历控件选择日期。" data-en="This tool uses the browser's native date picker, supporting standard YYYY-MM-DD format. You can also use the calendar widget by clicking the input field.">本工具使用浏览器原生的日期选择器，支持标准的 YYYY-MM-DD 格式输入。您也可以点击输入框使用日历控件选择日期。</p>
+  </div>
+  <div>
+    <p style="font-weight:600;color:var(--text-primary);font-size:.9rem" data-zh="Q5: 计算结果可以复制吗？" data-en="Q5: Can I copy the results?">Q5: 计算结果可以复制吗？</p>
+    <p style="color:var(--text-secondary);font-size:.85rem;margin-top:.25rem" data-zh="可以。点击计算后，结果会显示在文本框中，您可以直接选中并复制。" data-en="Yes. After clicking Calculate, results appear in a text area that you can select and copy directly.">可以。点击计算后，结果会显示在文本框中，您可以直接选中并复制。</p>
+  </div>
+</div>
+
+</div>
+<footer class="footer">
+  <div class="footer-links">
+    <a href="/about.html" data-zh="关于我们" data-en="About">关于我们</a>
+    <a href="/privacy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+    <a href="/contact.html" data-zh="联系我们" data-en="Contact">联系我们</a>
+    <a href="/disclaimer.html" data-zh="免责声明" data-en="Disclaimer">免责声明</a>
+  </div>
+  <p data-zh="009TG 工具箱 - 免费实用的在线工具集合" data-en="009TG Toolbox - Free & Practical Online Tools">009TG 工具箱 - 免费实用的在线工具集合</p>
+</footer>
+<script>
+const i18nData={
+  zh:{
+    home:'站点首页',tools:'工具集首页',lang:'English',backHome:'返回站点首页',backTools:'返回工具集首页',
+    run:'运行',clear:'清空',copy:'复制',copied:'已复制',inputPlaceholder:'请输入...',
+    error:'错误',loading:'加载中...',noResult:'暂无结果'
+  },
+  en:{
+    home:'Site Home',tools:'Tools Home',lang:'中文',backHome:'Back to Site Home',backTools:'Back to Tools Home',
+    run:'Run',clear:'Clear',copy:'Copy',copied:'Copied',inputPlaceholder:'Enter...',
+    error:'Error',loading:'Loading...',noResult:'No result'
+  }
+};
+let currentLang='zh';
+function setLang(l){
+  currentLang=l;
+  document.documentElement.lang=l==='zh'?'zh-CN':'en';
+  document.querySelectorAll('[data-zh],[data-en]').forEach(el=>{
+    if(el.tagName==='INPUT'&&el.hasAttribute('placeholder')){
+      el.placeholder=el.getAttribute('data-'+l);
+    }else if(el.tagName==='TITLE'){
+      document.title=el.getAttribute('data-'+l)||document.title;
+    }else{
+      el.textContent=el.getAttribute('data-'+l)||el.textContent;
+    }
+  });
+  document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  localStorage.setItem('tools-lang',l);
+}
+function t(key){return(i18nData[currentLang]||i18nData.zh)[key]||key;}
+document.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('tools-lang')||'zh';
+  setLang(saved);
+  document.querySelectorAll('.lang-switch button').forEach(b=>{
+    b.addEventListener('click',()=>setLang(b.dataset.lang));
+  });
+});
+function escapeHtml(t){
+  const d=document.createElement('div');d.textContent=t;return d.innerHTML;
+}
+function copyText(t){
+  navigator.clipboard.writeText(t).then(()=>alert(t_i18n('copied'))).catch(()=>{});
+}
+function t_i18n(key){return(i18nData[currentLang]||i18nData.zh)[key]||key;}
+</script>
+<script>
+document.getElementById('date-base').valueAsDate=new Date();
+document.getElementById('date-start').valueAsDate=new Date();
+const tomorrow=new Date(); tomorrow.setDate(tomorrow.getDate()+7);
+document.getElementById('date-end').valueAsDate=tomorrow;
+document.getElementById('wd-start').valueAsDate=new Date();
+document.getElementById('wd-end').valueAsDate=tomorrow;
+function calcDateAdd(){
+  const base=document.getElementById('date-base').value;
+  if(!base){alert('Please select a base date');return;}
+  let dt=new Date(base+'T00:00:00');
+  const num=parseInt(document.getElementById('date-num').value)||0;
+  const unit=document.getElementById('date-unit').value;
+  const dir=document.getElementById('date-dir').value;
+  const sign=dir==='add'?1:-1;
+  if(unit==='day')dt.setDate(dt.getDate()+num*sign);
+  else if(unit==='week')dt.setDate(dt.getDate()+num*7*sign);
+  else if(unit==='month')dt.setMonth(dt.getMonth()+num*sign);
+  else if(unit==='year')dt.setFullYear(dt.getFullYear()+num*sign);
+  const res=document.getElementById('date-add-result');
+  const fmt=dt.toLocaleDateString();
+  res.textContent=(currentLang==='zh'?'结果: ':'Result: ')+fmt;
+  res.style.display='block';
+}
+function calcDateDiff(){
+  const s=document.getElementById('date-start').value;
+  const e=document.getElementById('date-end').value;
+  if(!s||!e){alert('Please select both dates');return;}
+  const d1=new Date(s+'T00:00:00');
+  const d2=new Date(e+'T00:00:00');
+  const ms=d2-d1;
+  const days=Math.round(ms/86400000);
+  const res=document.getElementById('date-diff-result');
+  const weeks=(days/7).toFixed(1);
+  const months=(days/30).toFixed(1);
+  if(currentLang==='zh'){
+    res.textContent='相差 '+days+' 天（约 '+weeks+' 周 / '+months+' 个月）';
+  }else{
+    res.textContent='Difference: '+days+' days (approx '+weeks+' weeks / '+months+' months)';
+  }
+  res.style.display='block';
+}
+function swapDates(){
+  const s=document.getElementById('date-start').value;
+  const e=document.getElementById('date-end').value;
+  document.getElementById('date-start').value=e;
+  document.getElementById('date-end').value=s;
+}
+function calcWorkdays(){
+  const s=document.getElementById('wd-start').value;
+  const e=document.getElementById('wd-end').value;
+  if(!s||!e){alert('Please select both dates');return;}
+  let d1=new Date(s+'T00:00:00');
+  let d2=new Date(e+'T00:00:00');
+  if(d1>d2){const tmp=d1;d1=d2;d2=tmp;}
+  let count=0;
+  const cur=new Date(d1);
+  while(cur<=d2){
+    const wd=cur.getDay();
+    if(wd!==0&&wd!==6)count++;
+    cur.setDate(cur.getDate()+1);
+  }
+  const res=document.getElementById('wd-result');
+  res.textContent=(currentLang==='zh'?'工作日数量: ':'Workdays: ')+count;
+  res.style.display='block';
+}
+</script>
+</body>
+</html>
