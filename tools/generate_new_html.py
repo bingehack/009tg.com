@@ -381,8 +381,8 @@ def generate_recent_and_hot(groups, favicon_mapping, lang='cn', asset_prefix='..
     for g in groups:
         collect_sites(g)
     
-    # 最新收录（按created_at降序，取12个）
-    recent_sites = sorted(all_sites, key=lambda s: s.get('created_at', ''), reverse=True)[:12]
+    # 最新收录（按created_at降序，取6个，左右布局）
+    recent_sites = sorted(all_sites, key=lambda s: s.get('created_at', ''), reverse=True)[:6]
     
     # 热门分类（按站点数降序，取10个一级分类）
     cat_counts = []
@@ -417,17 +417,16 @@ def generate_recent_and_hot(groups, favicon_mapping, lang='cn', asset_prefix='..
     # 生成最新收录HTML
     recent_html = '''
             <!-- 最新收录 -->
-            <div class="row" style="margin-bottom: 30px;">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title" style="font-size: 18px; font-weight: 600;">
-                                <i class="fa-clock-o" style="margin-right: 8px; color: #337ab7;"></i>''' + recent_title + '''
-                                <small style="color: #999; margin-left: 10px; font-size: 13px;">''' + recent_subtitle + '''</small>
-                            </h3>
-                        </div>
-                        <div class="panel-body" style="padding: 15px;">
-                            <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" style="font-size: 18px; font-weight: 600;">
+                            <i class="fa-clock-o" style="margin-right: 8px; color: #337ab7;"></i>''' + recent_title + '''
+                            <small style="color: #999; margin-left: 10px; font-size: 13px;">''' + recent_subtitle + '''</small>
+                        </h3>
+                    </div>
+                    <div class="panel-body" style="padding: 15px;">
+                        <div class="row">
     '''
     
     for site in recent_sites:
@@ -451,7 +450,7 @@ def generate_recent_and_hot(groups, favicon_mapping, lang='cn', asset_prefix='..
         created = site.get('created_at', '')
         
         recent_html += '''
-                                <div class="col-md-2 col-sm-3 col-xs-4" style="margin-bottom: 12px;">
+                                <div class="col-md-4 col-sm-4 col-xs-6" style="margin-bottom: 12px;">
                                     <a href="site/''' + str(site.get('id', 0)) + '''.html" 
                                        style="display: block; padding: 10px; border: 1px solid #eee; border-radius: 6px; text-decoration: none; transition: all 0.2s; height: 100%;"
                                        onmouseover="this.style.borderColor='#337ab7';this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)'"
@@ -470,15 +469,13 @@ def generate_recent_and_hot(groups, favicon_mapping, lang='cn', asset_prefix='..
                         </div>
                     </div>
                 </div>
-            </div>
     '''
     
     # 生成热门分类HTML
     hot_html = '''
             <!-- 热门分类榜 -->
-            <div class="row" style="margin-bottom: 30px;">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
+            <div class="col-md-6">
+                <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title" style="font-size: 18px; font-weight: 600;">
                                 <i class="fa-fire" style="margin-right: 8px; color: #e74c3c;"></i>''' + hot_title + '''
@@ -521,128 +518,16 @@ def generate_recent_and_hot(groups, favicon_mapping, lang='cn', asset_prefix='..
                         </div>
                     </div>
                 </div>
-            </div>
     '''
     
-    # 生成站长工具板块
-    if lang == 'cn':
-        tools_title = '站长工具'
-        tools_subtitle = '免费在线工具集合，提升工作效率'
-        tools_view_all = '查看全部'
-        tools_categories = [
-            ('网络工具', [
-                ('IP查询', 'ip.html'),
-                ('DNS查询', 'dns.html'),
-                ('WHOIS查询', 'whois.html'),
-                ('HTTP检测', 'http.html'),
-                ('端口扫描', 'port.html'),
-            ]),
-            ('编码转换', [
-                ('Base64编解码', 'base64.html'),
-                ('URL编解码', 'url.html'),
-                ('时间戳转换', 'timestamp.html'),
-                ('图片转Base64', 'img-base64.html'),
-            ]),
-            ('开发工具', [
-                ('JSON格式化', 'json.html'),
-                ('正则表达式', 'regex.html'),
-                ('JWT解析', 'jwt.html'),
-                ('UUID/哈希', 'uuid-hash.html'),
-            ]),
-            ('计算工具', [
-                ('房贷计算', 'mortgage.html'),
-                ('个税计算', 'tax.html'),
-                ('单位换算', 'unit.html'),
-                ('日期计算', 'date-calc.html'),
-            ]),
-            ('文本/图片', [
-                ('密码生成器', 'password.html'),
-                ('二维码生成', 'qrcode.html'),
-                ('颜色工具', 'color.html'),
-                ('CSS渐变', 'css-gradient.html'),
-            ]),
-        ]
-    else:
-        tools_title = 'Webmaster Tools'
-        tools_subtitle = 'Free online tools to boost your productivity'
-        tools_view_all = 'View All'
-        tools_categories = [
-            ('Network', [
-                ('IP Lookup', 'ip.html'),
-                ('DNS Lookup', 'dns.html'),
-                ('WHOIS Lookup', 'whois.html'),
-                ('HTTP Check', 'http.html'),
-                ('Port Scan', 'port.html'),
-            ]),
-            ('Encoding', [
-                ('Base64', 'base64.html'),
-                ('URL Encode', 'url.html'),
-                ('Timestamp', 'timestamp.html'),
-                ('Img to Base64', 'img-base64.html'),
-            ]),
-            ('Developer', [
-                ('JSON Formatter', 'json.html'),
-                ('Regex Tester', 'regex.html'),
-                ('JWT Decoder', 'jwt.html'),
-                ('UUID/Hash', 'uuid-hash.html'),
-            ]),
-            ('Calculator', [
-                ('Mortgage', 'mortgage.html'),
-                ('Income Tax', 'tax.html'),
-                ('Unit Converter', 'unit.html'),
-                ('Date Calculator', 'date-calc.html'),
-            ]),
-            ('Text/Image', [
-                ('Password Gen', 'password.html'),
-                ('QR Code', 'qrcode.html'),
-                ('Color Picker', 'color.html'),
-                ('CSS Gradient', 'css-gradient.html'),
-            ]),
-        ]
-    
-    tools_html = '''
-            <!-- 站长工具 -->
+    # 左右布局：最新收录(左) + 热门分类(右)，用row包裹
+    combined_html = '''
             <div class="row" style="margin-bottom: 30px;">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="display: flex; justify-content: space-between; align-items: center;">
-                            <h3 class="panel-title" style="font-size: 18px; font-weight: 600;">
-                                <i class="fa-wrench" style="margin-right: 8px; color: #27ae60;"></i>''' + tools_title + '''
-                                <small style="color: #999; margin-left: 10px; font-size: 13px;">''' + tools_subtitle + '''</small>
-                            </h3>
-                            <a href="../tools/index.html" style="font-size: 13px; color: #337ab7; text-decoration: none;">''' + tools_view_all + ''' <i class="fa-angle-right"></i></a>
-                        </div>
-                        <div class="panel-body" style="padding: 15px;">
-                            <div class="row">
-    '''
-    
-    for cat_name, tools in tools_categories:
-        tools_html += '''
-                                <div class="col-md-15 col-sm-3 col-xs-6" style="margin-bottom: 15px;">
-                                    <div style="font-size: 13px; font-weight: 600; color: #333; margin-bottom: 8px; padding-bottom: 5px; border-bottom: 1px solid #eee;">''' + cat_name + '''</div>
-                                    <ul style="list-style: none; padding: 0; margin: 0;">
-        '''
-        for tool_name, tool_file in tools:
-            tools_html += '''
-                                        <li style="margin-bottom: 5px;">
-                                            <a href="../tools/''' + tool_file + '''" style="font-size: 12px; color: #666; text-decoration: none; display: block; padding: 3px 0; transition: color 0.2s;"
-                                               onmouseover="this.style.color='#337ab7'" onmouseout="this.style.color='#666'">''' + tool_name + '''</a>
-                                        </li>
-            '''
-        tools_html += '''
-                                    </ul>
-                                </div>
-        '''
-    
-    tools_html += '''
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    ''' + recent_html + hot_html + '''
             </div>
     '''
     
-    return recent_html + hot_html + tools_html
+    return combined_html
 
 
 def generate_language_switcher(lang='cn'):
@@ -736,6 +621,7 @@ def generate_html(lang='cn'):
         nav_articles = '文章资讯'
         nav_about = '关于我们'
         nav_contact = '联系我们'
+        nav_tools = '站长工具'
     else:
         html_lang = 'en'
         title = '009tg Navigation - Invisible Man'
@@ -749,6 +635,7 @@ def generate_html(lang='cn'):
         nav_articles = 'Articles'
         nav_about = 'About'
         nav_contact = 'Contact'
+        nav_tools = 'Tools'
 
     # 底部footer内容
     if lang == 'cn':
@@ -802,11 +689,11 @@ def generate_html(lang='cn'):
         [data-theme="dark"] .back-to-top{background-color:#4a90d9;}
         @media (max-width:768px){.back-to-top{bottom:20px;right:20px;width:40px;height:40px;}}
     </style>
-    <button class="back-to-top" onclick="backToTop()" title="''' + ('回到顶部' if lang == 'cn' else 'Back to Top') + '''">
+    <button class="back-to-top" onclick="return backToTop(event)" title="''' + ('回到顶部' if lang == 'cn' else 'Back to Top') + '''">
         <svg viewBox="0 0 24 24"><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg>
     </button>
     <script>
-        function backToTop(){var s={p:window.scrollY||document.documentElement.scrollTop},t=performance.now();function a(n){var e=Math.min((n-t)/300,1);window.scrollTo(0,s.p*(1-Math.pow(1-e,3)));e<1&&requestAnimationFrame(a)}requestAnimationFrame(a)}
+        function backToTop(e){if(e&&e.preventDefault){e.preventDefault();e.stopPropagation();}window.scrollTo({top:0,behavior:'smooth'});return false;}
         window.addEventListener('scroll',function(){var b=document.querySelector('.back-to-top');if(b){window.scrollY>300?b.classList.add('show'):b.classList.remove('show')}});
     </script>'''
 
@@ -1334,6 +1221,11 @@ def generate_html(lang='cn'):
                     <li class="hidden-sm hidden-xs" style="margin-left: 15px;">
                         <a href="articles.html" style="font-size: 13px; color: inherit; text-decoration: none;">
                             <i class="fa-newspaper-o" style="margin-right: 4px;"></i>{nav_articles}
+                        </a>
+                    </li>
+                    <li class="hidden-sm hidden-xs" style="margin-left: 15px;">
+                        <a href="../tools/index.html" style="font-size: 13px; color: inherit; text-decoration: none;">
+                            <i class="fa-wrench" style="margin-right: 4px;"></i>{nav_tools}
                         </a>
                     </li>
                     <li class="hidden-sm hidden-xs" style="margin-left: 15px;">

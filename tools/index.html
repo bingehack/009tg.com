@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN" data-theme="dark">
 <head>
 <meta charset="UTF-8">
@@ -77,8 +77,6 @@ label{display:block;margin-bottom:.35rem;font-size:.85rem;color:var(--text-secon
 .tool-card .tool-name{font-weight:600;margin-bottom:.25rem;color:var(--text-primary)}
 .tool-card .tool-desc{font-size:.8rem;color:var(--text-muted);line-height:1.4}
 .badge{display:inline-block;padding:.15rem .45rem;border-radius:4px;font-size:.7rem;font-weight:600;text-transform:uppercase}
-.badge-api{background:rgba(58,123,213,.2);color:var(--accent-light)}
-.badge-offline{background:rgba(39,174,96,.2);color:var(--success)}
 .footer{text-align:center;padding:2rem 1rem;color:var(--text-muted);font-size:.8rem;border-top:1px solid var(--border-color);margin-top:2rem}
 .copy-hint{font-size:.75rem;color:var(--text-muted);margin-top:.35rem}
 .action-bar{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
@@ -98,7 +96,7 @@ label{display:block;margin-bottom:.35rem;font-size:.85rem;color:var(--text-secon
 <body>
 <nav class="navbar">
   <a href="/cn/" class="brand">
-    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    <img src="../assets/images/logo@2x.png" alt="009TG" style="height:28px;width:auto;border-radius:4px;">
     <span data-zh="009TG 工具箱" data-en="009TG Toolbox">009TG 工具箱</span>
   </a>
   <div class="nav-links">
@@ -122,121 +120,101 @@ label{display:block;margin-bottom:.35rem;font-size:.85rem;color:var(--text-secon
     <div class="tool-icon">&#127760;</div>
     <div class="tool-name" data-zh="IP 查询" data-en="IP Lookup">IP 查询</div>
     <div class="tool-desc" data-zh="查询 IP 地址地理位置、ISP、经纬度" data-en="Query IP geolocation, ISP, latitude/longitude">查询 IP 地址地理位置、ISP、经纬度</div>
-    <span class="badge badge-api" data-zh="在线API" data-en="Online API">在线API</span>
   </a>
   <a href="./dns.html" class="tool-card">
     <div class="tool-icon">&#128279;</div>
     <div class="tool-name" data-zh="DNS 查询" data-en="DNS Lookup">DNS 查询</div>
     <div class="tool-desc" data-zh="查询域名 A/AAAA/CNAME/MX/TXT/NS 记录" data-en="Query domain A/AAAA/CNAME/MX/TXT/NS records">查询域名 A/AAAA/CNAME/MX/TXT/NS 记录</div>
-    <span class="badge badge-api" data-zh="在线API" data-en="Online API">在线API</span>
   </a>
   <a href="./whois.html" class="tool-card">
     <div class="tool-icon">&#128220;</div>
     <div class="tool-name" data-zh="WHOIS 查询" data-en="WHOIS Lookup">WHOIS 查询</div>
     <div class="tool-desc" data-zh="查询域名注册信息、过期时间、DNS 服务器" data-en="Query domain registration, expiry, DNS servers">查询域名注册信息、过期时间、DNS 服务器</div>
-    <span class="badge badge-api" data-zh="在线API" data-en="Online API">在线API</span>
   </a>
   <a href="./password.html" class="tool-card">
     <div class="tool-icon">&#128272;</div>
     <div class="tool-name" data-zh="密码生成器" data-en="Password Generator">密码生成器</div>
     <div class="tool-desc" data-zh="自定义长度和字符类型生成强密码" data-en="Generate strong passwords with custom length & charset">自定义长度和字符类型生成强密码</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./json.html" class="tool-card">
     <div class="tool-icon">&#128451;</div>
     <div class="tool-name" data-zh="JSON 格式化" data-en="JSON Formatter">JSON 格式化</div>
     <div class="tool-desc" data-zh="JSON 美化、压缩、校验并提示错误位置" data-en="Beautify, compress, validate JSON with error hints">JSON 美化、压缩、校验并提示错误位置</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./base64.html" class="tool-card">
     <div class="tool-icon">&#128421;</div>
     <div class="tool-name" data-zh="Base64 编解码" data-en="Base64 Encoder">Base64 编解码</div>
     <div class="tool-desc" data-zh="文本与 Base64 互转，UTF-8 安全" data-en="Text &harr; Base64 conversion, UTF-8 safe">文本与 Base64 互转，UTF-8 安全</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./timestamp.html" class="tool-card">
     <div class="tool-icon">&#128336;</div>
     <div class="tool-name" data-zh="时间戳转换" data-en="Timestamp Converter">时间戳转换</div>
     <div class="tool-desc" data-zh="Unix 时间戳与日期时间双向转换" data-en="Unix timestamp &harr; datetime with timezone support">Unix 时间戳与日期时间双向转换</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./url.html" class="tool-card">
     <div class="tool-icon">&#128279;</div>
     <div class="tool-name" data-zh="URL 编码/解码" data-en="URL Encoder">URL 编码/解码</div>
     <div class="tool-desc" data-zh="URL encode/decode 互转" data-en="URL encode & decode conversion">URL encode/decode 互转</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./qrcode.html" class="tool-card">
     <div class="tool-icon">&#9633;</div>
     <div class="tool-name" data-zh="二维码生成" data-en="QR Code Generator">二维码生成</div>
     <div class="tool-desc" data-zh="输入文本或 URL 生成二维码图片" data-en="Generate QR code images from text or URL">输入文本或 URL 生成二维码图片</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./color.html" class="tool-card">
     <div class="tool-icon">&#127912;</div>
     <div class="tool-name" data-zh="颜色转换" data-en="Color Converter">颜色转换</div>
     <div class="tool-desc" data-zh="HEX/RGB/HSL 互转、调色板与明暗变体" data-en="HEX/RGB/HSL conversion with color picker">HEX/RGB/HSL 互转、调色板与明暗变体</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./regex.html" class="tool-card">
     <div class="tool-icon">&#128269;</div>
     <div class="tool-name" data-zh="正则测试" data-en="Regex Tester">正则测试</div>
     <div class="tool-desc" data-zh="实时正则表达式匹配、分组与替换测试" data-en="Real-time regex pattern matching, groups & replace">实时正则表达式匹配、分组与替换测试</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./diff.html" class="tool-card">
     <div class="tool-icon">&#8644;</div>
     <div class="tool-name" data-zh="文本对比" data-en="Text Diff">文本对比</div>
     <div class="tool-desc" data-zh="两段文本逐行差异对比" data-en="Compare differences between two texts line by line">两段文本逐行差异对比</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./unit.html" class="tool-card">
     <div class="tool-icon">&#9878;</div>
     <div class="tool-name" data-zh="单位换算" data-en="Unit Converter">单位换算</div>
     <div class="tool-desc" data-zh="长度/质量/温度/数据量/面积/速度换算" data-en="Length/mass/temperature/data/area/speed conversion">长度/质量/温度/数据量/面积/速度换算</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./uuid-hash.html" class="tool-card">
     <div class="tool-icon">&#128290;</div>
     <div class="tool-name" data-zh="UUID / 哈希" data-en="UUID / Hash">UUID / 哈希</div>
     <div class="tool-desc" data-zh="生成 UUID v4 与 MD5/SHA 系列哈希" data-en="Generate UUID v4 & MD5/SHA hashes">生成 UUID v4 与 MD5/SHA 系列哈希</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./jwt.html" class="tool-card">
     <div class="tool-icon">&#128273;</div>
     <div class="tool-name" data-zh="JWT 解码" data-en="JWT Decoder">JWT 解码</div>
     <div class="tool-desc" data-zh="解码 JWT Payload（不验签）" data-en="Decode JWT payload (no signature verification)">解码 JWT Payload（不验签）</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./cron.html" class="tool-card">
     <div class="tool-icon">&#9200;</div>
     <div class="tool-name" data-zh="Cron 表达式" data-en="Cron Expression">Cron 表达式</div>
     <div class="tool-desc" data-zh="生成与解析 Cron 表达式、计算未来执行时间" data-en="Generate & parse cron expressions, next execution times">生成与解析 Cron 表达式、计算未来执行时间</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./date-calc.html" class="tool-card">
     <div class="tool-icon">&#128197;</div>
     <div class="tool-name" data-zh="日期计算" data-en="Date Calculator">日期计算</div>
     <div class="tool-desc" data-zh="日期加减、间隔天数、工作日计算" data-en="Date add/subtract, interval days, workdays">日期加减、间隔天数、工作日计算</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./css-gradient.html" class="tool-card">
     <div class="tool-icon">&#127912;</div>
     <div class="tool-name" data-zh="CSS 渐变" data-en="CSS Gradient">CSS 渐变</div>
     <div class="tool-desc" data-zh="生成 CSS 渐变与阴影代码" data-en="Generate CSS gradient & shadow code">生成 CSS 渐变与阴影代码</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./word-count.html" class="tool-card">
     <div class="tool-icon">&#9997;</div>
     <div class="tool-name" data-zh="字数统计" data-en="Word Count">字数统计</div>
     <div class="tool-desc" data-zh="统计字符/词/行数并清理空白" data-en="Count chars/words/lines and clean whitespace">统计字符/词/行数并清理空白</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./img-base64.html" class="tool-card">
     <div class="tool-icon">&#128247;</div>
     <div class="tool-name" data-zh="图片转 Base64" data-en="Image to Base64">图片转 Base64</div>
     <div class="tool-desc" data-zh="图片转 Base64 Data URI（纯本地）" data-en="Convert image to Base64 Data URI (local only)">图片转 Base64 Data URI（纯本地）</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
 </div>
 <h2 style="font-size:1.2rem;margin:1.5rem 0 .75rem;color:var(--text-primary)" data-zh="站长与 SEO 工具" data-en="Webmaster & SEO Tools">站长与 SEO 工具</h2>
@@ -245,43 +223,36 @@ label{display:block;margin-bottom:.35rem;font-size:.85rem;color:var(--text-secon
     <div class="tool-icon">&#128640;</div>
     <div class="tool-name" data-zh="网站响应检测" data-en="HTTP Status Check">网站响应检测</div>
     <div class="tool-desc" data-zh="检测网站可达性与响应状态" data-en="Check website reachability & response status">检测网站可达性与响应状态</div>
-    <span class="badge badge-api" data-zh="在线API" data-en="Online API">在线API</span>
   </a>
   <a href="./port.html" class="tool-card">
     <div class="tool-icon">&#128681;</div>
     <div class="tool-name" data-zh="端口扫描" data-en="Port Scanner">端口扫描</div>
     <div class="tool-desc" data-zh="探测常用端口开放状态" data-en="Probe common port open status">探测常用端口开放状态</div>
-    <span class="badge badge-api" data-zh="在线API" data-en="Online API">在线API</span>
   </a>
   <a href="./utm.html" class="tool-card">
     <div class="tool-icon">&#128279;</div>
     <div class="tool-name" data-zh="UTM 链接" data-en="UTM Builder">UTM 链接</div>
     <div class="tool-desc" data-zh="构建带 UTM 参数的追踪链接" data-en="Build tracked links with UTM parameters">构建带 UTM 参数的追踪链接</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./schema.html" class="tool-card">
     <div class="tool-icon">&#128203;</div>
     <div class="tool-name" data-zh="JSON-LD 生成" data-en="JSON-LD Generator">JSON-LD 生成</div>
     <div class="tool-desc" data-zh="生成结构化数据标记（FAQ/Article/Breadcrumb）" data-en="Generate structured data markup (FAQ/Article/Breadcrumb)">生成结构化数据标记（FAQ/Article/Breadcrumb）</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./robots.html" class="tool-card">
     <div class="tool-icon">&#128126;</div>
     <div class="tool-name" data-zh="robots.txt" data-en="robots.txt Generator">robots.txt</div>
     <div class="tool-desc" data-zh="生成 robots.txt 含 AI 爬虫屏蔽预设" data-en="Generate robots.txt with AI crawler presets">生成 robots.txt 含 AI 爬虫屏蔽预设</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./og-preview.html" class="tool-card">
     <div class="tool-icon">&#128240;</div>
     <div class="tool-name" data-zh="OG 预览" data-en="OG Preview">OG 预览</div>
     <div class="tool-desc" data-zh="Open Graph 分享卡片预览" data-en="Open Graph share card preview">Open Graph 分享卡片预览</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./image-compress.html" class="tool-card">
     <div class="tool-icon">&#128247;</div>
     <div class="tool-name" data-zh="图片压缩" data-en="Image Compress">图片压缩</div>
     <div class="tool-desc" data-zh="本地图片压缩与格式转换" data-en="Local image compression & format conversion">本地图片压缩与格式转换</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
 </div>
 <h2 style="font-size:1.2rem;margin:1.5rem 0 .75rem;color:var(--text-primary)" data-zh="计算器" data-en="Calculators">计算器</h2>
@@ -290,22 +261,20 @@ label{display:block;margin-bottom:.35rem;font-size:.85rem;color:var(--text-secon
     <div class="tool-icon">&#127969;</div>
     <div class="tool-name" data-zh="房贷计算器" data-en="Mortgage Calculator">房贷计算器</div>
     <div class="tool-desc" data-zh="等额本息/等额本金/复利计算" data-en="Equal payment / Principal payment / Compound interest">等额本息/等额本金/复利计算</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
   <a href="./tax.html" class="tool-card">
     <div class="tool-icon">&#128176;</div>
     <div class="tool-name" data-zh="个税计算器" data-en="Tax Calculator">个税计算器</div>
     <div class="tool-desc" data-zh="中国个税累计预扣预缴计算" data-en="China individual income tax cumulative withholding">中国个税累计预扣预缴计算</div>
-    <span class="badge badge-offline" data-zh="纯前端" data-en="Pure Frontend">纯前端</span>
   </a>
 </div>
 </div>
 <footer class="footer">
   <div class="footer-links">
-    <a href="/about.html" data-zh="关于我们" data-en="About">关于我们</a>
-    <a href="/privacy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
-    <a href="/contact.html" data-zh="联系我们" data-en="Contact">联系我们</a>
-    <a href="/disclaimer.html" data-zh="免责声明" data-en="Disclaimer">免责声明</a>
+    <a href="/cn/about.html" data-zh="关于我们" data-en="About">关于我们</a>
+    <a href="/cn/privacy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+    <a href="/cn/contact.html" data-zh="联系我们" data-en="Contact">联系我们</a>
+    <a href="/cn/disclaimer.html" data-zh="免责声明" data-en="Disclaimer">免责声明</a>
   </div>
   <p data-zh="009TG 工具箱 - 免费实用的在线工具集合" data-en="009TG Toolbox - Free & Practical Online Tools">009TG 工具箱 - 免费实用的在线工具集合</p>
 </footer>
