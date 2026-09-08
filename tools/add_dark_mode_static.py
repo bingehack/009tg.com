@@ -1,211 +1,17 @@
-<!DOCTYPE html>
-<html lang="zh">
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+给独立HTML页面添加深色模式支持
+处理：about.html, 404.html, redirect.html
+"""
 
-<head>
-    <meta charset="utf-8">
-    <title>009tg - 404</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
-    <link rel="shortcut icon" href="./assets/images/favicon.png">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5301924424938934"
-         crossorigin="anonymous"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-77253689-1"></script>
-    
-    <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?c05bb16ea908292af9f6c513087a1cc3";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-    </script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
+import os
+import re
 
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-    gtag('config', 'UA-77253689-1');
-    </script>
-    <style>
-    html,
-    body {
-        width: 100%;
-        height: 100%;
-    }
-    
-    a,
-    a img,
-    a:before,
-    a:after {
-        text-decoration: none;
-        transition-duration: .25s;
-    }
-    
-    section {
-        display: block;
-    }
-    
-    body {
-        line-height: 1;
-    }
-    
-    #about {
-        width: 40%;
-        position: absolute;
-        top: 40%;
-        left: 10%;
-        z-index: 20;
-        transform: translate(0, -50%);
-    }
-    
-    #about h1 {
-        margin: 30px;
-    }
-    
-    #about p {
-        margin: 30px;
-    }
-    
-    #about img {
-        margin-left: 30px;
-    }
-    
-    #about .social {
-        float: left;
-        margin: 30px;
-    }
-    
-    #about .copyright {
-        width: 100%;
-        float: left;
-        margin-bottom: 0px;
-    }
-    
-    @media (max-width: 768px) {
-        #about {
-            width: 100%;
-            left: 0px;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.85);
-        }
-        #about h1 {
-            margin: 30px;
-        }
-        #about p {
-            margin: 30px;
-        }
-        #about .social {
-            margin: 30px;
-        }
-        #about .copyright {
-            width: 100%;
-            float: left;
-            margin-bottom: 0px;
-        }
-    }
-    
-    @media (max-width: 580px) {
-        #about {
-            width: 100%;
-            left: 0px;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.85);
-        }
-        #about h1 {
-            margin: 30px;
-        }
-        #about p {
-            margin: 30px;
-            margin-bottom: 0;
-        }
-        #about .social {
-            margin: 30px;
-            margin-bottom: 0;
-        }
-        #about .copyright {
-            width: 100%;
-            float: left;
-            margin-bottom: 0;
-        }
-    }
-    
-    .animated {
-        animation-duration: 1s;
-        animation-fill-mode: both;
-    }
-    
-    .bounce-in {
-        animation-name: bounce-in;
-    }
-    
-    @keyframes bounce-in {
-        from,
-        60%,
-        75%,
-        90%,
-        to {
-            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-        }
-        0% {
-            opacity: 0;
-            transform: translate3d(-3000px, -50%, 0);
-        }
-        60% {
-            opacity: 1;
-            transform: translate3d(25px, -50%, 0);
-        }
-        75% {
-            transform: translate3d(-10px, -50%, 0);
-        }
-        90% {
-            transform: translate3d(5px, -50%, 0);
-        }
-        to {
-            transform: translate3d(0, -50%);
-        }
-    }
-    
-    body {
-        font-family: "Roboto", sans-serif;
-        font-size: 16px;
-        font-weight: 300;
-        line-height: 1.75;
-        color: rgba(0, 0, 0, 0.65);
-    }
-    
-    h1 {
-        font-family: "Merriweather", sans-serif;
-        font-size: 50px;
-        font-weight: 700;
-        line-height: 1.25;
-        color: rgba(0, 0, 0, 0.85);
-        margin-bottom: 25px;
-    }
-    
-    a {
-        color: rgba(3, 3, 3, 0.85);
-        font-weight: 600;
-    }
-    
-    @media (max-width: 580px) {
-        body {
-            font-size: 14px;
-        }
-        h1 {
-            font-size: 42px;
-            line-height: 1.45;
-        }
-    }
-    
-    .bg-align {
-        margin-top: 50%;
-    }
-    </style>
-
+# 深色模式CSS
+DARK_MODE_CSS = '''
     <style>
         /* ========== 深色模式主题变量 ========== */
         :root {
@@ -385,19 +191,10 @@
             background-color: rgba(255,255,255,0.1);
         }
     </style>
+'''
 
-</head>
-
-<body>
-    <section id="about" class="animated bounce-in">
-        <div class="bg-align">
-            <h1>404</h1>
-            <p>Oops! It looks like you're lost...</p>
-            <p>The Page you're looking for doesn't exist or another error occurred.</p>
-            <p><a href="https://009tg.com">👉  009tg.com</a></p>
-        </div>
-    </section>
-
+# 主题切换JS
+DARK_MODE_JS = '''
     <!-- 深色模式主题切换 -->
     <script>
         function initTheme() {
@@ -446,7 +243,88 @@
             });
         }
     </script>
+'''
 
-</body>
+# 主题切换按钮（放在horizontal-menu中）
+THEME_TOGGLE_BTN = '''
+                <ul class="user-info-menu right-links list-inline list-unstyled" style="float: right; margin-top: 15px; margin-right: 20px;">
+                    <li>
+                        <button class="theme-toggle-btn" onclick="toggleTheme()" title="切换深色/浅色模式">
+                            <i class="fa-moon-o" id="theme-icon"></i>
+                        </button>
+                    </li>
+                </ul>
+'''
 
-</html>
+
+def add_dark_mode_to_file(filepath):
+    """给单个HTML文件添加深色模式支持"""
+    if not os.path.exists(filepath):
+        print(f"  文件不存在: {filepath}")
+        return False
+
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    # 检查是否已经添加了深色模式
+    if 'data-theme="dark"' in content:
+        print(f"  已包含深色模式，跳过: {filepath}")
+        return True
+
+    modified = False
+
+    # 1. 在</head>之前添加CSS
+    if '</head>' in content:
+        content = content.replace('</head>', DARK_MODE_CSS + '\n</head>', 1)
+        modified = True
+        print(f"  已添加CSS")
+
+    # 2. 在horizontal-menu的navbar-inner中添加切换按钮
+    # 找到 <div class="navbar-mobile-clear"></div> 之前插入
+    if 'navbar-mobile-clear' in content:
+        content = content.replace(
+            '<div class="navbar-mobile-clear"></div>',
+            THEME_TOGGLE_BTN + '\n            <div class="navbar-mobile-clear"></div>',
+            1
+        )
+        modified = True
+        print(f"  已添加切换按钮")
+
+    # 3. 在</body>之前添加JS
+    if '</body>' in content:
+        content = content.replace('</body>', DARK_MODE_JS + '\n</body>', 1)
+        modified = True
+        print(f"  已添加JS")
+
+    if modified:
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(content)
+        print(f"  已保存: {filepath}")
+        return True
+    else:
+        print(f"  未修改: {filepath}")
+        return False
+
+
+def main():
+    files_to_process = [
+        os.path.join(PROJECT_ROOT, 'cn', 'about.html'),
+        os.path.join(PROJECT_ROOT, 'en', 'about.html'),
+        os.path.join(PROJECT_ROOT, '404.html'),
+        os.path.join(PROJECT_ROOT, 'redirect.html'),
+    ]
+
+    print("=" * 60)
+    print("给独立页面添加深色模式支持")
+    print("=" * 60)
+
+    for filepath in files_to_process:
+        print(f"\n处理: {filepath}")
+        add_dark_mode_to_file(filepath)
+
+    print("\n" + "=" * 60)
+    print("处理完成！")
+
+
+if __name__ == '__main__':
+    main()
