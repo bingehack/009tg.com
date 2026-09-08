@@ -181,6 +181,70 @@ PAGES = {
 '''
         }
     },
+    'disclaimer': {
+        'cn': {
+            'title': '009tg下海导航 - 免责声明',
+            'og_title': '009tg下海导航 - 免责声明',
+            'og_desc': '009tg下海导航 - 免责声明，了解本站的责任边界和使用须知。',
+            'heading': '免责声明',
+            'content': '''
+                    <blockquote>
+                        <p>欢迎使用009tg下海导航（以下简称"本网站"）。在使用本网站前，请仔细阅读以下免责声明。您的使用行为即视为同意本声明的全部条款。</p>
+                    </blockquote>
+                    <h5>一、网站性质</h5>
+                    <p>本网站是一个网址导航平台，旨在为用户提供便捷的网站分类索引和资源聚合服务。本网站收录的所有外部网站链接均来自公开网络，仅作为用户获取信息的参考，不代表本网站对其内容的真实性、准确性、合法性或可靠性作出任何保证或承诺。</p>
+                    <h5>二、外部链接免责</h5>
+                    <p>本网站包含大量指向第三方网站的链接。对于这些外部网站的内容、隐私政策、服务质量或任何其他方面，本网站不承担任何责任。用户通过本网站链接访问第三方网站时，应自行承担风险，并仔细阅读该网站的用户协议和隐私政策。</p>
+                    <p>本网站不对外部链接的可用性、及时性、安全性作出保证。如发现链接失效或指向不当内容，请通过<a href="contact.html">联系我们</a>页面告知，我们将及时处理。</p>
+                    <h5>三、内容免责</h5>
+                    <p>本网站展示的站点名称、描述、图标等信息，部分来源于被收录网站的公开元数据（如meta标签），部分由用户或编辑提交。本网站尽力确保信息的准确性，但不对信息的完整性、准确性、时效性作出保证。</p>
+                    <p>本网站的文章和指南内容仅供参考和学习交流，不构成任何投资建议、法律意见或专业指导。用户据此操作所产生的任何后果，本网站不承担责任。</p>
+                    <h5>四、知识产权</h5>
+                    <p>本网站的原创内容（包括但不限于文章、分类体系、页面设计）受知识产权法律保护。未经授权，不得复制、转载或用于商业用途。</p>
+                    <p>本网站收录的站点名称、logo、描述等归各自权利人所有。如权利人认为本网站的收录侵犯了其合法权益，请通过<a href="contact.html">联系我们</a>页面提供权属证明，我们将在核实后及时处理。</p>
+                    <h5>五、用户行为</h5>
+                    <p>用户在使用本网站时应遵守相关法律法规，不得利用本网站从事任何违法违规活动。用户因自身行为导致的任何法律责任，由用户自行承担。</p>
+                    <h5>六、服务变更与终止</h5>
+                    <p>本网站有权根据实际情况随时调整、暂停或终止部分或全部服务，且无需事先通知用户。本网站不对服务的中断或终止承担任何责任。</p>
+                    <h5>七、免责声明更新</h5>
+                    <p>本免责声明可能会不时更新。更新后的声明将在本页面发布，继续使用本网站即视为接受更新后的声明。</p>
+                    <h5>八、联系我们</h5>
+                    <p>如对本免责声明有任何疑问，或需要投诉举报相关内容，请通过<a href="contact.html">联系我们</a>页面与我们取得联系。</p>
+                    <p><em>最后更新日期：2026年9月</em></p>
+'''
+        },
+        'en': {
+            'title': '009tg Navigation - Disclaimer',
+            'og_title': '009tg Navigation - Disclaimer',
+            'og_desc': '009tg Navigation - Disclaimer, understand our liability boundaries and terms of use.',
+            'heading': 'Disclaimer',
+            'content': '''
+                    <blockquote>
+                        <p>Welcome to 009tg Navigation (hereinafter referred to as "this website"). Before using this website, please carefully read the following disclaimer. Your use of this website constitutes agreement to all terms of this disclaimer.</p>
+                    </blockquote>
+                    <h5>1. Website Nature</h5>
+                    <p>This website is a URL navigation platform designed to provide users with convenient website classification indexing and resource aggregation services. All external website links included on this website come from the public Internet and are only provided as a reference for users to obtain information. This website does not guarantee or promise the authenticity, accuracy, legality, or reliability of their content.</p>
+                    <h5>2. External Links Disclaimer</h5>
+                    <p>This website contains numerous links to third-party websites. This website is not responsible for the content, privacy policies, service quality, or any other aspects of these external websites. When users access third-party websites through links on this website, they do so at their own risk and should carefully read the user agreement and privacy policy of that website.</p>
+                    <p>This website does not guarantee the availability, timeliness, or security of external links. If you find a broken link or a link pointing to inappropriate content, please notify us through the <a href="contact.html">Contact Us</a> page, and we will promptly address it.</p>
+                    <h5>3. Content Disclaimer</h5>
+                    <p>The site names, descriptions, icons, and other information displayed on this website are partially derived from the public metadata of the listed websites (such as meta tags) and partially submitted by users or editors. This website strives to ensure the accuracy of the information but does not guarantee its completeness, accuracy, or timeliness.</p>
+                    <p>The articles and guides on this website are for reference and learning exchange only and do not constitute any investment advice, legal opinion, or professional guidance. This website is not responsible for any consequences arising from users' operations based on this information.</p>
+                    <h5>4. Intellectual Property</h5>
+                    <p>The original content of this website (including but not limited to articles, classification systems, and page design) is protected by intellectual property laws. Unauthorized copying, reproduction, or commercial use is prohibited.</p>
+                    <p>The site names, logos, descriptions, etc., listed on this website belong to their respective rights holders. If a rights holder believes that the listing on this website infringes upon their legitimate rights and interests, please provide proof of ownership through the <a href="contact.html">Contact Us</a> page, and we will promptly address it after verification.</p>
+                    <h5>5. User Behavior</h5>
+                    <p>Users should comply with relevant laws and regulations when using this website and must not use this website to engage in any illegal activities. Users shall bear any legal liabilities arising from their own actions.</p>
+                    <h5>6. Service Changes and Termination</h5>
+                    <p>This website reserves the right to adjust, suspend, or terminate part or all of its services at any time based on actual conditions without prior notice to users. This website shall not be liable for any interruption or termination of services.</p>
+                    <h5>7. Disclaimer Updates</h5>
+                    <p>This disclaimer may be updated from time to time. The updated disclaimer will be published on this page, and continued use of this website constitutes acceptance of the updated disclaimer.</p>
+                    <h5>8. Contact Us</h5>
+                    <p>If you have any questions about this disclaimer, or need to report related content, please contact us through the <a href="contact.html">Contact Us</a> page.</p>
+                    <p><em>Last updated: September 2026</em></p>
+'''
+        }
+    },
     'contact': {
         'cn': {
             'title': '009tg下海导航 - 联系我们',

@@ -364,6 +364,168 @@ def generate_all_content(groups, favicon_mapping, lang='cn'):
     return ''.join(content_sections)
 
 
+def generate_recent_and_hot(groups, favicon_mapping, lang='cn', asset_prefix='../'):
+    """生成最新收录和热门分类榜板块"""
+    from urllib.parse import urlparse
+    
+    # 收集所有站点
+    all_sites = []
+    def collect_sites(group):
+        for site in group.get('sites', []):
+            site['_group_name'] = group.get('name', '')
+            site['_group_id'] = group.get('id', 0)
+            all_sites.append(site)
+        for child in group.get('children', []):
+            collect_sites(child)
+    for g in groups:
+        collect_sites(g)
+    
+    # 最新收录（按created_at降序，取12个）
+    recent_sites = sorted(all_sites, key=lambda s: s.get('created_at', ''), reverse=True)[:12]
+    
+    # 热门分类（按站点数降序，取10个一级分类）
+    cat_counts = []
+    for g in groups:
+        count = len(g.get('sites', []))
+        for child in g.get('children', []):
+            count += len(child.get('sites', []))
+        if count > 0:
+            cat_counts.append((g, count))
+    cat_counts.sort(key=lambda x: x[1], reverse=True)
+    hot_cats = cat_counts[:10]
+    
+    # 加载分类翻译
+    try:
+        trans_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'tools/category_translation.json')
+        with open(trans_path, 'r', encoding='utf-8') as f:
+            cat_trans = json.load(f)
+    except:
+        cat_trans = {}
+    
+    if lang == 'cn':
+        recent_title = '最新收录'
+        recent_subtitle = '最近添加的优质站点'
+        hot_title = '热门分类'
+        hot_subtitle = '站点数量最多的分类'
+    else:
+        recent_title = 'Recently Added'
+        recent_subtitle = 'Latest quality sites added'
+        hot_title = 'Popular Categories'
+        hot_subtitle = 'Categories with most sites'
+    
+    # 生成最新收录HTML
+    recent_html = '''
+            <!-- 最新收录 -->
+            <div class="row" style="margin-bottom: 30px;">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" style="font-size: 18px; font-weight: 600;">
+                                <i class="fa-clock-o" style="margin-right: 8px; color: #337ab7;"></i>''' + recent_title + '''
+                                <small style="color: #999; margin-left: 10px; font-size: 13px;">''' + recent_subtitle + '''</small>
+                            </h3>
+                        </div>
+                        <div class="panel-body" style="padding: 15px;">
+                            <div class="row">
+    '''
+    
+    for site in recent_sites:
+        name = site.get('name', '')
+        url = site.get('url', '')
+        icon = site.get('icon', '')
+        domain = ''
+        try:
+            domain = urlparse(url).netloc
+        except:
+            pass
+        
+        favicon_path = icon
+        if domain and domain in favicon_mapping:
+            favicon_path = favicon_mapping[domain]
+        if not favicon_path:
+            favicon_path = asset_prefix + 'assets/images/logos/default.png'
+        elif favicon_path.startswith('assets/'):
+            favicon_path = asset_prefix + favicon_path
+        
+        created = site.get('created_at', '')
+        
+        recent_html += '''
+                                <div class="col-md-2 col-sm-3 col-xs-4" style="margin-bottom: 12px;">
+                                    <a href="redirect.html?url=''' + url + '''&name=''' + name + '''" target="_blank" 
+                                       style="display: block; padding: 10px; border: 1px solid #eee; border-radius: 6px; text-decoration: none; transition: all 0.2s; height: 100%;"
+                                       onmouseover="this.style.borderColor='#337ab7';this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)'"
+                                       onmouseout="this.style.borderColor='#eee';this.style.boxShadow='none'">
+                                        <div style="text-align: center;">
+                                            <img src="''' + favicon_path + '''" alt="''' + name + '''" style="width: 32px; height: 32px; border-radius: 4px; margin-bottom: 6px;" onerror="this.src=''' + "'" + asset_prefix + 'assets/images/logos/default.png' + "'" + '''">
+                                            <div style="font-size: 12px; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500;">''' + name + '''</div>
+                                            <div style="font-size: 11px; color: #999; margin-top: 2px;">''' + created + '''</div>
+                                        </div>
+                                    </a>
+                                </div>
+        '''
+    
+    recent_html += '''
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    '''
+    
+    # 生成热门分类HTML
+    hot_html = '''
+            <!-- 热门分类榜 -->
+            <div class="row" style="margin-bottom: 30px;">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" style="font-size: 18px; font-weight: 600;">
+                                <i class="fa-fire" style="margin-right: 8px; color: #e74c3c;"></i>''' + hot_title + '''
+                                <small style="color: #999; margin-left: 10px; font-size: 13px;">''' + hot_subtitle + '''</small>
+                            </h3>
+                        </div>
+                        <div class="panel-body" style="padding: 15px;">
+                            <div class="row">
+    '''
+    
+    for i, (cat, count) in enumerate(hot_cats, 1):
+        cat_id = cat.get('id', 0)
+        cat_name = cat.get('name', '')
+        if lang == 'en' and cat_name in cat_trans:
+            display_name = cat_trans[cat_name]
+        else:
+            display_name = cat_name
+        
+        if i <= 3:
+            rank_color = '#e74c3c'
+        elif i <= 6:
+            rank_color = '#f39c12'
+        else:
+            rank_color = '#999'
+        
+        hot_html += '''
+                                <div class="col-md-6" style="margin-bottom: 10px;">
+                                    <a href="category/''' + str(cat_id) + '''.html" style="display: flex; align-items: center; padding: 8px 12px; border: 1px solid #eee; border-radius: 6px; text-decoration: none; transition: all 0.2s;"
+                                       onmouseover="this.style.borderColor='#337ab7';this.style.backgroundColor='#f8f9fa'"
+                                       onmouseout="this.style.borderColor='#eee';this.style.backgroundColor='transparent'">
+                                        <span style="display: inline-block; width: 24px; height: 24px; line-height: 24px; text-align: center; background: ''' + rank_color + '''; color: #fff; border-radius: 4px; font-size: 12px; font-weight: 600; margin-right: 10px;">''' + str(i) + '''</span>
+                                        <span style="flex: 1; font-size: 14px; color: #333; font-weight: 500;">''' + display_name + '''</span>
+                                        <span style="font-size: 12px; color: #999;">''' + str(count) + ''' sites</span>
+                                    </a>
+                                </div>
+        '''
+    
+    hot_html += '''
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    '''
+    
+    return recent_html + hot_html
+
+
 def generate_language_switcher(lang='cn'):
     """生成语言切换器HTML"""
     if lang == 'cn':
@@ -435,6 +597,9 @@ def generate_html(lang='cn'):
 
     print(f"生成内容区域 ({lang})...")
     content_html = generate_all_content(root_groups, favicon_mapping, lang)
+
+    print(f"生成最新收录和热门榜 ({lang})...")
+    recent_hot_html = generate_recent_and_hot(root_groups, favicon_mapping, lang, asset_prefix)
 
     lang_switcher = generate_language_switcher(lang)
 
@@ -963,6 +1128,7 @@ def generate_html(lang='cn'):
                     </li>
                 </ul>
             </nav>
+            {recent_hot_html}
             {content_html}
         </div>
     </div>

@@ -134,6 +134,67 @@ def get_category_description(category_name, lang='cn'):
     return DEFAULT_CATEGORY_DESC[lang]
 
 
+def generate_category_intro(category_name, parent_name, total_sites, sample_sites, lang='cn'):
+    """动态生成200-300字的分类导读文字
+    基于基础描述 + 站点数量 + 热门站点 + 使用建议
+    """
+    base_desc = get_category_description(category_name, lang)
+    
+    # 取前3-5个热门站点名称
+    hot_names = []
+    for s in sample_sites[:5]:
+        name = s.get('name', '')
+        if name and len(name) < 30:
+            hot_names.append(name)
+        if len(hot_names) >= 4:
+            break
+    
+    if lang == 'cn':
+        # 中文导读
+        parts = [base_desc]
+        
+        # 站点数量说明
+        if total_sites > 0:
+            parts.append(f'本分类目前收录了{total_sites}个优质站点，')
+            if hot_names:
+                parts.append(f'包括{"、".join(hot_names)}等知名工具，')
+            parts.append('覆盖了该领域的主流需求和应用场景。')
+        
+        # 父分类关联
+        if parent_name and parent_name != category_name:
+            parts.append(f'作为{parent_name}领域的重要组成部分，')
+        
+        # 使用建议
+        parts.append('建议您根据自身需求选择合适的工具，多数工具提供免费试用或基础免费版本，可先体验后再决定是否升级付费。')
+        parts.append('如发现失效链接或有更好的工具推荐，欢迎通过联系我们页面告知，我们会及时更新维护。')
+        
+        intro = ''.join(parts)
+        # 确保长度在200-350字之间
+        if len(intro) < 200:
+            intro += '我们致力于为用户提供最全面、最实用的工具导航服务，持续更新和优化收录内容，帮助用户提升工作效率和使用体验。'
+    else:
+        # 英文导读
+        parts = [base_desc]
+        
+        if total_sites > 0:
+            parts.append(f' This category currently features {total_sites} quality sites,')
+            if hot_names:
+                parts.append(f' including well-known tools such as {", ".join(hot_names)},')
+            parts.append(' covering the mainstream needs and application scenarios in this field.')
+        
+        if parent_name and parent_name != category_name:
+            parts.append(f' As an important part of the {parent_name} field,')
+        
+        parts.append(' We recommend choosing the right tool based on your needs. Most tools offer free trials or basic free versions, so you can try before upgrading.')
+        parts.append(' If you find broken links or have better tool recommendations, please let us know through the Contact Us page, and we will update promptly.')
+        
+        intro = ''.join(parts)
+        if len(intro) < 200:
+            intro += ' We are committed to providing users with the most comprehensive and practical tool navigation service, continuously updating and optimizing our content to help users improve productivity and user experience.'
+    
+    return intro
+
+
 # ============================================================
 # 分类功能特点（中英文）
 # ============================================================
@@ -337,8 +398,9 @@ def generate_category_page(category, parent_category, children, all_sites_in_cat
     display_name = translate_category(category_name, lang)
     is_root = parent_category is None
 
-    # 分类描述
-    category_desc = get_category_description(category_name, lang)
+    # 分类描述（动态生成200-300字导读）
+    parent_name = parent_category.get('name', '') if parent_category else ''
+    category_desc = generate_category_intro(category_name, parent_name, len(all_sites_in_category), all_sites_in_category, lang)
 
     # 面包屑
     if lang == 'cn':
