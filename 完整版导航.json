@@ -2942,20 +2942,6 @@
           "updated_at": "2026-09-08"
         },
         {
-          "id": 3470,
-          "group_id": 10,
-          "name": "FastData数据分析",
-          "url": "https://www.500fd.cn",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 2,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
           "id": 3471,
           "group_id": 10,
           "name": "Etsyshop",
@@ -3259,20 +3245,6 @@
           "description_en": "",
           "notes": "",
           "order_num": 24,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
-          "id": 3526,
-          "group_id": 10,
-          "name": "福韵数据",
-          "url": "https://www.fukuku.cn",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 25,
           "is_public": true,
           "created_at": "2026-09-08",
           "updated_at": "2026-09-08"
@@ -4196,34 +4168,6 @@
           "description_en": "DoNotPay is an AI-powered online tool platform supporting AI Q&A, content generation, intelligent assistant, simple and easy to use, no installation required."
         },
         {
-          "id": 2861,
-          "group_id": 11,
-          "name": "小浣熊家族",
-          "url": "https://raccoon.sensetime.com/login",
-          "icon": "https://www.faviconextractor.com/api/favicon/raccoon.sensetime.com",
-          "description": "AI办公神器小浣熊家族，覆盖软件开发、数据分析、编程教育等多个场景",
-          "notes": "来源: 图钉AI导航_其他工具.json",
-          "order_num": 112,
-          "is_public": 1,
-          "created_at": "2026-09-05 11:27:00",
-          "updated_at": "2026-09-05 11:27:00",
-          "description_en": "小浣熊家族 provides convenient AI services covering AI Q&A, content generation, intelligent assistant and more, making it a reliable assistant for daily work and learning."
-        },
-        {
-          "id": 2862,
-          "group_id": 11,
-          "name": "Gemini 中文版",
-          "url": "https://gemini.ywsj.eu.org",
-          "icon": "https://www.faviconextractor.com/api/favicon/gemini.ywsj.eu.org",
-          "description": "Gemini 中文版是一款实用的AI工具，提供AI问答、内容生成、智能助手功能，帮助用户提升工作效率，适用于日常办公和学习场景。",
-          "notes": "来源: 图钉AI导航_其他工具.json",
-          "order_num": 113,
-          "is_public": 1,
-          "created_at": "2026-09-05 11:27:00",
-          "updated_at": "2026-09-05 11:27:00",
-          "description_en": "Gemini 中文版 is a practical AI tool that provides AI Q&A, content generation, intelligent assistant capabilities, helping users improve work efficiency for daily office and learning scenarios."
-        },
-        {
           "id": 2928,
           "group_id": 11,
           "name": "ChatGPT",
@@ -4418,20 +4362,6 @@
           "created_at": "2026-09-05 11:27:00",
           "updated_at": "2026-09-05 11:27:00",
           "description_en": "Scholaread provides convenient AI services covering AI Q&A, content generation, intelligent assistant and more, making it a reliable assistant for daily work and learning."
-        },
-        {
-          "id": 2975,
-          "group_id": 11,
-          "name": "Kimi Copilot – 网页总结助手",
-          "url": "https://kimi.tools",
-          "icon": "https://www.faviconextractor.com/api/favicon/kimi.tools",
-          "description": "Kimi Copilot – 网页总结助手是一款实用的AI工具，提供AI问答、内容生成、智能助手功能，帮助用户提升工作效率，适用于日常办公和学习场景。",
-          "notes": "来源: 图钉AI导航_阅读总结.json",
-          "order_num": 128,
-          "is_public": 1,
-          "created_at": "2026-09-05 11:27:00",
-          "updated_at": "2026-09-05 11:27:00",
-          "description_en": "Kimi Copilot – 网页总结助手 is a practical AI tool that provides AI Q&A, content generation, intelligent assistant capabilities, helping users improve work efficiency for daily office and learning scenarios."
         },
         {
           "id": 2976,
@@ -5344,20 +5274,6 @@
           "description_en": "妙想金融大模型 provides convenient AI services covering AI Q&A, content generation, intelligent assistant and more, making it a reliable assistant for daily work and learning."
         },
         {
-          "id": 3286,
-          "group_id": 11,
-          "name": "BloombergGPT",
-          "url": "https://www.bloomberg.com/company/press/bloomberggpt",
-          "icon": "https://www.faviconextractor.com/api/favicon/www.bloomberg.com",
-          "description": "彭博社金融大模型，5000亿金融数据训练，金融NLP任务专业领先",
-          "notes": "来源: AIH超级导航站_金融AI.json",
-          "order_num": 194,
-          "is_public": 1,
-          "created_at": "2026-09-05 11:34:57",
-          "updated_at": "2026-09-05 11:34:57",
-          "description_en": "BloombergGPT is a practical AI tool that provides AI Q&A, content generation, intelligent assistant capabilities, helping users improve work efficiency for daily office and learning scenarios."
-        },
-        {
           "id": 3287,
           "group_id": 11,
           "name": "Kavout",
@@ -5456,20 +5372,6 @@
           "updated_at": "2026-09-08 10:35:38"
         },
         {
-          "id": 3409,
-          "group_id": 11,
-          "name": "腾讯智影",
-          "url": "https://zenvideo.qq.com/activity/invitee?invitation_code=9n3YFqi7S7uyhK5p",
-          "icon": "",
-          "description": "腾讯智能创作工具平台",
-          "description_en": "",
-          "notes": "来源：zvcard导航",
-          "order_num": 3409,
-          "is_public": 1,
-          "created_at": "2026-09-08 10:35:38",
-          "updated_at": "2026-09-08 10:35:38"
-        },
-        {
           "id": 3410,
           "group_id": 11,
           "name": "AutoPod-AI自动视频剪辑制作插件",
@@ -5535,20 +5437,6 @@
           "description_en": "",
           "notes": "来源：zvcard导航",
           "order_num": 3414,
-          "is_public": 1,
-          "created_at": "2026-09-08 10:35:38",
-          "updated_at": "2026-09-08 10:35:38"
-        },
-        {
-          "id": 3415,
-          "group_id": 11,
-          "name": "Video Translate_HeyGen一键翻译视频",
-          "url": "https://labs.heygen.com/video-translate",
-          "icon": "",
-          "description": "一键翻译视频功能",
-          "description_en": "",
-          "notes": "来源：zvcard导航",
-          "order_num": 3415,
           "is_public": 1,
           "created_at": "2026-09-08 10:35:38",
           "updated_at": "2026-09-08 10:35:38"
@@ -6192,20 +6080,6 @@
           "description_en": "gong.io is an AI office assistant supporting document processing, data analysis, and meeting summaries to improve office efficiency for businesses and individuals."
         },
         {
-          "id": 2132,
-          "group_id": 12,
-          "name": "Smart ChatPDF",
-          "url": "https://smartchatpdf.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/smartchatpdf.com",
-          "description": "AI PDF文档对话工具，上传PDF通过自然语言提问获取文档内容",
-          "notes": "来源: AI地带_AI办公.json",
-          "order_num": 68,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Smart ChatPDF uses AI technology to optimize office workflows with smart writing, data processing, and task management, making it a reliable modern office assistant."
-        },
-        {
           "id": 2133,
           "group_id": 12,
           "name": "lightpdf.com",
@@ -6526,20 +6400,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "automagicalapps.com is an AI office assistant supporting document processing, data analysis, and meeting summaries to improve office efficiency for businesses and individuals."
-        },
-        {
-          "id": 2156,
-          "group_id": 12,
-          "name": "dealstream.com",
-          "url": "https://dealstream.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/dealstream.com",
-          "description": "排名第一的人工智能驱动的交易寻找平台，用于寻找收购机会、私人投资和资金来源。",
-          "notes": "来源: AI地带_AI办公.json",
-          "order_num": 92,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "dealstream.com uses AI technology to optimize office workflows with smart writing, data processing, and task management, making it a reliable modern office assistant."
         },
         {
           "id": 2157,
@@ -7544,20 +7404,6 @@
           "description_en": "Copysmith is an intelligent writing platform offering AI writing, content optimization, and title generation to help creators improve writing efficiency and quality."
         },
         {
-          "name": "Effidit",
-          "url": "https://effidit.qq.com",
-          "description": "由腾讯AI Lab 开发的一个研究性原型系统，探索用AI 技术提升写作者的写作效率和创作体验",
-          "icon": "https://www.faviconextractor.com/api/favicon/effidit.qq.com",
-          "notes": "层级：AI写作工具",
-          "is_public": 1,
-          "group_id": 13,
-          "id": 38,
-          "order_num": 24,
-          "created_at": "2025-12-10 16:32:18",
-          "updated_at": "2025-12-10 16:32:18",
-          "description_en": "Effidit is an AI-powered writing assistant that supports article generation, content polishing, and copy creation, ideal for content creators, marketers, and academic writing."
-        },
-        {
           "name": "彩云小梦",
           "url": "https://if.caiyunai.com",
           "description": "彩云小梦利用AI技术帮助用户高效创作内容，支持多种文体和语言，能够快速生成高质量的文章和文案。",
@@ -7768,34 +7614,6 @@
           "description_en": "resumewriting.com is an AI-powered writing assistant that supports article generation, content polishing, and copy creation, ideal for content creators, marketers, and academic writing."
         },
         {
-          "id": 2083,
-          "group_id": 13,
-          "name": "ZenithChat",
-          "url": "https://zenithchat.co",
-          "icon": "https://www.faviconextractor.com/api/favicon/zenithchat.co",
-          "description": "ZenithChat利用AI技术帮助用户高效创作内容，支持多种文体和语言，能够快速生成高质量的文章和文案。",
-          "notes": "来源: AI地带_AI写作工具.json",
-          "order_num": 40,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "ZenithChat uses AI technology to help users create content efficiently, supporting multiple writing styles and languages to generate high-quality articles quickly."
-        },
-        {
-          "id": 2084,
-          "group_id": 13,
-          "name": "V-A-I",
-          "url": "https://www.veronicavai.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/www.veronicavai.com",
-          "description": "V-A-I是一个智能写作平台，提供AI写作、内容优化、标题生成等功能，帮助创作者提升写作效率和质量。",
-          "notes": "来源: AI地带_AI写作工具.json",
-          "order_num": 41,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "V-A-I is an intelligent writing platform offering AI writing, content optimization, and title generation to help creators improve writing efficiency and quality."
-        },
-        {
           "id": 2085,
           "group_id": 13,
           "name": "ContentAI",
@@ -7822,34 +7640,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "CapGen AI Captions for Instagram uses AI technology to help users create content efficiently, supporting multiple writing styles and languages to generate high-quality articles quickly."
-        },
-        {
-          "id": 2087,
-          "group_id": 13,
-          "name": "BabyStoryAI",
-          "url": "https://babystoryai.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/babystoryai.com",
-          "description": "BabyStoryAI是一个智能写作平台，提供AI写作、内容优化、标题生成等功能，帮助创作者提升写作效率和质量。",
-          "notes": "来源: AI地带_AI写作工具.json",
-          "order_num": 44,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "BabyStoryAI is an intelligent writing platform offering AI writing, content optimization, and title generation to help creators improve writing efficiency and quality."
-        },
-        {
-          "id": 2088,
-          "group_id": 13,
-          "name": "Focal Studio",
-          "url": "https://focalstudio.ai",
-          "icon": "https://www.faviconextractor.com/api/favicon/focalstudio.ai",
-          "description": "Focal Studio是一款基于人工智能的写作辅助工具，支持文章生成、内容润色、文案创作等功能，适用于自媒体运营、营销文案、学术写作等场景。",
-          "notes": "来源: AI地带_AI写作工具.json",
-          "order_num": 45,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Focal Studio is an AI-powered writing assistant that supports article generation, content polishing, and copy creation, ideal for content creators, marketers, and academic writing."
         },
         {
           "id": 2089,
@@ -7976,20 +7766,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "monic.ai is an AI-powered writing assistant that supports article generation, content polishing, and copy creation, ideal for content creators, marketers, and academic writing."
-        },
-        {
-          "id": 2098,
-          "group_id": 13,
-          "name": "maker.ai",
-          "url": "https://maker.ai",
-          "icon": "https://www.faviconextractor.com/api/favicon/maker.ai",
-          "description": "maker.ai利用AI技术帮助用户高效创作内容，支持多种文体和语言，能够快速生成高质量的文章和文案。",
-          "notes": "来源: AI地带_AI写作工具.json",
-          "order_num": 55,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "maker.ai uses AI technology to help users create content efficiently, supporting multiple writing styles and languages to generate high-quality articles quickly."
         },
         {
           "id": 2099,
@@ -8160,20 +7936,6 @@
           "description_en": "厉害猫AI uses AI technology to help users create content efficiently, supporting multiple writing styles and languages to generate high-quality articles quickly."
         },
         {
-          "id": 2111,
-          "group_id": 13,
-          "name": "echotalent.net",
-          "url": "https://echotalent.net",
-          "icon": "https://www.faviconextractor.com/api/favicon/echotalent.net",
-          "description": "echotalent.net是一个智能写作平台，提供AI写作、内容优化、标题生成等功能，帮助创作者提升写作效率和质量。",
-          "notes": "来源: AI地带_AI写作工具.json",
-          "order_num": 68,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "echotalent.net is an intelligent writing platform offering AI writing, content optimization, and title generation to help creators improve writing efficiency and quality."
-        },
-        {
           "id": 2112,
           "group_id": 13,
           "name": "MyAIBae",
@@ -8186,20 +7948,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "MyAIBae is an AI-powered writing assistant that supports article generation, content polishing, and copy creation, ideal for content creators, marketers, and academic writing."
-        },
-        {
-          "id": 2113,
-          "group_id": 13,
-          "name": "WizFairy",
-          "url": "https://wizfairy.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/wizfairy.com",
-          "description": "WizFairy利用AI技术帮助用户高效创作内容，支持多种文体和语言，能够快速生成高质量的文章和文案。",
-          "notes": "来源: AI地带_AI写作工具.json",
-          "order_num": 70,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "WizFairy uses AI technology to help users create content efficiently, supporting multiple writing styles and languages to generate high-quality articles quickly."
         },
         {
           "id": 2114,
@@ -9078,20 +8826,6 @@
           "description_en": "Kaiber is an intelligent video creation platform offering AI video generation, enhancement, and content creation to lower the barrier of video production."
         },
         {
-          "id": 2466,
-          "group_id": 14,
-          "name": "Lip",
-          "url": "https://app.lipvideo.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/app.lipvideo.com",
-          "description": "Lip是一款AI视频创作工具，支持文本生成视频、视频编辑、智能剪辑等功能，适用于短视频创作、营销视频、教育培训等场景。",
-          "notes": "来源: AI地带_AI视频工具.json",
-          "order_num": 142,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Lip is an AI video creation tool supporting text-to-video, video editing, and smart clipping for short video creation, marketing videos, and educational content."
-        },
-        {
           "id": 2467,
           "group_id": 14,
           "name": "Wonder Studio",
@@ -9358,34 +9092,6 @@
           "description_en": "啵啵动漫 uses AI technology to simplify video production with auto-clipping, subtitle generation, and effects, helping users produce professional video content quickly."
         },
         {
-          "id": 2486,
-          "group_id": 14,
-          "name": "怪兽AI数字人",
-          "url": "https://www.guaishouai.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/www.guaishouai.com",
-          "description": "怪兽AI数字人是一个智能视频创作平台，提供AI生成视频、视频增强、内容创作等功能，降低视频制作门槛，提升创作效率。",
-          "notes": "来源: AI地带_AI视频工具.json",
-          "order_num": 162,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "怪兽AI数字人 is an intelligent video creation platform offering AI video generation, enhancement, and content creation to lower the barrier of video production."
-        },
-        {
-          "id": 2487,
-          "group_id": 14,
-          "name": "SEO Video Scribe",
-          "url": "https://seovideoscribe.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/seovideoscribe.com",
-          "description": "SEO Video Scribe是一款AI视频创作工具，支持文本生成视频、视频编辑、智能剪辑等功能，适用于短视频创作、营销视频、教育培训等场景。",
-          "notes": "来源: AI地带_AI视频工具.json",
-          "order_num": 163,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "SEO Video Scribe is an AI video creation tool supporting text-to-video, video editing, and smart clipping for short video creation, marketing videos, and educational content."
-        },
-        {
           "id": 2488,
           "group_id": 14,
           "name": "SpeakUp AI",
@@ -9398,20 +9104,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "SpeakUp AI uses AI technology to simplify video production with auto-clipping, subtitle generation, and effects, helping users produce professional video content quickly."
-        },
-        {
-          "id": 2489,
-          "group_id": 14,
-          "name": "TubehHorizon",
-          "url": "https://www.tubehorizon.ai",
-          "icon": "https://www.faviconextractor.com/api/favicon/www.tubehorizon.ai",
-          "description": "TubehHorizon是一个智能视频创作平台，提供AI生成视频、视频增强、内容创作等功能，降低视频制作门槛，提升创作效率。",
-          "notes": "来源: AI地带_AI视频工具.json",
-          "order_num": 165,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "TubehHorizon is an intelligent video creation platform offering AI video generation, enhancement, and content creation to lower the barrier of video production."
         },
         {
           "id": 2490,
@@ -10570,20 +10262,6 @@
           "description_en": "Poly is an intelligent design platform offering AI-generated designs, template editing, and collaborative design to lower the design barrier and improve efficiency."
         },
         {
-          "id": 2510,
-          "group_id": 15,
-          "name": "UserWise – Feedback Management Platform",
-          "url": "https://userwise.tech",
-          "icon": "https://www.faviconextractor.com/api/favicon/userwise.tech",
-          "description": "UserWise – Feedback Management Platform是一款AI设计辅助工具，支持智能排版、配色推荐、模板生成等功能，适用于UI设计、平面设计、营销素材等场景。",
-          "notes": "来源: AI地带_AI设计工具.json",
-          "order_num": 157,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "UserWise – Feedback Management Platform is an AI design assistant supporting smart layout, color recommendations, and template generation for UI design, graphic design, and marketing materials."
-        },
-        {
           "id": 2511,
           "group_id": 15,
           "name": "hint.app",
@@ -10694,20 +10372,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "bark.us is an intelligent design platform offering AI-generated designs, template editing, and collaborative design to lower the design barrier and improve efficiency."
-        },
-        {
-          "id": 2519,
-          "group_id": 15,
-          "name": "Roast My Landing Page",
-          "url": "https://roastmylandingpage.io",
-          "icon": "https://www.faviconextractor.com/api/favicon/roastmylandingpage.io",
-          "description": "AI驱动的着陆页即时评审工具，上传URL获取UX/文案/转化优化建议",
-          "notes": "来源: AI地带_AI设计工具.json",
-          "order_num": 166,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Roast My Landing Page is an AI design assistant supporting smart layout, color recommendations, and template generation for UI design, graphic design, and marketing materials."
         },
         {
           "id": 2520,
@@ -10990,20 +10654,6 @@
           "description_en": "AI Space of Design is an intelligent design platform offering AI-generated designs, template editing, and collaborative design to lower the design barrier and improve efficiency."
         },
         {
-          "id": 2540,
-          "group_id": 15,
-          "name": "UX Eyer",
-          "url": "https://www.uxeyer.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/www.uxeyer.com",
-          "description": "UX Eyer是一款AI设计辅助工具，支持智能排版、配色推荐、模板生成等功能，适用于UI设计、平面设计、营销素材等场景。",
-          "notes": "来源: AI地带_AI设计工具.json",
-          "order_num": 187,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "UX Eyer is an AI design assistant supporting smart layout, color recommendations, and template generation for UI design, graphic design, and marketing materials."
-        },
-        {
           "id": 2541,
           "group_id": 15,
           "name": "Evercopy",
@@ -11046,34 +10696,6 @@
           "description_en": "Releaso is an AI design assistant supporting smart layout, color recommendations, and template generation for UI design, graphic design, and marketing materials."
         },
         {
-          "id": 2544,
-          "group_id": 15,
-          "name": "PocketAI",
-          "url": "https://www.mypocketai.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/www.mypocketai.com",
-          "description": "适用于 WhatsApp 的快速且强大的基于 ChatGPT 的 AI 工具。",
-          "notes": "来源: AI地带_AI设计工具.json",
-          "order_num": 191,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "PocketAI uses AI technology to simplify design workflows with auto-generated designs, smart background removal, and style conversion for professional design output."
-        },
-        {
-          "id": 2545,
-          "group_id": 15,
-          "name": "Create Like Ninja",
-          "url": "https://createlike.ninja",
-          "icon": "https://www.faviconextractor.com/api/favicon/createlike.ninja",
-          "description": "Create Like Ninja是一个智能设计平台，提供AI生成设计、模板编辑、协作设计等功能，降低设计门槛，提升设计效率。",
-          "notes": "来源: AI地带_AI设计工具.json",
-          "order_num": 192,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Create Like Ninja is an intelligent design platform offering AI-generated designs, template editing, and collaborative design to lower the design barrier and improve efficiency."
-        },
-        {
           "id": 2546,
           "group_id": 15,
           "name": "SmartVisuals.app",
@@ -11086,20 +10708,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "SmartVisuals.app is an AI design assistant supporting smart layout, color recommendations, and template generation for UI design, graphic design, and marketing materials."
-        },
-        {
-          "id": 2547,
-          "group_id": 15,
-          "name": "RedditChatLab",
-          "url": "https://redditchatlab.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/redditchatlab.com",
-          "description": "使用受最新 subreddit 数据训练的聊天机器人进行用户研究并产生商业想法。",
-          "notes": "来源: AI地带_AI设计工具.json",
-          "order_num": 194,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "RedditChatLab uses AI technology to simplify design workflows with auto-generated designs, smart background removal, and style conversion for professional design output."
         },
         {
           "id": 2548,
@@ -11172,20 +10780,6 @@
           "description_en": "pdfy is an AI design assistant supporting smart layout, color recommendations, and template generation for UI design, graphic design, and marketing materials."
         },
         {
-          "id": 2553,
-          "group_id": 15,
-          "name": "SahNirmatha",
-          "url": "https://sahnirmatha.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/sahnirmatha.com",
-          "description": "AI驱动的无代码MVP快速构建平台，几分钟将创意转化为可运行原型",
-          "notes": "来源: AI地带_AI设计工具.json",
-          "order_num": 200,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "SahNirmatha uses AI technology to simplify design workflows with auto-generated designs, smart background removal, and style conversion for professional design output."
-        },
-        {
           "id": 2554,
           "group_id": 15,
           "name": "CouponGPTs",
@@ -11198,20 +10792,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "CouponGPTs is an intelligent design platform offering AI-generated designs, template editing, and collaborative design to lower the design barrier and improve efficiency."
-        },
-        {
-          "id": 2555,
-          "group_id": 15,
-          "name": "Dealdazzle",
-          "url": "https://www.dealdazzle.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/www.dealdazzle.com",
-          "description": "Dealdazzle是一款AI设计辅助工具，支持智能排版、配色推荐、模板生成等功能，适用于UI设计、平面设计、营销素材等场景。",
-          "notes": "来源: AI地带_AI设计工具.json",
-          "order_num": 202,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Dealdazzle is an AI design assistant supporting smart layout, color recommendations, and template generation for UI design, graphic design, and marketing materials."
         },
         {
           "id": 2556,
@@ -11254,20 +10834,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "Marketcells is an AI design assistant supporting smart layout, color recommendations, and template generation for UI design, graphic design, and marketing materials."
-        },
-        {
-          "id": 2559,
-          "group_id": 15,
-          "name": "MyYearInReview",
-          "url": "https://myyearinreview.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/myyearinreview.com",
-          "description": "MyYearInReview利用人工智能技术简化设计流程，支持自动生成设计稿、智能抠图、风格转换等功能，帮助用户快速产出专业设计作品。",
-          "notes": "来源: AI地带_AI设计工具.json",
-          "order_num": 206,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "MyYearInReview uses AI technology to simplify design workflows with auto-generated designs, smart background removal, and style conversion for professional design output."
         }
       ]
     },
@@ -11726,20 +11292,6 @@
           "description_en": "Cyber Square uses AI technology to improve programming efficiency, supporting multiple languages and frameworks with intelligent code context understanding and precise suggestions."
         },
         {
-          "id": 2402,
-          "group_id": 16,
-          "name": "Ramen AI",
-          "url": "https://tryramen.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/tryramen.com",
-          "description": "Ramen AI是一个智能编程平台，提供AI代码助手、代码审查、技术问答等功能，帮助开发者更快更好地完成编程任务。",
-          "notes": "来源: AI地带_AI编程.json",
-          "order_num": 120,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Ramen AI is an intelligent programming platform offering AI code assistance, code review, and technical Q&A to help developers complete programming tasks faster and better."
-        },
-        {
           "id": 2403,
           "group_id": 16,
           "name": "Sitescripter",
@@ -11752,20 +11304,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "Sitescripter is an AI programming assistant supporting code generation, code completion, and bug fixing for software development, learning to code, and technical research."
-        },
-        {
-          "id": 2404,
-          "group_id": 16,
-          "name": "CodeMaker AI",
-          "url": "https://codemaker.ai",
-          "icon": "https://www.faviconextractor.com/api/favicon/codemaker.ai",
-          "description": "CodeMaker AI 是一款 AI 驱动的编程助手，集成 JetBrains IDE，支持 10+ 语言的上下文感知代码生成和自动化测试。",
-          "notes": "来源: AI地带_AI编程.json",
-          "order_num": 122,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "CodeMaker AI uses AI technology to improve programming efficiency, supporting multiple languages and frameworks with intelligent code context understanding and precise suggestions."
         },
         {
           "id": 2405,
@@ -11796,20 +11334,6 @@
           "description_en": "autobotAI is an AI programming assistant supporting code generation, code completion, and bug fixing for software development, learning to code, and technical research."
         },
         {
-          "id": 2407,
-          "group_id": 16,
-          "name": "Coin Wizard",
-          "url": "https://coinwizard.ai",
-          "icon": "https://www.faviconextractor.com/api/favicon/coinwizard.ai",
-          "description": "Coin Wizard利用人工智能技术提升编程效率，支持多种编程语言和框架，能够智能理解代码上下文并提供精准建议。",
-          "notes": "来源: AI地带_AI编程.json",
-          "order_num": 125,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Coin Wizard uses AI technology to improve programming efficiency, supporting multiple languages and frameworks with intelligent code context understanding and precise suggestions."
-        },
-        {
           "id": 2408,
           "group_id": 16,
           "name": "Cliptutor",
@@ -11836,20 +11360,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "Instyll is an AI programming assistant supporting code generation, code completion, and bug fixing for software development, learning to code, and technical research."
-        },
-        {
-          "id": 2410,
-          "group_id": 16,
-          "name": "Zevo.ai",
-          "url": "https://zevo.ai",
-          "icon": "https://www.faviconextractor.com/api/favicon/zevo.ai",
-          "description": "Zevo.ai利用人工智能技术提升编程效率，支持多种编程语言和框架，能够智能理解代码上下文并提供精准建议。",
-          "notes": "来源: AI地带_AI编程.json",
-          "order_num": 128,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Zevo.ai uses AI technology to improve programming efficiency, supporting multiple languages and frameworks with intelligent code context understanding and precise suggestions."
         },
         {
           "id": 2411,
@@ -11908,20 +11418,6 @@
           "description_en": "ProGuides | Courses & Coaching by Pro Gamers is an intelligent programming platform offering AI code assistance, code review, and technical Q&A to help developers complete programming tasks faster and better."
         },
         {
-          "id": 2415,
-          "group_id": 16,
-          "name": "Nextprep",
-          "url": "https://www.nextprep.ai",
-          "icon": "https://www.faviconextractor.com/api/favicon/www.nextprep.ai",
-          "description": "Nextprep是一款AI编程辅助工具，支持代码生成、代码补全、bug修复等功能，适用于软件开发、学习编程、技术研究等场景。",
-          "notes": "来源: AI地带_AI编程.json",
-          "order_num": 133,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Nextprep is an AI programming assistant supporting code generation, code completion, and bug fixing for software development, learning to code, and technical research."
-        },
-        {
           "id": 2416,
           "group_id": 16,
           "name": "MUSICDATAK",
@@ -11948,34 +11444,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "MEJ Sales AI is an intelligent programming platform offering AI code assistance, code review, and technical Q&A to help developers complete programming tasks faster and better."
-        },
-        {
-          "id": 2418,
-          "group_id": 16,
-          "name": "MEJ ERP AI",
-          "url": "https://mejerpai.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/mejerpai.com",
-          "description": "MEJ ERP AI是一款AI编程辅助工具，支持代码生成、代码补全、bug修复等功能，适用于软件开发、学习编程、技术研究等场景。",
-          "notes": "来源: AI地带_AI编程.json",
-          "order_num": 136,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "MEJ ERP AI is an AI programming assistant supporting code generation, code completion, and bug fixing for software development, learning to code, and technical research."
-        },
-        {
-          "id": 2419,
-          "group_id": 16,
-          "name": "ExerDevAI",
-          "url": "https://exerdevai.dev",
-          "icon": "https://www.faviconextractor.com/api/favicon/exerdevai.dev",
-          "description": "ExerDevAI利用人工智能技术提升编程效率，支持多种编程语言和框架，能够智能理解代码上下文并提供精准建议。",
-          "notes": "来源: AI地带_AI编程.json",
-          "order_num": 137,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "ExerDevAI uses AI technology to improve programming efficiency, supporting multiple languages and frameworks with intelligent code context understanding and precise suggestions."
         },
         {
           "id": 2420,
@@ -15032,34 +14500,6 @@
           "updated_at": "2026-09-08 10:35:38"
         },
         {
-          "id": 3423,
-          "group_id": 27,
-          "name": "Analisa",
-          "url": "https://analisa.io",
-          "icon": "",
-          "description": "Tiktok、Instagram的数据分析平台。",
-          "description_en": "",
-          "notes": "来源：zvcard导航",
-          "order_num": 3423,
-          "is_public": 1,
-          "created_at": "2026-09-08 10:35:38",
-          "updated_at": "2026-09-08 10:35:38"
-        },
-        {
-          "id": 3424,
-          "group_id": 27,
-          "name": "TikRank(免费)",
-          "url": "https://tikrank.com",
-          "icon": "",
-          "description": "Tiktok上创作者的影响力排名分析网站，收录的基本是百万级粉丝以上的创作者，该工具目前是免费的。",
-          "description_en": "",
-          "notes": "来源：zvcard导航",
-          "order_num": 3424,
-          "is_public": 1,
-          "created_at": "2026-09-08 10:35:38",
-          "updated_at": "2026-09-08 10:35:38"
-        },
-        {
           "id": 3425,
           "group_id": 27,
           "name": "TikBuddy",
@@ -15088,20 +14528,6 @@
           "updated_at": "2026-09-08 10:35:38"
         },
         {
-          "id": 3427,
-          "group_id": 27,
-          "name": "TiChoo数据分析",
-          "url": "https://www.tichoo.cn/mp/",
-          "icon": "",
-          "description": "免费送高级会员-全球视频电商数据分析平台",
-          "description_en": "",
-          "notes": "来源：zvcard导航",
-          "order_num": 3427,
-          "is_public": 1,
-          "created_at": "2026-09-08 10:35:38",
-          "updated_at": "2026-09-08 10:35:38"
-        },
-        {
           "id": 3428,
           "group_id": 27,
           "name": "SocialTracker",
@@ -15125,20 +14551,6 @@
           "description_en": "",
           "notes": "来源：zvcard导航",
           "order_num": 3429,
-          "is_public": 1,
-          "created_at": "2026-09-08 10:35:38",
-          "updated_at": "2026-09-08 10:35:38"
-        },
-        {
-          "id": 3430,
-          "group_id": 27,
-          "name": "Pentos智能营销工具",
-          "url": "https://pentos.co",
-          "icon": "",
-          "description": "智能营销的Tiktok工具",
-          "description_en": "",
-          "notes": "来源：zvcard导航",
-          "order_num": 3430,
           "is_public": 1,
           "created_at": "2026-09-08 10:35:38",
           "updated_at": "2026-09-08 10:35:38"
@@ -15504,20 +14916,6 @@
           "updated_at": "2026-09-08 10:35:38"
         },
         {
-          "id": 3318,
-          "group_id": 30,
-          "name": "922 S5 Proxy",
-          "url": "https://www.922proxy.com/index.html",
-          "icon": "",
-          "description": "922S5Proxy是一家大型住宅IP代理服务商",
-          "description_en": "",
-          "notes": "来源：zvcard导航",
-          "order_num": 3318,
-          "is_public": 1,
-          "created_at": "2026-09-08 10:35:38",
-          "updated_at": "2026-09-08 10:35:38"
-        },
-        {
           "id": 3319,
           "group_id": 30,
           "name": "IPIPGO海外代理",
@@ -15597,20 +14995,6 @@
           "description_en": "",
           "notes": "来源：zvcard导航",
           "order_num": 3339,
-          "is_public": 1,
-          "created_at": "2026-09-08 10:35:38",
-          "updated_at": "2026-09-08 10:35:38"
-        },
-        {
-          "id": 3340,
-          "group_id": 30,
-          "name": "LunaProxy全球住宅IP",
-          "url": "https://www.lunaproxy.com/",
-          "icon": "",
-          "description": "全球真实家庭住宅代理，高速稳定且便宜",
-          "description_en": "",
-          "notes": "来源：zvcard导航",
-          "order_num": 3340,
           "is_public": 1,
           "created_at": "2026-09-08 10:35:38",
           "updated_at": "2026-09-08 10:35:38"
@@ -15728,20 +15112,6 @@
           "updated_at": "2026-09-08"
         },
         {
-          "id": 3456,
-          "group_id": 30,
-          "name": "Cherry Proxy",
-          "url": "https://www.cherryproxy.com/?utm-source=zbw&utm-keyword=?zvcard",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 3350,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
           "id": 3457,
           "group_id": 30,
           "name": "1024proxy",
@@ -15849,20 +15219,6 @@
           "description_en": "",
           "notes": "",
           "order_num": 3358,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
-          "id": 3465,
-          "group_id": 30,
-          "name": "IPIDEA",
-          "url": "https://share.ipidea.net/7mpCrGroPIZYh0R",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 3359,
           "is_public": true,
           "created_at": "2026-09-08",
           "updated_at": "2026-09-08"
@@ -16498,20 +15854,6 @@
           "updated_at": "2026-09-08"
         },
         {
-          "id": 3637,
-          "group_id": 30,
-          "name": "松果云",
-          "url": "https://www.seegoing.com",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 3405,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
           "id": 3638,
           "group_id": 30,
           "name": "美播云",
@@ -16764,20 +16106,6 @@
           "updated_at": "2026-09-08"
         },
         {
-          "id": 3657,
-          "group_id": 30,
-          "name": "比目网络",
-          "url": "https://www.bmob.cn",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 3424,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
           "id": 3658,
           "group_id": 30,
           "name": "天威视讯",
@@ -16787,20 +16115,6 @@
           "description_en": "",
           "notes": "",
           "order_num": 3425,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
-          "id": 3687,
-          "group_id": 30,
-          "name": "Ipcloaks",
-          "url": "https://ipcloaks.com/#",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 3426,
           "is_public": true,
           "created_at": "2026-09-08",
           "updated_at": "2026-09-08"
@@ -17951,20 +17265,6 @@
           "updated_at": "2026-09-08"
         },
         {
-          "id": 3765,
-          "group_id": 35,
-          "name": "云之讯",
-          "url": "http://www.ucpaas.com",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 3365,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
           "id": 3766,
           "group_id": 35,
           "name": "轻码云",
@@ -17974,20 +17274,6 @@
           "description_en": "",
           "notes": "",
           "order_num": 3366,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
-          "id": 3767,
-          "group_id": 35,
-          "name": "CM.com",
-          "url": "https://www.cmtelecom.cn",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 3367,
           "is_public": true,
           "created_at": "2026-09-08",
           "updated_at": "2026-09-08"
@@ -18083,20 +17369,6 @@
           "created_at": "2025-12-10 16:32:18",
           "updated_at": "2025-12-10 16:32:18",
           "description_en": "云片OTP短信 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios."
-        },
-        {
-          "name": "秒赛科技",
-          "url": "https://www.shmiaosai.com",
-          "description": "专业短信验证码平台服务商，提供用户注册、登录、支付确认等各种手机验证码短信场景",
-          "icon": "https://www.faviconextractor.com/api/favicon/www.shmiaosai.com",
-          "notes": "层级：2FA短信验证码发送",
-          "is_public": 1,
-          "group_id": 36,
-          "id": 258,
-          "order_num": 244,
-          "created_at": "2025-12-10 16:32:18",
-          "updated_at": "2025-12-10 16:32:18",
-          "description_en": "秒赛科技 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet."
         },
         {
           "name": "SUBMAIL赛邮云通信",
@@ -18984,20 +18256,6 @@
           "description_en": "Coincenter is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios."
         },
         {
-          "name": "BitcoinWarrior",
-          "url": "https://bitcoinwarrior.net",
-          "description": "BitcoinWarrior为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。",
-          "icon": "https://www.faviconextractor.com/api/favicon/bitcoinwarrior.net",
-          "notes": "层级：区块链媒体",
-          "is_public": 1,
-          "group_id": 40,
-          "id": 277,
-          "order_num": 263,
-          "created_at": "2025-12-10 16:32:18",
-          "updated_at": "2025-12-10 16:32:18",
-          "description_en": "BitcoinWarrior provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet."
-        },
-        {
           "name": "99bitcoins",
           "url": "https://99bitcoins.com",
           "description": "提供教程介绍如何用PayPal、信用卡、借记卡等方式购买比特币",
@@ -19080,20 +18338,6 @@
           "created_at": "2025-12-10 16:32:18",
           "updated_at": "2025-12-10 16:32:18",
           "description_en": "TheBitcoinNews provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet."
-        },
-        {
-          "name": "LetstalkBitcoin",
-          "url": "https://letstalkbitcoin.com",
-          "description": "LetstalkBitcoin是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。",
-          "icon": "https://www.faviconextractor.com/api/favicon/letstalkbitcoin.com",
-          "notes": "层级：区块链媒体",
-          "is_public": 1,
-          "group_id": 40,
-          "id": 1134,
-          "order_num": 1120,
-          "created_at": "2025-12-10 16:32:18",
-          "updated_at": "2025-12-10 16:32:18",
-          "description_en": "LetstalkBitcoin is a professional online tool platform with simple operation and easy access, offering convenient online services without installation."
         },
         {
           "name": "BitcoinMagazine",
@@ -20306,20 +19550,6 @@
           "updated_at": "2026-09-08 10:35:38"
         },
         {
-          "id": 3378,
-          "group_id": 46,
-          "name": "Worldpay",
-          "url": "https://online.worldpay.com",
-          "icon": "",
-          "description": "Worldpay 是一家为在线交易提供支付网关的商户服务和支付处理提供商。自被收购以来，该公司现在被称为“FIS 的 Worldpay”。",
-          "description_en": "",
-          "notes": "来源：zvcard导航",
-          "order_num": 3378,
-          "is_public": 1,
-          "created_at": "2026-09-08 10:35:38",
-          "updated_at": "2026-09-08 10:35:38"
-        },
-        {
           "id": 3379,
           "group_id": 46,
           "name": "Koho Financial",
@@ -20511,20 +19741,6 @@
           "description_en": "",
           "notes": "来源：zvcard导航",
           "order_num": 3392,
-          "is_public": 1,
-          "created_at": "2026-09-08 10:35:38",
-          "updated_at": "2026-09-08 10:35:38"
-        },
-        {
-          "id": 3393,
-          "group_id": 46,
-          "name": "Yokoy",
-          "url": "https://yokoy.io/en",
-          "icon": "",
-          "description": "Yokoy 将 AI 整合到一个工具中，将费用管理、供应商发票管理和公司信用卡纳入其中。公司可以配置和构建自己独特的流程,根据需要自动化多或少的步骤,并自动将 Yokoy 与所有主要的第三方工具集成。",
-          "description_en": "",
-          "notes": "来源：zvcard导航",
-          "order_num": 3393,
           "is_public": 1,
           "created_at": "2026-09-08 10:35:38",
           "updated_at": "2026-09-08 10:35:38"
@@ -20740,20 +19956,6 @@
           "updated_at": "2026-09-08"
         },
         {
-          "id": 3590,
-          "group_id": 46,
-          "name": "UnPAY",
-          "url": "https://www.unpay.com/zh_CN/index.html",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 3409,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
           "id": 3591,
           "group_id": 46,
           "name": "掌游互动",
@@ -20833,20 +20035,6 @@
           "description_en": "",
           "notes": "",
           "order_num": 3415,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
-          "id": 3597,
-          "group_id": 46,
-          "name": "瑞银信",
-          "url": "https://www.ruiyinxin.com",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 3416,
           "is_public": true,
           "created_at": "2026-09-08",
           "updated_at": "2026-09-08"
@@ -21057,20 +20245,6 @@
           "description_en": "",
           "notes": "",
           "order_num": 3431,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
-          "id": 3613,
-          "group_id": 46,
-          "name": "中数合一",
-          "url": "https://www.zhongshuheyi.com",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 3432,
           "is_public": true,
           "created_at": "2026-09-08",
           "updated_at": "2026-09-08"
@@ -24974,20 +24148,6 @@
           "updated_at": "2026-09-08"
         },
         {
-          "id": 3487,
-          "group_id": 68,
-          "name": "有言在前",
-          "url": "https://www.hitranslator.com/#/home",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 10,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
           "id": 3488,
           "group_id": 68,
           "name": "译维翻译",
@@ -25151,20 +24311,6 @@
           "description_en": "",
           "notes": "",
           "order_num": 22,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
-          "id": 3500,
-          "group_id": 68,
-          "name": "Yee Tran",
-          "url": "https://www.yeetran.com/about",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 23,
           "is_public": true,
           "created_at": "2026-09-08",
           "updated_at": "2026-09-08"
@@ -25389,20 +24535,6 @@
           "description_en": "",
           "notes": "",
           "order_num": 39,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
-          "id": 3547,
-          "group_id": 68,
-          "name": "翻易通",
-          "url": "https://www.flitto.com.cn",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 40,
           "is_public": true,
           "created_at": "2026-09-08",
           "updated_at": "2026-09-08"
@@ -28828,20 +27960,6 @@
           "updated_at": "2026-09-08"
         },
         {
-          "id": 3720,
-          "group_id": 79,
-          "name": "Mobvoyage",
-          "url": "https://www.mobvoyage.cn",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 20,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
           "id": 3721,
           "group_id": 79,
           "name": "Liftoff",
@@ -29833,20 +28951,6 @@
           "updated_at": "2026-09-08"
         },
         {
-          "id": 3663,
-          "group_id": 84,
-          "name": "立圣科技",
-          "url": "https://www.lisheng.net.cn",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 3460,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
           "id": 3664,
           "group_id": 84,
           "name": "亿思特科技",
@@ -29898,20 +29002,6 @@
           "description_en": "",
           "notes": "",
           "order_num": 3464,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
-          "id": 3668,
-          "group_id": 84,
-          "name": "赫鲸",
-          "url": "https://www.famewhale.com",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 3465,
           "is_public": true,
           "created_at": "2026-09-08",
           "updated_at": "2026-09-08"
@@ -31055,20 +30145,6 @@
       "parent_id": 84,
       "sites": [
         {
-          "name": "Slickdeals",
-          "url": "https://slickdeals.net",
-          "description": "Slickdeals是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。",
-          "icon": "https://www.faviconextractor.com/api/favicon/slickdeals.net",
-          "notes": "层级：Deals平台",
-          "is_public": 1,
-          "group_id": 88,
-          "id": 1289,
-          "order_num": 1275,
-          "created_at": "2025-12-10 16:32:18",
-          "updated_at": "2025-12-10 16:32:18",
-          "description_en": "Slickdeals is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios."
-        },
-        {
           "name": "TechBargains",
           "url": "https://www.techbargains.com",
           "description": "TechBargains为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。",
@@ -31469,20 +30545,6 @@
           "updated_at": "2026-09-08"
         },
         {
-          "id": 3801,
-          "group_id": 89,
-          "name": "Tikmeta",
-          "url": "https://www.tikmeta.com",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 27,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
           "id": 3802,
           "group_id": 89,
           "name": "SellerCenter",
@@ -31637,20 +30699,6 @@
           "updated_at": "2026-09-08"
         },
         {
-          "id": 3813,
-          "group_id": 89,
-          "name": "Egrow",
-          "url": "https://egrow.io",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 39,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
           "id": 3814,
           "group_id": 89,
           "name": "ZonGuru",
@@ -31688,20 +30736,6 @@
           "description_en": "",
           "notes": "",
           "order_num": 42,
-          "is_public": true,
-          "created_at": "2026-09-08",
-          "updated_at": "2026-09-08"
-        },
-        {
-          "id": 3817,
-          "group_id": 89,
-          "name": "Cashcowpro",
-          "url": "https://www.cashcowpro.com",
-          "icon": "",
-          "description": "",
-          "description_en": "",
-          "notes": "",
-          "order_num": 43,
           "is_public": true,
           "created_at": "2026-09-08",
           "updated_at": "2026-09-08"
@@ -32451,20 +31485,6 @@
           "created_at": "2025-12-10 16:32:18",
           "updated_at": "2025-12-10 16:32:18",
           "description_en": "中国制造网 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet."
-        },
-        {
-          "name": "环球资源网",
-          "url": "https://www.globalsources.com",
-          "description": "环球资源是领先的全球性多渠道 B2B 平台。通过提供由线上贸易网站、线下展会构成的一站式 O2O 解决方案,让用户获得优质、真实的 B2B 服务,促成交易并促进商业成功。",
-          "icon": "https://www.faviconextractor.com/api/favicon/www.globalsources.com",
-          "notes": "层级：货源网站",
-          "is_public": 1,
-          "group_id": 93,
-          "id": 1283,
-          "order_num": 1269,
-          "created_at": "2025-12-10 16:32:18",
-          "updated_at": "2025-12-10 16:32:18",
-          "description_en": "环球资源网 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation."
         },
         {
           "name": "物托帮",
@@ -33561,20 +32581,6 @@
           "description_en": "LexiGym uses AI technology to identify AI-generated content with multiple detection dimensions and report output to help users ensure content originality and quality."
         },
         {
-          "id": 2051,
-          "group_id": 2002,
-          "name": "Your-AI",
-          "url": "https://your-ai.net",
-          "icon": "https://www.faviconextractor.com/api/favicon/your-ai.net",
-          "description": "Your-AI是一个智能内容检测平台，提供AI检测、查重、润色等功能，帮助创作者和教育机构提升内容质量和学术诚信。",
-          "notes": "来源: AI地带_AI内容检测.json",
-          "order_num": 17,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Your-AI is an intelligent content detection platform offering AI detection, plagiarism checking, and text polishing to help creators and educators improve content quality and academic integrity."
-        },
-        {
           "id": 2052,
           "group_id": 2002,
           "name": "Super Tech Fans",
@@ -33603,34 +32609,6 @@
           "description_en": "Skiley uses AI technology to identify AI-generated content with multiple detection dimensions and report output to help users ensure content originality and quality."
         },
         {
-          "id": 2054,
-          "group_id": 2002,
-          "name": "SaaSlidator",
-          "url": "https://saaslidator.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/saaslidator.com",
-          "description": "SaaSlidator是一个智能内容检测平台，提供AI检测、查重、润色等功能，帮助创作者和教育机构提升内容质量和学术诚信。",
-          "notes": "来源: AI地带_AI内容检测.json",
-          "order_num": 20,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "SaaSlidator is an intelligent content detection platform offering AI detection, plagiarism checking, and text polishing to help creators and educators improve content quality and academic integrity."
-        },
-        {
-          "id": 2055,
-          "group_id": 2002,
-          "name": "Rejoy",
-          "url": "https://rejoy.app",
-          "icon": "https://www.faviconextractor.com/api/favicon/rejoy.app",
-          "description": "Rejoy是一款AI内容检测工具，支持AI文本检测、抄袭检测、内容质量评估等功能，适用于学术写作、内容创作、教育评估等场景。",
-          "notes": "来源: AI地带_AI内容检测.json",
-          "order_num": 21,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Rejoy is an AI content detection tool supporting AI text detection, plagiarism checking, and content quality assessment for academic writing, content creation, and education."
-        },
-        {
           "id": 2056,
           "group_id": 2002,
           "name": "Link:RE",
@@ -33643,20 +32621,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "Link:RE uses AI technology to identify AI-generated content with multiple detection dimensions and report output to help users ensure content originality and quality."
-        },
-        {
-          "id": 2057,
-          "group_id": 2002,
-          "name": "Huntd",
-          "url": "https://huntd.xyz",
-          "icon": "https://www.faviconextractor.com/api/favicon/huntd.xyz",
-          "description": "Huntd是一个智能内容检测平台，提供AI检测、查重、润色等功能，帮助创作者和教育机构提升内容质量和学术诚信。",
-          "notes": "来源: AI地带_AI内容检测.json",
-          "order_num": 23,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Huntd is an intelligent content detection platform offering AI detection, plagiarism checking, and text polishing to help creators and educators improve content quality and academic integrity."
         },
         {
           "id": 2058,
@@ -34381,20 +33345,6 @@
           "description_en": "Sneakerlogoai is an online AI painting platform offering text-to-image, image editing, and style conversion, allowing anyone to create stunning images without design skills."
         },
         {
-          "id": 2202,
-          "group_id": 2003,
-          "name": "Modeli.ai",
-          "url": "https://modeli.ai/en",
-          "icon": "https://www.faviconextractor.com/api/favicon/modeli.ai",
-          "description": "Modeli.ai是一款AI图像生成和编辑工具，支持文生图、图生图、图像编辑等功能，适用于设计创作、营销素材、社交媒体配图等场景。",
-          "notes": "来源: AI地带_AI图像工具.json",
-          "order_num": 33,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Modeli.ai is an AI image generation and editing tool supporting text-to-image, image-to-image, and image editing for design, marketing, and social media content creation."
-        },
-        {
           "id": 2203,
           "group_id": 2003,
           "name": "Photify AI",
@@ -34855,20 +33805,6 @@
           "created_at": "2026-09-05 11:27:00",
           "updated_at": "2026-09-05 11:27:00",
           "description_en": "AI 动漫生成器 is an AI image generation and editing tool supporting text-to-image, image-to-image, and image editing for design, marketing, and social media content creation."
-        },
-        {
-          "id": 2876,
-          "group_id": 2003,
-          "name": "HivisionIDPhoto",
-          "url": "https://swanhub.co/ZeYiLin/HivisionIDPhotos/demo",
-          "icon": "https://www.faviconextractor.com/api/favicon/swanhub.co",
-          "description": "HivisionIDPhoto利用人工智能技术实现智能图像处理，支持多种风格和效果，帮助用户快速创作专业级图像内容。",
-          "notes": "来源: 图钉AI导航_图像绘画.json",
-          "order_num": 67,
-          "is_public": 1,
-          "created_at": "2026-09-05 11:27:00",
-          "updated_at": "2026-09-05 11:27:00",
-          "description_en": "HivisionIDPhoto uses AI technology for intelligent image processing, supporting multiple styles and effects to help users create professional-grade images quickly."
         },
         {
           "id": 2877,
@@ -35999,20 +34935,6 @@
           "description_en": "AI Tools Alternatives: Browser Extension uses AI technology to personalize learning experiences with smart recommendations, learning path planning, and progress tracking to help users learn efficiently."
         },
         {
-          "id": 2249,
-          "group_id": 2004,
-          "name": "blessing.wiki",
-          "url": "https://blessing.wiki",
-          "icon": "https://www.faviconextractor.com/api/favicon/blessing.wiki",
-          "description": "使用 Blessing.wiki 为每一天定制并创建个性化的祝福。",
-          "notes": "来源: AI地带_AI学习资源.json",
-          "order_num": 26,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "blessing.wiki is an online learning platform covering programming, design, business, and more, providing quality courses and resources for personal growth and career development."
-        },
-        {
           "id": 2250,
           "group_id": 2004,
           "name": "fix-relationship",
@@ -36055,20 +34977,6 @@
           "description_en": "Cambiador De Palabras is an online learning platform covering programming, design, business, and more, providing quality courses and resources for personal growth and career development."
         },
         {
-          "id": 2253,
-          "group_id": 2004,
-          "name": "Notega",
-          "url": "https://www.notega.co",
-          "icon": "https://www.faviconextractor.com/api/favicon/www.notega.co",
-          "description": "人工智能驱动的工具，可简化内容创建、提高数字参与度并节省时间。",
-          "notes": "来源: AI地带_AI学习资源.json",
-          "order_num": 30,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Notega is an AI learning resource platform offering online courses, learning tools, and knowledge Q&A for skill improvement, exam preparation, and interest learning."
-        },
-        {
           "id": 2254,
           "group_id": 2004,
           "name": "Algorityx",
@@ -36109,20 +35017,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "Twine is an AI learning resource platform offering online courses, learning tools, and knowledge Q&A for skill improvement, exam preparation, and interest learning."
-        },
-        {
-          "id": 2257,
-          "group_id": 2004,
-          "name": "Tech Web Planet",
-          "url": "https://techwebplanet.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/techwebplanet.com",
-          "description": "在 Techweb Planet 上找到最适合您职业的人工智能工具。",
-          "notes": "来源: AI地带_AI学习资源.json",
-          "order_num": 34,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Tech Web Planet uses AI technology to personalize learning experiences with smart recommendations, learning path planning, and progress tracking to help users learn efficiently."
         },
         {
           "id": 2258,
@@ -37393,20 +36287,6 @@
       "parent_id": 10,
       "sites": [
         {
-          "id": 2274,
-          "group_id": 2005,
-          "name": "Google Gemini Pro Chat Bot",
-          "url": "https://chat.googlegemini.co",
-          "icon": "https://www.faviconextractor.com/api/favicon/chat.googlegemini.co",
-          "description": "一款基于Google Gemini Pro API的免费文本和图像交互工具。",
-          "notes": "来源: AI地带_AI对话.json",
-          "order_num": 0,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Google Gemini Pro Chat Bot is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios."
-        },
-        {
           "id": 2275,
           "group_id": 2005,
           "name": "ChatGPT",
@@ -37561,20 +36441,6 @@
           "description_en": "RIZZ AI is a professional online tool platform with simple operation and easy access, offering convenient online services without installation."
         },
         {
-          "id": 2286,
-          "group_id": 2005,
-          "name": "Minimax AI",
-          "url": "https://minimax-ai.org",
-          "icon": "https://www.faviconextractor.com/api/favicon/minimax-ai.org",
-          "description": "中国领先AI大模型平台，提供多模态服务包括语言模型、语音合成、视频生成、音乐和图像生成，定价极低",
-          "notes": "来源: AI地带_AI对话.json",
-          "order_num": 12,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Minimax AI is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios."
-        },
-        {
           "id": 2287,
           "group_id": 2005,
           "name": "BluChatbot",
@@ -37699,20 +36565,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "Whisper is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios."
-        },
-        {
-          "id": 2296,
-          "group_id": 2005,
-          "name": "Morphic",
-          "url": "https://www.houseofzoox.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/www.houseofzoox.com",
-          "description": "Morphic为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。",
-          "notes": "来源: AI地带_AI对话.json",
-          "order_num": 22,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Morphic provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet."
         },
         {
           "id": 2297,
@@ -37981,20 +36833,6 @@
           "description_en": "Open Assistant is a professional online tool platform with simple operation and easy access, offering convenient online services without installation."
         },
         {
-          "id": 2316,
-          "group_id": 2005,
-          "name": "Seeker AI",
-          "url": "https://seeker-ai.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/seeker-ai.com",
-          "description": "Seeker AI是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。",
-          "notes": "来源: AI地带_AI对话.json",
-          "order_num": 42,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Seeker AI is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios."
-        },
-        {
           "id": 2317,
           "group_id": 2005,
           "name": "Dreamy.AI",
@@ -38119,20 +36957,6 @@
           "created_at": "2026-09-05 11:27:00",
           "updated_at": "2026-09-05 11:27:00",
           "description_en": "华为小艺 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios."
-        },
-        {
-          "id": 2940,
-          "group_id": 2005,
-          "name": "Copilot",
-          "url": "https://copilot.microsoft.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/copilot.microsoft.com",
-          "description": "Copilot为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。",
-          "notes": "来源: 图钉AI导航_聊天机器.json",
-          "order_num": 52,
-          "is_public": 1,
-          "created_at": "2026-09-05 11:27:00",
-          "updated_at": "2026-09-05 11:27:00",
-          "description_en": "Copilot provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet."
         }
       ]
     },
@@ -38435,20 +37259,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "Lightning AI is an AI open platform offering speech, vision, and NLP capabilities to help developers quickly build intelligent applications."
-        },
-        {
-          "id": 2342,
-          "group_id": 2006,
-          "name": "怪兽AI知识库大模型",
-          "url": "https://www.guaishouai.net",
-          "icon": "https://www.faviconextractor.com/api/favicon/www.guaishouai.net",
-          "description": "怪兽AI知识库大模型是一个AI开发平台，提供模型训练、API接口、应用开发等功能，适用于AI应用开发、技术研究、企业智能化转型等场景。",
-          "notes": "来源: AI地带_AI开发平台.json",
-          "order_num": 21,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "怪兽AI知识库大模型 is an AI development platform offering model training, API interfaces, and application development for AI app development, technical research, and enterprise AI transformation."
         },
         {
           "id": 2343,
@@ -39081,20 +37891,6 @@
           "description_en": "ocool AI is an AI development platform offering model training, API interfaces, and application development for AI app development, technical research, and enterprise AI transformation."
         },
         {
-          "id": 2920,
-          "group_id": 2006,
-          "name": "Nice API",
-          "url": "https://ai.ailtba.com/register?aff=5977a35717",
-          "icon": "https://www.faviconextractor.com/api/favicon/ai.ailtba.com",
-          "description": "提供 OpenAI、Claude、Grok、Midjourney、Gemini 等多种AI大模型的API服务",
-          "notes": "来源: 图钉AI导航_服务平台.json",
-          "order_num": 67,
-          "is_public": 1,
-          "created_at": "2026-09-05 11:27:00",
-          "updated_at": "2026-09-05 11:27:00",
-          "description_en": "Nice API provides one-stop AI development services for developers, supporting multiple frameworks and models to lower the barrier of AI application development and accelerate AI deployment."
-        },
-        {
           "id": 2921,
           "group_id": 2006,
           "name": "fal.ai​",
@@ -39521,20 +38317,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "Gensmo – Snap & Style: Turn Your Moments into Magic is a professional online tool platform with simple operation and easy access, offering convenient online services without installation."
-        },
-        {
-          "id": 2369,
-          "group_id": 2007,
-          "name": "Global Regulatory Insights",
-          "url": "https://globalregulatoryinsights.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/globalregulatoryinsights.com",
-          "description": "Global Regulatory Insights是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。",
-          "notes": "来源: AI地带_AI搜索.json",
-          "order_num": 3,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Global Regulatory Insights is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios."
         },
         {
           "id": 2370,
@@ -40055,20 +38837,6 @@
           "description_en": "Felo provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet."
         },
         {
-          "id": 3015,
-          "group_id": 2007,
-          "name": "xanswer",
-          "url": "https://www.xanswer.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/www.xanswer.com",
-          "description": "xanswer是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。",
-          "notes": "来源: AIH超级导航站_AI搜索.json",
-          "order_num": 41,
-          "is_public": 1,
-          "created_at": "2026-09-05 11:34:57",
-          "updated_at": "2026-09-05 11:34:57",
-          "description_en": "xanswer is a professional online tool platform with simple operation and easy access, offering convenient online services without installation."
-        },
-        {
           "id": 3016,
           "group_id": 2007,
           "name": "brave",
@@ -40187,34 +38955,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "lingvanex.com is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios."
-        },
-        {
-          "id": 2440,
-          "group_id": 2008,
-          "name": "EntBot",
-          "url": "https://entbot.ai",
-          "icon": "https://www.faviconextractor.com/api/favicon/entbot.ai",
-          "description": "EntBot.ai 是一款人工智能驱动的聊天机器人构建器，可供企业使用，提供产品指南或开发人员文档。",
-          "notes": "来源: AI地带_AI翻译.json",
-          "order_num": 4,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "EntBot provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet."
-        },
-        {
-          "id": 2441,
-          "group_id": 2008,
-          "name": "Transluto",
-          "url": "https://transluto.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/transluto.com",
-          "description": "Transluto是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。",
-          "notes": "来源: AI地带_AI翻译.json",
-          "order_num": 5,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Transluto is a professional online tool platform with simple operation and easy access, offering convenient online services without installation."
         },
         {
           "id": 2442,
@@ -40659,20 +39399,6 @@
       "parent_id": 10,
       "sites": [
         {
-          "id": 2560,
-          "group_id": 2009,
-          "name": "DailyLetter: News Tailored for You",
-          "url": "https://dailyletter.news",
-          "icon": "https://www.faviconextractor.com/api/favicon/dailyletter.news",
-          "description": "DailyLetter: News Tailored for You是一个AI资讯平台，提供人工智能行业新闻、技术动态、产品评测等内容，适用于AI从业者、技术爱好者、投资者等人群。",
-          "notes": "来源: AI地带_AI资讯获取.json",
-          "order_num": 0,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "DailyLetter: News Tailored for You is an AI news platform providing industry news, technology updates, and product reviews for AI professionals, tech enthusiasts, and investors."
-        },
-        {
           "id": 2561,
           "group_id": 2009,
           "name": "Trends for GPTs",
@@ -40839,20 +39565,6 @@
           "created_at": "2026-09-05 11:27:00",
           "updated_at": "2026-09-05 11:27:00",
           "description_en": "PinchBench is an AI news platform providing industry news, technology updates, and product reviews for AI professionals, tech enthusiasts, and investors."
-        },
-        {
-          "id": 2961,
-          "group_id": 2009,
-          "name": "GDPval",
-          "url": "https://evals.openai.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/evals.openai.com",
-          "description": "GDPval专注于人工智能领域的信息传播，涵盖大模型、机器学习、计算机视觉等前沿技术，帮助用户及时了解AI行业发展趋势。",
-          "notes": "来源: 图钉AI导航_评测排行.json",
-          "order_num": 13,
-          "is_public": 1,
-          "created_at": "2026-09-05 11:27:00",
-          "updated_at": "2026-09-05 11:27:00",
-          "description_en": "GDPval focuses on AI industry information covering large models, machine learning, computer vision, and other cutting-edge technologies to help users stay updated on AI trends."
         },
         {
           "id": 2962,
@@ -41409,34 +40121,6 @@
           "description_en": "AI Audio Kit is a professional online tool platform with simple operation and easy access, offering convenient online services without installation."
         },
         {
-          "id": 2602,
-          "group_id": 2010,
-          "name": "EstateText",
-          "url": "https://www.estatetext.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/www.estatetext.com",
-          "description": "EstateText是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。",
-          "notes": "来源: AI地带_AI音频.json",
-          "order_num": 33,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "EstateText is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios."
-        },
-        {
-          "id": 2603,
-          "group_id": 2010,
-          "name": "New Year Resolutions AI",
-          "url": "https://newyearresolutionsai.com",
-          "icon": "https://www.faviconextractor.com/api/favicon/newyearresolutionsai.com",
-          "description": "使用 Send2M 制定搞笑且独特的决议，以微笑开始新的一年。",
-          "notes": "来源: AI地带_AI音频.json",
-          "order_num": 34,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "New Year Resolutions AI provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet."
-        },
-        {
           "id": 2604,
           "group_id": 2010,
           "name": "NotesCast",
@@ -41477,20 +40161,6 @@
           "created_at": "2026-09-05 09:59:39",
           "updated_at": "2026-09-05 09:59:39",
           "description_en": "Rude Karma provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet."
-        },
-        {
-          "id": 2607,
-          "group_id": 2010,
-          "name": "Text-To-Edit",
-          "url": "https://span.lol",
-          "icon": "https://www.faviconextractor.com/api/favicon/span.lol",
-          "description": "Text-To-Edit是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。",
-          "notes": "来源: AI地带_AI音频.json",
-          "order_num": 38,
-          "is_public": 1,
-          "created_at": "2026-09-05 09:59:39",
-          "updated_at": "2026-09-05 09:59:39",
-          "description_en": "Text-To-Edit is a professional online tool platform with simple operation and easy access, offering convenient online services without installation."
         },
         {
           "id": 2608,
@@ -41589,20 +40259,6 @@
           "created_at": "2026-09-05 11:27:00",
           "updated_at": "2026-09-05 11:27:00",
           "description_en": "逗哥配音 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios."
-        },
-        {
-          "id": 2984,
-          "group_id": 2010,
-          "name": "OpenMusic",
-          "url": "https://www.openmusic.aiEUNK7D",
-          "icon": "https://www.faviconextractor.com/api/favicon/www.openmusic.aieunk7d",
-          "description": "OpenMusic为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。",
-          "notes": "来源: 图钉AI导航_音频音乐.json",
-          "order_num": 46,
-          "is_public": 1,
-          "created_at": "2026-09-05 11:27:00",
-          "updated_at": "2026-09-05 11:27:00",
-          "description_en": "OpenMusic provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet."
         },
         {
           "id": 2985,

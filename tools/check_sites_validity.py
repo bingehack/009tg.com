@@ -707,7 +707,36 @@ def main():
             'http': args.proxy,
             'https': args.proxy
         }
-        print(f"使用代理: {args.proxy}")
+        print(f"使用指定代理: {args.proxy}")
+        print("-" * 60)
+    else:
+        # 自动检测Windows系统代理
+        try:
+            import winreg
+            registry = winreg.ConnectRegistry(None, winreg.HKEY_CURRENT_USER)
+            key = winreg.OpenKey(registry, r'Software\Microsoft\Windows\CurrentVersion\Internet Settings')
+            proxy_enable, _ = winreg.QueryValueEx(key, 'ProxyEnable')
+            if proxy_enable == 1:
+                proxy_server, _ = winreg.QueryValueEx(key, 'ProxyServer')
+                if proxy_server:
+                    # 处理可能的协议前缀
+                    if not proxy_server.startswith('http') and not proxy_server.startswith('socks'):
+                        proxy_server = 'http://' + proxy_server
+                    proxies = {
+                        'http': proxy_server,
+                        'https': proxy_server
+                    }
+                    print(f"检测到Windows系统代理已启用: {proxy_server}")
+                    print("-" * 60)
+                winreg.CloseKey(key)
+            winreg.CloseKey(registry)
+        except ImportError:
+            print("非Windows系统，跳过系统代理检测")
+        except Exception as e:
+            print(f"检测系统代理失败: {e}，将不使用代理")
+    
+    if not proxies:
+        print("未使用代理（国外站点可能因网络问题检测为超时）")
         print("-" * 60)
     
     # 检查文件是否存在
