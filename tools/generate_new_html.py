@@ -446,6 +446,9 @@ def generate_html(lang='cn'):
         description = '009tg下海导航致力于打造国内最好的互联网上优质网站网址大全，收录了全网好用强大的网站网址和软件包括创业、副业、投资、跨境电商、营销工具、AI工具、社交媒体、独立站、广告投放、生活、休闲、办公、工具、资源等超全面的网址和职业技巧内容，让您的上网体验更便捷更放心，努力成为全民级人人都在用的网址导航。'
         about_text = '关于本站'
         articles_text = '文章资讯'
+        search_placeholder = '搜索站点...'
+        search_no_result = '未找到相关站点'
+        search_result_count = '找到 {count} 个站点'
     else:
         html_lang = 'en'
         title = '009tg Navigation - Invisible Man'
@@ -453,6 +456,9 @@ def generate_html(lang='cn'):
         description = '009tg Navigation is a comprehensive web directory featuring the best websites and tools for entrepreneurship, side hustles, investment, cross-border e-commerce, marketing, AI tools, social media, and more. Your ultimate resource for discovering powerful online tools and professional tips.'
         about_text = 'About Us'
         articles_text = 'Articles'
+        search_placeholder = 'Search sites...'
+        search_no_result = 'No sites found'
+        search_result_count = '{count} sites found'
 
     print(f"生成完整HTML ({lang})...")
     html = f'''<!DOCTYPE html>
@@ -629,6 +635,26 @@ def generate_html(lang='cn'):
             background-color: #5f1e1e !important;
             border-color: #822c2c !important;
             color: #feb2b2 !important;
+        }}
+        /* 搜索结果深色模式 */
+        [data-theme="dark"] #search-results {{
+            background-color: var(--bg-card) !important;
+            border-color: var(--border-color) !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+        }}
+        [data-theme="dark"] #search-results .search-result-item {{
+            border-bottom-color: var(--border-color) !important;
+        }}
+        [data-theme="dark"] #search-results .search-result-item:hover {{
+            background-color: var(--bg-card-hover) !important;
+        }}
+        [data-theme="dark"] #site-search-input {{
+            background-color: var(--bg-input) !important;
+            border-color: var(--border-color) !important;
+            color: var(--text-primary) !important;
+        }}
+        [data-theme="dark"] #site-search-input::placeholder {{
+            color: var(--text-muted) !important;
         }}
         /* 主题切换按钮 */
         .theme-toggle-btn {{
@@ -882,6 +908,16 @@ def generate_html(lang='cn'):
                         </a>
                     </li>
                     {lang_switcher}
+                    <li class="hidden-sm hidden-xs" style="margin-left: 10px;">
+                        <div class="search-box-wrapper" style="position: relative;">
+                            <input type="text" id="site-search-input" class="form-control" 
+                                   placeholder="{search_placeholder}" 
+                                   style="width: 220px; height: 32px; font-size: 13px; border-radius: 16px; padding-left: 32px;"
+                                   autocomplete="off">
+                            <i class="fa-search" style="position: absolute; left: 12px; top: 9px; color: #999; font-size: 13px;"></i>
+                            <div id="search-results" style="display: none; position: absolute; top: 38px; left: 0; width: 350px; max-height: 400px; overflow-y: auto; background: #fff; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 9999;"></div>
+                        </div>
+                    </li>
                 </ul>
                 <ul class="user-info-menu right-links list-inline list-unstyled">
                     <li class="hidden-sm hidden-xs">
@@ -1113,6 +1149,125 @@ def generate_html(lang='cn'):
                 }}
             }});
         }});
+
+        // ========== 站内搜索功能 ==========
+        var allSitesFlat = [];
+        // 把所有分类的站点合并成扁平数组
+        for (var catName in allSitesData) {{
+            var sites = allSitesData[catName] || [];
+            for (var i = 0; i < sites.length; i++) {{
+                allSitesFlat.push({{
+                    name: sites[i].name,
+                    url: sites[i].url,
+                    description: sites[i].description || '',
+                    icon: sites[i].icon || '',
+                    category: catName
+                }});
+            }}
+        }}
+
+        var searchInput = document.getElementById('site-search-input');
+        var searchResults = document.getElementById('search-results');
+        var searchTimer = null;
+
+        if (searchInput && searchResults) {{
+            searchInput.addEventListener('input', function() {{
+                clearTimeout(searchTimer);
+                var query = this.value.trim().toLowerCase();
+                if (query.length < 2) {{
+                    searchResults.style.display = 'none';
+                    searchResults.innerHTML = '';
+                    return;
+                }}
+                // 防抖
+                searchTimer = setTimeout(function() {{
+                    performSearch(query);
+                }}, 200);
+            }});
+
+            // 按Enter跳转到第一个结果
+            searchInput.addEventListener('keydown', function(e) {{
+                if (e.key === 'Enter') {{
+                    e.preventDefault();
+                    var firstLink = searchResults.querySelector('.search-result-item a');
+                    if (firstLink) {{
+                        window.open(firstLink.getAttribute('href'), '_blank');
+                        searchResults.style.display = 'none';
+                    }}
+                }}
+                if (e.key === 'Escape') {{
+                    searchResults.style.display = 'none';
+                    searchInput.blur();
+                }}
+            }});
+
+            // 点击页面其他地方关闭搜索结果
+            document.addEventListener('click', function(e) {{
+                if (!e.target.closest('.search-box-wrapper')) {{
+                    searchResults.style.display = 'none';
+                }}
+            }});
+        }}
+
+        function performSearch(query) {{
+            var results = [];
+            var queryLower = query.toLowerCase();
+
+            for (var i = 0; i < allSitesFlat.length; i++) {{
+                var site = allSitesFlat[i];
+                var nameMatch = site.name.toLowerCase().indexOf(queryLower) !== -1;
+                var descMatch = site.description.toLowerCase().indexOf(queryLower) !== -1;
+                var urlMatch = site.url.toLowerCase().indexOf(queryLower) !== -1;
+                var catMatch = site.category.toLowerCase().indexOf(queryLower) !== -1;
+
+                if (nameMatch || descMatch || urlMatch || catMatch) {{
+                    // 计算匹配分数，名称匹配权重最高
+                    var score = 0;
+                    if (nameMatch) score += 10;
+                    if (catMatch) score += 5;
+                    if (descMatch) score += 3;
+                    if (urlMatch) score += 1;
+                    results.push({{ site: site, score: score, nameMatch: nameMatch }});
+                }}
+            }}
+
+            // 按分数排序
+            results.sort(function(a, b) {{ return b.score - a.score; }});
+
+            // 最多显示20个结果
+            results = results.slice(0, 20);
+
+            if (results.length === 0) {{
+                searchResults.innerHTML = '<div style="padding: 20px; text-align: center; color: #999;">{search_no_result}</div>';
+            }} else {{
+                var countText = '{search_result_count}'.replace('{{count}}', results.length);
+                var html = '<div style="padding: 8px 15px; font-size: 12px; color: #999; border-bottom: 1px solid #f0f0f0;">' + countText + '</div>';
+                for (var j = 0; j < results.length; j++) {{
+                    var s = results[j].site;
+                    var redirectUrl = '{asset_prefix}redirect.html?url=' + encodeURIComponent(s.url) + '&name=' + encodeURIComponent(s.name);
+                    html += '<div class="search-result-item" style="padding: 10px 15px; border-bottom: 1px solid #f5f5f5; cursor: pointer;" onmouseover="this.style.background=\\'#f9f9f9\\'" onmouseout="this.style.background=\\'#fff\\'">' +
+                        '<a href="' + redirectUrl + '" target="_blank" style="text-decoration: none; color: inherit; display: block;">' +
+                        '<div style="display: flex; align-items: center;">' +
+                        '<img src="' + s.icon + '" width="24" height="24" style="border-radius: 50%; margin-right: 10px; flex-shrink: 0;" onerror="this.src=\\'{asset_prefix}assets/images/logos/default.png\\'">' +
+                        '<div style="flex-grow: 1; min-width: 0;">' +
+                        '<div style="font-size: 14px; font-weight: 600; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' + highlightText(s.name, query) + '</div>' +
+                        '<div style="font-size: 12px; color: #999; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' + (s.description ? s.description.substring(0, 60) : s.url) + '</div>' +
+                        '</div>' +
+                        '<span style="font-size: 11px; color: #337ab7; background: #e8f4fd; padding: 2px 8px; border-radius: 10px; margin-left: 10px; flex-shrink: 0;">' + s.category + '</span>' +
+                        '</div>' +
+                        '</a>' +
+                        '</div>';
+                }}
+                searchResults.innerHTML = html;
+            }}
+            searchResults.style.display = 'block';
+        }}
+
+        function highlightText(text, query) {{
+            if (!query) return text;
+            var regex = new RegExp('(' + query.replace(/[.*+?^${{}}()|[\]\\\\]/g, '\\\\$&') + ')', 'gi');
+            return text.replace(regex, '<span style="color: #337ab7; font-weight: 700;">$1</span>');
+        }}
 
         // ========== 深色模式主题切换 ==========
         function initTheme() {{
