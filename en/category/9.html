@@ -450,7 +450,7 @@
 
     
     <script>
-        var allSites = [{"name": "时安曼", "url": "https://news.like.tg", "description": "时安曼 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/8861b84eeebb27e0714eaf6fbf194fa2.png"}, {"name": "OKLA", "url": "https://www.ookla.com", "description": "OKLA provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/8d68911e0344a79d9fe8813746a66149.png"}, {"name": "魔方全球", "url": "https://www.mofang.tw", "description": "魔方全球 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/7ce2566ccc064b7b8c717cd316f1f865.png"}, {"name": "数字星球", "url": "https://xingqiu.pro", "description": "数字星球 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/c4ccb0a3b018d132d6c545ffd150fd87.png"}];
+        var allSites = [{"id": 1032, "name": "时安曼", "url": "https://news.like.tg", "description": "时安曼 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/8861b84eeebb27e0714eaf6fbf194fa2.png"}, {"id": 1033, "name": "OKLA", "url": "https://www.ookla.com", "description": "OKLA provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/8d68911e0344a79d9fe8813746a66149.png"}, {"id": 1034, "name": "魔方全球", "url": "https://www.mofang.tw", "description": "魔方全球 is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.", "icon": "../../assets/favicons/7ce2566ccc064b7b8c717cd316f1f865.png"}, {"id": 1035, "name": "数字星球", "url": "https://xingqiu.pro", "description": "数字星球 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/c4ccb0a3b018d132d6c545ffd150fd87.png"}];
         var currentPage = 1;
         var itemsPerPage = 32;
         var totalPages = Math.ceil(allSites.length / itemsPerPage);
@@ -476,7 +476,7 @@
                 for (var i = start; i < end; i++) {
                     var site = allSites[i];
                     var siteHtml = '<div class="site-item">' +
-                        '<div class="xe-widget xe-conversations box2 label-info" onclick="window.open(\'' + '../../redirect.html?url=' + encodeURIComponent(site.url) + '&name=' + encodeURIComponent(site.name) + '\', \'_blank\')" data-toggle="tooltip" data-placement="bottom" title="' + site.url + '">' +
+                        '<div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href=\'' + '../../site/' + site.id + '.html\'" data-toggle="tooltip" data-placement="bottom" title="' + site.url + '">' +
                             '<div class="xe-comment-entry">' +
                                 '<a class="xe-user-img"><img src="' + site.icon + '" class="lozad img-circle" width="40" alt="' + site.name + '"></a>' +
                                 '<div class="xe-comment">' +

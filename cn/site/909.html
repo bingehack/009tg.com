@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instagram视频下载 - 009tg下海导航</title>
+    <meta name="keywords" content="Instagram视频下载, thezerohack.com, Instagram视频下载为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站, 009tg导航"/>
+    <meta name="description" content="Instagram视频下载为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。"/>
+    <link rel="shortcut icon" href="../../assets/images/favicon.png">
+    <link rel="stylesheet" href="../../assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="../../assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            --accent-color: #337ab7;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --border-color: #2a2a4a;
+            --accent-color: #5dade2;
+        }
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+        .site-detail-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .site-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 30px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+        .site-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: contain;
+            background: #fff;
+            padding: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .site-info h1 {
+            margin: 0 0 8px 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .site-domain {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .site-actions {
+            display: flex;
+            gap: 12px;
+        }
+        .btn-primary {
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.9; color: #fff; text-decoration: none; }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover { border-color: var(--accent-color); color: var(--accent-color); }
+        .section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title i { color: var(--accent-color); }
+        .intro-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+        .keyword-tag {
+            display: inline-block;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin: 4px 6px 4px 0;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        .info-item {
+            font-size: 14px;
+        }
+        .info-label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .info-value {
+            color: var(--text-primary);
+            font-weight: 500;
+            word-break: break-all;
+        }
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+        .related-site-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .related-site-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-decoration: none;
+        }
+        .related-favicon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            object-fit: contain;
+            background: #fff;
+            padding: 2px;
+        }
+        .related-name {
+            font-size: 13px;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1;
+        }
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .breadcrumb a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+        .theme-toggle:hover { border-color: var(--accent-color); }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+        <i class="fa-moon-o" id="theme-icon"></i>
+    </button>
+    
+    <div class="site-detail-container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a> / 
+            <a href="../category/65.html">社交app</a> / 
+            <span>Instagram视频下载</span>
+        </div>
+        
+        <div class="site-header">
+            <img src="../../assets/favicons/c3c79725be855d1ee36473d77311a524.png" alt="Instagram视频下载" class="site-logo" onerror="this.src='../../assets/images/logos/default.png'">
+            <div class="site-info">
+                <h1>Instagram视频下载</h1>
+                <div class="site-domain"><i class="fa-globe" style="margin-right: 6px;"></i>thezerohack.com</div>
+                <div class="site-actions">
+                    <a href="../redirect.html?url=https://thezerohack.com&name=Instagram视频下载" target="_blank" class="btn-primary">
+                        <i class="fa-external-link" style="margin-right: 6px;"></i>访问官网
+                    </a>
+                    <button class="btn-secondary" onclick="copyUrl()">
+                        <i class="fa-copy" style="margin-right: 6px;"></i>复制链接
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-info-circle"></i>站点介绍</h2>
+            <div class="intro-text">Instagram视频下载为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。</div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-tags"></i>关键词标签</h2>
+            <div><span style="color: #999;">暂无关键词标签</span></div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-list-alt"></i>站点信息</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">域名</div>
+                    <div class="info-value">thezerohack.com</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">所属分类</div>
+                    <div class="info-value"><a href="../category/65.html" style="color: var(--accent-color);">社交app</a></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">收录日期</div>
+                    <div class="info-value">2025-12-10 16:32:18</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-thumbs-up"></i>相关站点推荐</h2>
+            <div class="related-grid">
+                
+                        <a href="169.html" class="related-site-card">
+                            <img src="../../assets/favicons/478a3041e67b2929774a5eef5c4977c9.png" alt="Facebook海外营销" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">Facebook海外营销</span>
+                        </a>
+            
+                        <a href="170.html" class="related-site-card">
+                            <img src="../../assets/favicons/660328a7f9004d462085aa67a82065db.png" alt="Facebook帮助中心" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">Facebook帮助中心</span>
+                        </a>
+            
+                        <a href="213.html" class="related-site-card">
+                            <img src="../../assets/favicons/3ca31af440607b517b1666a20405c3b1.png" alt="Instagram" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">Instagram</span>
+                        </a>
+            
+                        <a href="214.html" class="related-site-card">
+                            <img src="../../assets/favicons/d66f5dab5a2db67b0e94f2b2032ab40e.png" alt="WhatsApp" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">WhatsApp</span>
+                        </a>
+            
+                        <a href="217.html" class="related-site-card">
+                            <img src="../../assets/favicons/450fa5673965816ee6d9aee8910b3092.png" alt="Snapchat" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">Snapchat</span>
+                        </a>
+            
+                        <a href="224.html" class="related-site-card">
+                            <img src="../../assets/favicons/06d98d4ac909243ea6920356377b25c0.png" alt="Skype" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">Skype</span>
+                        </a>
+            
+                        <a href="225.html" class="related-site-card">
+                            <img src="../../assets/favicons/39050a792fc6f7194976007bcd2e0777.png" alt="Telegram" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">Telegram</span>
+                        </a>
+            
+                        <a href="226.html" class="related-site-card">
+                            <img src="../../assets/favicons/051fe719aa5e4c1664e037041dc35dcb.png" alt="LINE" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">LINE</span>
+                        </a>
+            
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 深色模式
+        function toggleTheme() {
+            var current = document.documentElement.getAttribute('data-theme');
+            var newTheme = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            document.getElementById('theme-icon').className = newTheme === 'dark' ? 'fa-sun-o' : 'fa-moon-o';
+        }
+        (function() {
+            var saved = localStorage.getItem('theme');
+            if (saved) {
+                document.documentElement.setAttribute('data-theme', saved);
+                document.getElementById('theme-icon').className = saved === 'dark' ? 'fa-sun-o' : 'fa-moon-o';
+            }
+        })();
+        
+        // 复制URL
+        function copyUrl() {
+            navigator.clipboard.writeText('https://thezerohack.com').then(function() {
+                var btn = event.target.closest('button');
+                var original = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-check" style="margin-right: 6px;"></i>已复制';
+                setTimeout(function() { btn.innerHTML = original; }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

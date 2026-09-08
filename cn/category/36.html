@@ -450,7 +450,7 @@
 
     
     <script>
-        var allSites = [{"name": "云片OTP短信", "url": "https://www.yunpian.com", "description": "云片OTP短信是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/b9fa00f8c57613445bc0699e11b9b1c9.png"}, {"name": "秒赛科技", "url": "https://www.shmiaosai.com", "description": "专业短信验证码平台服务商，提供用户注册、登录、支付确认等各种手机验证码短信场景", "icon": "../../assets/favicons/5a8d5f30c916cdacfcc951608c97061c.png"}, {"name": "SUBMAIL赛邮云通信", "url": "https://www.mysubmail.com", "description": "致力于为企业用户打造一站式云通信平台,提供全功能的云端通信服务、互联网营销能力、企业PaaS服务", "icon": "../../assets/favicons/633725cf14c163693d209f898b3bb465.png"}, {"name": "⽜信云", "url": "https://www.nxcloud.com", "description": "一家以技术驱动为核心的云通信公司，通过优质的短信通道，与全球客户建立紧密的联系。", "icon": "../../assets/favicons/56a158df5f0da865affca395ac5232e2.png"}];
+        var allSites = [{"id": 257, "name": "云片OTP短信", "url": "https://www.yunpian.com", "description": "云片OTP短信是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/b9fa00f8c57613445bc0699e11b9b1c9.png"}, {"id": 258, "name": "秒赛科技", "url": "https://www.shmiaosai.com", "description": "专业短信验证码平台服务商，提供用户注册、登录、支付确认等各种手机验证码短信场景", "icon": "../../assets/favicons/5a8d5f30c916cdacfcc951608c97061c.png"}, {"id": 259, "name": "SUBMAIL赛邮云通信", "url": "https://www.mysubmail.com", "description": "致力于为企业用户打造一站式云通信平台,提供全功能的云端通信服务、互联网营销能力、企业PaaS服务", "icon": "../../assets/favicons/633725cf14c163693d209f898b3bb465.png"}, {"id": 260, "name": "⽜信云", "url": "https://www.nxcloud.com", "description": "一家以技术驱动为核心的云通信公司，通过优质的短信通道，与全球客户建立紧密的联系。", "icon": "../../assets/favicons/56a158df5f0da865affca395ac5232e2.png"}];
         var currentPage = 1;
         var itemsPerPage = 32;
         var totalPages = Math.ceil(allSites.length / itemsPerPage);
@@ -476,7 +476,7 @@
                 for (var i = start; i < end; i++) {
                     var site = allSites[i];
                     var siteHtml = '<div class="site-item">' +
-                        '<div class="xe-widget xe-conversations box2 label-info" onclick="window.open(\'' + '../../redirect.html?url=' + encodeURIComponent(site.url) + '&name=' + encodeURIComponent(site.name) + '\', \'_blank\')" data-toggle="tooltip" data-placement="bottom" title="' + site.url + '">' +
+                        '<div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href=\'' + '../../site/' + site.id + '.html\'" data-toggle="tooltip" data-placement="bottom" title="' + site.url + '">' +
                             '<div class="xe-comment-entry">' +
                                 '<a class="xe-user-img"><img src="' + site.icon + '" class="lozad img-circle" width="40" alt="' + site.name + '"></a>' +
                                 '<div class="xe-comment">' +

@@ -450,7 +450,7 @@
 
     
     <script>
-        var allSites = [{"name": "站长工具", "url": "http://tool.chinaz.com", "description": "站长工具是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/9ca3197dc88e015633abba9b6dfd52e6.png"}, {"name": "网站信用评估", "url": "https://www.scamdoc.com", "description": "网站信用评估为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/9594c17a10549bbb0a832ae6b2af105d.png"}, {"name": "Publicwww", "url": "https://publicwww.com", "description": "在网页 HTML、JS 和 CSS 代码中查找任何字母数字片段、签名或关键字。", "icon": "../../assets/favicons/81d7cea5555d1ff5b70898b42a74857b.png"}, {"name": "检测网址标红", "url": "https://transparencyreport.google.com", "description": "检测网址标红是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/4229103b9fad3dd07f95231e527b9dbe.png"}, {"name": "网站时光机", "url": "https://web.archive.org", "description": "网站时光机为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/e5516eb5686a18e24b3f0841b0ecbd08.png"}, {"name": "查看ip环境", "url": "https://whoer.net", "description": "查看ip环境是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/6e68181667a0a3652608d23b031c9420.png"}];
+        var allSites = [{"id": 1047, "name": "站长工具", "url": "http://tool.chinaz.com", "description": "站长工具是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/9ca3197dc88e015633abba9b6dfd52e6.png"}, {"id": 1048, "name": "网站信用评估", "url": "https://www.scamdoc.com", "description": "网站信用评估为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/9594c17a10549bbb0a832ae6b2af105d.png"}, {"id": 1049, "name": "Publicwww", "url": "https://publicwww.com", "description": "在网页 HTML、JS 和 CSS 代码中查找任何字母数字片段、签名或关键字。", "icon": "../../assets/favicons/81d7cea5555d1ff5b70898b42a74857b.png"}, {"id": 1050, "name": "检测网址标红", "url": "https://transparencyreport.google.com", "description": "检测网址标红是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/4229103b9fad3dd07f95231e527b9dbe.png"}, {"id": 1051, "name": "网站时光机", "url": "https://web.archive.org", "description": "网站时光机为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/e5516eb5686a18e24b3f0841b0ecbd08.png"}, {"id": 1052, "name": "查看ip环境", "url": "https://whoer.net", "description": "查看ip环境是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/6e68181667a0a3652608d23b031c9420.png"}];
         var currentPage = 1;
         var itemsPerPage = 32;
         var totalPages = Math.ceil(allSites.length / itemsPerPage);
@@ -476,7 +476,7 @@
                 for (var i = start; i < end; i++) {
                     var site = allSites[i];
                     var siteHtml = '<div class="site-item">' +
-                        '<div class="xe-widget xe-conversations box2 label-info" onclick="window.open(\'' + '../../redirect.html?url=' + encodeURIComponent(site.url) + '&name=' + encodeURIComponent(site.name) + '\', \'_blank\')" data-toggle="tooltip" data-placement="bottom" title="' + site.url + '">' +
+                        '<div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href=\'' + '../../site/' + site.id + '.html\'" data-toggle="tooltip" data-placement="bottom" title="' + site.url + '">' +
                             '<div class="xe-comment-entry">' +
                                 '<a class="xe-user-img"><img src="' + site.icon + '" class="lozad img-circle" width="40" alt="' + site.name + '"></a>' +
                                 '<div class="xe-comment">' +

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>凤凰网 - 009tg Navigation</title>
+    <meta name="keywords" content="凤凰网, www.ifeng.com, 凤凰网 provides quality online services with complete, 009tg navigation"/>
+    <meta name="description" content="凤凰网 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet."/>
+    <link rel="shortcut icon" href="../../assets/images/favicon.png">
+    <link rel="stylesheet" href="../../assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="../../assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            --accent-color: #337ab7;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --border-color: #2a2a4a;
+            --accent-color: #5dade2;
+        }
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+        .site-detail-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .site-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 30px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+        .site-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: contain;
+            background: #fff;
+            padding: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .site-info h1 {
+            margin: 0 0 8px 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .site-domain {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .site-actions {
+            display: flex;
+            gap: 12px;
+        }
+        .btn-primary {
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.9; color: #fff; text-decoration: none; }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover { border-color: var(--accent-color); color: var(--accent-color); }
+        .section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title i { color: var(--accent-color); }
+        .intro-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+        .keyword-tag {
+            display: inline-block;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin: 4px 6px 4px 0;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        .info-item {
+            font-size: 14px;
+        }
+        .info-label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .info-value {
+            color: var(--text-primary);
+            font-weight: 500;
+            word-break: break-all;
+        }
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+        .related-site-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .related-site-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-decoration: none;
+        }
+        .related-favicon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            object-fit: contain;
+            background: #fff;
+            padding: 2px;
+        }
+        .related-name {
+            font-size: 13px;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1;
+        }
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .breadcrumb a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+        .theme-toggle:hover { border-color: var(--accent-color); }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+        <i class="fa-moon-o" id="theme-icon"></i>
+    </button>
+    
+    <div class="site-detail-container">
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> / 
+            <a href="../category/18.html">全球新闻</a> / 
+            <span>凤凰网</span>
+        </div>
+        
+        <div class="site-header">
+            <img src="../../assets/favicons/4eed2c93c0be0d9182c751ae291b8080.png" alt="凤凰网" class="site-logo" onerror="this.src='../../assets/images/logos/default.png'">
+            <div class="site-info">
+                <h1>凤凰网</h1>
+                <div class="site-domain"><i class="fa-globe" style="margin-right: 6px;"></i>www.ifeng.com</div>
+                <div class="site-actions">
+                    <a href="../redirect.html?url=https://www.ifeng.com&name=凤凰网" target="_blank" class="btn-primary">
+                        <i class="fa-external-link" style="margin-right: 6px;"></i>Visit Website
+                    </a>
+                    <button class="btn-secondary" onclick="copyUrl()">
+                        <i class="fa-copy" style="margin-right: 6px;"></i>Copy URL
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-info-circle"></i>About</h2>
+            <div class="intro-text">凤凰网 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.</div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-tags"></i>Keywords</h2>
+            <div><span style="color: #999;">No keywords available</span></div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-list-alt"></i>Site Info</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Domain</div>
+                    <div class="info-value">www.ifeng.com</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Category</div>
+                    <div class="info-value"><a href="../category/18.html" style="color: var(--accent-color);">全球新闻</a></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Added</div>
+                    <div class="info-value">2025-12-10 16:32:18</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-thumbs-up"></i>Related Sites</h2>
+            <div class="related-grid">
+                
+                        <a href="194.html" class="related-site-card">
+                            <img src="../../assets/favicons/a3a39f40a147aa983040094d0cabd9e2.png" alt="明报" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">明报</span>
+                        </a>
+            
+                        <a href="196.html" class="related-site-card">
+                            <img src="../../assets/favicons/ab4b576406d62f1cc335603bf4a1aa01.png" alt="yahoo!雅虎香港" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">yahoo!雅虎香港</span>
+                        </a>
+            
+                        <a href="197.html" class="related-site-card">
+                            <img src="../../assets/favicons/ba61883ef7f102be1fab1d1aee5214ae.png" alt="香港电台网站" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">香港电台网站</span>
+                        </a>
+            
+                        <a href="198.html" class="related-site-card">
+                            <img src="../../assets/favicons/1629c75e9ca406757cd61daf154e2629.png" alt="南华早报" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">南华早报</span>
+                        </a>
+            
+                        <a href="200.html" class="related-site-card">
+                            <img src="../../assets/favicons/a44e3c9600c2e162cb9d04b4a33d755a.png" alt="香港01" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">香港01</span>
+                        </a>
+            
+                        <a href="201.html" class="related-site-card">
+                            <img src="../../assets/favicons/04b60b2a7bf079c8e32d89c6402c24cb.png" alt="文汇报" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">文汇报</span>
+                        </a>
+            
+                        <a href="202.html" class="related-site-card">
+                            <img src="../../assets/favicons/c3cd15dd2e776449a678ffd5059182e3.png" alt="东方日报" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">东方日报</span>
+                        </a>
+            
+                        <a href="203.html" class="related-site-card">
+                            <img src="../../assets/favicons/0e479a79de73c7b8f3c4135988df48b4.png" alt="中时新闻网" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">中时新闻网</span>
+                        </a>
+            
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 深色模式
+        function toggleTheme() {
+            var current = document.documentElement.getAttribute('data-theme');
+            var newTheme = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            document.getElementById('theme-icon').className = newTheme === 'dark' ? 'fa-sun-o' : 'fa-moon-o';
+        }
+        (function() {
+            var saved = localStorage.getItem('theme');
+            if (saved) {
+                document.documentElement.setAttribute('data-theme', saved);
+                document.getElementById('theme-icon').className = saved === 'dark' ? 'fa-sun-o' : 'fa-moon-o';
+            }
+        })();
+        
+        // 复制URL
+        function copyUrl() {
+            navigator.clipboard.writeText('https://www.ifeng.com').then(function() {
+                var btn = event.target.closest('button');
+                var original = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-check" style="margin-right: 6px;"></i>Copied';
+                setTimeout(function() { btn.innerHTML = original; }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connected Paper - 009tg Navigation</title>
+    <meta name="keywords" content="Connected Paper, www.connectedpapers.com, Connected Paper is a practical online platform pro, 009tg navigation"/>
+    <meta name="description" content="Connected Paper is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scen"/>
+    <link rel="shortcut icon" href="../../assets/images/favicon.png">
+    <link rel="stylesheet" href="../../assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="../../assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            --accent-color: #337ab7;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --border-color: #2a2a4a;
+            --accent-color: #5dade2;
+        }
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+        .site-detail-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .site-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 30px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+        .site-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: contain;
+            background: #fff;
+            padding: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .site-info h1 {
+            margin: 0 0 8px 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .site-domain {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .site-actions {
+            display: flex;
+            gap: 12px;
+        }
+        .btn-primary {
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.9; color: #fff; text-decoration: none; }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover { border-color: var(--accent-color); color: var(--accent-color); }
+        .section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title i { color: var(--accent-color); }
+        .intro-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+        .keyword-tag {
+            display: inline-block;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin: 4px 6px 4px 0;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        .info-item {
+            font-size: 14px;
+        }
+        .info-label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .info-value {
+            color: var(--text-primary);
+            font-weight: 500;
+            word-break: break-all;
+        }
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+        .related-site-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .related-site-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-decoration: none;
+        }
+        .related-favicon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            object-fit: contain;
+            background: #fff;
+            padding: 2px;
+        }
+        .related-name {
+            font-size: 13px;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1;
+        }
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .breadcrumb a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+        .theme-toggle:hover { border-color: var(--accent-color); }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+        <i class="fa-moon-o" id="theme-icon"></i>
+    </button>
+    
+    <div class="site-detail-container">
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> / 
+            <a href="../category/2007.html">AI搜索</a> / 
+            <span>Connected Paper</span>
+        </div>
+        
+        <div class="site-header">
+            <img src="../../assets/favicons/74a196f3f6bfa97694c282811c50c90f.png" alt="Connected Paper" class="site-logo" onerror="this.src='../../assets/images/logos/default.png'">
+            <div class="site-info">
+                <h1>Connected Paper</h1>
+                <div class="site-domain"><i class="fa-globe" style="margin-right: 6px;"></i>www.connectedpapers.com</div>
+                <div class="site-actions">
+                    <a href="../redirect.html?url=https://www.connectedpapers.com&name=Connected Paper" target="_blank" class="btn-primary">
+                        <i class="fa-external-link" style="margin-right: 6px;"></i>Visit Website
+                    </a>
+                    <button class="btn-secondary" onclick="copyUrl()">
+                        <i class="fa-copy" style="margin-right: 6px;"></i>Copy URL
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-info-circle"></i>About</h2>
+            <div class="intro-text">Connected Paper is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.</div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-tags"></i>Keywords</h2>
+            <div><span style="color: #999;">No keywords available</span></div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-list-alt"></i>Site Info</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Domain</div>
+                    <div class="info-value">www.connectedpapers.com</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Category</div>
+                    <div class="info-value"><a href="../category/2007.html" style="color: var(--accent-color);">AI搜索</a></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Added</div>
+                    <div class="info-value">2026-09-05 10:39:32</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-thumbs-up"></i>Related Sites</h2>
+            <div class="related-grid">
+                
+                        <a href="2366.html" class="related-site-card">
+                            <img src="../../assets/favicons/fefc47fd74b526e99eb2be99ffe681bf.png" alt="秘塔AI搜索" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">秘塔AI搜索</span>
+                        </a>
+            
+                        <a href="2367.html" class="related-site-card">
+                            <img src="../../assets/favicons/6ca5f5767d94f605e9b04d84f707d554.png" alt="Particle News" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">Particle News</span>
+                        </a>
+            
+                        <a href="2368.html" class="related-site-card">
+                            <img src="../../assets/favicons/8b20766ff74f81483cc461f3e207486b.png" alt="Gensmo – Snap & Style: Turn Your Moments into Magic" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">Gensmo – Snap & Style: Turn Your Moments into Magic</span>
+                        </a>
+            
+                        <a href="2369.html" class="related-site-card">
+                            <img src="../../assets/favicons/d6ced3568742e89e037e1c5291be0310.png" alt="Global Regulatory Insights" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">Global Regulatory Insights</span>
+                        </a>
+            
+                        <a href="2370.html" class="related-site-card">
+                            <img src="../../assets/favicons/0568deb68bed8e8706c91afc7eeb7221.png" alt="etsycheck.com" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">etsycheck.com</span>
+                        </a>
+            
+                        <a href="2371.html" class="related-site-card">
+                            <img src="../../assets/favicons/ece87b6cb2a1e12a4dee12a098bacc1f.png" alt="instantlyfree.com" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">instantlyfree.com</span>
+                        </a>
+            
+                        <a href="2372.html" class="related-site-card">
+                            <img src="../../assets/favicons/420f36cc0ff0e483d06c20e92f75bb10.png" alt="gettrove.co" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">gettrove.co</span>
+                        </a>
+            
+                        <a href="2794.html" class="related-site-card">
+                            <img src="../../assets/favicons/6142b8968d2bb2b29f090f41c0160b60.png" alt="进口原研药目录" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">进口原研药目录</span>
+                        </a>
+            
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 深色模式
+        function toggleTheme() {
+            var current = document.documentElement.getAttribute('data-theme');
+            var newTheme = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            document.getElementById('theme-icon').className = newTheme === 'dark' ? 'fa-sun-o' : 'fa-moon-o';
+        }
+        (function() {
+            var saved = localStorage.getItem('theme');
+            if (saved) {
+                document.documentElement.setAttribute('data-theme', saved);
+                document.getElementById('theme-icon').className = saved === 'dark' ? 'fa-sun-o' : 'fa-moon-o';
+            }
+        })();
+        
+        // 复制URL
+        function copyUrl() {
+            navigator.clipboard.writeText('https://www.connectedpapers.com').then(function() {
+                var btn = event.target.closest('button');
+                var original = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-check" style="margin-right: 6px;"></i>Copied';
+                setTimeout(function() { btn.innerHTML = original; }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>邦阅网 - 009tg Navigation</title>
+    <meta name="keywords" content="邦阅网, www.52by.com, 邦阅网 provides quality online services with complete, 009tg navigation"/>
+    <meta name="description" content="邦阅网 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet."/>
+    <link rel="shortcut icon" href="../../assets/images/favicon.png">
+    <link rel="stylesheet" href="../../assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="../../assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            --accent-color: #337ab7;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --border-color: #2a2a4a;
+            --accent-color: #5dade2;
+        }
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+        .site-detail-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .site-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 30px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+        .site-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: contain;
+            background: #fff;
+            padding: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .site-info h1 {
+            margin: 0 0 8px 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .site-domain {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .site-actions {
+            display: flex;
+            gap: 12px;
+        }
+        .btn-primary {
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.9; color: #fff; text-decoration: none; }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover { border-color: var(--accent-color); color: var(--accent-color); }
+        .section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title i { color: var(--accent-color); }
+        .intro-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+        .keyword-tag {
+            display: inline-block;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin: 4px 6px 4px 0;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        .info-item {
+            font-size: 14px;
+        }
+        .info-label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .info-value {
+            color: var(--text-primary);
+            font-weight: 500;
+            word-break: break-all;
+        }
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+        .related-site-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .related-site-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-decoration: none;
+        }
+        .related-favicon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            object-fit: contain;
+            background: #fff;
+            padding: 2px;
+        }
+        .related-name {
+            font-size: 13px;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1;
+        }
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .breadcrumb a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+        .theme-toggle:hover { border-color: var(--accent-color); }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+        <i class="fa-moon-o" id="theme-icon"></i>
+    </button>
+    
+    <div class="site-detail-container">
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> / 
+            <a href="../category/19.html">中国论坛</a> / 
+            <span>邦阅网</span>
+        </div>
+        
+        <div class="site-header">
+            <img src="../../assets/favicons/6c5f898825c503b722e1d8f59dcde491.png" alt="邦阅网" class="site-logo" onerror="this.src='../../assets/images/logos/default.png'">
+            <div class="site-info">
+                <h1>邦阅网</h1>
+                <div class="site-domain"><i class="fa-globe" style="margin-right: 6px;"></i>www.52by.com</div>
+                <div class="site-actions">
+                    <a href="../redirect.html?url=https://www.52by.com&name=邦阅网" target="_blank" class="btn-primary">
+                        <i class="fa-external-link" style="margin-right: 6px;"></i>Visit Website
+                    </a>
+                    <button class="btn-secondary" onclick="copyUrl()">
+                        <i class="fa-copy" style="margin-right: 6px;"></i>Copy URL
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-info-circle"></i>About</h2>
+            <div class="intro-text">邦阅网 provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.</div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-tags"></i>Keywords</h2>
+            <div><span style="color: #999;">No keywords available</span></div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-list-alt"></i>Site Info</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Domain</div>
+                    <div class="info-value">www.52by.com</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Category</div>
+                    <div class="info-value"><a href="../category/19.html" style="color: var(--accent-color);">中国论坛</a></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Added</div>
+                    <div class="info-value">2025-12-10 16:32:18</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-thumbs-up"></i>Related Sites</h2>
+            <div class="related-grid">
+                
+                        <a href="1344.html" class="related-site-card">
+                            <img src="../../assets/favicons/5f70b3bcd7df32ce6a68d044e1ca9721.png" alt="广告中国" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">广告中国</span>
+                        </a>
+            
+                        <a href="1345.html" class="related-site-card">
+                            <img src="../../assets/favicons/c73fd16821d3a7509f3cdd9b751ad126.png" alt="雨果网" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">雨果网</span>
+                        </a>
+            
+                        <a href="1346.html" class="related-site-card">
+                            <img src="../../assets/favicons/4292eff1baeb649d657e161270fc43fe.png" alt="蓝色星期五" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">蓝色星期五</span>
+                        </a>
+            
+                        <a href="1347.html" class="related-site-card">
+                            <img src="../../assets/favicons/2eacb08002509586012a1f7dc817c002.png" alt="福步外贸论坛" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">福步外贸论坛</span>
+                        </a>
+            
+                        <a href="1349.html" class="related-site-card">
+                            <img src="../../assets/favicons/38e959681f67f57b19d790d86681d4ff.png" alt="亿邦动力" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">亿邦动力</span>
+                        </a>
+            
+                        <a href="1350.html" class="related-site-card">
+                            <img src="../../assets/favicons/dcc19771c231e8a218b1e96b028b352b.png" alt="快出海" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">快出海</span>
+                        </a>
+            
+                        <a href="1351.html" class="related-site-card">
+                            <img src="../../assets/favicons/7fcc7de5e0a87514a4183f06bd569ed3.png" alt="顾小北博客" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">顾小北博客</span>
+                        </a>
+            
+                        <a href="1352.html" class="related-site-card">
+                            <img src="../../assets/favicons/3e98f59f2ef2919171690a72f52ad148.png" alt="出海笔记" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">出海笔记</span>
+                        </a>
+            
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 深色模式
+        function toggleTheme() {
+            var current = document.documentElement.getAttribute('data-theme');
+            var newTheme = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            document.getElementById('theme-icon').className = newTheme === 'dark' ? 'fa-sun-o' : 'fa-moon-o';
+        }
+        (function() {
+            var saved = localStorage.getItem('theme');
+            if (saved) {
+                document.documentElement.setAttribute('data-theme', saved);
+                document.getElementById('theme-icon').className = saved === 'dark' ? 'fa-sun-o' : 'fa-moon-o';
+            }
+        })();
+        
+        // 复制URL
+        function copyUrl() {
+            navigator.clipboard.writeText('https://www.52by.com').then(function() {
+                var btn = event.target.closest('button');
+                var original = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-check" style="margin-right: 6px;"></i>Copied';
+                setTimeout(function() { btn.innerHTML = original; }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

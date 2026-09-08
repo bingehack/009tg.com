@@ -450,7 +450,7 @@
 
     
     <script>
-        var allSites = [{"name": "Slickdeals", "url": "https://slickdeals.net", "description": "Slickdeals是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/e8b664c6868e029edae92c33af9c7a64.png"}, {"name": "TechBargains", "url": "https://www.techbargains.com", "description": "TechBargains为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/9aa882aa9e155b601a26815a057bc538.png"}, {"name": "DealNews", "url": "https://www.dealnews.com", "description": "DealNews是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/efa4f6bf9f81728d29ed76d2f41d130d.png"}];
+        var allSites = [{"id": 1289, "name": "Slickdeals", "url": "https://slickdeals.net", "description": "Slickdeals是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。", "icon": "../../assets/favicons/e8b664c6868e029edae92c33af9c7a64.png"}, {"id": 1290, "name": "TechBargains", "url": "https://www.techbargains.com", "description": "TechBargains为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。", "icon": "../../assets/favicons/9aa882aa9e155b601a26815a057bc538.png"}, {"id": 1291, "name": "DealNews", "url": "https://www.dealnews.com", "description": "DealNews是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。", "icon": "../../assets/favicons/efa4f6bf9f81728d29ed76d2f41d130d.png"}];
         var currentPage = 1;
         var itemsPerPage = 32;
         var totalPages = Math.ceil(allSites.length / itemsPerPage);
@@ -476,7 +476,7 @@
                 for (var i = start; i < end; i++) {
                     var site = allSites[i];
                     var siteHtml = '<div class="site-item">' +
-                        '<div class="xe-widget xe-conversations box2 label-info" onclick="window.open(\'' + '../../redirect.html?url=' + encodeURIComponent(site.url) + '&name=' + encodeURIComponent(site.name) + '\', \'_blank\')" data-toggle="tooltip" data-placement="bottom" title="' + site.url + '">' +
+                        '<div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href=\'' + '../../site/' + site.id + '.html\'" data-toggle="tooltip" data-placement="bottom" title="' + site.url + '">' +
                             '<div class="xe-comment-entry">' +
                                 '<a class="xe-user-img"><img src="' + site.icon + '" class="lozad img-circle" width="40" alt="' + site.name + '"></a>' +
                                 '<div class="xe-comment">' +

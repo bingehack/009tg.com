@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Writer - 009tg下海导航</title>
+    <meta name="keywords" content="AI Writer, ai-writer.com, 是新开发的文案软件，它可以轻松生成特定风格的仿真人写作句子，甚至还包括自动更正、拼写检查、语法检查、, 009tg导航"/>
+    <meta name="description" content="是新开发的文案软件，它可以轻松生成特定风格的仿真人写作句子，甚至还包括自动更正、拼写检查、语法检查、剽窃检测等功能"/>
+    <link rel="shortcut icon" href="../../assets/images/favicon.png">
+    <link rel="stylesheet" href="../../assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="../../assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            --accent-color: #337ab7;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --border-color: #2a2a4a;
+            --accent-color: #5dade2;
+        }
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+        .site-detail-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .site-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 30px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+        .site-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: contain;
+            background: #fff;
+            padding: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .site-info h1 {
+            margin: 0 0 8px 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .site-domain {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .site-actions {
+            display: flex;
+            gap: 12px;
+        }
+        .btn-primary {
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.9; color: #fff; text-decoration: none; }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover { border-color: var(--accent-color); color: var(--accent-color); }
+        .section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title i { color: var(--accent-color); }
+        .intro-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+        .keyword-tag {
+            display: inline-block;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin: 4px 6px 4px 0;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        .info-item {
+            font-size: 14px;
+        }
+        .info-label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .info-value {
+            color: var(--text-primary);
+            font-weight: 500;
+            word-break: break-all;
+        }
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+        .related-site-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .related-site-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-decoration: none;
+        }
+        .related-favicon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            object-fit: contain;
+            background: #fff;
+            padding: 2px;
+        }
+        .related-name {
+            font-size: 13px;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1;
+        }
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .breadcrumb a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+        .theme-toggle:hover { border-color: var(--accent-color); }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+        <i class="fa-moon-o" id="theme-icon"></i>
+    </button>
+    
+    <div class="site-detail-container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a> / 
+            <a href="../category/13.html">AI写作工具</a> / 
+            <span>AI Writer</span>
+        </div>
+        
+        <div class="site-header">
+            <img src="../../assets/favicons/6a6bd3225be943d587b8686f680484d5.png" alt="AI Writer" class="site-logo" onerror="this.src='../../assets/images/logos/default.png'">
+            <div class="site-info">
+                <h1>AI Writer</h1>
+                <div class="site-domain"><i class="fa-globe" style="margin-right: 6px;"></i>ai-writer.com</div>
+                <div class="site-actions">
+                    <a href="../redirect.html?url=https://ai-writer.com&name=AI Writer" target="_blank" class="btn-primary">
+                        <i class="fa-external-link" style="margin-right: 6px;"></i>访问官网
+                    </a>
+                    <button class="btn-secondary" onclick="copyUrl()">
+                        <i class="fa-copy" style="margin-right: 6px;"></i>复制链接
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-info-circle"></i>站点介绍</h2>
+            <div class="intro-text">是新开发的文案软件，它可以轻松生成特定风格的仿真人写作句子，甚至还包括自动更正、拼写检查、语法检查、剽窃检测等功能</div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-tags"></i>关键词标签</h2>
+            <div><span style="color: #999;">暂无关键词标签</span></div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-list-alt"></i>站点信息</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">域名</div>
+                    <div class="info-value">ai-writer.com</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">所属分类</div>
+                    <div class="info-value"><a href="../category/13.html" style="color: var(--accent-color);">AI写作工具</a></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">收录日期</div>
+                    <div class="info-value">2025-12-10 16:32:18</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-thumbs-up"></i>相关站点推荐</h2>
+            <div class="related-grid">
+                
+                        <a href="14.html" class="related-site-card">
+                            <img src="../../assets/favicons/3d67f7ec8c1fedbee863d29166e64bdd.png" alt="Copy.Ai" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">Copy.Ai</span>
+                        </a>
+            
+                        <a href="15.html" class="related-site-card">
+                            <img src="../../assets/favicons/90609183bbf5d9b2d9ce739f3413269d.png" alt="悉语" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">悉语</span>
+                        </a>
+            
+                        <a href="16.html" class="related-site-card">
+                            <img src="../../assets/favicons/4acad3c85ba581dadb2cd87722385bf1.png" alt="Rytr" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">Rytr</span>
+                        </a>
+            
+                        <a href="17.html" class="related-site-card">
+                            <img src="../../assets/favicons/df131d6bfed7c2f40fe187a43151a6d3.png" alt="绘蛙" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">绘蛙</span>
+                        </a>
+            
+                        <a href="18.html" class="related-site-card">
+                            <img src="../../assets/favicons/d005238159b3a710382bbf9daf55f37f.png" alt="彩云小梦" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">彩云小梦</span>
+                        </a>
+            
+                        <a href="19.html" class="related-site-card">
+                            <img src="../../assets/favicons/fa5be1fa6cd18210fe442a1a30a65c0a.png" alt="秘塔写作猫" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">秘塔写作猫</span>
+                        </a>
+            
+                        <a href="20.html" class="related-site-card">
+                            <img src="../../assets/favicons/cc36633963dee14b1235aced3d45e17d.png" alt="深言达意" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">深言达意</span>
+                        </a>
+            
+                        <a href="21.html" class="related-site-card">
+                            <img src="../../assets/favicons/b88f5f71de80511bab3846d1cd501c11.png" alt="66AI论文" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">66AI论文</span>
+                        </a>
+            
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 深色模式
+        function toggleTheme() {
+            var current = document.documentElement.getAttribute('data-theme');
+            var newTheme = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            document.getElementById('theme-icon').className = newTheme === 'dark' ? 'fa-sun-o' : 'fa-moon-o';
+        }
+        (function() {
+            var saved = localStorage.getItem('theme');
+            if (saved) {
+                document.documentElement.setAttribute('data-theme', saved);
+                document.getElementById('theme-icon').className = saved === 'dark' ? 'fa-sun-o' : 'fa-moon-o';
+            }
+        })();
+        
+        // 复制URL
+        function copyUrl() {
+            navigator.clipboard.writeText('https://ai-writer.com').then(function() {
+                var btn = event.target.closest('button');
+                var original = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-check" style="margin-right: 6px;"></i>已复制';
+                setTimeout(function() { btn.innerHTML = original; }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

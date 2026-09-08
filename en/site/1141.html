@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CoinMarketCap - 009tg Navigation</title>
+    <meta name="keywords" content="CoinMarketCap, coinmarketcap.com, CoinMarketCap is a professional online tool platfo, 009tg navigation"/>
+    <meta name="description" content="CoinMarketCap is a professional online tool platform with simple operation and easy access, offering convenient online services without installation."/>
+    <link rel="shortcut icon" href="../../assets/images/favicon.png">
+    <link rel="stylesheet" href="../../assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="../../assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            --accent-color: #337ab7;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --border-color: #2a2a4a;
+            --accent-color: #5dade2;
+        }
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+        .site-detail-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .site-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 30px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+        .site-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: contain;
+            background: #fff;
+            padding: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .site-info h1 {
+            margin: 0 0 8px 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .site-domain {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .site-actions {
+            display: flex;
+            gap: 12px;
+        }
+        .btn-primary {
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.9; color: #fff; text-decoration: none; }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover { border-color: var(--accent-color); color: var(--accent-color); }
+        .section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title i { color: var(--accent-color); }
+        .intro-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+        .keyword-tag {
+            display: inline-block;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin: 4px 6px 4px 0;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        .info-item {
+            font-size: 14px;
+        }
+        .info-label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .info-value {
+            color: var(--text-primary);
+            font-weight: 500;
+            word-break: break-all;
+        }
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+        .related-site-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .related-site-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-decoration: none;
+        }
+        .related-favicon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            object-fit: contain;
+            background: #fff;
+            padding: 2px;
+        }
+        .related-name {
+            font-size: 13px;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1;
+        }
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .breadcrumb a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+        .theme-toggle:hover { border-color: var(--accent-color); }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+        <i class="fa-moon-o" id="theme-icon"></i>
+    </button>
+    
+    <div class="site-detail-container">
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> / 
+            <a href="../category/42.html">市场数据</a> / 
+            <span>CoinMarketCap</span>
+        </div>
+        
+        <div class="site-header">
+            <img src="../../assets/favicons/74d5e2b50b966d18aebd9a8a5c91f10d.png" alt="CoinMarketCap" class="site-logo" onerror="this.src='../../assets/images/logos/default.png'">
+            <div class="site-info">
+                <h1>CoinMarketCap</h1>
+                <div class="site-domain"><i class="fa-globe" style="margin-right: 6px;"></i>coinmarketcap.com</div>
+                <div class="site-actions">
+                    <a href="../redirect.html?url=https://coinmarketcap.com&name=CoinMarketCap" target="_blank" class="btn-primary">
+                        <i class="fa-external-link" style="margin-right: 6px;"></i>Visit Website
+                    </a>
+                    <button class="btn-secondary" onclick="copyUrl()">
+                        <i class="fa-copy" style="margin-right: 6px;"></i>Copy URL
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-info-circle"></i>About</h2>
+            <div class="intro-text">CoinMarketCap is a professional online tool platform with simple operation and easy access, offering convenient online services without installation.</div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-tags"></i>Keywords</h2>
+            <div><span style="color: #999;">No keywords available</span></div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-list-alt"></i>Site Info</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Domain</div>
+                    <div class="info-value">coinmarketcap.com</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Category</div>
+                    <div class="info-value"><a href="../category/42.html" style="color: var(--accent-color);">市场数据</a></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Added</div>
+                    <div class="info-value">2025-12-10 16:32:18</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-thumbs-up"></i>Related Sites</h2>
+            <div class="related-grid">
+                
+                        <a href="1139.html" class="related-site-card">
+                            <img src="../../assets/favicons/c29a9627258c36fe87faefbf928681d1.png" alt="DeFi Pulse" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">DeFi Pulse</span>
+                        </a>
+            
+                        <a href="1140.html" class="related-site-card">
+                            <img src="../../assets/favicons/ce1068342aabd1e8bcf5dd9c9d88319c.png" alt="The Block" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">The Block</span>
+                        </a>
+            
+                        <a href="1142.html" class="related-site-card">
+                            <img src="../../assets/favicons/351de1ca0d0f6b4cff0eb12f1d0c7432.png" alt="MyToken" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">MyToken</span>
+                        </a>
+            
+                        <a href="1143.html" class="related-site-card">
+                            <img src="../../assets/favicons/e57549183fbe414e72eeac7a0e914fe6.png" alt="Coin Metrics" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">Coin Metrics</span>
+                        </a>
+            
+                        <a href="1144.html" class="related-site-card">
+                            <img src="../../assets/favicons/2cc06f0066346a43c1336cdb0e4cdd98.png" alt="Token Terminal" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">Token Terminal</span>
+                        </a>
+            
+                        <a href="1145.html" class="related-site-card">
+                            <img src="../../assets/favicons/521d581b6c6e719952cd26e6a145c194.png" alt="蜜蜂查" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">蜜蜂查</span>
+                        </a>
+            
+                        <a href="1146.html" class="related-site-card">
+                            <img src="../../assets/favicons/37ec1d196523a070fa7a06aca9136dfc.png" alt="IntoTheBlock" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">IntoTheBlock</span>
+                        </a>
+            
+                        <a href="1147.html" class="related-site-card">
+                            <img src="../../assets/favicons/e3e77446ff9b3ddf3e6fdbb5bc73c2de.png" alt="CoinMarketCal" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">CoinMarketCal</span>
+                        </a>
+            
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 深色模式
+        function toggleTheme() {
+            var current = document.documentElement.getAttribute('data-theme');
+            var newTheme = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            document.getElementById('theme-icon').className = newTheme === 'dark' ? 'fa-sun-o' : 'fa-moon-o';
+        }
+        (function() {
+            var saved = localStorage.getItem('theme');
+            if (saved) {
+                document.documentElement.setAttribute('data-theme', saved);
+                document.getElementById('theme-icon').className = saved === 'dark' ? 'fa-sun-o' : 'fa-moon-o';
+            }
+        })();
+        
+        // 复制URL
+        function copyUrl() {
+            navigator.clipboard.writeText('https://coinmarketcap.com').then(function() {
+                var btn = event.target.closest('button');
+                var original = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-check" style="margin-right: 6px;"></i>Copied';
+                setTimeout(function() { btn.innerHTML = original; }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

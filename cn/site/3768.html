@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>途宝网络 - 009tg下海导航</title>
+    <meta name="keywords" content="途宝网络, www.itourbag.com, , 009tg导航"/>
+    <meta name="description" content="途宝网络是一个专业的在线工具和服务平台，致力于为用户提供高质量的产品和服务。访问官网了解更多详情。"/>
+    <link rel="shortcut icon" href="../../assets/images/favicon.png">
+    <link rel="stylesheet" href="../../assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="../../assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            --accent-color: #337ab7;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --border-color: #2a2a4a;
+            --accent-color: #5dade2;
+        }
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+        .site-detail-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .site-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 30px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+        .site-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: contain;
+            background: #fff;
+            padding: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .site-info h1 {
+            margin: 0 0 8px 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .site-domain {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .site-actions {
+            display: flex;
+            gap: 12px;
+        }
+        .btn-primary {
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.9; color: #fff; text-decoration: none; }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover { border-color: var(--accent-color); color: var(--accent-color); }
+        .section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title i { color: var(--accent-color); }
+        .intro-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+        .keyword-tag {
+            display: inline-block;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin: 4px 6px 4px 0;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        .info-item {
+            font-size: 14px;
+        }
+        .info-label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .info-value {
+            color: var(--text-primary);
+            font-weight: 500;
+            word-break: break-all;
+        }
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+        .related-site-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .related-site-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-decoration: none;
+        }
+        .related-favicon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            object-fit: contain;
+            background: #fff;
+            padding: 2px;
+        }
+        .related-name {
+            font-size: 13px;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1;
+        }
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .breadcrumb a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+        .theme-toggle:hover { border-color: var(--accent-color); }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+        <i class="fa-moon-o" id="theme-icon"></i>
+    </button>
+    
+    <div class="site-detail-container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a> / 
+            <a href="../category/35.html">全球接码</a> / 
+            <span>途宝网络</span>
+        </div>
+        
+        <div class="site-header">
+            <img src="../../assets/favicons/f4d7a1233a746f7a2c6d0fbf550f23e1.png" alt="途宝网络" class="site-logo" onerror="this.src='../../assets/images/logos/default.png'">
+            <div class="site-info">
+                <h1>途宝网络</h1>
+                <div class="site-domain"><i class="fa-globe" style="margin-right: 6px;"></i>www.itourbag.com</div>
+                <div class="site-actions">
+                    <a href="../redirect.html?url=http://www.itourbag.com&name=途宝网络" target="_blank" class="btn-primary">
+                        <i class="fa-external-link" style="margin-right: 6px;"></i>访问官网
+                    </a>
+                    <button class="btn-secondary" onclick="copyUrl()">
+                        <i class="fa-copy" style="margin-right: 6px;"></i>复制链接
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-info-circle"></i>站点介绍</h2>
+            <div class="intro-text">途宝网络是一个专业的在线工具和服务平台，致力于为用户提供高质量的产品和服务。访问官网了解更多详情。</div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-tags"></i>关键词标签</h2>
+            <div><span style="color: #999;">暂无关键词标签</span></div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-list-alt"></i>站点信息</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">域名</div>
+                    <div class="info-value">www.itourbag.com</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">所属分类</div>
+                    <div class="info-value"><a href="../category/35.html" style="color: var(--accent-color);">全球接码</a></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">收录日期</div>
+                    <div class="info-value">2026-09-08</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-thumbs-up"></i>相关站点推荐</h2>
+            <div class="related-grid">
+                
+                        <a href="3317.html" class="related-site-card">
+                            <img src="../../assets/favicons/a82a8f9294d704aca4c5a2a7cdbc3783.png" alt="Sms-Activate" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">Sms-Activate</span>
+                        </a>
+            
+                        <a href="3349.html" class="related-site-card">
+                            <img src="../../assets/favicons/664615fb6bc33aa0d2d561a72ba7234d.png" alt="云上Focus接码平台" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">云上Focus接码平台</span>
+                        </a>
+            
+                        <a href="3351.html" class="related-site-card">
+                            <img src="../../assets/favicons/b71ab5a5ef5af123224ad9aedf24a4fc.png" alt="SMSLEG" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">SMSLEG</span>
+                        </a>
+            
+                        <a href="3352.html" class="related-site-card">
+                            <img src="../../assets/favicons/29897a2a265edd93bab71b2d721e9fba.png" alt="CheapSms" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">CheapSms</span>
+                        </a>
+            
+                        <a href="3353.html" class="related-site-card">
+                            <img src="../../assets/favicons/b81c871cc8e48e86011236268491bf00.png" alt="Z-SMS" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">Z-SMS</span>
+                        </a>
+            
+                        <a href="3354.html" class="related-site-card">
+                            <img src="../../assets/favicons/d372bdd390586c4fbe68cb6b5c39713d.png" alt="SMS-online.pro" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">SMS-online.pro</span>
+                        </a>
+            
+                        <a href="3355.html" class="related-site-card">
+                            <img src="../../assets/favicons/8d1cef89425dba1f114fd622d5283b2a.png" alt="Receive-SMS" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">Receive-SMS</span>
+                        </a>
+            
+                        <a href="3756.html" class="related-site-card">
+                            <img src="../../assets/favicons/b2d0a797c4b3fd3d18d1003c5614c139.png" alt="聚英达科技" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <span class="related-name">聚英达科技</span>
+                        </a>
+            
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 深色模式
+        function toggleTheme() {
+            var current = document.documentElement.getAttribute('data-theme');
+            var newTheme = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            document.getElementById('theme-icon').className = newTheme === 'dark' ? 'fa-sun-o' : 'fa-moon-o';
+        }
+        (function() {
+            var saved = localStorage.getItem('theme');
+            if (saved) {
+                document.documentElement.setAttribute('data-theme', saved);
+                document.getElementById('theme-icon').className = saved === 'dark' ? 'fa-sun-o' : 'fa-moon-o';
+            }
+        })();
+        
+        // 复制URL
+        function copyUrl() {
+            navigator.clipboard.writeText('http://www.itourbag.com').then(function() {
+                var btn = event.target.closest('button');
+                var original = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-check" style="margin-right: 6px;"></i>已复制';
+                setTimeout(function() { btn.innerHTML = original; }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

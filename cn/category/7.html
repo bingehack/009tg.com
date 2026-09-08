@@ -450,7 +450,7 @@
 
     
     <script>
-        var allSites = [{"name": "BrowserScan", "url": "https://www.browserscan.net", "description": "BrowserScan是一款用于保护隐私和评估浏览器安全的工具，适用于网络安全和数据分析领域。", "icon": "../../assets/favicons/48bfc6d9208e5e0b98614ebf52311ab7.png"}];
+        var allSites = [{"id": 972, "name": "BrowserScan", "url": "https://www.browserscan.net", "description": "BrowserScan是一款用于保护隐私和评估浏览器安全的工具，适用于网络安全和数据分析领域。", "icon": "../../assets/favicons/48bfc6d9208e5e0b98614ebf52311ab7.png"}];
         var currentPage = 1;
         var itemsPerPage = 32;
         var totalPages = Math.ceil(allSites.length / itemsPerPage);
@@ -476,7 +476,7 @@
                 for (var i = start; i < end; i++) {
                     var site = allSites[i];
                     var siteHtml = '<div class="site-item">' +
-                        '<div class="xe-widget xe-conversations box2 label-info" onclick="window.open(\'' + '../../redirect.html?url=' + encodeURIComponent(site.url) + '&name=' + encodeURIComponent(site.name) + '\', \'_blank\')" data-toggle="tooltip" data-placement="bottom" title="' + site.url + '">' +
+                        '<div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href=\'' + '../../site/' + site.id + '.html\'" data-toggle="tooltip" data-placement="bottom" title="' + site.url + '">' +
                             '<div class="xe-comment-entry">' +
                                 '<a class="xe-user-img"><img src="' + site.icon + '" class="lozad img-circle" width="40" alt="' + site.name + '"></a>' +
                                 '<div class="xe-comment">' +

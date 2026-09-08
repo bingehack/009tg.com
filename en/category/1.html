@@ -523,7 +523,7 @@
 
     
     <script>
-        var allSites = [{"name": "Sexo 博客", "url": "https://invisibleman.dpdns.org", "description": "Sexo 博客 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/c00f5a5795130a909f978a73fce74027.png"}, {"name": "Libretv", "url": "https://tv.safesystem.dpdns.org", "description": "Libretv provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/093bca42950dbc02ab00f74e58b5d918.png"}];
+        var allSites = [{"id": 13, "name": "Sexo 博客", "url": "https://invisibleman.dpdns.org", "description": "Sexo 博客 is a practical online platform providing various convenient features to help users improve efficiency for daily work and learning scenarios.", "icon": "../../assets/favicons/c00f5a5795130a909f978a73fce74027.png"}, {"id": 1, "name": "Libretv", "url": "https://tv.safesystem.dpdns.org", "description": "Libretv provides quality online services with complete features and excellent experience, a worthwhile practical website to bookmark on the internet.", "icon": "../../assets/favicons/093bca42950dbc02ab00f74e58b5d918.png"}];
         var currentPage = 1;
         var itemsPerPage = 32;
         var totalPages = Math.ceil(allSites.length / itemsPerPage);
@@ -549,7 +549,7 @@
                 for (var i = start; i < end; i++) {
                     var site = allSites[i];
                     var siteHtml = '<div class="site-item">' +
-                        '<div class="xe-widget xe-conversations box2 label-info" onclick="window.open(\'' + '../../redirect.html?url=' + encodeURIComponent(site.url) + '&name=' + encodeURIComponent(site.name) + '\', \'_blank\')" data-toggle="tooltip" data-placement="bottom" title="' + site.url + '">' +
+                        '<div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href=\'' + '../../site/' + site.id + '.html\'" data-toggle="tooltip" data-placement="bottom" title="' + site.url + '">' +
                             '<div class="xe-comment-entry">' +
                                 '<a class="xe-user-img"><img src="' + site.icon + '" class="lozad img-circle" width="40" alt="' + site.name + '"></a>' +
                                 '<div class="xe-comment">' +

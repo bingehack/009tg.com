@@ -256,6 +256,7 @@ def generate_site_data(group, favicon_mapping, lang='cn', asset_prefix=''):
             pass
 
         sites_data.append({
+            'id': site.get('id', 0),
             'name': site_name,
             'url': site_url,
             'description': site_description,
@@ -451,7 +452,7 @@ def generate_recent_and_hot(groups, favicon_mapping, lang='cn', asset_prefix='..
         
         recent_html += '''
                                 <div class="col-md-2 col-sm-3 col-xs-4" style="margin-bottom: 12px;">
-                                    <a href="redirect.html?url=''' + url + '''&name=''' + name + '''" target="_blank" 
+                                    <a href="site/''' + str(site.get('id', 0)) + '''.html" 
                                        style="display: block; padding: 10px; border: 1px solid #eee; border-radius: 6px; text-decoration: none; transition: all 0.2s; height: 100%;"
                                        onmouseover="this.style.borderColor='#337ab7';this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)'"
                                        onmouseout="this.style.borderColor='#eee';this.style.boxShadow='none'">
@@ -1204,7 +1205,7 @@ def generate_html(lang='cn'):
                         for (var i = startIndex; i < endIndex; i++) {{
                             var site = sites[i];
                             var siteHtml = `<div class="site-item" data-index="${{i}}">
-                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('{asset_prefix}redirect.html?url=${{encodeURIComponent(site.url)}}&name=${{encodeURIComponent(site.name)}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
+                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href='{asset_prefix}site/${{site.id}}.html'" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
                                     <div class="xe-comment-entry">
                                         <a class="xe-user-img">
                                             <img src="${{site.icon}}" data-src="${{site.icon}}" class="lozad img-circle" width="40">
@@ -1224,7 +1225,7 @@ def generate_html(lang='cn'):
                         for (var i = 0; i < sites.length; i++) {{
                             var site = sites[i];
                             var siteHtml = `<div class="site-item" data-index="${{i}}">
-                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('{asset_prefix}redirect.html?url=${{encodeURIComponent(site.url)}}&name=${{encodeURIComponent(site.name)}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
+                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href='{asset_prefix}site/${{site.id}}.html'" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
                                     <div class="xe-comment-entry">
                                         <a class="xe-user-img">
                                             <img src="${{site.icon}}" data-src="${{site.icon}}" class="lozad img-circle" width="40">
@@ -1284,7 +1285,7 @@ def generate_html(lang='cn'):
                         for (var i = startIndex; i < endIndex; i++) {{
                             var site = sites[i];
                             var siteHtml = `<div class="site-item" data-index="${{i}}">
-                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('{asset_prefix}redirect.html?url=${{encodeURIComponent(site.url)}}&name=${{encodeURIComponent(site.name)}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
+                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href='{asset_prefix}site/${{site.id}}.html'" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
                                     <div class="xe-comment-entry">
                                         <a class="xe-user-img">
                                             <img src="${{site.icon}}" data-src="${{site.icon}}" class="lozad img-circle" width="40">
@@ -1441,9 +1442,9 @@ def generate_html(lang='cn'):
                 var html = '<div style="padding: 8px 15px; font-size: 12px; color: #999; border-bottom: 1px solid #f0f0f0;">' + countText + '</div>';
                 for (var j = 0; j < results.length; j++) {{
                     var s = results[j].site;
-                    var redirectUrl = '{asset_prefix}redirect.html?url=' + encodeURIComponent(s.url) + '&name=' + encodeURIComponent(s.name);
+                    var detailUrl = '{asset_prefix}site/' + s.id + '.html';
                     html += '<div class="search-result-item" style="padding: 10px 15px; border-bottom: 1px solid #f5f5f5; cursor: pointer;" onmouseover="this.style.background=\\'#f9f9f9\\'" onmouseout="this.style.background=\\'#fff\\'">' +
-                        '<a href="' + redirectUrl + '" target="_blank" style="text-decoration: none; color: inherit; display: block;">' +
+                        '<a href="' + detailUrl + '" style="text-decoration: none; color: inherit; display: block;">' +
                         '<div style="display: flex; align-items: center;">' +
                         '<img src="' + s.icon + '" width="24" height="24" style="border-radius: 50%; margin-right: 10px; flex-shrink: 0;" onerror="this.src=\\'{asset_prefix}assets/images/logos/default.png\\'">' +
                         '<div style="flex-grow: 1; min-width: 0;">' +
