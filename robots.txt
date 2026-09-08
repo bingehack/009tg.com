@@ -1,4 +1,15 @@
+# robots.txt for 009tg.com
+# https://009tg.com
+
 User-agent: *
 Allow: /
+Disallow: /raw/
+Disallow: /tools/
+Disallow: /data/
+Disallow: /backup/
+Disallow: /*.py$
+Disallow: /*.json$
+Disallow: /*.md$
 
+# Sitemap
 Sitemap: https://009tg.com/sitemap.xml
