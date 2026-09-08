@@ -10,19 +10,24 @@
 
 - 精选优质网站，覆盖创业、副业、投资、跨境电商、AI工具等多个领域
 - 中英文双语支持（`/cn/` 中文站，`/en/` 英文站）
-- 分类详情页（每个分类独立页面，支持分页浏览）
+- 分类详情页（每个分类独立页面，支持分页浏览，每页32个站点）
+- **深色模式**（全站支持深色/浅色切换，自动跟随系统偏好，localStorage保存用户选择）
+- **文章资讯系统**（19篇分类指南文章，列表页+详情页，中英文双语）
+- **站内搜索**（实时搜索2591个站点，支持名称/描述/URL/分类匹配，关键词高亮）
 - 响应式设计，支持桌面端和移动端访问
 - 纯静态网站，部署简单快速（Cloudflare Pages）
 - 本地 favicon 缓存，提升加载速度
 - 统一数据源（`完整版导航.json`），所有页面由脚本生成
 - 自动化抓取框架，支持服务端渲染站和纯JS渲染站
+- **Web管理后台**（本地Flask应用，支持抓取、合并、数据管理可视化操作）
 
 ## 当前数据规模
 
 - 分类数：105（19个一级分类 + 86个子分类）
-- 站点数：2447
-- 页面数：220+（首页2 + 标准页面10 + 分类详情页210）
-- 已抓取源站：4个（AI地带、Tbox导航、图钉AI、AIH超级导航站）
+- 站点数：2591
+- 文章数：19（每个一级分类一篇指南文章）
+- 页面数：260+（首页2 + 标准页面10 + 分类详情页210 + 文章页面40）
+- 已抓取源站：5个（AI地带、Tbox导航、图钉AI、AIH超级导航站、zvcard导航）
 
 ## 项目结构
 
@@ -45,6 +50,11 @@
 │   ├── terms.html             # 服务条款
 │   ├── contact.html           # 联系我们
 │   ├── sitemap.html           # 网站地图
+│   ├── articles.html          # 【自动生成】文章列表页
+│   ├── article/               # 【自动生成】文章详情页（19个，按文章ID命名）
+│   │   ├── 1.html             # 下海推荐
+│   │   ├── 2.html             # AI工具
+│   │   └── ...
 │   └── category/              # 分类详情页（105个，按分类ID命名）
 │       ├── 10.html            # AI工具（一级分类）
 │       ├── 13.html            # AI写作工具（子分类）
@@ -56,11 +66,18 @@
 │   ├── terms.html
 │   ├── contact.html
 │   ├── sitemap.html
+│   ├── articles.html          # 英文文章列表页
+│   ├── article/               # 英文文章详情页（19个）
 │   └── category/              # 105个英文分类详情页
+├── data/                      # 【数据文件】
+│   └── articles.json          # 文章数据（19篇，中英文双语）
 ├── tools/                     # 【开发工具】Python脚本
-│   ├── generate_new_html.py   # 【核心】生成中英文首页
-│   ├── generate_category_pages.py # 【核心】生成中英文分类详情页
-│   ├── generate_standard_pages.py  # 【核心】生成标准页面（隐私/条款/联系/地图）
+│   ├── generate_new_html.py   # 【核心】生成中英文首页（含深色模式、搜索功能）
+│   ├── generate_category_pages.py # 【核心】生成中英文分类详情页（含深色模式）
+│   ├── generate_standard_pages.py  # 【核心】生成标准页面（隐私/条款/联系/地图，含深色模式）
+│   ├── generate_articles.py   # 【核心】生成文章列表页和详情页（含深色模式）
+│   ├── generate_articles_data.py # 生成文章数据（为每个分类生成一篇文章）
+│   ├── add_dark_mode_static.py # 给独立页面添加深色模式支持
 │   ├── cache_favicons.py      # 【核心】批量下载favicon
 │   ├── enrich_descriptions.py # 丰富站点描述（中英文）
 │   ├── update_sitemap.py      # 更新sitemap.xml
@@ -70,14 +87,30 @@
 │   ├── check_sites_validity.py # 站点有效性检测
 │   ├── remove_invalid_sites.py # 删除无效站点
 │   ├── list_categories.py     # 查看分类结构
+│   ├── web_admin/             # 【Web管理后台】Flask应用
+│   │   ├── app.py             # 主程序（仪表盘/抓取/合并/数据管理）
+│   │   ├── crawler_generic.py # 通用抓取脚本
+│   │   ├── templates/         # HTML模板（5个页面）
+│   │   ├── static/            # 静态资源（CSS/JS）
+│   │   └── README.md          # Web管理后台使用说明
 │   └── crawler/               # 抓取脚本目录
 │       ├── crawler_utils.py   # 通用工具模块
 │       ├── crawl_aididai.py   # AI地带抓取脚本
 │       ├── crawl_tbox.py      # Tbox导航抓取脚本
 │       ├── crawl_tudingai.py  # 图钉AI抓取脚本
-│       └── crawl_aih.py       # AIH超级导航站抓取脚本
+│       ├── crawl_aih.py       # AIH超级导航站抓取脚本
+│       ├── crawl_zvcard.py    # zvcard导航抓取脚本（WordPress+onenav主题）
+│       ├── auto_categorize_zvcard.py # zvcard站点自动分类
+│       └── merge_zvcard.py    # zvcard站点合并到主数据
 ├── index.html                  # 根目录跳转页（自动跳转到/cn/）
 ├── 404.html                   # 404错误页面
+├── redirect.html              # 站点跳转中转页
+├── robots.txt                 # 搜索引擎爬虫规则
+├── sitemap.xml                # 【自动生成】网站地图（263个URL）
+├── 完整版导航.json            # 【核心数据】站点数据（105分类/2591站点）
+├── favicon_mapping.json       # 【自动生成】域名→favicon路径映射
+├── 启动Web管理后台.bat         # Windows启动脚本（双击打开Web管理后台）
+└── README.md                  # 项目说明文档
 ├── redirect.html              # 外链跳转中转页
 ├── ads.txt                    # 广告验证文件
 ├── sitemap.xml                # 【自动生成】网站地图
@@ -105,6 +138,11 @@
 | `en/contact.html` | `generate_standard_pages.py` | 联系我们 |
 | `cn/sitemap.html` | `generate_standard_pages.py` | 网站地图 |
 | `en/sitemap.html` | `generate_standard_pages.py` | 网站地图 |
+| `cn/articles.html` | `generate_articles.py` | 中文文章列表页 |
+| `en/articles.html` | `generate_articles.py` | 英文文章列表页 |
+| `cn/article/*.html` | `generate_articles.py` | 19个中文文章详情页 |
+| `en/article/*.html` | `generate_articles.py` | 19个英文文章详情页 |
+| `data/articles.json` | `generate_articles_data.py` | 文章数据（19篇，中英文） |
 | `sitemap.xml` | `update_sitemap.py` | 网站地图XML |
 | `favicon_mapping.json` | `cache_favicons.py` | favicon映射 |
 | `assets/favicons/*.png` | `cache_favicons.py` | favicon图片 |
@@ -199,6 +237,7 @@
 python tools/generate_new_html.py
 python tools/generate_category_pages.py
 python tools/generate_standard_pages.py
+python tools/generate_articles.py
 python tools/update_sitemap.py
 ```
 5. 本地预览：`python -m http.server 8000`
@@ -234,6 +273,56 @@ python tools/update_sitemap.py
 2. 重新生成所有页面
 3. 提交部署
 
+### 文章管理
+
+文章数据存储在 `data/articles.json`，每篇文章包含中英文标题、摘要、内容、标签等字段。
+
+**添加新文章：**
+1. 编辑 `data/articles.json`，在`articles`数组中添加新文章：
+```json
+{
+  "id": 100,
+  "title": "中文标题",
+  "title_en": "English Title",
+  "category": "分类名",
+  "category_en": "Category Name",
+  "author": "Invisible Man",
+  "publishDate": "2026-09-08",
+  "summary": "中文摘要",
+  "summary_en": "English summary",
+  "content": "<h2>标题</h2><p>正文内容（支持HTML）</p>",
+  "content_en": "<h2>Title</h2><p>Content in English</p>",
+  "tags": ["标签1", "标签2"],
+  "tags_en": ["Tag1", "Tag2"],
+  "views": 0,
+  "isPublic": true
+}
+```
+2. 重新生成文章页面：`python tools/generate_articles.py`
+3. 更新sitemap：`python tools/update_sitemap.py`
+4. 提交部署
+
+**批量生成分类文章：**
+- 运行 `python tools/generate_articles_data.py` 可为每个一级分类自动生成一篇文章
+- 生成后可手动编辑 `data/articles.json` 优化内容
+
+### Web管理后台
+
+本地Web管理后台提供可视化操作界面，支持抓取、合并、数据管理等功能。
+
+**启动方式：**
+- Windows：双击 `启动Web管理后台.bat`
+- 或命令行：`python tools/web_admin/app.py`
+- 访问地址：http://127.0.0.1:5000
+
+**功能模块：**
+1. **仪表盘**：数据统计（站点数、分类数）、分类排行Top10
+2. **抓取站点**：通用抓取（输入URL自动抓取）+ 指定脚本抓取（选择已有的抓取脚本）
+3. **合并生成**：分类映射、重复检测、一键合并到主数据、重新生成页面
+4. **数据管理**：关键词/分类搜索站点、删除站点
+
+**注意：** Web管理后台仅在本地运行，不会部署到线上。生成页面后仍需手动git提交部署。
+
 ## 完整操作流程
 
 ### 日常维护流程（添加/修改站点后）
@@ -244,11 +333,12 @@ python tools/update_sitemap.py
 # 2. 下载/更新favicon
 python tools/cache_favicons.py
 
-# 3. 重新生成所有页面（4个脚本）
-python tools/generate_new_html.py       # 中英文首页
-python tools/generate_category_pages.py  # 中英文分类详情页（210个）
-python tools/generate_standard_pages.py  # 中英文标准页面（8个）
-python tools/update_sitemap.py           # sitemap.xml
+# 3. 重新生成所有页面（5个脚本）
+python tools/generate_new_html.py       # 中英文首页（含深色模式、搜索功能）
+python tools/generate_category_pages.py  # 中英文分类详情页（210个，含深色模式）
+python tools/generate_standard_pages.py  # 中英文标准页面（8个，含深色模式）
+python tools/generate_articles.py        # 中英文文章页面（40个，含深色模式）
+python tools/update_sitemap.py           # sitemap.xml（263个URL）
 
 # 4. 本地预览
 python -m http.server 8000
@@ -313,6 +403,7 @@ python tools/remove_invalid_sites.py
 python tools/generate_new_html.py
 python tools/generate_category_pages.py
 python tools/generate_standard_pages.py
+python tools/generate_articles.py
 python tools/update_sitemap.py
 
 # 5. 提交部署

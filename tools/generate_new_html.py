@@ -449,6 +449,9 @@ def generate_html(lang='cn'):
         search_placeholder = '搜索站点...'
         search_no_result = '未找到相关站点'
         search_result_count = '找到 {count} 个站点'
+        nav_articles = '文章资讯'
+        nav_about = '关于我们'
+        nav_contact = '联系我们'
     else:
         html_lang = 'en'
         title = '009tg Navigation - Invisible Man'
@@ -459,6 +462,9 @@ def generate_html(lang='cn'):
         search_placeholder = 'Search sites...'
         search_no_result = 'No sites found'
         search_result_count = '{count} sites found'
+        nav_articles = 'Articles'
+        nav_about = 'About'
+        nav_contact = 'Contact'
 
     print(f"生成完整HTML ({lang})...")
     html = f'''<!DOCTYPE html>
@@ -671,6 +677,16 @@ def generate_html(lang='cn'):
         }}
         [data-theme="dark"] .theme-toggle-btn:hover {{
             background-color: rgba(255,255,255,0.1);
+        }}
+        /* 顶部导航链接 */
+        .user-info-menu .nav-link {{
+            transition: color 0.3s ease;
+        }}
+        .user-info-menu .nav-link:hover {{
+            color: #337ab7 !important;
+        }}
+        [data-theme="dark"] .user-info-menu .nav-link:hover {{
+            color: #5dade2 !important;
         }}
         /* 分类标题行：分类名 + 查看更多 */
         .category-title {{
@@ -912,11 +928,26 @@ def generate_html(lang='cn'):
                         <div class="search-box-wrapper" style="position: relative;">
                             <input type="text" id="site-search-input" class="form-control" 
                                    placeholder="{search_placeholder}" 
-                                   style="width: 220px; height: 32px; font-size: 13px; border-radius: 16px; padding-left: 32px;"
+                                   style="width: 200px; height: 32px; font-size: 13px; border-radius: 16px; padding-left: 32px;"
                                    autocomplete="off">
                             <i class="fa-search" style="position: absolute; left: 12px; top: 9px; color: #999; font-size: 13px;"></i>
                             <div id="search-results" style="display: none; position: absolute; top: 38px; left: 0; width: 350px; max-height: 400px; overflow-y: auto; background: #fff; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 9999;"></div>
                         </div>
+                    </li>
+                    <li class="hidden-sm hidden-xs" style="margin-left: 15px;">
+                        <a href="articles.html" style="font-size: 13px; color: inherit; text-decoration: none;">
+                            <i class="fa-newspaper-o" style="margin-right: 4px;"></i>{nav_articles}
+                        </a>
+                    </li>
+                    <li class="hidden-sm hidden-xs" style="margin-left: 15px;">
+                        <a href="about.html" style="font-size: 13px; color: inherit; text-decoration: none;">
+                            <i class="fa-info-circle" style="margin-right: 4px;"></i>{nav_about}
+                        </a>
+                    </li>
+                    <li class="hidden-sm hidden-xs" style="margin-left: 15px;">
+                        <a href="contact.html" style="font-size: 13px; color: inherit; text-decoration: none;">
+                            <i class="fa-envelope" style="margin-right: 4px;"></i>{nav_contact}
+                        </a>
                     </li>
                 </ul>
                 <ul class="user-info-menu right-links list-inline list-unstyled">
