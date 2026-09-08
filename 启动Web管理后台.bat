@@ -1,28 +1,44 @@
 @echo off
-chcp 65001 >nul
-title 009tg导航站 - Web管理后台
-echo ==================================================
-echo   009tg导航站 - Web管理后台
-echo ==================================================
+title 009tg Web Admin
+echo ============================================
+echo   009tg Navigation - Web Admin Panel
+echo ============================================
 echo.
-echo 正在启动...
-echo.
-echo 启动后将自动打开浏览器
-echo 访问地址: http://127.0.0.1:5000
-echo.
-echo 关闭此窗口即可停止服务
-echo ==================================================
+echo Starting server...
+echo URL: http://127.0.0.1:5000
+echo Close this window to stop the server.
+echo ============================================
 echo.
 
 cd /d "%~dp0"
-python tools\web_admin\app.py
+
+REM Try to find python
+where python >nul 2>&1
+if %errorlevel%==0 (
+    python tools\web_admin\app.py
+) else (
+    where py >nul 2>&1
+    if %errorlevel%==0 (
+        py tools\web_admin\app.py
+    ) else (
+        echo.
+        echo ERROR: Python not found!
+        echo Please install Python 3.8+ from https://python.org
+        echo.
+        pause
+    )
+)
 
 if errorlevel 1 (
     echo.
-    echo 启动失败！请检查：
-    echo 1. 是否已安装Python
-    echo 2. 是否已安装Flask: pip install flask
-    echo 3. 是否在项目根目录运行
+    echo ============================================
+    echo Server stopped with error.
+    echo ============================================
+    echo.
+    echo Common issues:
+    echo 1. Flask not installed: run "pip install flask"
+    echo 2. Port 5000 in use: close other apps using port 5000
+    echo 3. Missing dependencies: run "pip install flask requests beautifulsoup4 pillow pyyaml"
     echo.
     pause
 )
