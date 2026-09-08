@@ -1,0 +1,624 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>快捷通支付平台</title>
+<link rel="apple-touch-icon" href="https://static.kjtpay.com/wallet/new/img/apple_ico_152.png" sizes="152x152" />
+<link rel="apple-touch-icon" href="https://static.kjtpay.com/wallet/new/img/apple_ico_120.png" sizes="120x120" />
+<link rel="apple-touch-icon" href="https://static.kjtpay.com/wallet/new/img/apple_ico_76.png" sizes="76x76" />
+<link rel="apple-touch-icon" href="https://static.kjtpay.com/wallet/new/img/apple_ico_60.png" sizes="60x60" />
+<link href="https://static.kjtpay.com/wallet/new/img/favicon.ico?1788431843916" type="image/x-icon" rel="shortcut icon" />
+<link href="https://static.kjtpay.com/wallet/common/css/style.css?1788431843916" rel="stylesheet" type="text/css">
+<link href="https://static.kjtpay.com/wallet/common/css/account.css?1788431843916" rel="stylesheet" type="text/css">
+<link href="https://sc-static.kjtpay.com/wallet/bank/bankkjt.css?1788431843916" rel="stylesheet" type="text/css">
+<link href="https://static.kjtpay.com/wallet/common/css/safety.css?1788431843916" rel="stylesheet" type="text/css">
+<link href="https://static.kjtpay.com/wallet/common/css/chosen.css?1788431843916" rel="stylesheet" type="text/css">
+<link href="https://static.kjtpay.com/wallet/common/css/lhgcalendar.css?1788431843916" rel="stylesheet" type="text/css">
+<link href="https://static.kjtpay.com/wallet/common/css/login.css?1788431843916" rel="stylesheet" type="text/css">
+<link href="https://static.kjtpay.com/wallet/common/css/jquery.lightbox-0.5.css?1788431843916" rel="stylesheet" type="text/css">
+<script src="https://static.kjtpay.com/wallet/common/js/jquery-1.8.2.min.js?1788431843916"></script>
+<script src="https://static.kjtpay.com/wallet/common/js/js.js?1788431843916"></script>
+<script src="https://static.kjtpay.com/wallet/common/js/showwin.js?1788431843916"></script>
+<script src="https://static.kjtpay.com/wallet/common/js/chosen.jquery.js?1788431843916"></script>
+<script src="https://static.kjtpay.com/wallet/common/js/lhgcore.min.js?1788431843916"></script>
+<script src="https://static.kjtpay.com/wallet/common/js/lhgcalendar.min.js?1788431843916"></script>
+<script src="https://static.kjtpay.com/wallet/common/js/jquery.form.js?1788431843916"></script>
+<script src="https://static.kjtpay.com/wallet/common/js/jquery.lightbox-0.5.pack.js?1788431843916"></script>
+<script src="https://static.kjtpay.com/wallet/new/js/common.js?1788431843916"></script>
+<script src="https://static.kjtpay.com/wallet/new/js/resizeDIV.js?1788431843916"></script>
+<link rel="stylesheet" href="https://static.kjtpay.com/wallet/new/css/footer.css?1788431843916"/>
+<link rel="stylesheet" href="https://static.kjtpay.com/wallet/new/css/showDialog.css?1788431843916"/>
+<script src="https://static.kjtpay.com/wallet/new/js/dialog.js?1788431843916"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/uploadFile.js"></script>
+<link rel="stylesheet" href="https://static.kjtpay.com/wallet/css/newpass/microdone.css?1788431843916" />
+<script type="text/javascript" src="https://static.kjtpay.com/wallet/js/newpass/microdone.min.js?1788431843916"></script>
+<script language="javascript" src="https://static.kjtpay.com/wallet/js/newpass/crypto-js.js?1788431843916"></script>
+<script language="javascript" src="https://static.kjtpay.com/wallet/js/newpass/PassGuardCtrl.js?1788431843916"></script>
+<script language="javascript" src="https://static.kjtpay.com/wallet/js/newpass/kjtpay.js?1788431843916"></script>
+<script language="javascript" src="https://static.kjtpay.com/wallet/new/js/showDialog.js?1788431843916"></script>
+<script src="https://static.kjtpay.com/wallet/common/js/jqueryAjaxFilter.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var _this = $(".wrap").eq($(".wrap").length - 1),
+            _width = $(window).height();
+        var _height = _this.height();
+
+        if(_height > 0 && ((555 + _height) < _width && (243 + _height) < _width) ){
+            $(".footer").css({
+                "width": "100%",
+                "position": "absolute",
+                "bottom": "0"
+            });
+        }
+        
+        $(window).resize(function() {
+            _width = $(window).height();
+            if(_height > 0 && ((555 + _height) < _width && (243 + _height) < _width) ){
+                $(".footer").css({
+                    "width": "100%",
+                    "position": "absolute",
+                    "bottom": "0"
+                });
+            }else{
+                $(".footer").css({
+                    "position": "relative"
+                });
+            }
+        });
+
+        _this.resize(function() {
+            _height = _this.height();
+            if(_height > 0 && ((555 + _height) < _width && (243 + _height) < _width) ){
+                $(".footer").css({
+                    "width": "100%",
+                    "position": "absolute",
+                    "bottom": "0"
+                });
+            }else{
+                $(".footer").css({
+                    "position": "relative"
+                });
+            }
+        });
+
+        window.staticAddress = "https://static.kjtpay.com/";
+    });
+    $(document).ready(function(){
+		$('input[type="radio"]').css( 'cursor', 'pointer' );
+	});
+	
+	handleIeLow();
+</script>
+</head>
+<body style="overflow-y:scroll;">
+<div class="container">
+<link rel="stylesheet" href="https://static1.kjtpay.com/wallet/new/css/head.css?1788431843916" />
+<div class="header-new">
+<div class="top-new">
+<div class="wrap">
+<div class="welcome-new">
+<div class="logo-new">
+<a href="/my/home.htm?link=0101">
+<img src="https://static.kjtpay.com/wallet/new/img/index/logo.png" alt="logo标签" />
+</a>
+</div>
+<div class="account-new">
+<dl>
+<dd><span>您好
+</span></dd>
+<dd><span>|</span></dd>
+<dd><a href="/logout.htm" class="a">退出</a></dd>
+<dd><span>|</span></dd>
+<dd><a href="/help/helpcenter.htm" target="_blank">帮助中心</a></dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div class="header-content-new">
+<div class="accounts-new">
+<div class="wrap" style="position: relative;">
+<div class="message-new" style="color: #FFF;">
+<span class="iconfont"><a href="/selfService/showSelfHelp.htm?link=0103" style="color: #FFF;"/>&#xe6ac;</span>
+<span><a href="/selfService/showSelfHelp.htm?link=0103" style="color: #FFF;" />消息</span>
+</div>
+<div class="photo-new">
+<a href="/my/accountSetting.htm?link=0103">
+<img src="https://static.kjtpay.com/wallet/new/img/index/default-logo.png" alt="头像" />
+</a>
+</div>
+<div class="info-new">
+<p class="clearfix">
+<span class="accountName-new" id="loginName"></span>
+<span id="persionImg" class="personal-new img-new"><a href="/my/go-enterprise-certification.htm"></a></span>
+<span id="phoneImg" class="phone-new img-new"><a href="/my/accountSetting.htm?link=0103"></a></span>
+<span id="emailImg" class="email-new img-new"><a href="/my/accountSetting.htm?link=0103"></a></span>
+<i class="i-personal-new">
+<em></em>
+<span class="i-up-new"></span>
+<span class="i-content-new" id="persionHtml">未实名</span>
+</i>
+<i class="i-phone-new">
+<em></em>
+<span class="i-up-new"></span>
+<span class="i-content-new" id="phoneHtml">
+</span>
+</i>
+<i class="i-email-new">
+<em></em>
+<span class="i-up-new"></span>
+<span class="i-content-new" id="emailHtml">
+</span>
+</i>
+</p>
+<dl class="clearfix">
+<dd>上次登录时间：<span id="lastLoginDate"></span></dd>
+<dd>|</dd>
+<dd>上次登录IP：<span id="lastIp"></span></dd>
+<dd>上次登录状态：<span id="lastLoginStatus"></span></dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="navs-new">
+<div class="wrap">
+<ul>
+<li class="active-new">
+<a href="/my/home.htm?link=0101">我的快捷通</a>
+<div class="navs-sub-new">
+<div class="wrap">
+<dl>
+<dd class="active-new"><a href="/my/home.htm?link=0101">首页</a></dd>
+<dd><a href="/my/accountInfo.htm?link=0102">账户资产</a></dd>
+<dd><a href="/my/accountSetting.htm?link=0103">账户设置</a></dd>
+<dd><a href="/my/bankCardInfo.htm?link=0104">银行账户</a></dd>
+</dl>
+</div>
+</div>
+</li>
+<li>
+<a href="/my/all-trade1.htm?link=0201">交易记录</a>
+<div class="navs-sub-new">
+<div class="wrap">
+<dl>
+<dd><a href="/my/all-trade1.htm?link=0201">交易记录</a></dd>
+<dd><a href="/my/all-recharge1.htm?link=0202">充值记录</a></dd>
+<dd><a href="/my/all-cach1.htm?link=0203">提现记录</a></dd>
+<dd><a href="/my/all-refund1.htm?link=0204">退款记录</a></dd>
+<dd><a href="/my/pay-detail.htm?link=0205">收支明细</a></dd>
+<dd><a href="/payment/payDetailDownload.htm?link=0206">下载中心</a></dd>
+</dl>
+</div>
+</div>
+</li>
+<li>
+<a href="/my/accountManage.htm?link=0400">安全中心</a>
+<div class="navs-sub-new">
+</div>
+</li>
+<li>
+<a href="/my/appcenter.htm?link=0500">应用中心</a>
+<div class="navs-sub-new">
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+		var pay_pwd_type = '$paypwdType';
+
+	jQuery.ajax({
+	    type: 'POST',
+	    url: "/my/getHeaderData.htm" ,
+	    success: function(response) {
+	    	if(response.success){
+	    		var memberType=response.data.membertype;
+	    		var personaVerifyLevel=response.data.personaVerifyLevel;
+	    		var memberType=response.data.membertype;
+	    		var verify_name=response.data.verify_name;
+	    		var verify_mobile=response.data.verify_mobile;
+	    		var verify_email=response.data.verify_email;
+	    		var lastLoginDate=response.data.lastLoginDate;  
+	    		var lastIp=response.data.lastIp;  
+	    		var reservedMsn=response.data.reservedMsn;
+				var lastLoginStatus=response.data.lastLoginStatus;
+				var loginName=response.data.loginName;
+	    		$("#lastLoginDate").html(lastLoginDate);
+	    		$("#lastIp").html(lastIp);
+	    		if(reservedMsn!=null){
+	    			$("#reservedMsn").html("预留信息："+reservedMsn);
+	    		}
+	    		$("#loginName").html(loginName);
+				$("#lastLoginStatus").html(lastLoginStatus);
+	    		//实名认证
+	    		if(memberType=='personal'){
+	    			if(personaVerifyLevel==null||personaVerifyLevel==''){
+	    				$("#persionImg").addClass('un-new');
+	    				$("#persionHtml").html("未实名");
+	    				$("#persionHtml").width("36px");
+	    			}else{
+	    				$("#persionHtml").html("实名等级"+personaVerifyLevel);
+	    			}
+	    		}else{
+	    			if(verify_name=='PASS'||verify_name=='checkPass'){
+	    				$("#persionHtml").html("已实名");
+	    			}else if(verify_name=='checkReject'){
+	    				$("#persionImg").addClass('un-new');
+	    				$("#persionHtml").html("认证失败");
+	    			}else if(verify_name=='init'){
+	    				$("#persionImg").addClass('un-new');
+	    				$("#persionHtml").html("认证中");
+	    			}else{
+	    				$("#persionImg").addClass('un-new');
+	    				$("#persionHtml").html("未实名");
+	    				$("#persionHtml").width("36px");
+	    			}
+	    		}
+	    		
+	    		//电话号码
+	    		if(verify_mobile==null||verify_mobile==''){
+	    			$("#phoneImg").addClass('un-new');
+	    			$("#phoneHtml").html("手机未绑定");
+	    			$("#phoneHtml").width("60px");
+	    		}else{
+	    			$("#phoneHtml").html(verify_mobile);
+	    		}
+	    		
+	    		//邮件
+	    		if(verify_email==null||verify_email==''){
+	    			$("#emailImg").addClass('un-new');
+	    			$("#emailHtml").html("邮箱未绑定");
+	    			$("#emailHtml").width("60px");
+	    		}else{
+	    			$("#emailHtml").html(verify_email);
+	    		}
+	    		
+	    		var left_w = $(".accountName-new").width() + 22;
+				$(".i-personal-new em,.i-personal-new .i-up-new").css("left", left_w + "px");
+				$(".i-personal-new .i-content-new").css("left", left_w - $(".i-personal-new .i-content-new").width()/2 + "px");
+				$(".i-phone-new em,.i-phone-new .i-up-new").css("left", left_w + 32 + "px");
+				$(".i-phone-new .i-content-new").css("left", left_w + 32 - $(".i-phone-new .i-content-new").width()/2 + "px");
+				$(".i-email-new em,.i-email-new .i-up-new").css("left", left_w + 60 + "px");
+				$(".i-email-new .i-content-new").css("left", left_w + 60 - $(".i-email-new .i-content-new").width()/2 + "px");
+				$(".info-new .img-new").addClass("i-show-new");
+				
+				$(".info-new .img-new.i-show-new").hover(function(){
+					$(".info-new p i").eq($(this).index() - 1).css("visibility", "visible");
+				},function(){
+					$(".info-new p i").eq($(this).index() - 1).css("visibility", "hidden");
+				});
+	    		
+	    	}  
+	    } 
+	});
+	var linkCode = '';
+	$(function() {
+		if (!linkCode) {
+			return;
+		}
+		$('.navs-new li').removeClass('active-new');
+		$('.navs-new li').each(function() {
+			if ($(this)) {
+				var aHref = $(this).find('a').attr('href');
+				if (aHref != undefined && aHref.indexOf(linkCode) >= 0) {
+    				$(this).addClass('active-new');
+    			}
+			}
+		
+			if (hasCurLinkCode($(this))) {
+				$(this).addClass('active-new');
+			}
+		});
+	});
+	
+	function hasCurLinkCode(jHoverli) {
+		if (!linkCode) {
+			return false;
+		}
+		
+		var res = false;
+		jHoverli.find('.navs-sub-new dd').removeClass('active-new');
+		jHoverli.find('.navs-sub-new a').each(function() {
+			var aHref = $(this).attr('href');
+			if (aHref != undefined && aHref.indexOf(linkCode) >= 0) {
+				$(this).parent().addClass("active-new");
+				res = true;
+			}
+		});
+		return res;
+	}
+	
+	
+	
+	
+	
+</script> <div id="" class="wrap">
+<div class="page_title">
+<div class="fr page_title_right"></div>
+<h2></h2>
+</div>
+<div class="pagebox" style="height:440px;">
+<p style=" margin-top:180px; margin-left:370px;"><i class="err404"><span class="f14 b" style="padding-bottom:8px; display:block;">
+404 非常抱歉，您访问的页面不存在！
+</span>
+<a href="/index.htm" class="f12 color_f6">返回首页</a>
+</i>
+</p>
+</div>
+</div>
+<div class="footer">
+<div class="wrapF clearfix">
+<div class="left_left c_97">
+<p>
+<a class="c_97" href="https://sc-static.kjtpay.com/wallet/agreement/ServiceAgreement_ent.html?1788431843916" target="_blank">快捷通服务协议</a>
+|
+<a class="c_97" href="https://sc-static.kjtpay.com/wallet/agreement/secret.html?1788431843916" target="_blank">快捷通隐私权政策</a>
+|
+<a class="c_97" href="https://sc-static.kjtpay.com/wallet/agreement/chargeAgreement.html?1788431843916" target="_blank">快捷通资费标准</a>
+|
+<a class="c_97" href="https://sc-static.kjtpay.com/wallet/agreement/kjtProductPip.html" target="_blank">快捷通产品及服务执行标准</a>
+</p>
+<p class="mt10">
+<a class="c_97" href="/new_static/aboutUs.htm">关于快捷通</a>
+|
+<a class="c_97" href="/static/contactus.htm" target="_blank">联系我们</a>
+|
+<span class="c_97">客服热线：400-611-0909</span>
+|
+<a class="c_97" href="mailto:compliance@yiwupay.com" target="_self">合规举报：compliance@yiwupay.com</a>
+</p>
+<p class="mt10">
+<span class="c_97"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010402003096" target="_blank"><i class="police"></i>浙公网安备 33010402003096号</a></span>
+|
+<span class="c_97">经营许可证编号：浙B2-20130212</span>
+|
+<span class="c_97"><a href="https://beian.miit.gov.cn" target="_blank">浙ICP备17027243号-1</a></span>
+|
+<span class="c_97">版权所有 2012-<span id="getYear"></span></span>
+|
+<span class="c_97">快捷通支持IPV6网络</span>
+</p>
+<ul class="mt25">
+<li><a href="/static/picture.htm" target="_blank" class="pic1_1"></a></li>
+<li style="display:none"><a href="https://sealinfo.verisign.com/splash?form_file=fdf/splash.fdf&dn=WWW.KJTPAY.COM&lang=zh_cn" class="pic2_1" target="_blank"></a></li>
+</ul>
+</div>
+<div class="right_right">
+<div class="left_left">
+<p class="codeImg_left"></p>
+<p class="c_97 mt10">关注官方微信</p>
+</div>
+<div class="right_right">
+<p class="codeImg_right"></p>
+<p class="c_97 mt10">关注官方微博</p>
+</div>
+</div>
+</div>
+</div>
+<div class="web-right-wrap">
+<ul class="web-right-nav web-nav">
+<li class="zxkf-li">
+<a href="javascript:void(0);" class="iconfont icon server-icon" target="_blank" id="kf-link">&#xe68c;</a>
+</li>
+<li class="zxkf-li2">
+<a href="javascript:void(0);" class="iconfont icon server-icon">&#xe64f;</a>
+<div class="hover-show-zone gzh">
+<div class="gzh-img"></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="toTop-right">
+<a class="iconfont top-icon" href="#top">&#xe6c2;</a>
+</div>
+<script>
+var _hmt = _hmt || [];
+(function() {
+    if(location.href.indexOf("https://www.kjtpay.com/") === 0){
+        console.log("tongji.baidu success...");
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?dc6bab51a653e7c56cf937e78d5813e3";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    }
+})();
+</script>
+<script type="text/javascript">
+    $(".zxkf-li").hover(function(){
+        $(this).find("a").removeClass("iconfont");
+        $(this).find("a").html("<p class=top-back1>在线</p><p class=top-back2>客服</p>");
+    },function(){
+        $(this).find("a").addClass("iconfont");
+        $(this).find("a").html("&#xe68c;");
+    });     
+     $(".zxkf-li2").hover(function(){
+		$(this).find("a").removeClass("iconfont");
+		$(this).find("a").html("<p class=top-back1>公众</p><p class=top-back2>号</p>");
+		$('.hover-show-zone').css('display','block');
+	},function(){
+		$(this).find("a").addClass("iconfont");
+		$(this).find("a").html("&#xe64f;");
+		$('.hover-show-zone').css('display','none');
+		
+	});	
+	$(".zxkf-li-app").hover(function(){
+		$(this).find("a").removeClass("iconfont");
+		$(this).find("a").html("<p class=top-back1>手机</p><p class=top-back2>钱包</p>");
+		$('.app-show-zone').css('display','block');
+	},function(){
+		$(this).find("a").addClass("iconfont");
+		$(this).find("a").html("&#xe664;");
+		$('.app-show-zone').css('display','none');
+	});	
+	
+    $(".tel-li").hover(function(){
+        $(this).find("a").removeClass("iconfont");
+        $(this).find("a").html("<p class=top-back1>客服</p><p class=top-back2>热线</p>");
+        $(".coordinate-tel").css("display","block");
+    },function(){
+        $(this).find("a").addClass("iconfont");
+        $(this).find("a").html("&#xe61e;");
+        $(".coordinate-tel").css("display","none");
+    }); 
+
+    $(".coordinate-li").hover(function(){
+        $(this).find("a").removeClass("iconfont");
+        $(this).find("a").html("<p class=top-back1>商务</p><p class=top-back2>合作</p>");
+        $(".coordinate-busness").css("display","block");
+    },function(){
+        $(this).find("a").addClass("iconfont");
+        $(this).find("a").html("&#xe61a;");
+        $(".coordinate-busness").css("display","none");
+    }); 
+
+    $(".toTop-right").hover(function(){
+        $(this).find("a").removeClass("iconfont");
+        $(this).find("a").html("<p class=top-back1>返回</p><p class=top-back2>顶部</p>");
+    },function(){
+        $(this).find("a").addClass("iconfont");
+        $(this).find("a").html("&#xe6c2;");
+    });     
+    
+     $(window).scroll(function(){  
+        if ($(window).scrollTop()>100){  
+            $(".toTop-right").fadeIn(500);  
+        } else{  
+            $(".toTop-right").fadeOut(500);  
+        }  
+    });  
+  
+    $(".toTop-right").click(function(){  
+        $('body,html').animate({scrollTop:0},100);  
+        return false;  
+    });
+
+    //获取token
+    function getcookie(objname){ 
+		var arrstr = document.cookie.split("; ");
+		for(var i = 0;i < arrstr.length;i ++){
+			var temp = arrstr[i].split("=");
+			if(temp[0] == objname) return unescape(temp[1]);
+		}
+	}
+    //浏览器
+    function getBrowser()  
+	{  
+   		var OsObject = "";  
+   		var userAgent = navigator.userAgent;
+   		if(userAgent.indexOf("MSIE")>0) {  
+      	  return "MSIE";  
+   		}else if(userAgent.indexOf("Chrome")>0){  
+    	    return "Chrome";  
+   		}else if(userAgent.indexOf("Firefox")>0){  
+    	    return "Firefox";  
+  		}else if(userAgent.indexOf("Safari")>0) {  
+        	return "Safari";  
+   		} else if(userAgent.indexOf("Camino")>0){  
+       		return "Camino";  
+   		}else if(userAgent.indexOf("Gecko/")>0){  
+        	return "Gecko";  
+   		}else{
+   			return navigator.appName;
+   		}
+		}  
+    var ssoToken = getcookie("com.vfsso.cas.token")?getcookie("com.vfsso.cas.token"):"";
+    var browser = getBrowser();
+    $(".zxkf-li a").attr("href","https://cschat.antcloud.com.cn/pcportal.htm?tntInstId=FONIMHCN&scene=SCE00001177");
+    
+    //阿里云客服替换
+    $.ajax({
+        url: 'https://ent.kjtpay.com/customer-service/show-dialog.htm',
+        type: 'GET',
+        dataType: 'JSONP', 
+        callback: 'callback',
+        jsonp: "callbackparam",
+        data: {
+          terminal : "web",
+          browser: browser, 
+          token:ssoToken,
+          network: 'wifi' ,
+	      contractOrSale:'contract',
+	      personalOrEnterprise: 'personal'   
+        },
+        success: function(data) {
+           var url = eval(data).url;
+           $(".zxkf-li a").attr("href",url);
+        },
+        error:function(){
+        	$(".zxkf-li a").attr("href","https://cschat.antcloud.com.cn/pcportal.htm?tntInstId=FONIMHCN&scene=SCE00001177");
+        }
+    });
+    
+</script>
+<script type="text/javascript">
+    (function () {
+        window._fmOpt = {
+            partner: 'kjtpay',
+            appName: 'kjtpay_web',
+            token: 'site' + "-" + new Date().getTime() + "-" + Math.random().toString(16).substr(2),
+            fmb: true,
+            success: function (data) {
+                // 在成功完成采集后，success回调中可以获取到blackbox
+                window.blackbox = data;
+                console.log("window.blackbox==", window.blackbox);
+                window._fmOpt = {};//置空
+                window._fmOpt = {
+                    partner: 'kjtpay',
+                    appName: 'kjtpay_web',
+                    token: 'site' + "-" + new Date().getTime() + "-" + Math.random().toString(16).substr(2),
+                    fmb: true,
+                    fpHost: 'https://fp.fraudmetrix.cn',
+                    staticHost: 'static.fraudmetrix.cn',
+                    success: function (data) {
+                        // 在成功完成采集后，success回调中可以获取到blackbox
+                        window.blackbox = window.blackbox + ";" + data;
+                        jQuery.ajax({
+                            type: 'POST',
+                            data: {"black_box": window.blackbox},
+                            url: "/ocx/setSarsBlackBox.htm",
+                            success: function (response) {
+                                if (response.result == 'success') {
+                                    //
+                                    //console.log(response);
+                                } else {
+                                    //console.log("设备指纹设置失败");
+                                }
+                            },
+                            dataType: "json"
+                        });
+                    },
+                };
+                var cimg = new Image(1, 1);
+                cimg.onload = function () {
+                    _fmOpt.imgLoaded = true;
+                };
+                cimg.src = "https://fp.kjtpay.com/fp/clear.png?partnerCode=kjtpay&appName=kjtpay_web&tokenId=" + window._fmOpt.token;
+                var fm = document.createElement('script');
+                fm.type = 'text/javascript';
+                fm.async = true;
+                fm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'static.fraudmetrix.cn/v3/fm.js?ver=0.1&t=' + (new Date().getTime() / 3600000).toFixed(0);
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(fm, s);
+
+            },
+            fpHost: 'https://fp.kjtpay.com',//'https://zfp.kjtpay.com',//'https://fp.kjtpay.com',  //TODO...
+            staticHost: ''
+        };
+        var fm = document.createElement('script');
+        fm.type = 'text/javascript';
+        fm.async = true;
+        //fm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'static.fraudmetrix.cn/static/fm.js';
+        fm.src = window._fmOpt.fpHost + '/static/fm.js?ver=0.1';
+
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(fm, s);
+
+    })();
+</script>
+</div>
+</body>
+</html>

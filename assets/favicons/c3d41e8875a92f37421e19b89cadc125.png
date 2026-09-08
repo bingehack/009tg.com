@@ -1,0 +1,1208 @@
+
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0">
+<title>吉信通|中正云通信|世纪中正|短信平台|短信接口|验证码|国际短信-20年专注企业通信解决方案，因您而变！</title>
+<meta name="description" content="中正云通信-吉信通拥有强大的服务与技术团队，20年云通信行业经验，根据您的需求个性订制，为您提供短信、云语音、400电话....."/>
+<meta name="keywords" content="短信发送平台,短信群发,群发短信,短信接口,短信平台,106短信平台,短信服务平台,营销短信,发短信平台,移动应用商务中心,验证码,国际短信,云通讯,云通信,融合通信,语音验证,语音通知,短信,彩信"/>
+<link rel="stylesheet" type="text/css" href="css/css.css">
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link href="css/animate.min.css" rel="stylesheet" type="text/css">
+<script src="css/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="css/dgheader.mini.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	var qcloud={};
+	$('[_t_nav]').hover(function(){
+		var _nav = $(this).attr('_t_nav');
+		clearTimeout( qcloud[ _nav + '_timer' ] );
+		qcloud[ _nav + '_timer' ] = setTimeout(function(){
+		$('[_t_nav]').each(function(){
+		$(this)[ _nav == $(this).attr('_t_nav') ? 'addClass':'removeClass' ]('nav-up-selected');
+		});
+		$('#'+_nav).stop(true,true).slideDown(200);
+		}, 150);
+	},function(){
+		var _nav = $(this).attr('_t_nav');
+		clearTimeout( qcloud[ _nav + '_timer' ] );
+		qcloud[ _nav + '_timer' ] = setTimeout(function(){
+		$('[_t_nav]').removeClass('nav-up-selected');
+		$('#'+_nav).stop(true,true).slideUp(200);
+		}, 150);
+	});
+});
+</script>
+<script type="text/javascript">
+	function getParam(paramName) {
+		paramValue = "";
+		isFound = false;
+		if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+			arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&");
+			i = 0;
+			while (i < arrSource.length && !isFound) {
+				if (arrSource[i].indexOf("=") > 0) {
+					if (arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase()) {
+						paramValue = arrSource[i].split("=")[1];
+						isFound = true;
+					}
+				}
+				i++;
+			}
+		}
+		return paramValue;
+	}
+
+	var token=getParam("mobile");
+	if(token!= "T")
+	{
+		try {
+			var urlhash = window.location.hash;
+			if (!urlhash.match("fromapp"))
+			{
+				if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iPad)/i)))
+				{
+					window.location="http://m.winic.org?RegistType=&KeyWord=&HrefSource=&ClientType=";
+				}
+			}
+		}
+		catch(err)
+		{
+		}
+	}
+</script>
+<style>
+.cpxt .cpbox .bd1 .qhbox .bd2 dl dt ul li a{
+	background: #dd4f18;
+    line-height: 45px;
+    width: 180px;
+    color: #ededed;
+    display: block;
+    font-size: 18px;
+    border-radius: 50px;
+	}
+</style>
+</head>
+<body>
+
+<link rel="stylesheet" href="/css/QQ/style.css">
+<!--<script type="text/javascript" src="/js/jquery-1.11.1.js" charset="utf-8"></script>-->
+<script language="javascript" src="/JS/layer/layer.js"></script>
+<!--<script src="http://tj.hcjietui.com/static/index/js/listen.js?key=MDAwMDAwMDAwMGmPvatrv4yVa8OYv26YlYuapYiYgo2wcg"></script>-->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c2b609e9276dff6521848a6331e0ce81";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<div class="top">
+  <div class="logo"><a href="/index.asp"><img src="/imgs/logo.png" style="width: 230px;"></a> </div>
+  <div class="nav">
+    <ul id="divli">
+      <li><a href="/index.asp">首页</a></li>
+      <li _t_nav="product"><a href="javascript:void(0)">产品服务</a></li>
+      <li _t_nav="fangan"><a href="javascript:void(0)">解决方案</a></li>
+      <li _t_nav="jiekou"><a href="javascript:void(0)">API接口</a></li>
+      <li><a href="/about/about.asp">关于我们</a></li>
+      <li><a href="/about/contact.asp">联系我们</a></li>
+      <li><a href="/server/chognzhi.asp">在线充值</a></li>
+    </ul>
+    <script>
+    var pn = location.pathname;
+    var as = document.getElementById('divli').getElementsByTagName('a'),find=false;
+    for (var i = 0, j = as.length; i < j; i++)
+        if (as[i].href.indexOf(pn) != -1) { as[i].className = 'focus'; find = true; break; }
+		
+		
+</script> 
+  </div>
+  <div style="float: left;margin-left: 6%;line-height: 70px;font-size: 18px;">
+    <ul>
+      <li><img src="/imgs/tel2.png" style="width: 35px;height: 35px;">&nbsp;<span>400&nbsp;0755&nbsp;550</span></li>
+    </ul>
+  </div>
+  <div class="navcd">
+    <div id="product" style="display: none;" _t_nav="product">
+      <dl>
+        <dt>云消息</dt>
+        <dd><a href="/product/yanzhenma.asp">短信验证码</a></dd>
+        <dd><a href="/product/duanxin.asp">短信通知</a></dd>
+        <dd><a href="/product/yxduanxin.asp">会员营销短信</a> </dd>
+        <dd><a href="/product/gjduanxin.asp">国际短信</a> </dd>
+        <dd><a href="/product/spcx.asp">视频彩信</a> </dd>
+        <dd><a href="/product/5gduanxin.asp">5G短信</a> </dd>
+      </dl>
+      <dl>
+        <dt>云语音</dt>
+        <dd><a href="/product/yuyinyzm.asp">语音验证码</a></dd>
+        <dd><a href="/product/yuyintz.asp">语音通知</a></dd>
+        <!--<dd><a href="ffxt.asp" class="erji">防封系统</a> </dd>-->
+        <dd><a href="/product/ffxt.asp" >防封系统</a> </dd>
+        <dd><a href="/product/zdwh.asp">自动外呼</a> </dd>
+        <dd><a href="/product/yznai.asp">云智能AI</a> </dd>
+      </dl>
+      <dl>
+        <dt>增值服务</dt>
+        <dd><a href="/product/yypt.asp">短信运营平台</a> </dd>
+        <dd><a href="/product/400.asp">400电话</a></dd>
+        <dd><a href="/product/crm.asp">Yes'CRM</a></dd>
+        <dd><a href="/product/jxt.asp">吉信通</a> </dd>
+        <dd><a href="/product/khd.asp">CMPP/SGIP/SMGP客户端</a> </dd>
+        <dd><a href="/product/jxtweb.asp">吉信通Web版</a> </dd>
+      </dl>
+    </div>
+  </div>
+  <div class="navcd">
+    <div id="fangan" style="display: none;" _t_nav="fangan">
+      <dl>
+        <dd><a href="/solution/jrfa.asp">金融保险</a></dd>
+        <dd><a href="/solution/hlwfa.asp">互联网</a></dd>
+        <dd><a href="/solution/dsfa.asp">电商O2O</a> </dd>
+        <dd><a href="/solution/wlfa.asp">物流快递</a> </dd>
+        <dd><a href="/solution/lsfa.asp">零售百货</a> </dd>
+        <dd><a href="/solution/jyfa.asp">教育培训</a> </dd>
+      </dl>
+    </div>
+  </div>
+  <div class="navcd">
+    <div id="jiekou" style="display: none;" _t_nav="jiekou">
+      <dl>
+        <dd><a href="/api/dxjk.asp">短信接口</a></dd>
+        <dd><a href="/api/yyjk.asp">语音接口</a></dd>
+        <dd><a href="/api/cxjk.asp">彩信接口</a></dd>
+      </dl>
+    </div>
+  </div>
+  <div class="login"> <a style="float: left;" href="http://2022.winic.org" target="_blank">切换旧版</a> <a class="zc" href="/reg_real.asp">账号注册</a> <a class="dr" href="http://web.900112.com" target="_blank">登入</a> <a class="dr" href="http://www.winic.org/download/吉信通.rar" target="_blank">吉信通下载</a></div>
+</div>
+<script>
+    var head=$(".top").height();
+        $(window).scroll(function(){
+			var topScr=$(window).scrollTop();
+			if (topScr>head) {
+				$(".top").addClass("fixed");
+			}else{
+				$(".top").removeClass("fixed");
+			}
+		})
+		
+
+
+</script>
+
+<script language="javascript">
+$(function(){
+	//加载扩展模块
+	layer.config({
+		extend: 'JS/extend/layer.ext.js'
+	});
+	$("a[name='zxty']").click(function(){
+		//官网欢迎页
+    	layer.open({
+			type: 2,
+			skin: 'layui-layer-rim',
+			title: false,
+			fix: false,
+			shadeClose: false,
+			shade: 0.8,
+			maxmin: false,
+			area: ['500px', '500px'],
+			content: ['/CustomerExperience/House.html','no']
+		});	
+	});
+})
+
+function openWin(URL)
+	{ 
+		var iWidth = 820;                          //弹出窗口的宽度; 
+		var iHeight = 610;                         //弹出窗口的高度; 
+		//获得窗口的垂直位置 
+		var iTop = (window.screen.availHeight - 30 - iHeight) / 2; 
+		//获得窗口的水平位置 
+		var iLeft = (window.screen.availWidth - 10 - iWidth) / 2; 
+		window.open(URL,'','height=' + iHeight + ',,innerHeight=' + iHeight + ',width=' + iWidth + ',innerWidth=' + iWidth + ',top=' + iTop + ',left=' + iLeft + ',status=no,toolbar=no,menubar=no,location=no,resizable=no,scrollbars=0,titlebar=no'); 
+	}
+	
+</script>
+
+
+    <script language="javascript">
+	$(function(){
+		$("a[name='qq_qxx']").click(function(){
+			$('#BizQQWPA').click();	
+		});
+	})
+	function Open_YxQQ()
+	{
+		$('#BizQQWPA').click();
+	}
+	
+	function openWin(URL)
+	{ 
+		var iWidth = 820;                          //弹出窗口的宽度; 
+		var iHeight = 610;                         //弹出窗口的高度; 
+		//获得窗口的垂直位置 
+		var iTop = (window.screen.availHeight - 30 - iHeight) / 2; 
+		//获得窗口的水平位置 
+		var iLeft = (window.screen.availWidth - 10 - iWidth) / 2; 
+		window.open(URL,'','height=' + iHeight + ',,innerHeight=' + iHeight + ',width=' + iWidth + ',innerWidth=' + iWidth + ',top=' + iTop + ',left=' + iLeft + ',status=no,toolbar=no,menubar=no,location=no,resizable=no,scrollbars=0,titlebar=no'); 
+	}
+	
+			
+	function ClickForOpenQQ(QQ)
+	{
+		document.getElementById("Open_QQ").src="tencent://message/?uin="+QQ+"&Site=&Menu=yes&t="+Math.random();
+	}
+	</script>
+
+    <!--<div id="BizQQWPA"></div>-->
+    <style>
+    .show_div
+	{
+		background-color:#33BFE2;
+		float:left;
+		width:65px;
+		line-height:85px;
+		height:85px;
+		margin-right:1px;
+		text-align:center;
+		color:#FFF;
+		font-weight:bold;
+		display:none;
+	}
+	.pub-fun-tip
+	{
+		text-align:center;
+		width: 190px;
+		filter: alpha(opacity=70);
+		background-color: #33bfe2;
+		display: none;
+		position: absolute;
+		right: 80px;
+		border-radius: 4px;
+		color: #fff;
+		line-height: 48px;
+		font-size: 16px;
+		top: 50%;
+		background: rgba(0, 162, 202, 0.58);
+	}
+	.arrowfor_head
+	{
+		display: inline-block;
+		border-width: 10px;
+		border-color: transparent;
+		border-left-color: rgba(0, 174, 243, 0.82);
+		border-style: solid;
+		right: -20px;
+		position: absolute;
+		top: 14px;
+		opacity: 0.7;
+		filter: alpha(opacity=70);
+	}
+    </style>
+    	
+	<!-- 代码部分begin -->
+	
+	<div id="lanren">
+    	<iframe id="Open_QQ" height="0" width="0" style="display:none"></iframe>
+        <div class="pub-fun-tip" id="kefu_div" style="margin-top: -255px;background: rgba(202, 0, 0, 0);">
+            <span class="arrowfor_head"></span>
+            <img src="/imgs/QQ/erweima.png" width="125" height="125" />
+        </div>
+        
+        <div id="BizQQWPA2">
+        <div class="pub-fun-tip" id="yewu_div" style="margin-top: -185px;">
+            <span class="arrowfor_head"></span>
+            QQ在线咨询
+        </div>
+        </div>
+        
+        <div class="pub-fun-tip" id="yewu_div" style="margin-top: -185px;" onclick="Open_YxQQ();">
+            <span class="arrowfor_head"></span>
+            QQ在线咨询
+        </div>
+        <div class="pub-fun-tip" id="zaixian_div" style="margin-top: -110px;" onclick="openWin('http://p.qiao.baidu.com/cps/chat?siteId=15966125&userId=31497271&siteToken=c2b609e9276dff6521848a6331e0ce81')">
+            <span class="arrowfor_head"></span>
+            在线业务咨询
+        </div>
+        <div class="pub-fun-tip" id="tel_div" style="margin-top: -40px;">
+            <span class="arrowfor_head"></span>
+            热线电话400-0755-550    
+        </div>
+        <div class="pub-fun-tip" id="jishu_div" style="margin-top:30px;" onclick="ClickForOpenQQ('2355397414');">
+            <span class="arrowfor_head"></span>
+            技术问题咨询
+        </div>
+		<ul>
+        	<li><a id="kefu_a" rel="nofollow" href="javascript:void"></a></li>
+			<li>
+            	
+                <div id="BizQQWPA"><a id="qq_a" name="qq_qxx" rel="nofollow" href="javascript:void"></a></div>
+                
+            </li>
+            <!--http://p.qiao.baidu.com/cps/chat?siteId=117602&userId=747859-->
+			<li><a id="zaixian_a" rel="nofollow" href="javascript:" onclick="openWin('http://p.qiao.baidu.com/cps/chat?siteId=15966125&userId=31497271&siteToken=c2b609e9276dff6521848a6331e0ce81')"></a></li>
+			<li><a id="tel_a" rel="nofollow" href="javascript:void" ></a></li>
+			<li><a id="jishu_a" rel="nofollow" href="javascript:void" onclick="ClickForOpenQQ('2355397414');"></a></li>
+		</ul>
+	</div>
+
+	<script>
+		$(function(){
+			var target = $("#lanren");
+			var distance = target.css("right");
+			if (distance == '0px'){
+				target.animate({right:-65}, 100);
+			} else {
+				target.animate({right:0}, 100);
+			}
+			
+			$('#kefu_a').mouseover(function(){
+				$('#kefu_div').show();
+			});
+			$('#tel_div').mouseover(function(){
+				$('#kefu_div').show();
+			});
+			$('#kefu_a').mouseout(function(){
+				$('#kefu_div').hide();
+			});
+			$('#kefu_div').mouseout(function(){
+				$('#kefu_div').hide();
+			});
+			
+			$('#tel_a').mouseover(function(){
+				$('#tel_div').show();
+			});
+			$('#tel_div').mouseover(function(){
+				$('#tel_div').show();
+			});
+			$('#tel_a').mouseout(function(){
+				$('#tel_div').hide();
+			});
+			$('#tel_div').mouseout(function(){
+				$('#tel_div').hide();
+			});
+			
+			$('#qq_a').mouseover(function(){
+				$('#yewu_div').show();
+			});
+			$('#yewu_div').mouseover(function(){
+				$('#yewu_div').show();
+			});
+			$('#qq_a').mouseout(function(){
+				$('#yewu_div').hide();
+			});
+			$('#yewu_div').mouseout(function(){
+				$('#yewu_div').hide();
+			});
+			
+			$('#zaixian_a').mouseover(function(){
+				$('#zaixian_div').show();
+			});
+			$('#zaixian_div').mouseover(function(){
+				$('#zaixian_div').show();
+			});
+			$('#zaixian_a').mouseout(function(){
+				$('#zaixian_div').hide();
+			});
+			$('#zaixian_div').mouseout(function(){
+				$('#zaixian_div').hide();
+			});
+			
+			$('#jishu_a').mouseover(function(){
+				$('#jishu_div').show();
+			});
+			$('#jishu_div').mouseover(function(){
+				$('#jishu_div').show();
+			});
+			$('#jishu_a').mouseout(function(){
+				$('#jishu_div').hide();
+			});
+			$('#jishu_div').mouseout(function(){
+				$('#jishu_div').hide();
+			});
+		})
+	</script>
+
+<script>
+    var head=$(".top").height();
+        $(window).scroll(function(){
+			var topScr=$(window).scrollTop();
+			if (topScr>head) {
+				$(".top").addClass("fixed");
+			}else{
+				$(".top").removeClass("fixed");
+			}
+		})
+</script>
+<link href="css/banner.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="css/superslide.2.1.js"></script>
+<div class="banner">
+  <div class="bd">
+    <ul style="position: relative; width: 960px; height: 599px;">
+      <li style="display: list-item;">
+       	 
+
+            <a href="hd.asp" target="_blank" ><img src="imgs/20260501/winic1.jpg" style="width:100%; height:563px"></a>
+      </li>
+      
+      <li style="display: list-item;">
+        <div class="bz"><span>中正云通信</span>
+          <p class="p2">行业领先的云通信服务运营商</p>
+		  <br>
+          <p class="p2">20年运营经验&nbsp;&nbsp;运营商直连 &nbsp;&nbsp;20万企业的选择</p>
+		  
+		  
+          <a href="javascript:" onClick="openWin('http://p.qiao.baidu.com/cps/chat?siteId=15966125&userId=31497271&siteToken=c2b609e9276dff6521848a6331e0ce81')" >咨询客户经理</a> </div>
+        <video class="fullscreenvideo" id="bgvid" playsinline="" autoplay="" muted="" loop="">
+          <source src="imgs/1.mp4" type="video/mp4">
+        </video>
+      </li>
+      <li style="display: list-item;">
+       	 
+
+            <img src="imgs/banner2.jpg" style="width:1920px; height:563px"></a>
+      </li>
+    </ul>
+  </div>
+  <div class="hd">
+    <ul>
+      <li class="">1</li>
+      <li class="">2</li>
+      <li class="">3</li>
+    </ul>
+  </div>
+  <span class="prev" style="opacity: 0.5; display: none;"></span> <span class="next" style="opacity: 0.5; display: none;"></span> </div>
+<script type="text/javascript">
+$(".banner").hover(function(){
+    $(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
+},
+function(){
+    $(this).find(".prev,.next").fadeOut()
+});
+$(".banner").slide({
+    titCell: ".hd ul",
+    mainCell: ".bd ul",
+    effect: "fold",
+    autoPlay: true,
+    autoPage: true,
+    trigger: "click",
+	interTime:"5"*1000,
+    startFun: function(i) {
+        var curLi = jQuery(".banner .bd li").eq(i);
+        if ( !! curLi.attr("_src")) {
+            curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
+        }
+    }
+});
+</script>
+<div class="wrap">
+  <div class="cpxt">
+    <div class="tit"><span>行业领先的云通信服务运营商</span>
+      <p>吉信通拥有强大的服务与技术团队，20年通信行业经验，根据您的需求个性订制</p>
+    </div>
+    <div class="cpbox"> 
+      <script type="text/javascript" src="css/SuperSlide2.js"></script>
+      <div class="hd hd1">
+        <ul>
+          <li class="on"><a href="javascript:void(0)"><img src="imgs/bt1.png"><br>
+            云消息</a></li>
+          <li><a href="javascript:void(0)"><img src="imgs/bt2.png"><br>
+            云语音</a></li>
+          <li><a href="javascript:void(0)"><img src="imgs/bt3.png"><br>
+            增值服务</a></li>
+        </ul>
+      </div>
+      <div class="bd bd1">
+        <div class="qhbox qih1">
+          <div class="hd hd2">
+            <ul class="lia">
+              <li class="on"><a href="/product/duanxin.asp">短信通知</a></li>
+              <li><a href="/product/yanzhenma.asp">短信验证码</a></li>
+              <li><a href="/product/yxduanxin.asp">会员营销短信</a> </li>
+              <li><a href="/product/gjduanxin.asp">国际短信</a> </li>
+              <li><a href="/product/spcx.asp">视频彩信</a> </li>
+              <li><a href="/product/5gduanxin.asp">5G短信</a> </li>
+            </ul>
+          </div>
+          <div class="bd bd2">
+            <div class="ynr">
+              <dl>
+                <dt>
+                  <div class="bt">短信通知 <span>三网合一，无覆盖</span></div>
+                  <ul>
+                    <li>三网合一：支持移动，联通，电信三大运营商一点接入全网送达。</li>
+                    <li>5秒到：及时响应，5秒必达。</li>
+                    <li>电信资质：工信部颁发电信业务，经营许可证。 </li>
+                    <li>快速上线：API调用简单，轻松接入。 </li>
+                    <li>专属号码：全国10690***靓号可选。</li>
+                    <li>高到达率：大容量、高并发、通道智能切换，确保高到达率。</li>
+                    <li style = "list-style-type: none;margin-left:50%;text-align: center;margin-top: 20px"><a  href="/product/duanxin.asp">详细了解</a></li>
+                  </ul>
+                </dt>
+                <dd><img src="imgs/dxt.jpg"></dd>
+              </dl>
+            </div>
+            <div class="ynr">
+              <dl>
+                <dt>
+                  <div class="bt">短信验证码 <span>快速对接，不接码</span></div>
+                  <ul>
+                    <li>三网合一：支持移动，联通，电信三大运营商一点接入全网送达。 </li>
+                    <li>独立端口：一客一签短信端口。 </li>
+                    <li>高效API：高效把关，速度更快，数据更安全。 </li>
+                    <li>优势通道：API调用简单，轻松接入。 </li>
+                    <li>自定义发送模式：可指定时刻或定时循环发送，发送时机任您掌握。 </li>
+                    <li>AI监控：24小时AI实时监控，出现异常，预警提示。 </li>
+                    <li style = "list-style-type: none;margin-left:50%;text-align: center;margin-top: 20px"><a href="/product/yanzhenma.asp">详细了解</a></li>
+                  </ul>
+                </dt>
+                <dd><img src="imgs/dxt.jpg"></dd>
+              </dl>
+            </div>
+            <div class="ynr">
+              <dl>
+                <dt>
+                  <div class="bt">会员营销短信 <span>营销短信，获客新模式</span></div>
+                  <ul>
+                    <li>直连资源：拥有众多全网营销直连资源，多通道热备份，满足用户的营销需求。 </li>
+                    <li>转化可跟踪：整合转化跟踪功能，随时查看营销活动转化报告。 </li>
+                    <li>数据可管理：提供发送数据批量导入导出、批量整理、分组管理等功能。 </li>
+                    <li>发送详单报告：提供图形化报表呈现的发送状态报告，并提供详单下载。 </li>
+                    <li style = "list-style-type: none;margin-left:50%;text-align: center;margin-top: 20px"><a href="/product/yxduanxin.asp">详细了解</a></li>
+                  </ul>
+                </dt>
+                <dd><img src="imgs/dxt.jpg"></dd>
+              </dl>
+            </div>
+            <div class="ynr">
+              <dl>
+                <dt>
+                  <div class="bt">国际短信 <span>全球秒级送达，稳定通道</span></div>
+                  <ul>
+                    <li>高效送达：采用先进的云计算技术；低延时，速度快；发送成功率高达99%。 </li>
+                    <li>安全加密：建立数据安全防护体系；军工级加密技术；客户内容隐私有保障。 </li>
+                    <li>闪电速度：全球高性能通道；即时响应；5秒到达。 </li>
+                    <li>接入简单：直接调用短信API接口；支持主流编辑语言；无缝兼容各种平台。 </li>
+                    <li>性能稳定：采用服务器集群架构；云端吞吐量达1000万条/天；高并发、大容量，实时监控。 </li>
+                    <li>全天候服务：7*24小时客户服务；资深技术在线协助。 </li>
+                    <li style = "list-style-type: none;margin-left:50%;text-align: center;margin-top: 20px"><a href="/product/gjduanxin.asp">详细了解</a></li>
+                  </ul>
+                </dt>
+                <dd><img src="imgs/dxt.jpg"></dd>
+              </dl>
+            </div>
+            <div class="ynr">
+              <dl>
+                <dt>
+                  <div class="bt">视频彩信 <span>多媒体呈现，三网可发</span></div>
+                  <ul>
+                    <li>多媒体呈现：用户免流，支持超大容量内容，约30秒视频/10张高清图/百万字。</li>
+                    <li>用户画像精准：城市、性别等多标签筛选，配合自动化营销策略，实现精准化发送。</li>
+                    <li>营销转化更高：内容吸引点击，实现更高转化；三网覆盖、终端适配、不易拦截。</li>
+                    <li>效果实时监控：UV、PV、点击率等数据；高意向客户点击数据一键导出。</li>
+                    <li style = "list-style-type: none;margin-left:50%;text-align: center;margin-top: 20px"><a href="/product/spcx.asp">详细了解</a></li>
+                  </ul>
+                </dt>
+                <dd><img src="imgs/dxt.jpg"></dd>
+              </dl>
+            </div>
+            <div class="ynr">
+              <dl>
+                <dt>
+                  <div class="bt">5G短信 <span>RCS富媒体短信，新一代短信技术</span></div>
+                  <ul>
+                    <li>传播内容生动：视频内容传播，新式新颖印象深刻，是最高效最生动的传播宣传手段。</li>
+                    <li>多场景投放：适用于商业，党政宣传媒体广告等多种业务场景。</li>
+                    <li>无门槛发送：无需APP在线创作，批量发送通过短信发送，到达率高。</li>
+                    <li>适配所有终端：适配市面上所有手机型号无需调整网络，三网可达。</li>
+                    <li style = "list-style-type: none;margin-left:50%;text-align: center;margin-top: 20px"><a href="/product/5gduanxin.asp">详细了解</a></li>
+                  </ul>
+                </dt>
+                <dd><img src="imgs/dxt.jpg"></dd>
+              </dl>
+            </div>
+          </div>
+          <script type="text/javascript">jQuery(".qih1").slide({delayTime:0 });</script> 
+        </div>
+        <div class="qhbox qih1">
+          <div class="hd hd2">
+            <ul class="lia">
+              <li class="on"><a href="/product/yuyinyzm.asp">语音验证码</a></li>
+              <li><a href="/product/yuyintz.asp">语音通知</a></li>
+              <li><a href="/product/ffxt.asp">语音呼叫中心</a> </li>
+              <li><a href="/product/yznai.asp">云智能AI</a> </li>
+              <li><a href="/product/zdwh.asp">自动外呼</a> </li>
+            </ul>
+          </div>
+          <div class="bd bd2">
+            <div class="ynr">
+              <dl>
+                <dt>
+                  <div class="bt">语音验证码 <span>防刷单，防屏蔽</span></div>
+                  <ul>
+                    <li>安全保障：产品深度研发，独家语言识别技术，军用级安全标准，确保用户信息安全。</li>
+                    <li>覆盖偏远：解决偏远、通讯不发达地区用户不能正常接收短信的困扰，减少偏远地区客户流失。</li>
+                    <li>杜绝刷单：有效杜绝机器刷单、虚假验证、批量注册的现象，减少平台运营成本。</li>
+                    <li>无拦截：手机固话均可接收，手机软件无法拦截，不受运营商短信管制影响。</li>
+                    <li>集成API接口：对接各种第三方操作系统，让您的产品插上通信的翅膀。</li>
+                    <li>高成功率：解决长期以来短信验证码不稳定、经常收不到的问题。 </li>
+                    <li style = "list-style-type: none;margin-left:50%;text-align: center;margin-top: 20px"><a href="/product/yuyinyzm.asp">详细了解</a></li>
+                  </ul>
+                </dt>
+                <dd><img src="imgs/dxt.jpg"></dd>
+              </dl>
+            </div>
+            <div class="ynr">
+              <dl>
+                <dt>
+                  <div class="bt">语音通知 <span>24小时AI监控，预警提示</span></div>
+                  <ul>
+                    <li>三网合一：支持移动，联通，电信三大运营商一点接入全网送达。</li>
+                    <li>独立端口：一客一签短信端口。</li>
+                    <li>高效API：高效把关，速度更快，数据更安全。</li>
+                    <li>优势通道：API调用简单，轻松接入。</li>
+                    <li>自定义发送模式：可指定时刻或定时循环发送，发送时机任您掌握。</li>
+                    <li>AI监控：24小时AI实时监控，出现异常，预警提示。 </li>
+                    <li style = "list-style-type: none;margin-left:50%;text-align: center;margin-top: 20px"><a href="/product/yuyintz.asp">详细了解</a></li>
+                  </ul>
+                </dt>
+                <dd><img src="imgs/dxt.jpg"></dd>
+              </dl>
+            </div>
+            <div class="ynr">
+              <dl>
+                <dt>
+                  <div class="bt">语音呼叫中心 <span>语音客服，一键回报，即时回复</span></div>
+                  <ul>
+                    <li>即时性：不受发送速度限制，瞬间直达。 </li>
+                    <li>沟通性：一键回拨，与目标群体直接互动，提升效果。 </li>
+                    <li>生动性：自定义内容表现形式，表现丰富，声情并茂。 </li>
+                    <li>经济性：按需付费，只为接听用户直付费，好用更省钱。 </li>
+                    <li>互动性：客户接听后免费回复咨询，直享受免费通话服务，增加客户参与互动的积极性。 </li>
+                    <li>可量化性：系统生成使用效果评估报表，投放效果尽在掌握。 </li>
+                    <li style = "list-style-type: none;margin-left:50%;text-align: center;margin-top: 20px"><a href="/product/ffxt.asp">详细了解</a></li>
+                  </ul>
+                </dt>
+                <dd><img src="imgs/dxt.jpg"></dd>
+              </dl>
+            </div>
+            <div class="ynr">
+              <dl>
+                <dt>
+                  <div class="bt">云智能AI <span>三网合一，AI智能客服</span></div>
+                  <ul>
+                    <li>三网合一：支持移动，联通，电信三大运营商一点接入全网送达。 </li>
+                    <li>独立端口：一客一签短信端口。 </li>
+                    <li>高效API：高效把关，速度更快，数据更安全。 </li>
+                    <li>优势通道：API调用简单，轻松接入。 </li>
+                    <li>自定义发送模式：可指定时刻或定时循环发送，发送时机任您掌握。 </li>
+                    <li>AI监控：24小时AI实时监控，出现异常，预警提示。 </li>
+                    <li style = "list-style-type: none;margin-left:50%;text-align: center;margin-top: 20px"><a href="/product/yznai.asp">详细了解</a></li>
+                  </ul>
+                </dt>
+                <dd><img src="imgs/dxt.jpg"></dd>
+              </dl>
+            </div>
+            <div class="ynr">
+              <dl>
+                <dt>
+                  <div class="bt">自动外呼 <span>自动播报，批量外呼</span></div>
+                  <ul>
+                    <li>即时性：不受发送速度限制，瞬间直达。 </li>
+                    <li>沟通性：一键回拨，与目标群体直接互动，提升效果。 </li>
+                    <li>生动性：自定义内容表现形式，表现丰富，声情并茂。 </li>
+                    <li>经济性：按需付费，只为接听用户直付费，好用更省钱。 </li>
+                    <li>互动性：客户接听后免费回复咨询，直享受免费通话服务，增加客户参与互动的积极性。 </li>
+                    <li>可量化性：系统生成使用效果评估报表，投放效果尽在掌握。 </li>
+                    <li style = "list-style-type: none;margin-left:50%;text-align: center;margin-top: 20px"><a href="/product/zdwh.asp">详细了解</a></li>
+                  </ul>
+                </dt>
+                <dd><img src="imgs/dxt.jpg"></dd>
+              </dl>
+            </div>
+          </div>
+          <script type="text/javascript">jQuery(".qih1").slide({delayTime:0 });</script> 
+        </div>
+        <div class="qhbox qih1">
+          <div class="hd hd2">
+            <ul class="lia">
+              <li class="on"><a href="/product/jxtweb.asp">吉信通Web版</a> </li>
+              <li><a href="/product/jxt.asp">吉信通PC版</a></li>
+              <li><a href="/product/yypt.asp">短信运营平台</a></li>
+              <li><a href="/product/khd.asp">CMPP/SGIP/SMGP</a>  </li>
+              <li><a href="/product/400.asp">400电话</a> </li>
+              <li><a href="/product/crm.asp">Yes'CRM</a></li>
+            </ul>
+          </div>
+          <div class="bd bd2">
+           <div class="ynr">
+              <dl>
+                <dt>
+                  <div class="bt">短信服务 <span>到达率99.99%</span></div>
+                  <ul>
+                    <li>支持短/彩信定时发送。</li>
+                    <li>WEB页面形式登录，方便灵活。</li>
+                    <li>三网调配，全网覆盖。</li>
+                    <li>支持短信上下行。</li>
+                    <li>满足个性化短信发送。 </li>
+                    <li style = "list-style-type: none;margin-left:50%;text-align: center;margin-top: 20px"><a href="/product/jxtweb.asp">详细了解</a></li>
+                  </ul>
+                </dt>
+                <dd><img src="imgs/dxt.jpg"></dd>
+              </dl>
+            </div>
+<div class="ynr">
+              <dl>
+                <dt>
+                  <div class="bt">短信服务 <span>到达率99.99%</span></div>
+                  <ul>
+                    <li>单发：将短信息发给一个手机。 </li>
+                    <li>多条发：将短信息发给一个手机。 </li>
+                    <li>定时发：在指定时刻发送定制短信息。 </li>
+                    <li>散发：对不同的人群可以发送不同内容的短信息。 </li>
+                    <li style = "list-style-type: none;margin-left:50%;text-align: center;margin-top: 20px"><a href="/product/jxt.asp">详细了解</a></li>
+                  </ul>
+                </dt>
+                <dd><img src="imgs/dxt.jpg"></dd>
+              </dl>
+            </div>
+<div class="ynr">
+              <dl>
+                <dt>
+                  <div class="bt">短信服务 <span>到达率99.99%</span></div>
+                  <ul>
+                    <li>快速稳定：独有事件继承，超线程，技术保证即时发送无堵塞。</li>
+                    <li>轻松运营：灵活的管理权限分配，用户充值回收、短信运营。</li>
+                    <li>灵活智能：智能切换官网、失败重发自定义成功率，两种计费模式。</li>
+                    <li>无极账户结构：采用传销金字塔形用户结构，代理商、终端用户合二为一。</li>
+                    <li>超强接口：提供二次开发接口，状态报告、回复自动推送。</li>
+                    <li>发送统计：针对某网管、某用户、自动统计（曲线图）。</li>
+                    <li>方便扩展：可以随时添加、切换新的短信网关、轻松应对突发事件。</li>
+                    <li>号池轮换：支持号池管理，随机轮换器发程序。</li>
+                    <li>灵活智能：充值回收日志一目了然，实时记录接口是否存在攻击。 </li>
+                    <li style = "list-style-type: none;margin-left:50%;text-align: center;margin-top: 20px"><a href="/product/yypt.asp">详细了解</a></li>
+                  </ul>
+                </dt>
+                <dd><img src="imgs/dxt.jpg"></dd>
+              </dl>
+            </div>
+<div class="ynr">
+              <dl>
+                <dt>
+                  <div class="bt">短信服务 <span>到达率99.99%</span></div>
+                  <ul>
+                    <li>快速稳定：独有事件继承，超线程，技术保证即时发送无堵塞。</li>
+                    <li>轻松运营：灵活的管理权限分配，用户充值回收、短信运营。</li>
+                    <li>灵活智能：智能切换官网、失败重发自定义成功率，两种计费模式。</li>
+                    <li>无极账户结构：采用传销金字塔形用户结构，代理商、终端用户合二为一。</li>
+                    <li>超强接口：提供二次开发接口，状态报告、回复自动推送。</li>
+                    <li>发送统计：针对某网管、某用户、自动统计（曲线图）。</li>
+                    <li>方便扩展：可以随时添加、切换新的短信网关、轻松应对突发事件。</li>
+                    <li>号池轮换：支持号池管理，随机轮换器发程序。</li>
+                    <li>灵活智能：充值回收日志一目了然，实时记录接口是否存在攻击。 </li>
+                    <li style = "list-style-type: none;margin-left:50%;text-align: center;margin-top: 20px"><a href="/product/khd.asp">详细了解</a></li>
+                  </ul>
+                </dt>
+                <dd><img src="imgs/dxt.jpg"></dd>
+              </dl>
+            </div>
+<div class="ynr">
+              <dl>
+                <dt>
+                  <div class="bt">短信服务 <span>到达率99.99%</span></div>
+                  <ul>
+                    <li>增加广告回报：400号码易记，记住号码等于记住公司，增加来电机会。 </li>
+                    <li>解决来电占线：多客户同时拨打400号码，实现同时接听，避免占线。 </li>
+                    <li>规范客户服务：像银行、电信公司一样接听电话，规模大且正规。 </li>
+                    <li>搬家不用换号：企业搬迁或员工离职，无需更换400号码，客户不流失。 </li>
+                    <li style = "list-style-type: none;margin-left:50%;text-align: center;margin-top: 20px"><a href="/product/400.asp">详细了解</a></li>
+                  </ul>
+                </dt>
+                <dd><img src="imgs/dxt.jpg"></dd>
+              </dl>
+            </div>
+ <div class="ynr">
+              <dl>
+                <dt>
+                  <div class="bt">短信服务 <span>到达率99.99%</span></div>
+                  <ul>
+                    <li>无需硬件、价格便宜、即开即用、无需等待。 </li>
+                    <li>多用户网络版，无需安装，随时随地办公。 </li>
+                    <li>32位MD5口令加密，确保数据安全。 </li>
+                    <li>使用简单便捷，易上手，操控性强。 </li>
+                    <li>用户权限设置灵活、客户分配方便。 </li>
+                    <li>新增在线发短信、发彩信、发传真功能。 </li>
+                    <li>曲线图：客户统计、订单统计、回访统计让您的 管理一目了然。 </li>
+                    <li>数据随时导出有备无患。 </li>
+                    <li style = "list-style-type: none;margin-left:50%;text-align: center;margin-top: 20px"><a href="/product/crm.asp">详细了解</a></li>
+                  </ul>
+                </dt>
+                <dd><img src="imgs/dxt.jpg"></dd>
+              </dl>
+            </div>
+          </div>
+          <script type="text/javascript">jQuery(".qih1").slide({delayTime:0 });</script> 
+        </div>
+      </div>
+      <script type="text/javascript">jQuery(".cpbox").slide({delayTime:0 });</script> 
+    </div>
+  </div>
+</div>
+<div class="a9">
+  <div class="wrap">
+    <div class="sytxt">
+      <div class="tit"><span>解决方案</span>
+        <p>深耕行业20年，累计为200000+用户提供专业化服务，助力我们的客户腾飞</p>
+      </div>
+      <div class="box">
+        <ul class="f4-ul clearfix" id="actF4">
+          <li>
+            <div class="g-tac">
+              <p class="f4-in"> <img src="imgs/gla.png" alt="" /></p>
+              <p class="s-fs20 g-mt8">金融保险</p>
+              <ul class="f4-sul">
+                <li>为金融保险客户提供短信系统、云语音消息、流量统付等一系列企业通信解决方案，全面助力金融保险行业信息化水平和服务水平的提升。</li>
+              </ul>
+            </div>
+            <div class="f4-h">
+              <p class="f4-in f4-h-hd "> <img src="imgs/glb.png" alt="" />金融保险</p>
+              <p class="f4-h-bd"> 为金融保险客户提供短信系统、云语音消息、流量统付等一系列企业通信解决方案，全面助力金融保险行业信息化水平和服务水平的提升。 </p>
+              <a target="_blank" href="javascript:" onClick="openWin('http://p.qiao.baidu.com/cps/chat?siteId=15966125&userId=31497271&siteToken=c2b609e9276dff6521848a6331e0ce81')"class="f4-h-lnk"><img src="imgs/lxkf.jpg"></a> </div>
+          </li>
+          <li>
+            <div class="g-tac">
+              <p class="f4-in"> <img src="imgs/yya.png" alt="" /> </p>
+              <p class="s-fs20 g-mt8">互联网</p>
+              <ul class="f4-sul">
+                <li>网站或应用调用API或嵌入SDK，快速实现短信/语音消息、网络通话、网页回呼、验证码发送等通信能力。</li>
+              </ul>
+            </div>
+            <div class="f4-h">
+              <p class="f4-in f4-h-hd "> <img src="imgs/yyb.png" alt="" /> 互联网 </p>
+              <p class="f4-h-bd"> 网站或应用调用API或嵌入SDK，快速实现短信/语音消息、网络通话、网页回呼、验证码发送等通信能力。</p>
+              <a target="_blank" href="javascript:" onClick="openWin('http://p.qiao.baidu.com/cps/chat?siteId=15966125&userId=31497271&siteToken=c2b609e9276dff6521848a6331e0ce81')"class="f4-h-lnk"><img src="imgs/lxkf.jpg"></a> </div>
+          </li>
+          <li>
+            <div class="g-tac">
+              <p class="f4-in"> <img src="imgs/wla.png" alt="" /> </p>
+              <p class="s-fs20 g-mt8">电商O2O</p>
+              <ul class="f4-sul">
+                <li>线上线下无缝对接，轻松实现语音验证码、号码卫士、IVR订单智能确认、电子券验证等功能的快速接入。</li>
+              </ul>
+            </div>
+            <div class="f4-h">
+              <p class="f4-in f4-h-hd "><img src="imgs/wlb.png" alt="" /> 电商O2O </p>
+              <p class="f4-h-bd"> 线上线下无缝对接，轻松实现语音验证码、号码卫士、IVR订单智能确认、电子券验证等功能的快速接入。 </p>
+              <a target="_blank" href="javascript:" onClick="openWin('http://p.qiao.baidu.com/cps/chat?siteId=15966125&userId=31497271&siteToken=c2b609e9276dff6521848a6331e0ce81')"class="f4-h-lnk"><img src="imgs/lxkf.jpg"></a> </div>
+          </li>
+          <li>
+            <div class="g-tac">
+              <p class="f4-in"> <img src="imgs/bba.png" alt="" /> </p>
+              <p class="s-fs20 g-mt8">物流快递</p>
+              <ul class="f4-sul">
+                <li>物流快递行业通信解决方案，帮您迅速提升运营效率，满意的性价比，优质的售后服务，开启快递物流移动信息化时代。</li>
+              </ul>
+            </div>
+            <div class="f4-h">
+              <p class="f4-in f4-h-hd "> <img src="imgs/bbb.png" alt="" />物流快递 </p>
+              <p class="f4-h-bd">物流快递行业通信解决方案，帮您迅速提升运营效率，满意的性价比，优质的售后服务，开启快递物流移动信息化时代。 </p>
+              <a target="_blank" href="javascript:"onclick="openWin('http://p.qiao.baidu.com/cps/chat?siteId=15966125&userId=31497271&siteToken=c2b609e9276dff6521848a6331e0ce81')" class="f4-h-lnk"><img src="imgs/lxkf.jpg"></a> </div>
+          </li>
+          <li>
+            <div class="g-tac">
+              <p class="f4-in"> <img src="imgs/jda.png" alt="" /> </p>
+              <p class="s-fs20 g-mt8">零售百货</p>
+              <ul class="f4-sul">
+                <li>企业通信方案 + 零售解决方案， 打造互联网+信息化解决方案，提升效率降低费用，提供创新体验，提升竞争力！</li>
+              </ul>
+            </div>
+            <div class="f4-h">
+              <p class="f4-in f4-h-hd "><img src="imgs/jdb.png" alt="" />零售百货 </p>
+              <p class="f4-h-bd">企业通信方案 + 零售解决方案， 打造互联网+信息化解决方案，提升效率降低费用，提供创新体验，提升竞争力！</p>
+              <a target="_blank" href="javascript:" onClick="openWin('http://p.qiao.baidu.com/cps/chat?siteId=15966125&userId=31497271&siteToken=c2b609e9276dff6521848a6331e0ce81')"class="f4-h-lnk"><img src="imgs/lxkf.jpg"></a> </div>
+          </li>
+        </ul>
+      </div>
+      <div class="gdgl"><a href="javascript:" onClick="openWin('http://p.qiao.baidu.com/cps/chat?siteId=15966125&userId=31497271&siteToken=c2b609e9276dff6521848a6331e0ce81')"><img src="imgs/gdgl.png"></a></div>
+    </div>
+    <script>
+    $('.f4-ul>li').hover(function () {
+        $('.f4-ul>li').removeClass('active');
+        $(this).addClass('active');
+    })
+		</script></div>
+</div>
+<div class="wrap">
+  <div class="kh">
+    <div class="tit"> <span>吉信通 深受全球50000+客户信赖</span>
+      <p>全国500强企业已服务30余家!</p>
+    </div>
+    <div class="shuzi">
+      <dl>
+        <dt>50000<i data-v-287f6afa="">+</i></dt>
+        <dd>50000+企业共同选择</dd>
+      </dl>
+      <dl>
+        <dt>20年 <i data-v-287f6afa="">+</i></dt>
+        <dd>20年行业资深经验</dd>
+      </dl>
+      <dl>
+        <dt>24H</dt>
+        <dd>7*24小时提供在线支持</dd>
+      </dl>
+      <dl>
+        <dt>1V1</dt>
+        <dd>提供1v1专属VIP服务</dd>
+      </dl>
+    </div>
+    <div class="hbt">
+      <ul>
+        <li><img src="imgs/h1.jpg"></li>
+        <li><img src="imgs/h2.jpg"></li>
+        <li><img src="imgs/h3.jpg"></li>
+        <li><img src="imgs/h4.jpg"></li>
+        <li><img src="imgs/h5.jpg"></li>
+        <li><img src="imgs/h6.jpg"></li>
+        <li><img src="imgs/h7.jpg"></li>
+        <li><img src="imgs/h8.jpg"></li>
+        <li><img src="imgs/hb9.jpg"></li>
+        <li><img src="imgs/hb10.jpg"></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="lcbg">
+  <div class="wrap">
+    <div class="lc">
+      <div class="tit">简单易用，快速接入</div>
+      <div class="box">
+        <dl>
+          <dt><img src="imgs/l1.png"</dt>
+          <dd>注册/认证 </dd>
+        </dl>
+        <dl>
+          <dt><img src="imgs/l2.png"</dt>
+          <dd>申请签名/模板 </dd>
+        </dl>
+        <dl>
+          <dt><img src="imgs/l3.png"</dt>
+          <dd>调用API/SDK</dd>
+        </dl>
+        <dl>
+          <dt><img src="imgs/l4.png"</dt>
+          <dd>实现发送</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="news">
+    <div class="tit"> <span>新闻中心</span>
+      <p>短信群发发送技巧,群发短信资讯、常见问题及短信接口api文档、各开发语言DEMO你都可以在这里找到</p>
+    </div>
+    <div class="box">
+      <dl>
+        <dt>
+          <p><img src="imgs/gst.jpg"></p>
+          <span><a href="News/gstt.asp">公司头条</a></span></dt>
+
+        <dd><a href="News/xw.asp?id=24186">SaaS系统对接短信API：验证码...</a><span>2026-03-09</span> </dd>
+    
+        <dd><a href="News/xw.asp?id=7141">喜大奔普！我们中正云的商标下来啦！！</a><span>2019-10-11</span> </dd>
+    
+        <dd><a href="News/xw.asp?id=7132">关于仿冒吉信通网站的严正声明！ </a><span>2019-07-31</span> </dd>
+    
+        <dd><a href="News/xw.asp?id=7130">吉信通：如何使用电脑简单的发送短信</a><span>2019-07-25</span> </dd>
+    
+        <div class="gdd"><a href="News/gstt.asp">查看更多</a></div>
+      </dl>
+      <dl>
+        <dt>
+          <p><img src="imgs/gst.jpg"></p>
+          <span><a href="News/gsdt.asp">公司动态</a></span></dt>
+	
+        <dd><a href="News/xw.asp?id=27186">关于2026年端午节放假的通知!!!</a><span>2026-06-15</span> </dd>
+    
+        <dd><a href="News/xw.asp?id=26187">拒当韭菜！企业初次挑选短信群发平台...</a><span>2026-04-28</span> </dd>
+    
+        <dd><a href="News/xw.asp?id=26186">关于2026年五一放假的通知!!</a><span>2026-04-28</span> </dd>
+    
+        <dd><a href="News/xw.asp?id=25186">关于2026年清明放假的通知！！</a><span>2026-03-30</span> </dd>
+    
+        <div class="gdd"><a href="News/gsdt.asp">查看更多</a></div>
+      </dl>
+      <dl>
+        <dt>
+          <p><img src="imgs/gst.jpg"></p>
+          <span><a href="News/mtbd.asp">媒体报道</a></span></dt>
+	
+        <dd><a href="News/xw.asp?id=7171">短信验证码平台在互联网时代的重要意义</a><span>2021-03-22</span> </dd>
+    
+        <dd><a href="News/xw.asp?id=7170">站在“十四五”新的历史起点上，新技...</a><span>2021-03-04</span> </dd>
+    
+        <dd><a href="News/xw.asp?id=7169">引爆市场的RCS视频短信到底是什么...</a><span>2021-01-28</span> </dd>
+    
+        <dd><a href="News/xw.asp?id=7167">详解短信平台的标准</a><span>2020-12-18</span> </dd>
+    
+        <div class="gdd"><a href="News/mtbd.asp">查看更多</a></div>
+      </dl>
+    </div>
+  </div>
+</div>
+<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+<script>LA.init({id:"3Gvpp5wDe4MzOpdF",ck:"3Gvpp5wDe4MzOpdF",autoTrack:true})</script>
+
+<style>
+
+
+.layout {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.footer1 {
+    background: #f3f3f3 ;
+}
+
+.server_list {
+    overflow: hidden;
+    /*border-bottom: 1px dashed #e2e2e2;
+    margin-bottom: 40px;*/
+    padding: 50px 0 50px;
+}
+
+    .server_list ul {
+        /*padding-left: 95px;*/
+    }
+
+    .server_list li {
+        float: left;
+        margin-right: 80px;
+        font-size: 16px;
+    }
+
+        .server_list li.last {
+            margin-right: 0;
+        }
+
+        .server_list li * {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .server_list li span {
+            color: #666;
+            /*font-weight: bold;*/
+        }
+
+        .server_list li img {
+            margin-right: 8px;
+        }
+
+
+</style>
+<div class="footer1">
+    <div class="server_list clearfix">
+        <div class="layout">
+            <ul>
+                <li>
+                    <img src="/imgs/1.png" width="163" height="97">
+                </li>
+                <li>
+                    <img src="/imgs/2.png" width="163" height="97">
+                </li>
+                <li>
+                    <img src="/imgs/3.png" width="163" height="97">
+                </li>
+                <li>
+                    <img src="/imgs/4.png" width="163" height="97">
+                </li>
+                <li class="last">
+                    <img src="/imgs/5b.png" width="163" height="97">
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="dbg">
+  <div class="wrap">
+    <p>现在注册，立享新人专属优惠礼包！</p>
+    <a href="/reg_real.asp">免费注册</a> </div>
+</div>
+<div class="footer"><a name="lx"></a>
+  <div class="wrap">
+    <div class="dibu">
+      <dl>
+        <dt>服务支持</dt>
+        <dd><a href="/server/cjwt.asp">常见问题</a></dd>
+        <dd><a href="/server/xz.asp">下载中心</a></dd>
+        <dd><a href="/server/chognzhi.asp">在线充值</a></dd>
+      </dl>
+      <dl>
+        <dt>产品服务</dt>
+        <dd><a href="/product/5gduanxin.asp">5G短信</a></dd>
+        <dd><a href="/product/gjduanxin.asp">国际短信</a></dd>
+        <dd><a href="/product/yanzhenma.asp">短信验证码</a></dd>
+        <dd><a href="/product/duanxin.asp">短信通知</a></dd>
+        <dd><a href="/product/yxduanxin.asp">营销短信</a></dd>
+        <dd><a href="/product/400.asp">400电话</a></dd>
+        <dd><a href="/product/spcx.asp">视频彩信</a></dd>
+      </dl>
+      <dl>
+        <dt>解决方案</dt>
+        <dd><a href="/solution/jrfa.asp">金融保险</a></dd>
+        <dd><a href="/solution/hlwfa.asp">互联网</a></dd>
+        <dd><a href="/solution/dsfa.asp">电商O2O</a></dd>
+        <dd><a href="/solution/wlfa.asp">物流快递</a></dd>
+        <dd><a href="/solution/lsfa.asp">零售百货</a></dd>
+        <dd><a href="/solution/jyfa.asp">教育培训</a></dd>
+      </dl>
+      <dl>
+        <dt>关于我们</dt>
+        <dd><a href="/about/about.asp">公司简介</a></dd>
+        <dd><a href="/about/contact.asp">联系我们</a></dd>
+        <dd><a href="/about/about.asp">牌照资质</a></dd>
+        <dd><a href="/about/fwtk.asp">服务条款</a></dd>
+      </dl>
+      <dl class="wx">
+        <dt><img src="/imgs/wx.jpg"></dt>
+        <dd>微信公众号</dd>
+      </dl>
+      <dl class="wx">
+        <dt><img src="/imgs/kfm.jpg"></dt>
+        <dd>线客服咨询</dd>
+      </dl>
+    </div>
+    <div class="bq">
+      <p>© Copyright 2016 吉信通   All Rights Reserved   运营支撑：深圳市世纪中正科技开发有限公司  <a href="http://beian.miit.gov.cn" target="_blank" style="color:#808080">粤ICP备05141584号-10 </a>
+            	<a href="/about/fwtk.asp" target="_blank" style="color:#808080">《服务条款》</a>
+                <script id="ebsgovicon" src="https://szcert.ebs.org.cn/govicons.js?id=e8540322-a791-43ae-afb5-fda3cf3e1fa2&width=35&height=50&type=1" type="text/javascript" charset="utf-8"></script>
+            </p>
+            
+    </div>
+    <div style="width:300px;margin:0 auto; padding:20px 0;">
+		 		<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030402000708" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="/imgs/beian.png" style="float:left;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤公网安备 44030402000708号</p></a>
+                <!--<a href="http://webscan.360.cn/index/checkwebsite/url/www.winic.org"><img border="0" src="http://webscan.360.cn/status/pai/hash/fa412c2be3ede01eda4d7bada90f4345"/></a>-->
+		 	</div>
+  </div>
+</div>
+<script>
+(function(b,a,e,h,f,c,g,s){b[h]=b[h]||function(){(b[h].c=b[h].c||[]).push(arguments)};
+b[h].s=!!c;g=a.getElementsByTagName(e)[0];s=a.createElement(e);
+s.src="//s.union.360.cn/"+f+".js";s.defer=!0;s.async=!0;g.parentNode.insertBefore(s,g)
+})(window,document,"script","_qha",552190,false);
+</script>
+
+
+</body>
+</html>

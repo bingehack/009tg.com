@@ -9,7 +9,7 @@
     <title>Content Creation - 009tg Navigation</title>
     <meta name="theme-color" content="#f9f9f9"/>
     <meta name="keywords" content="Content Creation,url directory,tool recommendation,内容制作"/>
-    <meta name="description" content="Quality tools and resources in the Content Creation category, 0 sites total. A selection of content creation and production tools, covering software development, script tools, m"/>
+    <meta name="description" content="Quality tools and resources in the Content Creation category, 58 sites total. A selection of content creation and production tools, covering software development, script tools, m"/>
     <link rel="shortcut icon" href="../../assets/images/favicon.png">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5301924424938934"
          crossorigin="anonymous"></script>
@@ -368,7 +368,7 @@
             <!-- 分类标题和描述 -->
             <div class="row">
                 <div class="col-md-12">
-                    <h2 style="margin-top: 0;">Content Creation <small style="color: #999;">(0 sites)</small></h2>
+                    <h2 style="margin-top: 0;">Content Creation <small style="color: #999;">(58 sites)</small></h2>
                     <div class="category-desc">
                         A selection of content creation and production tools, covering software development, script tools, media editing, image libraries and more. Help creators efficiently produce high-quality content.
                     </div>
@@ -376,6 +376,31 @@
             </div>
 
             <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><i class="fa-check-circle" style="margin-right: 8px;"></i>Features</h4>
+                        </div>
+                        <div class="panel-body" style="padding: 0;">
+                            <ul class="list-group" style="margin-bottom: 0;">
+                                <li class="list-group-item"><i class="fa-check-circle" style="color: #5cb85c; margin-right: 8px;"></i>Multi-format support</li><li class="list-group-item"><i class="fa-check-circle" style="color: #5cb85c; margin-right: 8px;"></i>Batch processing</li><li class="list-group-item"><i class="fa-check-circle" style="color: #5cb85c; margin-right: 8px;"></i>Template library</li><li class="list-group-item"><i class="fa-check-circle" style="color: #5cb85c; margin-right: 8px;"></i>Cloud collaboration</li><li class="list-group-item"><i class="fa-check-circle" style="color: #5cb85c; margin-right: 8px;"></i>High-quality output</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><i class="fa-users" style="margin-right: 8px;"></i>Use Cases</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p style="font-size: 14px; line-height: 1.8; margin: 0;">Suitable for various users who need these tools and resources, including individual developers, enterprise operators, freelancers and more. Can be used for daily work, learning and research, project development, business operations and more, helping users improve efficiency, reduce costs, and quickly achieve goals.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
 
             <!-- 子分类入口（一级分类页面） -->
@@ -452,6 +477,18 @@
 
             <!-- 站点列表（仅当有站点时显示） -->
             
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>All Sites</h3>
+                    <div class="category-content" id="sites-container"></div>
+                    <div class="pagination-controls">
+                        <button class="btn btn-default" id="prev-page" disabled><i class="fa fa-chevron-left"></i> Previous</button>
+                        <span class="page-info" id="page-info"></span>
+                        <button class="btn btn-default" id="next-page">Next <i class="fa fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -468,6 +505,89 @@
         </div>
     </div>
 
+    
+    <script>
+        var allSites = [{"name": "成都夏尔天逸", "url": "http://www.sheeren.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "星蓉腾", "url": "http://www.cdxrt.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "博特盈", "url": "http://www.ptwsh.cn", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "西亥域", "url": "http://www.seehind.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "固有色数码", "url": "http://www.pixeland.com.cn/sc/Frameset.html", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "光线时代", "url": "http://www.lightgx.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "杭州趣卓科技", "url": "http://www.artpro.cc", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "上海帝美", "url": "http://www.ae-people.com/#body", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "润界科技", "url": "http://www.wordtechintl.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "有言在前", "url": "https://www.hitranslator.com/#/home", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "译维翻译", "url": "http://www.transvan.cn", "description": "", "icon": "../../assets/favicons/9aa9e4b6e2d6604f1d4318b8128d0c58.png"}, {"name": "传神", "url": "http://www.transn.com/cn/#", "description": "", "icon": "../../assets/favicons/5b4b44c97f32d8b727b46bdcb2622d91.png"}, {"name": "天虹翻译", "url": "http://www.tianhongchina.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "南阳精准翻译", "url": "http://www.0377fy.com", "description": "", "icon": "../../assets/favicons/dfc71741937e43aa3f620c50bc034487.png"}, {"name": "易语堂", "url": "http://easytowntrans.com/html/index.html", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "EASY译锐", "url": "http://www.easytranslation.com.cn/index.html", "description": "", "icon": "../../assets/favicons/c45880d94b0034e26abc3e745c8caa95.png"}, {"name": "亚太译联", "url": "https://www.yataifanyi.com/guanyuwomen", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "彩蝶翻译", "url": "http://www.caidiefanyi.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "HQT", "url": "https://hqt.world/contact.html", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "语铭毅胜", "url": "http://www.7dtranslation.com/cn", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "LocalizeDirect", "url": "https://www.localizedirect.com/about", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "白泽言物", "url": "http://www.baizeyanwu.com", "description": "", "icon": "../../assets/favicons/699d09404b6e7bd886e0d6ccdb7fe652.png"}, {"name": "Yee Tran", "url": "https://www.yeetran.com/about", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "佳诚博译", "url": "http://www.powerstrans.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "CBG", "url": "https://www.cbg.com", "description": "", "icon": "../../assets/favicons/3e586f1d30f055f5a36591f18aa845b5.png"}, {"name": "Onesky", "url": "https://www.oneskyapp.com", "description": "", "icon": "../../assets/favicons/9547db8bdcb084056cca80cfc8e48991.png"}, {"name": "乐译通翻译", "url": "http://www.transtill.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "语富翻译", "url": "http://www.yufu.net/zh-CN", "description": "", "icon": "../../assets/favicons/e4c71d2db473e573e9958f846b44e020.png"}, {"name": "译信科技", "url": "http://www.truslation.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "尚语翻译", "url": "http://www.shine-yu.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "译满天下", "url": "http://www.1sj.tv", "description": "", "icon": "../../assets/favicons/0dba494810eabab4abeb28d4497acd86.png"}, {"name": "昊通翻译", "url": "http://www.kallostrans.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "Glodom", "url": "http://www.glodomtec.com", "description": "", "icon": "../../assets/favicons/ca35f8d333a6631b931544740a73e642.png"}, {"name": "Topyee", "url": "http://www.topyeelocalize.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "甲骨易", "url": "http://www.chinabesteasy.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "快译猫科技", "url": "https://www.qtransmall.com/#/index", "description": "", "icon": "../../assets/favicons/bf2baa24699d7ef25f6b19095b9e9621.png"}, {"name": "精艺达翻译", "url": "https://www.mts.cn", "description": "", "icon": "../../assets/favicons/f820d2ba070b4aef8709c8c1465cc3f1.png"}, {"name": "译圣翻译", "url": "http://www.eachwinner.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "旭科翻译", "url": "http://www.xktrans.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "翻易通", "url": "https://www.flitto.com.cn", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "Helloworld", "url": "https://www.helloworld88.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "九九译", "url": "https://www.99yee.cn", "description": "", "icon": "../../assets/favicons/5b45da25c19aa55bee3c3a5e68f4bc9a.png"}, {"name": "Gtcom", "url": "http://www.yeecloud.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "信实翻译", "url": "http://www.xinshify.com.cn", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "译创语言", "url": "http://www.anhuiyichuang.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "托贝斯", "url": "http://www.fanyi1688.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "维译纵横", "url": "http://www.vezhtrans.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "译讯科技", "url": "https://www.ctcfile.com", "description": "", "icon": "../../assets/favicons/32c4095ca77a08e8f3064242844ef25f.png"}, {"name": "爱译翻译", "url": "http://www.ayeetrans.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "译联翻译", "url": "http://www.translian.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "三玛新诺", "url": "http://www.3trans.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "佳域通", "url": "http://www.gvlocalization.com.cn", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "沟通翻译", "url": "http://www.go-tone.net", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "著文翻译", "url": "https://www.ecyti.com", "description": "", "icon": "../../assets/favicons/00d83166b1a73b8377d2d96b9b51b4e6.png"}, {"name": "SDL", "url": "http://www.sdl-china.cn", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "瑞科翻译", "url": "http://www.locatran.com", "description": "", "icon": "../../assets/favicons/cce25fd009d74907beaaa15ce81f6108.png"}, {"name": "Welocalize", "url": "http://www.welocalize.com", "description": "", "icon": "../../assets/favicons/f50466cb6d647df0784cd811886bd861.png"}, {"name": "博朗翻译", "url": "http://www.belinktrans.com", "description": "", "icon": "../../assets/images/logos/default.png"}];
+        var currentPage = 1;
+        var itemsPerPage = 32;
+        var totalPages = Math.ceil(allSites.length / itemsPerPage);
+
+        function calculateItemsPerPage() {
+            var windowWidth = $(window).width();
+            if (windowWidth > 1400) return 32; // 8列 × 4行
+            if (windowWidth > 1200) return 24; // 6列 × 4行
+            if (windowWidth > 992) return 16;  // 4列 × 4行
+            if (windowWidth > 768) return 12;  // 3列 × 4行
+            return 8; // 2列 × 4行
+        }
+
+        function renderPage(pageNum) {
+            var container = $('#sites-container');
+            container.empty();
+            container.css('opacity', '0.5');
+
+            setTimeout(function() {
+                var start = (pageNum - 1) * itemsPerPage;
+                var end = Math.min(start + itemsPerPage, allSites.length);
+
+                for (var i = start; i < end; i++) {
+                    var site = allSites[i];
+                    var siteHtml = '<div class="site-item">' +
+                        '<div class="xe-widget xe-conversations box2 label-info" onclick="window.open(\'' + '../../redirect.html?url=' + encodeURIComponent(site.url) + '&name=' + encodeURIComponent(site.name) + '\', \'_blank\')" data-toggle="tooltip" data-placement="bottom" title="' + site.url + '">' +
+                            '<div class="xe-comment-entry">' +
+                                '<a class="xe-user-img"><img src="' + site.icon + '" class="lozad img-circle" width="40" alt="' + site.name + '"></a>' +
+                                '<div class="xe-comment">' +
+                                    '<a href="#" class="xe-user-name overflowClip_1"><strong>' + site.name + '</strong></a>' +
+                                    '<p class="overflowClip_2">' + site.description + '</p>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
+                    container.append(siteHtml);
+                }
+
+                container.css('opacity', '1');
+                if (typeof lozad !== 'undefined') {
+                    var observer = lozad();
+                    observer.observe();
+                }
+            }, 200);
+
+            $('#page-info').text('Page ' + pageNum + ' / ' + totalPages + ' ');
+            $('#prev-page').prop('disabled', pageNum === 1);
+            $('#next-page').prop('disabled', pageNum === totalPages);
+        }
+
+        $(document).ready(function() {
+            itemsPerPage = calculateItemsPerPage();
+            totalPages = Math.ceil(allSites.length / itemsPerPage);
+            renderPage(1);
+
+            $('#prev-page').click(function() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderPage(currentPage);
+                }
+            });
+
+            $('#next-page').click(function() {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderPage(currentPage);
+                }
+            });
+
+            $(window).resize(function() {
+                var newItemsPerPage = calculateItemsPerPage();
+                if (newItemsPerPage !== itemsPerPage) {
+                    itemsPerPage = newItemsPerPage;
+                    totalPages = Math.ceil(allSites.length / itemsPerPage);
+                    currentPage = 1;
+                    renderPage(1);
+                }
+            });
+        });
+    </script>
     
 
     <!-- 深色模式主题切换（所有页面都加载） -->

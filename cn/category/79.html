@@ -9,7 +9,7 @@
     <title>引流工具 - 009tg下海导航</title>
     <meta name="theme-color" content="#f9f9f9"/>
     <meta name="keywords" content="引流工具,网址导航,工具推荐,引流工具"/>
-    <meta name="description" content="引流工具分类下的优质工具和资源，共0个站点。精选流量获取和转化工具，涵盖引流平台、群发工具、自动化营销等多个领域。帮助营销人员高效获取精准流量，提升转化率和客户留存，实现业务增长。"/>
+    <meta name="description" content="引流工具分类下的优质工具和资源，共41个站点。精选流量获取和转化工具，涵盖引流平台、群发工具、自动化营销等多个领域。帮助营销人员高效获取精准流量，提升转化率和客户留存，实现业务增长。"/>
     <link rel="shortcut icon" href="../../assets/images/favicon.png">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5301924424938934"
          crossorigin="anonymous"></script>
@@ -368,7 +368,7 @@
             <!-- 分类标题和描述 -->
             <div class="row">
                 <div class="col-md-12">
-                    <h2 style="margin-top: 0;">引流工具 <small style="color: #999;">(0 个站点)</small></h2>
+                    <h2 style="margin-top: 0;">引流工具 <small style="color: #999;">(41 个站点)</small></h2>
                     <div class="category-desc">
                         精选流量获取和转化工具，涵盖引流平台、群发工具、自动化营销等多个领域。帮助营销人员高效获取精准流量，提升转化率和客户留存，实现业务增长。
                     </div>
@@ -376,6 +376,31 @@
             </div>
 
             <!-- 功能特点和适用场景（仅子分类或有站点的一级分类显示） -->
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><i class="fa-check-circle" style="margin-right: 8px;"></i>功能特点</h4>
+                        </div>
+                        <div class="panel-body" style="padding: 0;">
+                            <ul class="list-group" style="margin-bottom: 0;">
+                                <li class="list-group-item"><i class="fa-check-circle" style="color: #5cb85c; margin-right: 8px;"></i>多渠道引流</li><li class="list-group-item"><i class="fa-check-circle" style="color: #5cb85c; margin-right: 8px;"></i>自动化群发</li><li class="list-group-item"><i class="fa-check-circle" style="color: #5cb85c; margin-right: 8px;"></i>精准用户触达</li><li class="list-group-item"><i class="fa-check-circle" style="color: #5cb85c; margin-right: 8px;"></i>转化漏斗分析</li><li class="list-group-item"><i class="fa-check-circle" style="color: #5cb85c; margin-right: 8px;"></i>客户管理系统</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><i class="fa-users" style="margin-right: 8px;"></i>适用场景</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p style="font-size: 14px; line-height: 1.8; margin: 0;">适用于需要该类工具和资源的各类用户，包括个人开发者、企业运营者、自由职业者等。可用于日常工作、学习研究、项目开发、业务运营等多种场景，帮助用户提升效率、降低成本、快速达成目标。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
 
             <!-- 子分类入口（一级分类页面） -->
@@ -436,6 +461,18 @@
 
             <!-- 站点列表（仅当有站点时显示） -->
             
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>全部站点</h3>
+                    <div class="category-content" id="sites-container"></div>
+                    <div class="pagination-controls">
+                        <button class="btn btn-default" id="prev-page" disabled><i class="fa fa-chevron-left"></i> 上一页</button>
+                        <span class="page-info" id="page-info"></span>
+                        <button class="btn btn-default" id="next-page">下一页 <i class="fa fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            
 
             <!-- 底部 -->
             <footer class="main-footer sticky footer-type-1">
@@ -452,6 +489,89 @@
         </div>
     </div>
 
+    
+    <script>
+        var allSites = [{"name": "快番茄", "url": "https://www.kuaifanqie.com", "description": "", "icon": "../../assets/favicons/9d257517252f5364dbb9c5844a1ac7d1.png"}, {"name": "Whatcms", "url": "https://whatcms.org", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "Domaininfofree", "url": "https://www.domaininfofree.com", "description": "", "icon": "../../assets/favicons/60dfd5450c229f713184aebd3ac950fb.png"}, {"name": "Longtailpro", "url": "https://www.ispionage.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "Soovle", "url": "https://soovle.com", "description": "", "icon": "../../assets/favicons/c81ca808ccca14c29ae928a2a014d3d7.png"}, {"name": "Similarsitesearch", "url": "https://www.similarsitesearch.com", "description": "", "icon": "../../assets/favicons/5e26b05acdbe81d1b9b91e4b8f640846.png"}, {"name": "谷歌网站测速", "url": "https://pagespeed.web.dev/?utm_source=psi&utm_medium=redirect", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "Asin站外推广", "url": "https://asin.xuggest.com", "description": "", "icon": "../../assets/favicons/8351145ef7ec761f0d91959b949ffe6a.png"}, {"name": "点金(IGG-TAPCASH)", "url": "http://www.tapcash.cn", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "橘子娱乐", "url": "http://www.happyjuzi.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "商至信", "url": "http://www.ytbaidu.cc", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "九藏喵窝", "url": "https://www.dnaxcat.net", "description": "", "icon": "../../assets/favicons/aa56559ac53f33449680fc0f195f0ae1.png"}, {"name": "寻麟文化", "url": "http://www.licorneteam.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "925G手游网", "url": "https://www.925g.com", "description": "", "icon": "../../assets/favicons/9da53dafbe88d3b33c80e85b031693f2.png"}, {"name": "时橙网络", "url": "http://www.shichengkjtech.com", "description": "", "icon": "../../assets/favicons/4dacf1ef448b0a7015c152b99addd7d2.png"}, {"name": "汇智众通", "url": "http://www.huizhizhongtong.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "易试互动", "url": "http://www.1shi.com.cn", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "地推吧", "url": "http://www.gzzhuomeng.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "易赢宝", "url": "http://www.ewinnerpay.com", "description": "", "icon": "../../assets/favicons/da31cda11c4a922a34eb541b71044e80.png"}, {"name": "Mobvoyage", "url": "https://www.mobvoyage.cn", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "Liftoff", "url": "https://liftoffchina.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "时空视点", "url": "https://www.evisionpr.com.cn", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "音动传媒", "url": "http://www.tellhowdm.cn", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "昊锋科技", "url": "http://www.yxsea.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "PALMAX", "url": "http://www.palmax.com.cn", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "巴掌互动", "url": "http://www.7723.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "Fle", "url": "http://www.fle.net.cn/cn", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "真巧文化传媒", "url": "http://morketing.com", "description": "", "icon": "../../assets/favicons/2b62706ac5acb8319f87964744836912.png"}, {"name": "AppLovin", "url": "https://cn.applovin.com", "description": "", "icon": "../../assets/favicons/7c5102a53861c5daf687466c5a8dd3ad.png"}, {"name": "话语科技", "url": "http://www.dreamfuture.cn", "description": "", "icon": "../../assets/favicons/68265d30e51d6e9966440b0083dc61a2.png"}, {"name": "乐汇科技", "url": "http://www.easyjoy.me", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "Mintegral", "url": "https://www.mintegral.com/cn", "description": "", "icon": "../../assets/favicons/eafeeb2a2a53854742bad642ef93daa8.png"}, {"name": "虹益网络", "url": "http://www.growingsdk.com/#", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "嗨量科技", "url": "http://www.halomobi.com", "description": "", "icon": "../../assets/favicons/5376aa5aaa974a19f3609e050264647f.png"}, {"name": "点开科技", "url": "http://www.alldk.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "古点网络", "url": "https://guuidea.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "艾德威朗科技", "url": "http://vlion.cn", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "WhatsCPI", "url": "http://www.whatscpi.com", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "Chartboost", "url": "https://www.chartboost.com/?lang=zh-hans", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "Kimia", "url": "http://kimiagroup.com/cn", "description": "", "icon": "../../assets/images/logos/default.png"}, {"name": "梦嘉控股集团", "url": "https://www.mokasz.com", "description": "", "icon": "../../assets/images/logos/default.png"}];
+        var currentPage = 1;
+        var itemsPerPage = 32;
+        var totalPages = Math.ceil(allSites.length / itemsPerPage);
+
+        function calculateItemsPerPage() {
+            var windowWidth = $(window).width();
+            if (windowWidth > 1400) return 32; // 8列 × 4行
+            if (windowWidth > 1200) return 24; // 6列 × 4行
+            if (windowWidth > 992) return 16;  // 4列 × 4行
+            if (windowWidth > 768) return 12;  // 3列 × 4行
+            return 8; // 2列 × 4行
+        }
+
+        function renderPage(pageNum) {
+            var container = $('#sites-container');
+            container.empty();
+            container.css('opacity', '0.5');
+
+            setTimeout(function() {
+                var start = (pageNum - 1) * itemsPerPage;
+                var end = Math.min(start + itemsPerPage, allSites.length);
+
+                for (var i = start; i < end; i++) {
+                    var site = allSites[i];
+                    var siteHtml = '<div class="site-item">' +
+                        '<div class="xe-widget xe-conversations box2 label-info" onclick="window.open(\'' + '../../redirect.html?url=' + encodeURIComponent(site.url) + '&name=' + encodeURIComponent(site.name) + '\', \'_blank\')" data-toggle="tooltip" data-placement="bottom" title="' + site.url + '">' +
+                            '<div class="xe-comment-entry">' +
+                                '<a class="xe-user-img"><img src="' + site.icon + '" class="lozad img-circle" width="40" alt="' + site.name + '"></a>' +
+                                '<div class="xe-comment">' +
+                                    '<a href="#" class="xe-user-name overflowClip_1"><strong>' + site.name + '</strong></a>' +
+                                    '<p class="overflowClip_2">' + site.description + '</p>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
+                    container.append(siteHtml);
+                }
+
+                container.css('opacity', '1');
+                if (typeof lozad !== 'undefined') {
+                    var observer = lozad();
+                    observer.observe();
+                }
+            }, 200);
+
+            $('#page-info').text('第 ' + pageNum + ' 页 / 共 ' + totalPages + ' 页');
+            $('#prev-page').prop('disabled', pageNum === 1);
+            $('#next-page').prop('disabled', pageNum === totalPages);
+        }
+
+        $(document).ready(function() {
+            itemsPerPage = calculateItemsPerPage();
+            totalPages = Math.ceil(allSites.length / itemsPerPage);
+            renderPage(1);
+
+            $('#prev-page').click(function() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderPage(currentPage);
+                }
+            });
+
+            $('#next-page').click(function() {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderPage(currentPage);
+                }
+            });
+
+            $(window).resize(function() {
+                var newItemsPerPage = calculateItemsPerPage();
+                if (newItemsPerPage !== itemsPerPage) {
+                    itemsPerPage = newItemsPerPage;
+                    totalPages = Math.ceil(allSites.length / itemsPerPage);
+                    currentPage = 1;
+                    renderPage(1);
+                }
+            });
+        });
+    </script>
     
 
     <!-- 深色模式主题切换（所有页面都加载） -->

@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta charset="utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" /><meta name="description" content="宏杉科技具备企业级存储产品和解决方案的研发、生产、销售和服务能力，作为用户数字化转型、业务创新的最佳合作伙伴，致力于帮助用户实现业务创新升级，以智能存储致胜新数据时代。" /><meta name="keywords" content="MacroSAN,宏杉,存储,存储设备，宏杉官网,macrosan,CloudSAN,宏杉科技-数智时代存储专家" /><title>
+	宏杉科技-404
+</title><link rel="icon" type="image/x-icon" href="/images/favicon.ico" /><link href="/styles/reset.css" rel="stylesheet" /><link href="/styles/header-footer.css" rel="stylesheet" /><link href="/styles/swiper.min.css" rel="stylesheet" /><link href="/styles/public.css" rel="stylesheet" /><link href="/styles/main.css" rel="stylesheet" />
+	<script type="text/javascript" src="/scripts/vendor.js"></script>
+</head>
+<body>
+    <!--header start-->
+    
+<header>
+    <div id="logo">
+        <a href="https://www.macrosan.com/">
+            <img src="/images/logo.png" /></a>
+    </div>
+    <div class="navi">
+        <ul>
+            <li class='nav-tab'><span>产品与解决方案</span><div class='second-menu'><div class='second-menu-box ms-container'><div class='second-menu-list'><dl><dt><a href='/Product/ProductType/MS/default.html'>MS系列</a></dt><dt><a href='/Product/ProductType/NAS/default.html'>NS系列</a></dt><dt><a href='/Product/ProductType/Description/default.html'>分布式</a></dt><dt><a href='/Product/ProductType/AI/default.html'>AI存储</a></dt><dt><a href='/Product/ProductType/Backups/default.html'>备份</a></dt><dt><a href='/Product/ProductType/Cloud/default.html'>宏杉云</a></dt></dl><dl><dt><a href='/Product/SolutionType/ServerSolution/default.html'>服务器虚拟化解决方案</a></dt><dt><a href='/Product/SolutionType/DatabackupSolution/default.html'>数据容灾解决方案</a></dt><dt><a href='/Product/SolutionType/BigdataSolution/default.html'>大数据解决方案</a></dt><dt><a href='/Product/SolutionType/OnestopSolution/default.html'>一站式灾备解决方案</a></dt></dl></div><div class='second-menu-product'><div class='s-menu-pro-content'><div class='s-menu-pro-text'><h3>推荐产品</h3><a href='/Product/ProductType/MS/Hybrid/MS9000G3/MS9000G3/default.html'><h4>MS9000G3</h4></a><p>国内首款基于第五代Intel至强可扩展处理器研发的高端紧耦合四控存储，提供99.99999%的可靠性。</p></div><div class='s-menu-pro-image'><a href='/Product/ProductType/MS/Hybrid/MS9000G3/MS9000G3/default.html'><img src='/upload/pictures/86/86cd4bb3-5552-434a-806c-614d268b22cb/420x130.png' alt=''></a></div></div></div></div></div></li><li class='nav-tab transverse'><span>行业解决方案</span><div class='second-menu'><div class='second-menu-box ms-container'><div class='second-menu-list second-menu-list4'><dl><dt><a href='/Industry/Finance/default.html'>金融</a></dt><dt><a href='/Industry/Government/default.html'>政府</a></dt></dl><dl><dt><a href='/Industry/Operator/default.html'>运营商</a></dt><dt><a href='/Industry/Medical/default.html'>医疗</a></dt></dl><dl><dt><a href='/Industry/Education/default.html'>教育</a></dt><dt><a href='/Industry/Traffic/default.html'>交通</a></dt></dl><dl><dt><a href='/Industry/Electric-energy/default.html'>电力能源</a></dt><dt><a href='/Industry/Enterprise/default.html'>企业</a></dt></dl></div></div></div></li><li class='nav-tab transverse'><span>服务支持</span><div class='second-menu'><div class='second-menu-box ms-container'><div class='second-menu-list second-menu-list3'><dl><dt><a href='/Technical/ServiceSupport/default.html'>技术支持</a></dt><dt><a href='/Technical/Training/default.html'>认证培训</a></dt><dt><a href='/Technical/Maintenance/default.html'>维保服务</a></dt><dt><a href='/Technical/Announcement/default.html'>服务公告</a></dt><dt><a href='/Technical/ServiceSystem/default.html'>服务体系</a></dt><dt><a href='/Technical/Guarantee/default.html'>保修期查询</a></dt></dl></div><div class='second-menu-product second-menu-product3'><div class='presale-item'><div class='presale-clause-list'><div class='presale-clause-item'><h5 class='icon-call'>客户服务热线</h5><p class='pc tel'><span><a>400-650-5527</a></span></p><p class='mb'><span><a href='tel:400-650-5527'>400-650-5527</a></span></p></div><div class='presale-clause-item'><h5 class='icon-form'>技术服务邮箱</h5><p><span><a href='mailto:service@macrosan.com'>service@macrosan.com</a></span></p></div></div></div></div></div></div></li><li class='nav-tab transverse'><span>合作伙伴</span><div class='second-menu'><div class='second-menu-box ms-container'><div class='second-menu-list second-menu-list4'><dl><dt><a href='/Partner/JoinIn/default.html'>加盟宏杉</a></dt><dt><a href='/Partner/Certification/default.html'>认证培训</a></dt></dl><dl><dt><a href='/Partner/MacroSAN/default.html'>MacroSAN+生态联盟</a></dt></dl></div></div></div></li><li class='nav-tab transverse'><span>关于宏杉</span><div class='second-menu'><div class='second-menu-box ms-container'><div class='second-menu-list second-menu-list4'><dl><dt><a href='/AboutUs/Company/default.html'>公司介绍</a></dt><dt><a href='/AboutUs/News/default.html'>公司动态</a></dt></dl><dl><dt><a href='/AboutUs/Cases/default.html'>成功案例</a></dt><dt><a href='/AboutUs/DocmentCenter/default.html'>资料中心</a></dt></dl><dl><dt><a href='/requirement.html'>如何购买</a></dt><dt><a href='/AboutUs/Contact/default.html'>联系我们</a></dt></dl><dl><dt><a href='/AboutUs/JoinUs/default.html'>宏杉招聘</a></dt></dl></div></div></div></li>
+        </ul>
+        <div class="userLoginM">
+            <a class="userName" href="javascript:;"></a>
+            <a class="userLogin" href="/login.html"><span>登录</span></a>
+            <span class="MisLogin"><a class="uItem" href="/cn/retrievepassword.html">修改密码</a></span>
+            <a class="userLoginOut" href="javascript:;"><span>退出登录</span></a>
+
+        </div>
+    </div>
+    <div class="utilities">
+        <div class="pcUser">
+            <a class="icon member uItem" href="/cn/login.html" title="个人中心"></a>
+            <div class="isLogin">
+                <a class="uItem" href="/cn/retrievepassword.html">修改密码</a>
+                |<a class="uItem logOut" href="javascript:;">退出登录</a>
+            </div>
+        </div>
+        <a class="icon search" href="javascript:;" title="搜索"></a>
+        <a class="icon language" href="javascript:;" title="中文/英文"></a>
+        <div class="mbUser">
+            <a class="icon menu" href="javascript:;" title="菜单"></a>
+        </div>
+    </div>
+</header>
+
+    <!--header end-->
+    <div class="ms-404">
+        <section class="ms-unify_pd">
+            <div class="ms-container">
+                <div class="img404">
+                    <img src="/images/404.png" alt="" />
+                </div>
+                <h3>您访问的页面错误或不存在！</h3>
+                <div class="btn404">
+                    <a href="/cn/index.html" class="btn ora">返回首页</a>
+                    <a class="btn ora return">返回上一页</a>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!--footer start-->
+    
+
+<footer>
+    <div class="ms-container">
+        <div class="footer-line-1">
+<div class="footer-navi">
+<dl>
+	<dt>关于宏杉</dt>
+	<dd>
+	<ul>
+		<li><a href="https://www.macrosan.com/AboutUs/Company/default.html">公司介绍</a></li>
+		<li><a href="https://www.macrosan.com/AboutUs/News/default.html">公司动态</a></li>
+		<li><a href="https://www.macrosan.com/AboutUs/JoinUs/default.html">加入我们</a></li>
+	</ul></dd>
+</dl>
+<dl>
+	<dt>资源中心</dt>
+	<dd>
+	<ul>
+		<li><a href="https://www.macrosan.com/AboutUs/DocmentCenter/default.html">资料中心</a></li>
+		<li><a href="https://www.macrosan.com/AboutUs/Cases/default.html">成功案例</a></li>
+	</ul></dd>
+</dl>
+<dl>
+	<dt>联系我们</dt>
+	<dd>
+	<ul>
+		<li><a href="https://www.macrosan.com/AboutUs/Contact/default.html?t=headquarters">公司总部</a></li>
+		<li><a href="https://www.macrosan.com/AboutUs/Contact/default.html?t=office">办事处</a></li>
+	</ul></dd>
+</dl>
+<dl>
+	<dt>如何购买</dt>
+	<dd>
+	<ul>
+		<li><a href="https://www.macrosan.com/AboutUs/Contact/default.html?t=contactMethod">售前咨询</a></li>
+		<li><a href="https://www.macrosan.com/requirement.html">如何购买</a></li>
+	</ul></dd>
+</dl></div>
+<div class="footer-line">&nbsp;</div>
+<div class="social">
+<h4>关注我们，了解宏杉</h4>
+<div class="footer-qrcodeDiv">
+<div class="footer-qrcode"><img src="/images/footer_qrcode3.png" />
+<p>公众号</p></div>
+<div class="footer-qrcode"><img src="/images/footer_qrcode4.png" />
+<p>视频号</p></div></div></div></div>
+<div class="footer-line-2">
+<div class="copyright">
+<p>&copy;版权所有 <script type="text/javascript">var d = new Date(); document.write(d.getFullYear())</script> 杭州宏杉科技股份有限公司 <a href="https://beian.miit.gov.cn/">浙ICP备10054605号</a></p>
+<p><img src="/images/fileIcon.png" /> <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010802002950">浙公网安备 33010802002950号</a></p></div>
+<div class="links">
+<p><a href="https://www.macrosan.com/Privacy/default.html">隐私政策</a> <a href="https://www.macrosan.com/Copyright/default.html">法律声明</a></p></div></div>
+        
+    </div>
+    <div class="ms-mask"></div>
+    <!-- 返回顶部 -->
+    <div class="ms-back-top">
+        <img src="/images/icon-back-top.png" alt="">
+    </div>
+    <!-- 视频弹层 -->
+    <section class="ms-video-wrap" id="ms-video-wrap">
+        <div class="ms-video-box">
+            <div id="ms-video-all"></div>
+            <div class="ms-close-video">
+                <img src="/images/produts/icon-view-close.png">
+            </div>
+        </div>
+    </section>
+    <!-- 联系我们 -->
+    <div class="contact-us"><a class="btn ora contact" href="javascript:;">联系我们</a>
+<div class="contact-us-wrap">
+<div class="contact-us-title">
+<h3>联系我们</h3><span class="close-contact-us">+</span></div>
+<div class="contact-us-text">
+<div class="contact-us-list">
+<div class="contcat-us-item">
+<h4>项目咨询</h4>
+<div class="contact-clause-list">
+<div class="contact-clause-item">
+<h5 class="icon-form">提交项目需求</h5>
+<p><a class="btn ora" href="/requirement.html">现在提交 &gt;</a></p></div>
+<div class="contact-clause-item green">
+<h5 class="icon-call">售前热线</h5>
+<p class="pc"><span><a>400-650-5527转1</a></span></p>
+<p class="mb"><span><a href="tel:4006505527">400-650-5527转1</a></span></p></div></div></div><!-- <div class="contcat-us-item">
+						<h4>在线咨询</h4>
+						<div class="contact-clause-list">
+							<div class="contact-clause-item">
+								<h5 class="icon-customer">智能客服</h5>
+								<p>
+									<a class="btn ora" href="javascript:;">立即咨询 ></a>
+								</p>
+							</div>
+						</div>
+					</div> -->
+<div class="contcat-us-item">
+<h4>售后支持</h4>
+<div class="contact-clause-list">
+<div class="contact-clause-item green">
+<h5 class="icon-call">售后热线</h5>
+<p class="pc"><span><a>400-650-5527</a></span></p>
+<p class="mb"><span><a href="tel:4006505527">400-650-5527</a></span></p></div>
+<div class="contact-clause-item  green">
+<h5 class="icon-service">售后邮箱</h5>
+<p><span><a href="mailto:service@macrosan.com">service@macrosan.com</a></span></p></div></div></div></div>
+<div class="contact-us-link"><!-- <a href="javascript:;">查找合作伙伴 ></a> --><a href="/AboutUs/Contact/default.html?t=office">联系办事处 &gt;</a> <a href="/AboutUs/Contact/default.html?t=headquarters">联系公司总部 &gt;</a> <a href="/AboutUs/Contact/default.html?t=contentusForm">网站意见反馈 &gt;</a></div></div></div></div>
+    
+</footer>
+<div class="header-search">
+    <div class="header-searchDiv">
+        <input type="text" name="" class="header-searchinput" placeholder="请输入关键字" style="">
+        <div class="header-searchbtn" style="">搜索</div>
+        <span class="header-searchClose">+</span>
+    </div>
+</div>
+
+
+    <!--footer end-->
+    <script type="text/javascript" src="/scripts/DynamicNumber.js"></script>
+    <script type="text/javascript" src="/scripts/header-footer.js"></script>
+
+    <script type="text/javascript" src="/scripts/public.js"></script>
+    <script type="text/javascript" src="/scripts/main.js"></script>
+    <script>
+        var Urls = window.sessionStorage.getItem("Urls");
+        $(document).on('click', '.return', function () {
+            if (Urls) {
+                window.location.href = Urls;
+            } else {
+                window.location.href = '/cn';
+            }
+        })
+
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,1660 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="来喜投屏是一款免费的电脑控制手机的软件. 可以将手机投屏到电脑,并用鼠标和键盘作为虚拟按键反向控制手机,可以手动也可用自动脚本控制,手机的一切功能均由电脑实现.可在电脑端看视频,文件传输,收发信息等.">
+    <meta name="keywords" content="来喜安卓手机群控系统,Android手机控制,安卓手机控制,安卓手机群控,安卓手机群控系统,电脑控制手机,手机自动群控系统,电脑控制安卓手机,电脑远程控制手机,电脑控制多台手机,免费软件,官网免费下载.">
+    <title>来喜 - 首页</title>
+    <link rel="stylesheet" type="text/css" href="static/css/index.css">
+    <link rel="stylesheet" type="text/css" href="static/css/index-md.css">
+    <link rel="stylesheet" type="text/css" href="static/css/index-sm.css">
+    <link data-n-head="ssr" rel="icon" type="image/x-icon" href="static/logo.ico">
+
+    <script src="./static/js/jquery.min.js"></script>
+    <script src="./static/js/store.js?v=2" defer></script>
+    <script src="./static/js/translate.js?v=2" defer></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        const language = "zh-CN";
+        $(document).ready(function () {
+
+            console.log(language, '%language')
+
+            handleInit(language)
+
+            window.syncNavLang && window.syncNavLang(language);
+
+            var saveImgUrl = ''
+
+            $(".logo a").append(window.logoSvg)
+
+            $(".li").click(function () {
+
+                const lang = $(this).data("lang");
+                setLanguage(lang);
+
+                addItemsWithSvg(bannerTxtValueMap[bannerTxtKeyMap[lang]], 'banner-items', 'item')
+
+                $('.lang-label').text($(this).text());
+
+                $(".li").removeClass("li-active");
+                $(this).addClass("li-active");
+
+                handleAboutLang(lang)
+
+                const newUrl = updateHrefWithSearchParams(window.location, {
+                    lang
+                });
+                window.location.href = newUrl;
+
+            });
+
+            function checkIsLaixiPromote() {
+                const queryParams = new URLSearchParams(window.location.search);
+
+                if (!queryParams.has('code')) return
+
+                // Step 1: 获取 UA 字符串并判断是否在微信浏览器中
+                const userAgent = navigator.userAgent;
+                const isWeChat = /MicroMessenger/i.test(userAgent);
+
+                // Step 2: 构建请求的 UA（追加 "WeChatBrowser" 信息，如果是在微信中打开的）
+                const customUserAgent = isWeChat ? `${userAgent} WeChatBrowser` : userAgent;
+                let baseUrl = 'https://lxapi.neibuapi.com/web/promoCall'
+                if (!['zh-TW', 'zh-CN'].includes(language)) baseUrl =
+                    'https://lxglobal.neibuapi.com/web/promoCall'
+
+                fetch(`${baseUrl}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'User-Agent': customUserAgent,
+                        },
+                        body: JSON.stringify({
+                            code: queryParams.get('code')
+                        }),
+                    })
+                    .then(response => response.json())
+                .then(data => {
+                        // console.log('Response:', data);
+                })
+                .catch(error => {
+                        // console.log('Error:', error);
+                    })
+                    .finally(() => {
+                        // const newUrl = updateHrefWithSearchParams(window.location, {
+                        //     lang
+                        // });
+                        // window.location.href = newUrl;
+                });
+
+            }
+
+
+            function handleInit(language) {
+                checkIsLaixiPromote()
+
+                setLanguage(language);
+
+                handleAboutLang(language)
+
+                addItemsWithSvg(bannerTxtValueMap[bannerTxtKeyMap[language]], 'banner-items', 'item')
+
+                updateLanguageSelection(language)
+            }
+
+
+            function handleAboutLang(lang) {
+                let serviceQrcode = ''
+
+                if (lang === 'zh-CN' || lang === 'zh-TW') {
+                    serviceQrcode = 'https://laixiui.cnhack.com/images/newWaterfalls/service-qrcode.png';
+                } else {
+                    serviceQrcode = 'https://laixiui.cnhack.com/images/newWaterfalls/telegram.png';
+                }
+
+                $('.service-qrcode-img').attr('src', serviceQrcode)
+
+                handleChangeMobileLangIcon(lang)
+
+                handleImg(lang)
+
+                updateImages(lang)
+
+                handleShowIntegrated(lang)
+
+                window.setSEO(lang, 'home')
+
+
+            }
+
+            $('.btn-down').on('click', function (event) {
+                event.preventDefault();
+                const newUrl = updateHrefWithSearchParams(this);
+                window.location.href = newUrl;
+            });
+
+
+            function updateHrefWithSearchParams(element, newParams = {}) {
+                const currentSearchParams = new URLSearchParams(window.location.search);
+
+                let href = $(element).attr('href');
+
+                const newHref = new URL(href, window.location.origin);
+
+                currentSearchParams.forEach((value, key) => {
+                    newHref.searchParams.set(key, value);
+                });
+
+                for (const key in newParams) {
+                    newHref.searchParams.set(key, newParams[key]);
+                }
+
+                $(element).attr('href', newHref.toString());
+                return newHref.toString();
+            }
+
+
+            function handleShowIntegrated(lang) {
+                $(".integrated").show();
+                $('.zh-txt').show()
+                if (lang !== 'zh-CN' && lang !== 'zh-TW') {
+                    $(".integrated").hide();
+                    $('.zh-txt').hide()
+                }
+            }
+
+            $(".lang-text").hover(
+                function () {
+                    $(".language-ul").show();
+                },
+                function () {
+                    $(".language-ul").hide();
+                }
+            );
+
+            function handleImg(lang) {
+                const {
+                    saveManagerImgSrc
+                } = window.updateImageSources(lang);
+
+                saveImgUrl = saveManagerImgSrc
+
+                const {
+                    bannerImgSrc
+                } = window.getMainBannerImg(lang)
+
+                $('.save-img').attr('href', saveManagerImgSrc);
+                $('.manager-img').attr('src', saveManagerImgSrc);
+                $('.main-banner').attr('src', bannerImgSrc);
+            }
+
+
+            $('.link-menu').each(function () {
+                let href = $(this).attr('href');
+                const newHref = updateHrefWithSearchParams(this);
+                $(this).attr('href', newHref.toString());
+            });
+
+            $(window).scroll(function () {
+                var distanceToBottom = $(document).height() - ($(window).height() + $(window)
+                    .scrollTop());
+                if (distanceToBottom <= 32) {
+                    $('.invite-box').removeClass('invite-box-float');
+                } else {
+                    $('.invite-box').addClass('invite-box-float');
+                }
+
+                var distanceToTop = $(window).scrollTop()
+                if (distanceToTop < 1114) {
+                    $('.lightspot-menu').removeClass('lightspot-menu-fixed');
+                } else {
+                    $('.lightspot-menu').show();
+                    $('.lightspot-menu').addClass('lightspot-menu-fixed');
+                }
+
+                if (distanceToTop > 4700) {
+                    $('.lightspot-menu').removeClass('lightspot-menu-fixed');
+                }
+
+                var scrollDistance = $(window).scrollTop();
+                $('.lightspot-menu .menu-li a').each(function () {
+                    if ($(this.hash).offset().top - 100 <= scrollDistance) {
+                        $('.lightspot-menu .menu-li').removeClass('menu-li-active');
+                        $(this).parent().addClass('menu-li-active');
+                    }
+                });
+            });
+
+            function handleMenuScroll() {
+                let menu = document.querySelector('.lightspot-menu');
+
+                if (!menu) return;
+
+                const menuOffsetTop = menu.offsetTop;
+
+                function scrollHandler() {
+                    const scrollY = window.scrollY || window.pageYOffset;
+
+                    if (scrollY >= menuOffsetTop) {
+                        menu.classList.add('fixed');
+                    } else {
+                        menu.classList.remove('fixed');
+                    }
+                }
+
+                scrollHandler();
+
+                window.addEventListener('scroll', scrollHandler);
+            }
+
+            handleMenuScroll();
+
+            $('.language').mousemove(function (e) {
+                $('.language-ul').show();
+            });
+
+            $('.language').mouseout(function (e) {
+                $('.language-ul').hide();
+            });
+
+            function addItemsWithSvg(str, containerId, liClass) {
+                $('#' + containerId).empty();
+
+                var items = str.split(',');
+
+                var svgIcon = window.honePageBannerSvg;
+
+                $.each(items, function (index, value) {
+                    $('#' + containerId).append('<li class="' + liClass + '">' + svgIcon + value +
+                        '</li>');
+                });
+            }
+
+            $('.sm-download').on('click', function () {
+                window.location.href = 'down';
+            });
+
+            $(".sm-lang-icon").on('click', function () {
+                $('.lang-menu').toggle();
+                $('.sm-menu').hide();
+            });
+            $(".menu-icon").on('click', function () {
+                $('.lang-menu').hide();
+                $('.lightspot-menu').hide();
+                $('.sm-menu').toggle();
+            });
+
+
+            $(".current-page").on('click', function () {
+                $('.lang-menu').hide();
+                $('.sm-navigation').toggle();
+                $('.lightspot-menu').toggle();
+            });
+
+            $('.levitate-service-content').hide()
+            $('.lightspot-menu').hide();
+            $('.sm-navigation').hide();
+
+            $('.levitate-service-closed').on('click', function () {
+                $('.levitate-service-content').hide()
+                window.enableScroll()
+            });
+
+            $('.levitate-service').on('click', function () {
+                $('.levitate-service-content').show()
+                window.disableScroll()
+            });
+
+
+            function updateLanguageSelection(language) {
+                $(".li").removeClass("li-active");
+
+                const labelText = $('.li[data-lang="' + language + '"]').text().trim().split(' ')[0];
+                $('.lang-label').text(labelText);
+
+                $('.li[data-lang="' + language + '"]').addClass("li-active");
+            }
+
+            function handleChangeMobileLangIcon(lang) {
+
+                const mobileLangIcon = window.iconMap[lang]
+
+                $('.sm-lang-icon').html(mobileLangIcon);
+                $('.lang-menu').hide();
+            }
+
+
+            // 更新瀑布流图片
+            function updateImages(lang) {
+                const imageElements = document.querySelectorAll('.item-img img');
+                imageElements.forEach((img, index) => {
+                    const key = index + 1;
+                    const {
+                        imgSrc
+                    } = window.getGifOrPic(lang, key);
+                    img.src = imgSrc;
+                });
+            }
+
+
+            function updateLinksWithLang() {
+                const queryParams = new URLSearchParams(window.location.search);
+                const lang = queryParams.get('lang');
+
+                if (lang) {
+                    $('.link-menu').each(function () {
+                        let href = $(this).attr('href');
+                        const newHref = new URL(href, window.location.origin);
+                        newHref.searchParams.set('lang', lang);
+                        $(this).attr('href', newHref.toString());
+                    });
+                }
+            }
+
+            handleLoadScript()
+
+            function handleLoadScript() {
+                window.loadScript('//at.alicdn.com/t/c/font_4260133_o9yejdu3m7.js');
+                window.loadScript('https://www.googletagmanager.com/gtag/js?id=AW-11479622774');
+                window.loadScript('https://analytics.us.umami.is/script.js', {
+                    defer: false,
+                    async: true,
+                    attributes: {
+                    'data-website-id': '6b20e259-b811-4263-8682-f3310bb48554'
+                    }
+                });
+                window.loadScript('https://cloud.umami.is/script.js', {
+                    defer: true,
+                    async: false,
+                    attributes: {
+                    'data-website-id': '6b20e259-b811-4263-8682-f3310bb48554'
+                    }
+                });
+            }
+
+        });
+    </script>
+</head>
+
+<body>
+
+    <div class="md-head">
+        <div class="logo">
+            <a href="/" class="link-menu"></a>
+        </div>
+        <div class="menu">
+            <div class="item item-active">
+                <a data-i18n="mainFeatures" href="/" class="link-menu"></a>
+                <div class="decorate"></div>
+            </div>
+            <div class="item">
+                <a data-i18n="downloadNow" href="down" class="link-menu"></a>
+                <div class="decorate"></div>
+            </div>
+            <div class="item">
+                <a data-i18n="contactUs" href="contactUs" class="link-menu"></a>
+                <div class="decorate"></div>
+            </div>
+            <div class="item">
+                <a data-i18n="helpCenter" href="https://docs.laixi.app/" target="_blank"></a>
+                <div class="decorate"></div>
+            </div>
+        </div>
+        <div class="function">
+            <div class="language">
+                <div class="lang-icon">
+                    <svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>语言icon</title>
+                        <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="20240612来喜官网5.0" transform="translate(-1490.000000, -20.000000)">
+                                <g id="导航" transform="translate(176.000000, 20.000000)">
+                                    <g id="语言icon" transform="translate(1314.000000, 0.000000)">
+                                        <circle id="椭圆形" fill="#D8D8D8" opacity="0" cx="20" cy="20" r="20"></circle>
+                                        <path
+                                            d="M12.9851429,23.2142857 L16.9965714,23.2142857 C16.8866429,22.4068571 16.8165714,21.5428571 16.7940714,20.6428571 L12.3114286,20.6428571 C12.3866429,21.5537857 12.62,22.4203571 12.9845,23.2142857 L12.9851429,23.2142857 Z M13.7334286,24.5 C14.8195495,26.0123912 16.4156426,27.0813238 18.2276429,27.5098571 C17.813,26.741 17.4658571,25.7098571 17.2157857,24.5 L13.7334286,24.5 Z M27.0148571,23.2142857 C27.3793571,22.4203571 27.6127143,21.5537857 27.6879286,20.6428571 L23.2059286,20.6428571 C23.1856832,21.5030674 23.1180809,22.36151 23.0034286,23.2142857 L27.0148571,23.2142857 Z M26.2665714,24.5 L22.7835714,24.5 C22.5335,25.7092143 22.1863571,26.741 21.7717143,27.5098571 C23.5837145,27.0813238 25.1798076,26.0123912 26.2659286,24.5 L26.2665714,24.5 Z M18.2462857,23.2142857 L21.7537143,23.2142857 C21.845,22.4203571 21.9028571,21.5537857 21.9221429,20.6428571 L18.0778571,20.6428571 C18.0971429,21.5537857 18.155,22.4203571 18.2462857,23.2142857 L18.2462857,23.2142857 Z M18.4333571,24.5 C18.7837143,26.4465714 19.3545714,27.7142857 20,27.7142857 C20.6454286,27.7142857 21.2162857,26.4465714 21.5666429,24.5 L18.4333571,24.5 L18.4333571,24.5 Z M12.3120714,19.3571429 L16.7940714,19.3571429 C16.8165714,18.4571429 16.8866429,17.5931429 16.9965714,16.7857143 L12.9851429,16.7857143 C12.6127775,17.5971301 12.3849977,18.4673489 12.3120714,19.3571429 L12.3120714,19.3571429 Z M27.6879286,19.3571429 C27.6150023,18.4673489 27.3872225,17.5971301 27.0148571,16.7857143 L23.0034286,16.7857143 C23.1133571,17.5931429 23.1834286,18.4571429 23.2059286,19.3571429 L27.6879286,19.3571429 L27.6879286,19.3571429 Z M18.0778571,19.3571429 L21.9221429,19.3571429 C21.9058905,18.4978526 21.8496869,17.6397829 21.7537143,16.7857143 L18.2462857,16.7857143 C18.1503131,17.6397829 18.0941095,18.4978526 18.0778571,19.3571429 L18.0778571,19.3571429 Z M13.7334286,15.5 L17.2157857,15.5 C17.4658571,14.2907857 17.813,13.259 18.2276429,12.4901429 C16.4158778,12.9188178 14.8200337,13.9877365 13.7340714,15.5 L13.7334286,15.5 Z M26.2665714,15.5 C25.1804505,13.9876088 23.5843574,12.9186762 21.7723571,12.4901429 C22.187,13.259 22.5341429,14.2901429 22.7842143,15.5 L26.2665714,15.5 Z M18.4333571,15.5 L21.5666429,15.5 C21.2162857,13.5534286 20.6454286,12.2857143 20,12.2857143 C19.3545714,12.2857143 18.7837143,13.5534286 18.4333571,15.5 Z M20,29 C15.0294286,29 11,24.9705714 11,20 C11,15.0294286 15.0294286,11 20,11 C24.9705714,11 29,15.0294286 29,20 C29,24.9705714 24.9705714,29 20,29 Z"
+                                            id="形状" fill="#000000" fill-rule="nonzero"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div class="lang-text">
+                    <span class="lang-label" data-i18n="zh-CN">简中</span>
+                    <div class="language-ul">
+                        <div class="li li-active" data-lang="zh-CN">简中</div>
+                        <div class="li" data-lang="zh-TW">繁中</div>
+                        <div class="li" data-lang="en-US">English</div>
+                        <div class="li" data-lang="ko">Korean</div>
+                        <div class="li" data-lang="vi-VN">Vietnamese</div>
+                    </div>
+                </div>
+            </div>
+            <a href="down" class="btn-down">
+                <div class="btn-down-icon">
+                    <svg width="24px" height="24px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>编组 3</title>
+                        <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="20240612来喜官网5.0" transform="translate(-866.000000, -356.000000)" fill="#FFFFFF"
+                                fill-rule="nonzero">
+                                <g id="编组-11" transform="translate(448.000000, 152.000000)">
+                                    <g id="bt下载" transform="translate(344.000000, 186.000000)">
+                                        <g id="编组-3" transform="translate(74.000000, 18.000000)">
+                                            <path
+                                                d="M19.1703381,21.8318142 L19.1703381,9.58115848 L5.78947368,11.686845 L5.78947368,21.8318142 L19.1703381,21.8318142 Z M20.8421053,23.506945 L20.8421053,36.0199706 L35.8947368,38.3913908 L35.8947368,23.506945 L20.8421053,23.506945 Z M20.8421053,21.8318142 L35.8947368,21.8318142 L35.8947368,6.94736842 L20.8421053,9.31542488 L20.8421053,21.8318142 Z M19.1703381,23.506945 L5.78947368,23.506945 L5.78947368,33.6519141 L19.1703381,35.7576007 L19.1703381,23.506945 Z"
+                                                id="形状"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <p data-i18n="freeDownload"></p>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <div class="sm-head">
+        <div class="current-page">
+            <div class="decorate"></div>
+            <span data-i18n="mainFeatures"></span>
+        </div>
+
+        <div class="operate">
+
+            <div class="sm-download">
+                <svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <title>下载icon</title>
+                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="官网5.0移动端-语言选择" transform="translate(-339.000000, -36.000000)">
+                            <g id="bt下载" transform="translate(327.000000, 24.000000)">
+                                <g id="下载icon" transform="translate(12.000000, 12.000000)">
+                                    <rect id="Frame" fill="#FFFFFF" x="0" y="0" width="32" height="32" rx="16"></rect>
+                                    <path
+                                        d="M23.0907784,23.5867541 C23.7571779,23.5867541 24.2974014,24.1269776 24.2974014,24.793377 C24.2974014,25.4181265 23.8225956,25.9319792 23.2141486,25.9937703 L23.0907784,26 L8.20662297,26 C7.54022351,26 7,25.4597765 7,24.793377 C7,24.1686275 7.47480582,23.6547749 8.08325278,23.5929837 L8.20662297,23.5867541 L23.0907784,23.5867541 Z M15.6487007,4 C16.3151002,4 16.8553237,4.54022351 16.8553237,5.20662297 L16.8553237,5.20662297 L16.8545268,18.7448948 L22.7129497,12.8962616 C23.157494,12.5155635 23.8045777,12.5121384 24.2515938,12.8704351 L24.2515938,12.8704351 L24.3510166,12.959533 C24.7967058,13.4052222 24.8242705,14.1188599 24.3927997,14.6208151 L24.3927997,14.6208151 L15.648564,23.3650507 L6.93578513,14.6423035 C6.5914437,14.347417 6.44145348,13.8844014 6.54748163,13.4436213 C6.65350977,13.0028412 6.9976613,12.6586897 7.43844137,12.5526616 C7.87922143,12.4466334 8.34223707,12.5966236 8.61563511,12.91775 L8.61563511,12.91775 L14.4418501,18.7438703 L14.4420777,5.20662297 C14.4420777,4.58187347 14.9168835,4.06802081 15.5253305,4.00622966 L15.5253305,4.00622966 Z"
+                                        id="形状结合" fill="#177FF9" fill-rule="nonzero"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+
+                <span data-i18n="downloadNow"></span>
+            </div>
+
+            <div class="sm-lang-icon">
+                <svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <title>简体中文icon</title>
+                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="官网5.0移动端-语言选择" transform="translate(-534.000000, -131.000000)">
+                            <g id="中英文切换下拉" transform="translate(502.000000, 95.000000)">
+                                <g id="简体中文icon" transform="translate(32.000000, 36.000000)">
+                                    <circle id="椭圆形" fill="#DD2910" cx="20" cy="20" r="20"></circle>
+                                    <path
+                                        d="M30.4474405,23.5819852 L30.4474405,12.8984123 L21.6887076,12.8984123 L21.6887076,8.67967055 L19.0248847,8.67967055 L19.0248847,12.8998967 L10.2903705,12.8998967 L10.2903705,23.5819852 L19.0248066,23.5819852 L19.0248066,31.8229066 L21.6886295,31.8229066 L21.6886295,23.5819852 L30.4474405,23.5819852 Z M21.6876139,21.0653495 L21.6876139,15.4164543 L27.8580706,15.4164543 L27.8580706,21.0653495 L21.6876139,21.0653495 Z M12.8787248,21.0653495 L12.8787248,15.4164543 L19.0248847,15.4164543 L19.0248847,21.0653495 L12.878803,21.0653495 L12.8787248,21.0653495 Z"
+                                        id="形状" fill="#FFFFFF" fill-rule="nonzero"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="menu-icon">
+                <svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <title>汉堡菜单icon</title>
+                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="官网5.0移动端-更多功能" transform="translate(-662.000000, -24.000000)" fill="#000000">
+                            <g id="汉堡菜单icon" transform="translate(662.000000, 24.000000)">
+                                <circle id="椭圆形" opacity="0" cx="28" cy="28" r="28"></circle>
+                                <path
+                                    d="M46,41 C46.8284271,41 47.5,41.6715729 47.5,42.5 C47.5,43.2796961 46.9051119,43.9204487 46.14446,43.9931334 L46,44 L10,44 C9.17157288,44 8.5,43.3284271 8.5,42.5 C8.5,41.7203039 9.09488808,41.0795513 9.85553999,41.0068666 L10,41 L46,41 Z M46,27 C46.8284271,27 47.5,27.6715729 47.5,28.5 C47.5,29.2796961 46.9051119,29.9204487 46.14446,29.9931334 L46,30 L10,30 C9.17157288,30 8.5,29.3284271 8.5,28.5 C8.5,27.7203039 9.09488808,27.0795513 9.85553999,27.0068666 L10,27 L46,27 Z M46,13 C46.8284271,13 47.5,13.6715729 47.5,14.5 C47.5,15.2796961 46.9051119,15.9204487 46.14446,15.9931334 L46,16 L10,16 C9.17157288,16 8.5,15.3284271 8.5,14.5 C8.5,13.7203039 9.09488808,13.0795513 9.85553999,13.0068666 L10,13 L46,13 Z"
+                                    id="形状结合" fill-rule="nonzero"></path>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+
+
+            <div class="lang-menu">
+                <div class="li li-active" data-lang="zh-CN">
+                    <svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>简体中文icon</title>
+                        <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="官网5.0移动端-语言选择" transform="translate(-534.000000, -131.000000)">
+                                <g id="中英文切换下拉" transform="translate(502.000000, 95.000000)">
+                                    <g id="简体中文icon" transform="translate(32.000000, 36.000000)">
+                                        <circle id="椭圆形" fill="#DD2910" cx="20" cy="20" r="20"></circle>
+                                        <path
+                                            d="M30.4474405,23.5819852 L30.4474405,12.8984123 L21.6887076,12.8984123 L21.6887076,8.67967055 L19.0248847,8.67967055 L19.0248847,12.8998967 L10.2903705,12.8998967 L10.2903705,23.5819852 L19.0248066,23.5819852 L19.0248066,31.8229066 L21.6886295,31.8229066 L21.6886295,23.5819852 L30.4474405,23.5819852 Z M21.6876139,21.0653495 L21.6876139,15.4164543 L27.8580706,15.4164543 L27.8580706,21.0653495 L21.6876139,21.0653495 Z M12.8787248,21.0653495 L12.8787248,15.4164543 L19.0248847,15.4164543 L19.0248847,21.0653495 L12.878803,21.0653495 L12.8787248,21.0653495 Z"
+                                            id="形状" fill="#FFFFFF" fill-rule="nonzero"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                    <span>简中</span>
+                </div>
+                <div class="li" data-lang="zh-TW">
+                    <svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>繁体中文icon</title>
+                        <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="官网5.0移动端-语言选择" transform="translate(-534.000000, -211.000000)">
+                                <g id="中英文切换下拉" transform="translate(502.000000, 95.000000)">
+                                    <g id="繁体中文icon" transform="translate(32.000000, 116.000000)">
+                                        <circle id="椭圆形" fill="#DD2910" cx="20" cy="20" r="20"></circle>
+                                        <path
+                                            d="M11.005,10.545 L20.205,10.545 L20.205,8.75750001 L12.25,8.75750001 C12.4925,8.35250001 12.735,7.92 12.98,7.48749999 L10.87,7.02749997 C9.7875,8.97499999 8.48750001,10.49 7,11.6 L8.325,13.195 C8.67749998,12.925 9.03000001,12.6 9.37999999,12.275 C9.32749998,13.0325 9.24499999,13.79 9.1375,14.575 L7.18749997,14.575 L7.18749997,16.2 L8.94749998,16.2 C8.78499997,17.2 8.62249996,18.2 8.43499999,19.23 L16.25,19.23 L16.0625,19.8525 C14.8175,20.5025 13.6275,21.015 12.4625,21.4475 C12.085,21.61 11.4625,21.6925 10.5425,21.6925 L10.92,23.4775 L17.09,23.26 C14.9525,24.1275 12.9225,24.775 10.975,25.1825 C10.3,25.1825 9.62249998,25.155 8.91749997,25.1275 L9.45999997,27.2375 L12.255,27.1475 C14.1775,27.08 16.215,26.995 18.36,26.8875 L18.36,29.4025 C18.36,29.89 18.09,30.16 17.5775,30.16 C16.8725,30.16 16.115,30.105 15.33,30.025 L15.7625,32.08 L18.3075,32.08 C19.9575,32.08 20.795,31.35 20.795,29.9425 L20.795,26.7775 L27.4525,26.4 C28.155,26.995 28.8025,27.5625 29.3725,28.13 L31.4025,26.725 C30.0225,25.48 28.0475,24.0725 25.4775,22.45 L23.665,23.5575 C24.315,23.9925 24.935,24.4525 25.53,24.8825 C22.1225,25.155 18.63,25.345 15.0875,25.5075 C18.6546137,24.5203196 22.0882246,23.102381 25.3125,21.285 L23.5025,20.095 C22.3375,20.745 21.2025,21.3675 20.065,21.935 L16.37,22.0525 C15.7475,22.0725 15.1225,22.0975 14.4925,22.125 C16.0216661,21.6050158 17.5134801,20.98106 18.9575,20.2575 L18.1725,19.6625 L18.3075,19.23 L19.715,19.23 L19.715,17.905 L18.605,17.905 L18.8475,16.2 L20.525,16.2 L20.525,14.575 L18.9825,14.575 C19.0375,13.71 19.065,12.71 19.065,11.625 L10.0575,11.625 L11.005,10.545 Z M11.005,15.9825 L12.52,15.9825 L11.9525,16.875 C12.8975,17.12 13.845,17.47 14.82,17.9025 L10.68,17.9025 L11.005,15.9825 L11.005,15.9825 Z M14.9,17.9025 L15.495,16.985 C14.5632098,16.5863547 13.6051181,16.2522337 12.6275,15.985 L16.9025,15.985 C16.8225,16.6325 16.7125,17.255 16.5775,17.9025 L14.9025,17.9025 L14.9,17.9025 Z M17.01,14.8475 L15.2,14.8475 L15.715,14.035 C14.8435365,13.5817714 13.9279202,13.2190433 12.9825,12.9525 L12.3575,13.845 C13.1975,14.0875 14.0375,14.4125 14.9025,14.845 L11.14,14.845 C11.22,14.225 11.3025,13.575 11.355,12.925 L17.0925,12.925 L17.01,14.8475 L17.01,14.8475 Z M23.4775,11.4925 L27.8075,11.4925 C27.3899364,12.8006254 26.7188333,14.0137079 25.8325,15.0625 C24.7418437,14.1049721 23.9284912,12.8719919 23.4775,11.4925 L23.4775,11.4925 Z M24.315,16.4675 C23.125,17.335 21.665,17.985 19.88,18.4175 L21.07,20.285 C22.9625,19.77 24.6125,18.985 25.9675,17.9025 C27.2675,18.8775 28.8875,19.7175 30.8375,20.42 L32,18.39 C30.2675,17.8225 28.78,17.145 27.535,16.335 C28.6175,15.035 29.43,13.44 29.9175,11.4925 L31.485,11.4925 L31.485,9.46249998 L24.4525,9.46249998 C24.75,8.83749999 25.0475,8.19 25.3175,7.48749999 L23.125,7 C22.0975,9.5425 20.88,11.545 19.475,13.0075 L20.825,14.63 C21.2575,14.1975 21.6925,13.71 22.125,13.17 C22.6125,14.36 23.3425,15.4425 24.315,16.47 L24.315,16.4675 Z M23.8825,27.3725 L22.6125,29.2675 C25.155,29.89 27.645,30.755 30.025,31.8375 L31.325,29.8075 C28.9191466,28.7824129 26.4290017,27.9676998 23.8825,27.3725 L23.8825,27.3725 Z M14.3875,27.4825 L15.7375,29.025 C13.7375,30.16 11.275,31.1075 8.37999997,31.865 L7.43249997,29.8625 C10.2475,29.2675 12.5725,28.455 14.3875,27.4825 Z"
+                                            id="形状" fill="#FFFFFF" fill-rule="nonzero"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                    <span>繁中</span>
+                </div>
+                <div class="li" data-lang="en-US">
+                    <svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>英文icon</title>
+                        <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="官网5.0移动端-语言选择" transform="translate(-534.000000, -291.000000)">
+                                <g id="中英文切换下拉" transform="translate(502.000000, 95.000000)">
+                                    <g id="英文icon" transform="translate(32.000000, 196.000000)">
+                                        <circle id="蒙版" fill="#051E6B" cx="20" cy="20" r="20"></circle>
+                                        <path
+                                            d="M19.8654152,12.0422134 L19.8654152,14.812084 L11.0281182,14.812084 L11.0281182,18.4442144 L19.2503823,18.4442144 L19.2503823,21.2042778 L11.0281182,21.2042778 L11.0281182,25.6598622 L20.1787525,25.6598622 L20.1787525,28.4199961 L7.72188403,28.4199961 L7.72188403,12.0422134 L19.8654152,12.0422134 Z M28.3339183,16.2879655 C29.0275502,16.2879655 29.6595164,16.412355 30.2327805,16.6609222 C30.8065384,16.9114651 31.2410902,17.2287535 31.5343897,17.6163153 C31.8290297,18.003877 32.0348403,18.4428738 32.1489993,18.9348578 C32.2635815,19.4268418 32.3222837,20.1302809 32.3222837,21.0471505 L32.3222837,28.4200667 L29.183478,28.4200667 L29.183478,22.3651992 C29.183478,21.0839805 29.1160268,20.2547409 28.9831002,19.8786797 C28.8646903,19.5237879 28.6350978,19.2164852 28.3283445,19.0023089 C28.0065298,18.787239 27.6257274,18.6777232 27.2388253,18.6889716 C26.6952652,18.6889716 26.2091373,18.8375616 25.7759261,19.1365762 C25.3439849,19.4339679 25.0465931,19.8285852 24.8879842,20.3204987 C24.7276114,20.8124827 24.6476014,21.7220851 24.6476014,23.0464132 L24.6476014,28.4200667 L21.5087956,28.4200667 L21.5087956,16.5555122 L24.4245046,16.5555122 L24.4245046,18.2985171 C25.4599077,16.9572557 26.7625046,16.2879655 28.3339183,16.2879655 Z"
+                                            id="形状结合" fill="#FFFFFF" fill-rule="nonzero"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                    <span>English</span>
+                </div>
+                <div class="li" data-lang="ko">
+                    <svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>韩文icon</title>
+                        <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="官网5.0移动端-语言选择" transform="translate(-534.000000, -371.000000)">
+                                <g id="中英文切换下拉" transform="translate(502.000000, 95.000000)">
+                                    <g id="韩文icon" transform="translate(32.000000, 276.000000)">
+                                        <circle id="蒙版" fill="#2D3892" cx="20" cy="20" r="20"></circle>
+                                        <path
+                                            d="M8,10.8382656 L14.0894701,10.8382656 L14.0894701,8 L17.3902271,8 L17.3902271,10.8382656 L23.4741913,10.8382656 L23.4741913,13.4700619 L8,13.4700619 L8,10.8382656 Z M28.845148,32.806607 L11.9146593,32.806607 L11.9146593,25.3434274 L15.2126635,25.3434274 L15.2126635,30.0454233 L28.845148,30.0454233 L28.845148,32.806607 Z M32,19.4246387 L28.1403992,19.4246387 L28.1403992,26.6923607 L24.880936,26.6923607 L24.880936,8.35237437 L28.1403992,8.35237437 L28.1403992,16.6662078 L32,16.6662078 L32,19.4246387 L32,19.4246387 Z M20.5698554,15.9697178 C19.3805919,15.0722643 17.79766,14.6235375 15.8017894,14.6235375 C13.8059188,14.6235375 12.2229869,15.0777701 11.044735,15.9779766 C9.86648313,16.8781831 9.26359254,18.0233999 9.26359254,19.3998624 C9.26359254,20.7763249 9.85822435,21.946318 11.0474879,22.8492774 C12.2367515,23.7522368 13.8004129,24.1954577 15.7687543,24.1954577 C17.7710484,24.1954577 19.3668272,23.743978 20.5560908,22.8410186 C21.7453544,21.9380592 22.3409039,20.7910071 22.3427391,19.3998624 C22.3556562,18.0335879 21.6919078,16.7493789 20.5698554,15.9697178 L20.5698554,15.9697178 Z M18.2463868,20.9497591 C17.6958018,21.3324157 16.8699243,21.5196146 15.8017894,21.5196146 C14.7336545,21.5196146 13.943565,21.3269098 13.39298,20.9415003 C12.8685786,20.6046781 12.5560588,20.020266 12.5671025,19.3971094 C12.5580394,18.7783776 12.880358,18.2019838 13.4122505,17.8857536 C13.9628355,17.5113558 14.7721955,17.3351686 15.7990365,17.3351686 C16.8258775,17.3351686 17.6572608,17.5196146 18.2216105,17.8857536 C18.7609959,18.1996655 19.0877036,18.781416 19.0750172,19.4053682 C19.0870811,20.0294557 18.7730589,20.6147262 18.2463868,20.9497591 L18.2463868,20.9497591 Z"
+                                            id="形状" fill="#FFFFFF" fill-rule="nonzero"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                    <span>Korean</span>
+                </div>
+                <div class="li" data-lang="vi-VN">
+                    <svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>越南icon</title>
+                        <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="官网5.0移动端-语言选择" transform="translate(-500.000000, -371.000000)" fill-rule="nonzero">
+                                <g id="中英文切换下拉" transform="translate(468.000000, 95.000000)">
+                                    <g id="越南icon" transform="translate(32.000000, 276.000000)">
+                                        <path
+                                            d="M0,20 C0,31.045695 8.954305,40 20,40 C31.045695,40 40,31.045695 40,20 C40,8.954305 31.045695,0 20,0 C8.954305,0 0,8.954305 0,20 Z"
+                                            id="路径" fill="#F42F4C"></path>
+                                        <polygon id="路径" fill="#FFE62E"
+                                            points="20 24.6424219 26.5997656 29.335 24.0903516 21.7064062 30.6649609 16.838125 22.5344922 16.838125 20 9.335 17.5407812 16.838125 9.335 16.838125 15.8845703 21.7064063 13.4002344 29.335">
+                                        </polygon>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                    <span>Vietnamese</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sm-navigation"></div>
+
+    <div class="sm-menu">
+        <div class="item item-active">
+            <a data-i18n="mainFeatures" href="/" class="link-menu"></a>
+            <div class="decorate"></div>
+        </div>
+        <div class="item">
+            <a data-i18n="downloadNow" href="down" class="link-menu"></a>
+            <div class="decorate"></div>
+        </div>
+        <div class="item">
+            <a data-i18n="contactUs" href="contactUs" class="link-menu"></a>
+            <div class="decorate"></div>
+        </div>
+        <div class="item">
+            <a data-i18n="helpCenter" href="https://docs.laixi.app/" target="_blank"></a>
+            <div class="decorate"></div>
+        </div>
+    </div>
+
+
+    <div class="ad-show">
+        <div class="ad-info">
+            <div data-i18n="professionalSystem" class="ad-title"></div>
+            <div data-i18n="appDescription" class="ad-describe">
+            </div>
+            <div class="operate">
+                <a href="down" class="btn-down">
+                    <div class="btn-down-icon">
+                        <svg width="24px" height="24px" viewBox="0 0 44 44" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>编组 3</title>
+                            <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="20240612来喜官网5.0" transform="translate(-866.000000, -356.000000)" fill="#FFFFFF"
+                                    fill-rule="nonzero">
+                                    <g id="编组-11" transform="translate(448.000000, 152.000000)">
+                                        <g id="bt下载" transform="translate(344.000000, 186.000000)">
+                                            <g id="编组-3" transform="translate(74.000000, 18.000000)">
+                                                <path
+                                                    d="M19.1703381,21.8318142 L19.1703381,9.58115848 L5.78947368,11.686845 L5.78947368,21.8318142 L19.1703381,21.8318142 Z M20.8421053,23.506945 L20.8421053,36.0199706 L35.8947368,38.3913908 L35.8947368,23.506945 L20.8421053,23.506945 Z M20.8421053,21.8318142 L35.8947368,21.8318142 L35.8947368,6.94736842 L20.8421053,9.31542488 L20.8421053,21.8318142 Z M19.1703381,23.506945 L5.78947368,23.506945 L5.78947368,33.6519141 L19.1703381,35.7576007 L19.1703381,23.506945 Z"
+                                                    id="形状"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <p data-i18n="freeDownload"></p>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="ad-banner">
+        <div class="banner-wrap">
+            <div class="banner-content">
+                <p data-i18n="widelyUsed"></p>
+                <ul id="banner-items"></ul>
+            </div>
+            <img class="main-banner" src="https://laixiui.cnhack.com/images/newWaterfalls/main-banner.png" alt="来喜主要功能">
+        </div>
+    </div>
+
+    <div class="lightspot">
+        <div class="lightspot-menu">
+            <div class="menu-li">
+                <a href="#smenu1">
+                    <div class="li-icon">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>批量操作icon</title>
+                            <defs>
+                                <path
+                                    d="M18.2876602,12.5921031 C18.6093804,12.5921031 18.9179238,12.719906 19.1454143,12.9473965 C19.3404062,13.1423884 19.4621581,13.3969293 19.492965,13.6682751 L19.5007077,13.8051506 L19.5007077,18.2869525 C19.5007077,18.6086727 19.3729048,18.9172161 19.1454143,19.1447066 C18.9504224,19.3396985 18.6958815,19.4614505 18.4245357,19.4922573 L18.2876602,19.5 L13.8058583,19.5 C13.4841381,19.5 13.1755947,19.3721972 12.9481042,19.1447066 C12.7531123,18.9497147 12.6313603,18.6951738 12.6005535,18.423828 L12.5928108,18.2869525 L12.5928108,13.8051506 C12.5928108,13.4834304 12.7206137,13.174887 12.9481042,12.9473965 C13.1430961,12.7524046 13.397637,12.6306527 13.6689828,12.5998458 L13.8058583,12.5921031 L18.2876602,12.5921031 Z M10.1955571,12.5921031 C10.823633,12.5921031 11.3402216,13.069437 11.4023417,13.6811235 L11.4086045,13.8051506 L11.4086045,18.2869525 C11.4086045,18.6086727 11.2808017,18.9172161 11.0533112,19.1447066 C10.8583193,19.3396985 10.6037784,19.4614505 10.3324325,19.4922573 L10.1955571,19.5 L5.71375513,19.5 C5.39203494,19.5 5.08349157,19.3721972 4.85600105,19.1447066 C4.66100916,18.9497148 4.53925721,18.6951738 4.50845036,18.423828 L4.50070767,18.2869525 L4.50070767,13.8051506 C4.50070767,13.4834304 4.62851052,13.174887 4.85600105,12.9473965 C5.05099293,12.7524046 5.30553383,12.6306527 5.57687968,12.5998458 L5.71375513,12.5921031 L10.1955571,12.5921031 Z M18.1941645,13.8976656 L13.8976656,13.8976656 L13.8976656,18.1941645 L18.1941645,18.1941645 L18.1941645,13.8976656 Z M10.1021161,13.8976656 L5.80561715,13.8976656 L5.80561715,18.1941645 L10.1021161,18.1941645 L10.1021161,13.8976656 Z M18.2876602,4.5 C18.6093804,4.5 18.9179238,4.62780285 19.1454143,4.85529337 C19.3404062,5.05028525 19.4621581,5.30482616 19.492965,5.576172 L19.5007077,5.71304745 L19.5007077,10.1948494 C19.5007077,10.5165696 19.3729048,10.825113 19.1454143,11.0526035 C18.9504224,11.2475954 18.6958815,11.3693473 18.4245357,11.4001542 L18.2876602,11.4078969 L13.8058583,11.4078969 C13.1777824,11.4078969 12.6611938,10.930563 12.5990736,10.3188765 L12.5928108,10.1948494 L12.5928108,5.71304745 C12.5928108,5.08497157 13.0701447,4.56838298 13.6818312,4.50626283 L13.8058583,4.5 L18.2876602,4.5 Z M10.8538922,5.81115728 C11.0189901,5.64605935 11.2596256,5.58158126 11.4851536,5.6420113 C11.7106815,5.70244134 11.8868389,5.87859874 11.947269,6.10412671 C11.9990662,6.29743641 11.9590941,6.50184549 11.8426481,6.66027137 L11.778123,6.73538811 L7.85662899,10.656882 C7.73415398,10.779667 7.56785604,10.8486731 7.39443087,10.8486731 C7.25569073,10.8486731 7.12151202,10.8045092 7.01072529,10.7240201 L6.93231545,10.6569648 L4.69141447,8.41606385 C4.43619518,8.16084456 4.43619517,7.74705233 4.69141447,7.49183303 C4.92111183,7.26213567 5.27925327,7.23916593 5.53465395,7.42293831 L5.61566517,7.49185291 L7.39365503,9.27059543 L10.8538922,5.81115728 Z M18.1941645,5.80561715 L13.8976656,5.80561715 L13.8976656,10.1021161 L18.1941645,10.1021161 L18.1941645,5.80561715 Z"
+                                    id="path-1"></path>
+                            </defs>
+                            <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="20240612来喜官网5.0" transform="translate(-1672.000000, -1235.000000)">
+                                    <g id="功能菜单浮窗" transform="translate(1656.000000, 1214.000000)">
+                                        <g id="编组-5" transform="translate(8.000000, 8.000000)">
+                                            <g id="批量操作icon" transform="translate(8.000000, 13.000000)">
+                                                <circle id="椭圆形" fill="#D8D8D8" opacity="0" cx="12" cy="12" r="12">
+                                                </circle>
+                                                <g id="形状" fill-rule="nonzero">
+                                                    <use fill="#177FF9" xlink:href="#path-1"></use>
+                                                    <use fill="#6B6B6B" xlink:href="#path-1"></use>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <div data-i18n="batchOperations" class="li-text"></div>
+                </a>
+            </div>
+            <div class="menu-li">
+                <a href="#smenu2">
+                    <div class="li-icon">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>设备显示icon</title>
+                            <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="20240612来喜官网5.0" transform="translate(-1672.000000, -1290.000000)">
+                                    <g id="功能菜单浮窗" transform="translate(1656.000000, 1214.000000)">
+                                        <g id="编组-5备份" transform="translate(8.000000, 64.000000)">
+                                            <g id="设备显示icon" transform="translate(8.000000, 12.000000)">
+                                                <circle id="椭圆形" fill="#D8D8D8" opacity="0" cx="12" cy="12" r="12">
+                                                </circle>
+                                                <path
+                                                    d="M7.37713391,7.10090932 C7.37682498,7.20913046 7.31505058,7.30777431 7.21782389,7.355302 C7.12059719,7.40282969 7.00481141,7.39098325 6.91922388,7.32475119 L5.10917256,5.9169335 C5.04026997,5.86309897 5,5.78053146 5,5.69309163 C5,5.6056518 5.04026997,5.52308429 5.10917256,5.46924975 L6.91922388,4.06029581 C7.00513549,3.99381137 7.12144153,3.98214588 7.21884574,4.03024374 C7.31624996,4.0783416 7.37769364,4.17777929 7.37713391,4.28641019 L7.37713391,5.12723754 L14.194653,5.12723754 L14.194653,4.28413768 C14.1946254,4.17549754 14.2565643,4.07635634 14.3542136,4.02874022 C14.4518629,3.9811241 14.5681184,3.99337347 14.6536993,4.06029581 L16.4626143,5.4681135 C16.5315169,5.52194804 16.5717869,5.60451554 16.5717869,5.69195537 C16.5717869,5.7793952 16.5315169,5.86196271 16.4626143,5.91579725 L14.6536993,7.32475119 C14.567957,7.39180137 14.4514401,7.40396129 14.3537012,7.35605955 C14.2559623,7.30815781 14.1941892,7.20861816 14.194653,7.09977306 L14.194653,6.26121822 L7.37713391,6.26121822 L7.37713391,7.10090932 Z M14.7627796,9.66997776 L6.80900732,9.66997776 C6.49523966,9.66997776 6.24088073,9.9243367 6.24088073,10.2381044 L6.24088073,18.1918766 C6.24088073,18.5056443 6.49523966,18.7600032 6.80900732,18.7600032 L14.7627796,18.7600032 C15.0765472,18.7600032 15.3309062,18.5056443 15.3309062,18.1918766 L15.3309062,10.2381044 C15.3309062,9.9243367 15.0765472,9.66997776 14.7627796,9.66997776 M6.80900732,8.53372458 C5.86770436,8.53372458 5.10462755,9.29680139 5.10462755,10.2381044 L5.10462755,18.1918766 C5.10462755,19.1331796 5.86770436,19.8962564 6.80900732,19.8962564 L14.7627796,19.8962564 C15.7040825,19.8962564 16.4671594,19.1331796 16.4671594,18.1918766 L16.4671594,10.2381044 C16.4671594,9.29680139 15.7040825,8.53372458 14.7627796,8.53372458 L6.80900732,8.53372458 Z M20.71561,10.8062309 L19.8759189,10.8062309 L19.8759189,17.62375 L20.71561,17.62375 C20.8238311,17.624059 20.922475,17.6858333 20.9700027,17.78306 C21.0175304,17.8802867 21.0056839,17.9960725 20.9394519,18.0816601 L19.5316342,19.8917114 C19.4777996,19.960614 19.3952321,20.0008839 19.3077923,20.0008839 C19.2203525,20.0008839 19.137785,19.960614 19.0839504,19.8917114 L17.6749965,18.0816601 C17.6086396,17.9959105 17.5968842,17.8798656 17.6446965,17.7825506 C17.6925089,17.6852357 17.7915486,17.6236261 17.8999746,17.62375 L18.7396657,17.62375 L18.7396657,10.8062309 L17.8999746,10.8062309 C17.7917535,10.805922 17.6931096,10.7441476 17.6455819,10.6469209 C17.5980542,10.5496942 17.6099007,10.4339084 17.6761327,10.3483209 L19.0839504,8.53826959 C19.137785,8.46936701 19.2203525,8.42909703 19.3077923,8.42909703 C19.3952321,8.42909703 19.4777996,8.46936701 19.5316342,8.53826959 L20.9405881,10.3483209 C21.006945,10.4340705 21.0187004,10.5501154 20.9708881,10.6474303 C20.9230758,10.7447453 20.824036,10.8063548 20.71561,10.8062309"
+                                                    id="形状" fill="#6B6B6B"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <div data-i18n="deviceDisplay" class="li-text"></div>
+                </a>
+            </div>
+            <div class="menu-li">
+                <a href="#smenu3">
+                    <div class="li-icon">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>话术icon</title>
+                            <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="20240612来喜官网5.0" transform="translate(-1672.000000, -1346.000000)">
+                                    <g id="功能菜单浮窗" transform="translate(1656.000000, 1214.000000)">
+                                        <g id="话术icon" transform="translate(8.000000, 120.000000)">
+                                            <g transform="translate(8.000000, 12.000000)">
+                                                <circle id="椭圆形" fill="#D8D8D8" opacity="0" cx="12" cy="12" r="12">
+                                                </circle>
+                                                <path
+                                                    d="M17.4237288,5.88888889 C18.8465641,5.88888889 20,7.04232479 20,8.46516008 L20,8.46516008 L20,15.5393057 C20,16.962141 18.8465641,18.1155769 17.4237288,18.1155769 L17.4237288,18.1155769 L14.6691525,18.1151789 L12,20.1546569 L9.33016949,18.1151789 L6.57627119,18.1155769 C5.1978995,18.1155769 4.07235283,17.0331043 4.00335223,15.6718803 L4.00335223,15.6718803 L4,15.5393057 L4,8.46516008 C4,7.04232479 5.1534359,5.88888889 6.57627119,5.88888889 L6.57627119,5.88888889 Z M17.4237288,6.97363465 L6.57627119,6.97363465 C5.75252444,6.97363465 5.08474576,7.64141333 5.08474576,8.46516008 L5.08474576,8.46516008 L5.08474576,15.5393057 C5.08474576,16.3630525 5.75252444,17.0308311 6.57627119,17.0308311 L6.57627119,17.0308311 L9.69758028,17.0308311 L12,18.7890772 L14.3024197,17.0308311 L17.4237288,17.0308311 C18.2474756,17.0308311 18.9152542,16.3630525 18.9152542,15.5393057 L18.9152542,15.5393057 L18.9152542,8.46516008 C18.9152542,7.64141333 18.2474756,6.97363465 17.4237288,6.97363465 L17.4237288,6.97363465 Z M10.9420836,8.83817311 L12.9980535,15.1119656 L11.8295657,15.1119656 L11.3007466,13.4781735 L9.14936325,13.4781735 L8.64875483,15.1119656 L7.55555977,15.1119656 C7.75317412,14.5251387 9.18289964,9.86675528 9.48785387,8.92454896 L9.5161162,8.83817311 L10.9420836,8.83817311 Z M16.4439282,13.5422088 L16.4439282,14.587831 L13.8298579,14.587831 L13.8298579,13.5422088 L16.4439282,13.5422088 Z M10.205187,9.6961359 L10.1934388,9.6961359 C10.0492122,10.3379417 9.79298509,11.1912691 9.47772707,12.2079188 L9.37052739,12.5527848 L11.0725484,12.5527848 C10.6346815,11.1634154 10.340604,10.2529276 10.205187,9.6961359 Z M16.4439282,11.4522434 L16.4439282,12.4978804 L13.3070468,12.4978804 L13.3070468,11.4522434 L16.4439282,11.4522434 Z M16.4444487,9.36229286 L16.4444487,10.4079299 L12.5290909,10.4079299 L12.5290909,9.36229286 L16.4444487,9.36229286 Z"
+                                                    id="形状结合" fill="#6B6B6B" fill-rule="nonzero"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <div data-i18n="script" class="li-text"></div>
+                </a>
+            </div>
+            <div class="menu-li">
+                <a href="#smenu4">
+                    <div class="li-icon icon-claw">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.51243 2.2583H3.55924C3.54492 3.03776 3.63822 4.57087 4.25615 5.10231C4.24716 4.90575 4.20987 3.36287 4.26565 3.28937C4.30996 3.26713 4.36131 3.27353 4.40669 3.2911C5.57832 3.74453 5.75353 5.18304 5.88354 6.25049L5.88384 6.2529C5.94246 6.7342 5.73087 7.37947 6.32309 7.57956C6.47776 6.85687 6.60071 6.17858 6.92922 5.50353C7.07487 5.20425 7.307 4.92707 7.43762 4.66663C7.33105 4.48312 7.14197 4.19933 7.08735 4.01901C6.9775 3.65642 7.0336 3.55366 6.72609 3.29009C6.49752 3.09418 6.59592 2.50482 6.87431 2.3771C7.12464 2.2287 7.35294 2.24822 7.60277 2.36609C7.72724 2.42482 7.85791 2.61303 7.8883 2.74203C7.92373 2.89233 7.91681 3.08554 7.83446 3.21806C7.73159 3.38359 7.62033 3.44608 7.67287 3.6557C7.72438 3.86133 7.80048 4.04264 7.94527 4.20174C8.05061 4.21658 8.23859 4.20408 8.38143 4.19049L8.5728 4.16918C8.5728 4.16918 8.85242 3.62152 8.8675 3.46278C8.58916 3.1483 8.47772 2.82473 8.78773 2.46459C9.00299 2.2145 9.31642 2.24385 9.58554 2.35691C9.92579 2.49984 10.0031 2.98139 9.80612 3.26367C9.74296 3.3542 9.63739 3.43176 9.57767 3.52617C9.48733 3.69616 9.45988 3.92809 9.38311 4.11204C9.29863 4.31451 9.17179 4.47805 9.07729 4.67241C9.23797 4.95727 9.454 5.22897 9.59691 5.52282C9.89264 6.13096 10.0238 6.77716 10.161 7.43069C10.1722 7.48385 10.1902 7.52605 10.2411 7.54802C10.7038 7.44451 10.6178 6.78325 10.6429 6.44207C10.7211 5.37674 10.8589 3.98364 11.8915 3.37961C11.9933 3.32219 12.1362 3.28551 12.2476 3.25586C12.283 3.49112 12.2737 3.84652 12.2742 4.09376C12.2749 4.41932 12.2826 4.78502 12.2552 5.10609C12.7029 4.73277 12.7583 4.14448 12.8674 3.61143C12.9373 3.27007 12.9345 2.91752 12.9503 2.57118C12.9532 2.47763 12.9668 2.34859 12.959 2.2583H12.9871C13.0366 2.33936 13.145 2.34751 13.2312 2.404C13.3774 2.49986 13.5141 2.6098 13.6331 2.73936C14.1442 3.29812 14.248 4.1036 14.2581 4.82396C14.2738 5.95145 13.5305 6.90425 12.5482 7.42078C12.4283 7.48378 11.8814 7.65389 11.8255 7.71858C11.6967 7.86762 11.5597 8.24618 11.3571 8.3961C11.057 8.64361 10.6402 8.87167 10.2448 8.86213C10.2414 9.02364 10.2489 9.8786 10.2514 10.0422C10.586 10.0022 11.073 10.1255 11.3987 9.92978C11.6973 9.75038 11.7537 9.54423 11.8332 9.23917C11.9963 9.21773 12.3019 9.22862 12.4716 9.23107C12.424 9.81902 12.2035 10.2144 11.676 10.5187C11.362 10.6997 11.0138 10.6946 10.6618 10.698C10.5275 10.6993 10.3786 10.7206 10.2483 10.6869L10.2484 10.6996C10.2554 11.2218 10.2618 11.6984 9.84444 12.0912C10.6658 13.5914 9.86544 14.2781 8.25381 14.258C6.64218 14.2379 5.89089 13.4694 6.65831 12.0912C6.19901 11.8148 6.25828 11.1736 6.26986 10.7167C5.78067 10.702 5.23896 10.7407 4.80958 10.4977C4.42768 10.2816 4.22105 10.0349 4.09809 9.61038C4.06409 9.49305 4.06311 9.36086 4.03151 9.24209L4.02802 9.22928C4.24823 9.22526 4.47822 9.21469 4.69613 9.24148C4.81022 10.1546 5.5562 10.0551 6.26459 10.0344C6.25824 9.88683 6.26991 9.02024 6.27515 8.86814C5.74595 8.81177 5.11466 8.5111 4.87608 8.04127C4.63139 7.55944 4.66506 7.70253 4.1586 7.50044C3.30429 7.15958 2.49085 6.3037 2.31214 5.40415C2.19813 4.83024 2.26936 3.92905 2.48642 3.38424C2.59914 3.09625 2.76878 2.83286 2.98558 2.60918C3.0982 2.49361 3.33105 2.36653 3.48224 2.30235L3.51243 2.2583Z" fill="#8F8F8F"/>
+                    </svg>
+                    </div>
+                    <div data-i18n="laixiClaw" class="li-text"></div>
+                </a>
+            </div>
+            <div class="menu-li">
+                <a href="#smenu5">
+                    <div class="li-icon">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>自动化任务icon</title>
+                            <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="20240612来喜官网5.0" transform="translate(-1672.000000, -1402.000000)">
+                                    <g id="功能菜单浮窗" transform="translate(1656.000000, 1214.000000)">
+                                        <g id="编组-5备份-3" transform="translate(8.000000, 176.000000)">
+                                            <g id="自动化任务icon" transform="translate(8.000000, 12.000000)">
+                                                <circle id="椭圆形" fill="#D8D8D8" opacity="0" cx="12" cy="12" r="12">
+                                                </circle>
+                                                <path
+                                                    d="M11.720821,15.520677 C12.0191075,15.4809055 12.2946675,15.6752178 12.3355753,15.9524822 C12.4810255,16.9194987 13.08953,17.727429 13.9451861,18.1933241 L13.9451861,18.1933241 L13.9451861,17.3831211 C13.9464437,17.2992977 13.9963604,17.223868 14.0730232,17.1899451 C14.1514621,17.1525912 14.2437367,17.159059 14.3161977,17.20699 L14.3161977,17.20699 L16.4695422,18.6614918 C16.5287997,18.7001652 16.5649908,18.765735 16.5661302,18.8364866 C16.5652542,18.9077659 16.5290678,18.9739658 16.4695422,19.0131858 L16.4695422,19.0131858 L14.317334,20.4659832 C14.2229313,20.5280157 14.098589,20.5186842 14.0145022,20.4432566 C13.9707535,20.4029169 13.9451861,20.3489412 13.9451861,20.2898521 L13.9451861,20.2898521 L13.9451861,19.320563 C13.4119804,19.1207083 12.9224999,18.819534 12.5037521,18.4336578 C11.8328447,17.8185207 11.392235,16.9926281 11.2549259,16.0928189 C11.2134499,15.8149864 11.4219664,15.5587441 11.720821,15.520677 Z M17.4996249,4 C18.4409911,4 19.2041192,4.7631281 19.2041192,5.70449431 L19.2041192,11.6702244 L18.0677897,11.6702244 L18.0677897,5.70449431 C18.0677897,5.39070557 17.8134136,5.13632953 17.4996249,5.13632953 L6.70449429,5.13632953 C6.39070556,5.13632953 6.13632953,5.39070557 6.13632953,5.70449431 L6.13632953,18.2041192 C6.13632953,18.5177462 6.39086736,18.7904652 6.70449429,18.7904652 L11.9924038,18.7904652 L11.9924038,19.9086135 L6.70449429,19.9086135 C5.76312809,19.9086135 5,19.1454854 5,18.2041192 L5,5.70449431 C5,4.7631281 5.76312809,4 6.70449429,4 L17.4996249,4 Z M18.2007402,13.0571146 C18.2659267,13.0213556 18.3437276,13.0167668 18.4126657,13.044615 L18.4126657,13.044615 L20.858615,14.017313 C20.937165,14.0463515 20.9920002,14.1179911 20.9995199,14.2013984 C21.0051738,14.2851111 20.9605081,14.3641693 20.8858869,14.4025287 L20.8858869,14.4025287 L19.9910274,14.9013774 C20.2160207,16.2990627 19.655242,17.7370878 18.4251653,18.6751278 C18.2058537,18.8416001 17.8899541,18.8245551 17.6939373,18.6427424 L17.6939373,18.6427424 L17.6570065,18.6046754 C17.5658191,18.5028468 17.5220543,18.3671453 17.5365667,18.2312277 C17.551079,18.0953101 17.622509,17.9719084 17.7331406,17.8916286 C18.5319803,17.2802833 18.9575357,16.3894009 18.9484451,15.479201 L18.9484451,15.479201 L18.2024447,15.8922568 C18.1263106,15.9354373 18.0319953,15.9337328 17.9569975,15.8905523 C17.9422253,15.882598 17.9285893,15.8718028 17.917226,15.8598714 C17.8684005,15.8163632 17.8431032,15.7522767 17.8490462,15.6871493 L17.8490462,15.6871493 L18.0876754,13.224155 C18.095148,13.1531034 18.1375531,13.0904546 18.2007402,13.0571146 Z M12.9145352,12.2713427 C14.1184764,11.3844375 15.7530864,11.1264907 17.2507687,11.669088 C17.5325784,11.7702214 17.6700743,12.0633944 17.5609867,12.3247502 C17.4518991,12.586106 17.1365676,12.7156475 16.8553261,12.6145142 C15.9085518,12.2697052 14.8595702,12.3457843 13.972458,12.8235988 L13.972458,12.8235988 L14.7315261,13.2201779 C14.806386,13.2573283 14.8530827,13.3343447 14.8514089,13.4178992 C14.8456599,13.5014687 14.7930435,13.5745592 14.7156175,13.6065299 L14.7156175,13.6065299 L12.2969401,14.6388853 C12.2084256,14.6769671 12.1058271,14.6598674 12.034448,14.5951366 C11.9975173,14.5610467 11.9730862,14.5161617 11.9674045,14.4684358 L11.9674045,14.4684358 L11.6588911,12.0111232 C11.6492663,11.9282124 11.6893373,11.8474027 11.7611607,11.8048794 C11.8355606,11.7596998 11.9281044,11.7564715 12.0054716,11.796357 L12.0054716,11.796357 Z M9.54531815,11.386142 C9.88621701,11.386142 10.0737114,11.5395465 10.1078013,11.8463555 L10.1134829,11.9543068 C10.1134829,12.3330833 9.92409465,12.5224715 9.54531815,12.5224715 L7.84082384,12.5224715 C7.49992498,12.5224715 7.3124306,12.369067 7.27834071,12.0622581 L7.27265907,11.9543068 C7.27265907,11.5755302 7.46204732,11.386142 7.84082384,11.386142 L9.54531815,11.386142 Z M14.6588011,9.11348292 C14.9996999,9.11348292 15.1871943,9.26688741 15.2212842,9.57369638 L15.2269658,9.68164768 C15.2269658,10.0604242 15.0375776,10.2498125 14.6588011,10.2498125 L7.84082384,10.2498125 C7.49992498,10.2498125 7.3124306,10.096408 7.27834071,9.78959899 L7.27265907,9.68164768 C7.27265907,9.30287116 7.46204732,9.11348292 7.84082384,9.11348292 L14.6588011,9.11348292 Z M15.7951306,6.84082383 C16.1088819,6.8408767 16.3631996,7.09523725 16.3631996,7.40898861 C16.3631996,7.72273997 16.1088819,7.97710052 15.7951306,7.97715338 L7.84082384,7.97715338 C7.63781532,7.97718757 7.45021308,7.86890346 7.34869895,7.69309862 C7.24718481,7.51729379 7.24718481,7.30068342 7.34869895,7.12487859 C7.45021308,6.94907375 7.63781532,6.84078964 7.84082384,6.84082383 L15.7951306,6.84082383 Z"
+                                                    id="形状结合" fill="#6B6B6B" fill-rule="nonzero"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <div data-i18n="autoTasks" class="li-text"></div>
+                </a>
+            </div>
+            <div class="menu-li">
+                <a href="#smenu6">
+                    <div class="li-icon">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>跨网设备分享icon</title>
+                            <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="20240612来喜官网5.0" transform="translate(-1672.000000, -1458.000000)">
+                                    <g id="功能菜单浮窗" transform="translate(1656.000000, 1214.000000)">
+                                        <g id="编组-5备份-4" transform="translate(8.000000, 232.000000)">
+                                            <g id="跨网设备分享icon" transform="translate(8.000000, 12.000000)">
+                                                <circle id="椭圆形" fill="#D8D8D8" opacity="0" cx="12" cy="12" r="12">
+                                                </circle>
+                                                <path
+                                                    d="M14.6048911,8 C15.5460252,8 16.3114788,8.76545366 16.3114788,9.70658777 C16.3114788,10.6477219 15.5460252,11.4131755 14.6048911,11.4131755 C14.2851491,11.4131755 13.9793577,11.3241507 13.7162823,11.1632098 L13.563793,11.0581522 L13.4576927,10.9664589 L11.9255656,11.8505289 L11.9432114,11.98989 L11.9500419,12.1649036 L11.9379866,12.3972344 L11.9007907,12.6315878 L13.1017176,13.3252828 L13.1571877,13.2544026 C13.4326657,12.928193 13.8115706,12.7020923 14.2337868,12.6177123 L14.417213,12.5903475 L14.6048911,12.5810641 C15.6497118,12.5810641 16.5,13.4313523 16.5,14.476173 C16.5,15.3860795 15.8551242,16.1484485 14.9984914,16.3301614 C14.8714761,16.3571045 14.7398054,16.3712819 14.6048911,16.3712819 C13.6215304,16.3712819 12.8104892,15.6180855 12.7184752,14.6584003 L12.7097822,14.476173 L12.7105362,14.4297183 L11.3713919,13.656483 L11.2526894,13.7816116 C10.9477027,14.0701207 10.5664214,14.2680422 10.1506882,14.3489711 L9.94014443,14.379564 L9.72502095,14.3899246 C8.49827729,14.3899246 7.5,13.3916473 7.5,12.1649036 C7.5,10.93816 8.49827729,9.9398827 9.72502095,9.9398827 C10.3048205,9.9398827 10.8470568,10.1648459 11.2526259,10.5483874 L11.3981144,10.6995191 L11.4678833,10.7865155 L12.9165584,9.94938731 L12.9052406,9.86098257 L12.8983033,9.70658777 C12.8983033,8.76545366 13.663757,8 14.6048911,8 Z M14.6048911,13.7319858 C14.1943285,13.7319858 13.8607038,14.0656104 13.8607038,14.476173 C13.8607038,14.8867356 14.1943285,15.2203603 14.6048911,15.2203603 C15.0154537,15.2203603 15.3490783,14.8867356 15.3490783,14.476173 C15.3490783,14.0659749 15.0148757,13.7319858 14.6048911,13.7319858 Z M9.72502095,11.0908044 C9.13253545,11.0908044 8.65092166,11.5724181 8.65092166,12.1649036 C8.65092166,12.7573891 9.13253545,13.2390029 9.72502095,13.2390029 C10.3175064,13.2390029 10.7991202,12.7573891 10.7991202,12.1649036 C10.7991202,11.5724181 10.3175064,11.0908044 9.72502095,11.0908044 Z M14.6048911,9.15092166 C14.2989577,9.15092166 14.049225,9.40065443 14.049225,9.70658777 C14.049225,10.0125211 14.2989577,10.2622539 14.6048911,10.2622539 C14.9108244,10.2622539 15.1605572,10.0125211 15.1605572,9.70658777 C15.1605572,9.40065443 14.9108244,9.15092166 14.6048911,9.15092166 Z M14.9583246,4.6236761 L14.9583246,4.87572062 C14.9583246,5.51037262 14.4438375,6.02485972 13.8091855,6.02485972 L10.1893973,6.02485972 C9.55474527,6.02485972 9.04025817,5.51037262 9.04025817,4.87572062 L9.04025817,4.6236761 L14.9583246,4.6236761 Z"
+                                                    id="形状结合" fill="#6B6B6B" fill-rule="nonzero"></path>
+                                                <path
+                                                    d="M17.0661169,3.42857143 C18.1238702,3.42857143 18.9813487,4.28604994 18.9813487,5.34380327 L18.9813487,18.6561967 C18.9813487,19.7139501 18.1238702,20.5714286 17.0661169,20.5714286 L6.95664492,20.5714286 C5.89889158,20.5714286 5.04141307,19.7139501 5.04141307,18.6561967 L5.04141307,5.34380327 C5.04141307,4.28604993 5.89889158,3.42857143 6.95664492,3.42857143 L17.0661169,3.42857143 Z M17.0661169,4.62857143 L6.95664492,4.62857143 C6.59455091,4.62857143 6.29530249,4.89764535 6.2479423,5.24675055 L6.24141307,5.34380327 L6.24141307,18.6561967 C6.24141307,19.0182907 6.51048699,19.3175392 6.85959219,19.3648993 L6.95664492,19.3714286 L17.0661169,19.3714286 C17.4282109,19.3714286 17.7274593,19.1023547 17.7748195,18.7532495 L17.7813487,18.6561967 L17.7813487,5.34380327 C17.7813487,4.98170927 17.5122748,4.68246085 17.1631696,4.63510065 L17.0661169,4.62857143 Z"
+                                                    id="路径" fill="#6B6B6B" fill-rule="nonzero"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <div data-i18n="crossNetworkDeviceSharing" class="li-text"></div>
+                </a>
+            </div>
+        </div>
+        <div class="list">
+            <div class="item" id="smenu1">
+                <div class="item-img">
+                    <img src="https://laixiui.cnhack.com/images/newWaterfalls/lightspot-1.png" alt="来喜批量控制">
+                    <a href="https://dl.neibuapi.com/video/batchControl.mp4" target="_blank">
+                    </a>
+                </div>
+                <div class="item-info">
+                    <div data-i18n="batchOperations" class="item-title"></div>
+                    <div class="item-describe">
+                        <p data-i18n="simultaneousOperation"></p>
+                        <p data-i18n="batchFunctions"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="item column-reverse" id="smenu2">
+                <div class="item-info">
+                    <div data-i18n="deviceDisplay" class="item-title"></div>
+                    <div class="item-describe">
+                        <p data-i18n="customScreenSize"></p>
+                        <p data-i18n="screenDisplayDevices"></p>
+                    </div>
+                </div>
+                <div class="item-img">
+                    <img src="https://laixiui.cnhack.com/images/newWaterfalls/lightspot-2.png" alt="来喜设备显示">
+                </div>
+            </div>
+            <div class="item" id="smenu3">
+                <div class="item-img">
+                    <img src="https://laixiui.cnhack.com/images/newWaterfalls/lightspot-3.png" alt="来喜话术">
+                </div>
+                <div class="item-info">
+                    <div data-i18n="script" class="item-title"></div>
+                    <div class="item-describe">
+                        <p data-i18n="responseManagement"></p>
+                        <p data-i18n="keyboardMouseSync"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="item  column-reverse" id="smenu4">
+                <div class="item-info">
+                    <div data-i18n="laixiClaw" class="item-title"></div>
+                    <div class="item-describe">
+                        <p data-i18n="aiTagline"></p>
+                    </div>
+                </div>
+                <div class="item-img">
+                    <img src="https://laixiui.cnhack.com/images/newWaterfalls/lightspot-ai.webp" alt="laixi claw">
+                </div>
+            </div>
+            <div class="item" id="smenu5">
+                <div class="item-img">
+                    <img src="https://laixiui.cnhack.com/images/newWaterfalls/lightspot-4.png" alt="来喜自动化服务">
+                </div>
+                <div class="item-info">
+                    <div data-i18n="autoTasks" class="item-title"></div>
+                    <div class="item-describe">
+                        <p data-i18n="autoScriptSupport"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="item column-reverse" id="smenu6">
+                <div class="item-info">
+                    <div data-i18n="crossNetworkDeviceSharing" class="item-title"></div>
+                    <div class="item-describe">
+                        <p data-i18n="centralizedManagement"></p>
+                        <p data-i18n="regionLimitBreakthrough"></p>
+                    </div>
+                </div>
+                <div class="item-img">
+                    <img src="https://laixiui.cnhack.com/images/newWaterfalls/lightspot-5.png" alt="来喜设备分享">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="more-function">
+        <div data-i18n="moreFeatures" class="title"></div>
+        <div class="function-group">
+            <div class="item">
+                <div class="item-icon">
+                    <svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>有线/无线投屏icon</title>
+                        <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="20240612来喜官网5.0" transform="translate(-241.000000, -5312.000000)">
+                                <g id="更多功能" transform="translate(176.000000, 5066.000000)">
+                                    <g id="有线/无线投屏icon" transform="translate(65.000000, 246.000000)">
+                                        <circle id="椭圆形" fill="#D8D8D8" opacity="0" cx="28" cy="28" r="28"></circle>
+                                        <path
+                                            d="M28.530246,34.7537884 C28.6206135,34.8166852 28.6990705,34.8951574 28.7619498,34.985537 L33.5830206,41.9136907 C33.8758454,42.3344974 33.7721236,42.9130169 33.3513169,43.2058417 C33.1957192,43.3141175 33.0107015,43.3721644 32.8211381,43.3721644 L23.1789068,43.3721644 C22.6662616,43.3721644 22.2506567,42.9565595 22.2506567,42.4439143 C22.2506567,42.2543308 22.3087238,42.0692957 22.4170242,41.9136907 L27.238095,34.985537 C27.5309198,34.5647303 28.1093945,34.4610085 28.530246,34.7538332 L28.530246,34.7537884 Z M43.0515302,14 C45.7794195,14 47.9560987,16.3094145 47.9993274,19.130936 L48,19.2165861 L48,35.1667924 C48,37.9984933 45.8505854,40.3362037 43.1340862,40.382661 L43.0515751,40.3833785 L35.2160233,40.3833785 C34.4758448,40.3833785 33.8758454,39.7835137 33.8758454,39.0436042 C33.8758454,38.3142328 34.4588044,37.72096 35.1843641,37.7041438 L35.2160233,37.7037851 L43.0515751,37.7037851 C44.2694661,37.7037851 45.2988371,36.6108715 45.3192855,35.2093484 L45.3196443,35.1667924 L45.3196443,19.2165861 C45.3196443,17.8089643 44.3023808,16.7018804 43.088436,16.6799073 L43.0515751,16.6795486 L12.9485146,16.6795486 C11.7306236,16.6795486 10.7012526,17.772507 10.6808042,19.1740301 L10.6804454,19.2165861 L10.6804454,35.1667924 C10.6804454,36.5744142 11.6977089,37.6814533 12.9116537,37.7034712 L12.9485146,37.7037851 L20.7497166,37.7037851 C21.4898952,37.7037851 22.0899394,38.3036499 22.0899394,39.0436042 C22.0899394,39.7729756 21.5068907,40.3662036 20.781331,40.3830197 L20.7497166,40.3833785 L12.9484698,40.3833785 C10.2205805,40.3833785 8.0439013,38.073964 8.00067264,35.2524425 L8,35.1667924 L8,19.2165861 C8,16.3848852 10.1494146,14.0471748 12.8659138,14.0007175 L12.9484249,14 L43.0515302,14 Z M34.0794326,30.4443762 C34.5083111,30.8187255 34.5524366,31.4697562 34.1779527,31.898545 C33.8035137,32.327244 33.1522588,32.3713695 32.7233355,31.9970202 C29.2313663,28.9490415 26.1206972,29.0908799 22.6881001,32.0061233 C22.2541993,32.3746431 21.603617,32.3217283 21.2349627,31.887962 C20.8663533,31.4541957 20.919268,30.8037928 21.3531689,30.4352731 C25.5310566,26.8870708 29.781859,26.6932145 34.0794326,30.4443762 Z M39.2152565,24.8755035 C39.6434623,25.25066 39.686377,25.9017804 39.3111308,26.3298516 C38.9358846,26.7579229 38.28454,26.8008377 37.8563342,26.425726 C30.850647,20.2884234 24.4207888,20.5827729 17.5552359,26.434874 C17.1219629,26.804156 16.471291,26.7524072 16.1018743,26.3193135 C15.7324577,25.886175 15.7842065,25.2356825 16.2174347,24.8664004 C23.8291751,18.3782911 31.4029334,18.0316098 39.2152565,24.8755035 Z"
+                                            id="形状" fill="#FFFFFF" fill-rule="nonzero"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div data-i18n="wiredWirelessScreenProjection" class="item-title"></div>
+                <div data-i18n="stableConnection" class="item-describe"></div>
+                <a href="https://dl.neibuapi.com/video/wiredWirelessProjection.mp4" target="_blank"
+                    class="item-operate">
+                    <p data-i18n="understandVideo" class="operate-text"></p>
+
+                    <div class="operate-more">
+                        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>箭头icon</title>
+                            <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="20240612来喜官网5.0" transform="translate(-663.000000, -5524.000000)">
+                                    <g id="更多功能" transform="translate(176.000000, 5066.000000)">
+                                        <g id="文字按钮cover" transform="translate(65.000000, 452.000000)">
+                                            <g id="箭头icon" transform="translate(422.000000, 6.000000)">
+                                                <rect id="矩形" fill="#D8D8D8" opacity="0" x="0" y="0" width="20"
+                                                    height="20"></rect>
+                                                <path
+                                                    d="M17.5453161,10.7902932 L0.768059361,10.7902932 C0.549933511,10.7902932 0.367137905,10.7156048 0.219672541,10.5662279 C0.0722071779,10.416851 -0.00101347125,10.230391 0,10.006848 C0.0010346588,9.78330495 0.074255308,9.59684498 0.219672541,9.44746809 C0.365089775,9.2980912 0.547885381,9.22340276 0.768059361,9.22340276 L17.5453161,9.22340276 L11.8079918,3.3726338 C11.6584784,3.21907853 11.5806494,3.03888613 11.574505,2.83205659 C11.5683606,2.62522705 11.6461896,2.4356333 11.8079918,2.26327535 C11.9779866,2.08987281 12.1607822,2.00212694 12.3563787,1.99996358 C12.5519751,1.99794857 12.7347707,2.08256065 12.9047655,2.25387401 L19.637481,9.12155488 C19.7706094,9.25735205 19.8643114,9.3968053 19.9185868,9.53991463 C19.9728623,9.68302396 20,9.83866841 20,10.006848 C20,10.1750276 19.9728623,10.330672 19.9185868,10.4737813 C19.8643114,10.6168907 19.7706094,10.7568662 19.637481,10.893708 L12.9047655,17.759822 C12.755252,17.9123326 12.5775767,17.992244 12.3717396,17.9995562 C12.1659026,18.0068684 11.9779866,17.9238232 11.8079918,17.7504206 C11.6441414,17.5780627 11.5611922,17.3931696 11.559144,17.1957414 C11.5570959,16.9983132 11.6400452,16.8134201 11.8079918,16.6410622 L17.5453161,10.7902932 Z"
+                                                    id="路径" fill="#FFFFFF" fill-rule="nonzero" class="fill-hover">
+                                                </path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+            <div class="item">
+                <div class="item-icon">
+                    <svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>安装apk icon</title>
+                        <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="20240612来喜官网5.0" transform="translate(-739.000000, -5312.000000)">
+                                <g id="更多功能" transform="translate(176.000000, 5066.000000)">
+                                    <g id="安装apk-icon" transform="translate(563.000000, 246.000000)">
+                                        <circle id="椭圆形备份" fill="#D8D8D8" opacity="0" cx="28" cy="28" r="28"></circle>
+                                        <path
+                                            d="M36.7107318,23.7773973 C38.1433931,23.7773973 39.3047945,24.9387987 39.3047945,26.37146 L39.3047945,35.3919381 C39.3047945,36.8245994 38.1433931,37.9860009 36.7107318,37.9860009 L9.84406276,37.9860009 C8.41140146,37.9860009 7.25,36.8245994 7.25,35.3919381 L7.25,26.37146 C7.25,24.9387987 8.41140146,23.7773973 9.84406276,23.7773973 L36.7107318,23.7773973 Z M14.7337636,26.0412071 L12.6649141,26.0412071 L8.89075099,35.7641386 L10.9662102,35.7641386 L11.7659891,33.5555874 L15.6392983,33.5555874 L16.4853454,35.7641386 L18.6136825,35.7641386 L14.7337636,26.0412071 Z M22.7996362,26.0412071 L19.6705229,26.0412071 L19.6705229,35.7641386 L21.6204546,35.7641386 L21.6204546,32.0964844 L22.8918627,32.0964844 C23.7746021,32.0964844 24.4487339,32.0500584 24.9142581,31.9572064 C25.2568137,31.8820405 25.5938796,31.7283925 25.9254558,31.4962625 C26.257032,31.2641325 26.5304177,30.9446774 26.7456129,30.5378971 C26.960808,30.1311169 27.0684056,29.6292739 27.0684056,29.0323682 C27.0684056,28.2586015 26.8817567,27.6274289 26.508459,27.1388505 C26.1351613,26.6502721 25.6718329,26.3330277 25.1184739,26.1871174 C24.983428,26.1506398 24.7903287,26.1210018 24.5391762,26.0982033 L23.9594668,26.0617258 C23.8499478,26.0571661 23.7339785,26.0533663 23.6115588,26.0503265 L22.7996362,26.0412071 L22.7996362,26.0412071 Z M30.6997155,26.0412071 L28.7593502,26.0412071 L28.7593502,35.7641386 L30.6997155,35.7641386 L30.6997155,32.8260359 L32.2729847,31.2011258 L34.9147659,35.7641386 L37.4254414,35.7641386 L33.6102636,29.8282425 L37.2287827,26.0412071 L34.619778,26.0412071 L30.6997155,30.3588254 L30.6997155,26.0412071 Z M13.6762047,28.309449 L15.0113727,31.9174127 L12.3674757,31.9174127 L13.6762047,28.309449 Z M21.6204546,27.6860141 L22.5624824,27.6860141 L23.1868411,27.6933833 L23.1868411,27.6933833 L23.6545612,27.7154909 C23.7843615,27.7253165 23.8880553,27.7375985 23.9656427,27.7523369 C24.2818478,27.8098168 24.5431562,27.9535163 24.7495679,28.1834355 C24.9559796,28.4133548 25.0591855,28.7051754 25.0591855,29.0588973 C25.0591855,29.3462964 24.9856238,29.5983233 24.8385006,29.8149779 C24.6913774,30.0316326 24.4882595,30.1908075 24.229147,30.2925026 C24.0132198,30.3772484 23.6204033,30.4266835 23.0506973,30.4408078 L21.6204546,30.4450451 L21.6204546,27.6860141 Z M38.9192169,13.2643712 L39.3047945,13.265991 C42.7125305,13.265991 45.526126,15.9191087 45.7373069,19.303113 L45.7502418,19.7267434 L45.7502418,39.8047945 C45.7502418,43.2125305 43.0968824,46.026126 39.712878,46.2373069 L39.2892476,46.2502418 L17.9349315,46.2502418 C15.0078332,46.2502418 12.4524063,44.2774911 11.7050647,41.462032 C11.5488143,40.8733904 11.8993367,40.2695362 12.4879783,40.1132859 C13.0121424,39.9741506 13.5576419,40.237394 13.7767049,40.7264338 L13.8486073,40.9346522 C14.2902179,42.604645 15.7656167,43.8548976 17.5250944,44.0248101 L17.9109179,44.0439436 L39.3047945,44.0445205 C41.4944304,44.0445205 43.3182576,42.3774944 43.5251339,40.2125164 L43.5439567,39.8285341 L43.5445205,19.7111965 C43.5445205,17.5215606 41.8774944,15.6977334 39.7125164,15.4908571 L39.3285341,15.4720343 L38.8790027,15.4714705 C38.2699764,15.4714705 37.776263,14.9777571 37.776263,14.3687307 C37.776263,13.8264147 38.1706474,13.3667108 38.6995208,13.2804469 L38.9192169,13.2643712 Z M18.3963897,13.265991 C19.0054161,13.265991 19.4991295,13.7597044 19.4991295,14.3687307 C19.4991295,14.9110467 19.1047451,15.3707507 18.5758717,15.4570146 L18.3561755,15.4730903 L17.9349315,15.4714705 C15.7452956,15.4714705 13.9214684,17.1384966 13.7145921,19.3034746 L13.6957694,19.6874569 L13.6952055,20.6277261 C13.6952055,21.2367524 13.2014921,21.7304658 12.5924658,21.7304658 C12.0501498,21.7304658 11.5904458,21.3360815 11.5041819,20.8072081 L11.4881062,20.5875119 L11.489726,19.7111965 C11.489726,16.3034605 14.1428437,13.489865 17.526848,13.2786841 L17.9504785,13.2657492 L18.3963897,13.265991 Z M29.5442554,8.1311306 L35.5401678,13.8079075 C36.04839,14.3160816 35.8760136,15.0514892 35.1571466,15.0514892 L31.9021587,15.0514892 L31.9021587,19.4640333 C31.9021587,20.2467372 31.2611731,20.8876988 30.4784692,20.8876988 L26.8198974,20.8876988 C26.0371935,20.8876988 25.3962319,20.2467372 25.3962319,19.4640333 L25.3962319,15.0514892 L22.0825679,15.0514892 C21.3637248,15.0514892 21.1913485,14.3160816 21.6995226,13.8079075 L27.695435,8.1311306 C28.2036091,7.62295647 29.0360573,7.62295647 29.5442554,8.1311306 Z"
+                                            id="形状" fill="#FFFFFF" fill-rule="nonzero"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div data-i18n="batchInstallApk" class="item-title"></div>
+                <div data-i18n="oneClickBatchUpload" class="item-describe"></div>
+                <a href="https://dl.neibuapi.com/video/batchInstallAPK.mp4" target="_blank" class="item-operate">
+                    <p data-i18n="understandVideo" class="operate-text"></p>
+                    <div class="operate-more">
+                        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>箭头icon</title>
+                            <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="20240612来喜官网5.0" transform="translate(-663.000000, -5524.000000)">
+                                    <g id="更多功能" transform="translate(176.000000, 5066.000000)">
+                                        <g id="文字按钮cover" transform="translate(65.000000, 452.000000)">
+                                            <g id="箭头icon" transform="translate(422.000000, 6.000000)">
+                                                <rect id="矩形" fill="#D8D8D8" opacity="0" x="0" y="0" width="20"
+                                                    height="20"></rect>
+                                                <path
+                                                    d="M17.5453161,10.7902932 L0.768059361,10.7902932 C0.549933511,10.7902932 0.367137905,10.7156048 0.219672541,10.5662279 C0.0722071779,10.416851 -0.00101347125,10.230391 0,10.006848 C0.0010346588,9.78330495 0.074255308,9.59684498 0.219672541,9.44746809 C0.365089775,9.2980912 0.547885381,9.22340276 0.768059361,9.22340276 L17.5453161,9.22340276 L11.8079918,3.3726338 C11.6584784,3.21907853 11.5806494,3.03888613 11.574505,2.83205659 C11.5683606,2.62522705 11.6461896,2.4356333 11.8079918,2.26327535 C11.9779866,2.08987281 12.1607822,2.00212694 12.3563787,1.99996358 C12.5519751,1.99794857 12.7347707,2.08256065 12.9047655,2.25387401 L19.637481,9.12155488 C19.7706094,9.25735205 19.8643114,9.3968053 19.9185868,9.53991463 C19.9728623,9.68302396 20,9.83866841 20,10.006848 C20,10.1750276 19.9728623,10.330672 19.9185868,10.4737813 C19.8643114,10.6168907 19.7706094,10.7568662 19.637481,10.893708 L12.9047655,17.759822 C12.755252,17.9123326 12.5775767,17.992244 12.3717396,17.9995562 C12.1659026,18.0068684 11.9779866,17.9238232 11.8079918,17.7504206 C11.6441414,17.5780627 11.5611922,17.3931696 11.559144,17.1957414 C11.5570959,16.9983132 11.6400452,16.8134201 11.8079918,16.6410622 L17.5453161,10.7902932 Z"
+                                                    id="路径" fill="#FFFFFF" fill-rule="nonzero" class="fill-hover">
+                                                </path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+            <div class="item">
+                <div class="item-icon">
+                    <svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>adb icon</title>
+                        <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="20240612来喜官网5.0" transform="translate(-1237.000000, -5312.000000)">
+                                <g id="更多功能" transform="translate(176.000000, 5066.000000)">
+                                    <g id="adb-icon" transform="translate(1061.000000, 246.000000)">
+                                        <circle id="椭圆形备份-2" fill="#D8D8D8" opacity="0" cx="28" cy="28" r="28"></circle>
+                                        <path
+                                            d="M42.987619,9.58333333 C44.5090312,9.61034488 45.7391405,10.8065536 45.8281727,12.3061488 L45.8333333,12.4804762 L45.8333333,43.2413209 C45.806893,44.7436682 44.6392554,45.9659691 43.1596768,46.0789671 L42.987619,46.0870352 L12.7304762,46.0870352 C11.2088243,46.0870352 9.95725854,44.9132746 9.84158953,43.4155274 L9.83333333,43.2413209 L9.83333333,12.4804762 C9.83333333,10.9375729 11.0394332,9.6763694 12.560247,9.58825142 L12.7304762,9.58333333 L42.987619,9.58333333 Z M42.987619,11.5833333 L12.7304762,11.5833333 C12.2731116,11.5833333 11.895683,11.92558 11.8403233,12.3679405 L11.8330182,12.4804762 L11.8330182,43.205818 C11.8410352,43.6573741 12.181748,44.0261478 12.619227,44.0802103 L12.7304762,44.0873449 L42.9524257,44.0873449 C43.39838,44.0794964 43.764649,43.7469279 43.8248032,43.3435057 L43.8333333,43.2413209 L43.8333333,12.4804762 C43.8333333,12.0285078 43.4992947,11.653645 43.0910703,11.5920649 L42.987619,11.5833333 Z M17.4961905,25.0120762 L23.1361905,30.7206476 C23.407325,30.9908423 23.559726,31.3578695 23.559726,31.7406476 C23.559726,32.1234257 23.407325,32.4904529 23.1361905,32.7606476 L17.4961905,38.4177905 C17.2247368,38.6928872 16.8540959,38.8473209 16.467619,38.8463619 C15.8787247,38.8549249 15.3439733,38.5040125 15.1174516,37.9603602 C14.8909298,37.416708 15.0183021,36.7899107 15.4390476,36.3777905 L20.1190476,31.7320762 L15.4390476,27.0520762 C15.0746367,26.684603 14.9339518,26.1506329 15.0699874,25.6513072 C15.2060231,25.1519815 15.5981123,24.7631597 16.0985588,24.6313072 C16.5990054,24.4994547 17.1317796,24.644603 17.4961905,25.0120762 Z M32.1190476,35.9492191 C32.9190715,35.9492191 33.567619,36.5977666 33.567619,37.3977905 C33.567619,38.1978144 32.9190715,38.8463619 32.1190476,38.8463619 L24.0961905,38.8463619 C23.2961666,38.8463619 22.647619,38.1978144 22.647619,37.3977905 C22.647619,36.5977666 23.2961666,35.9492191 24.0961905,35.9492191 L32.1190476,35.9492191 Z M16.6831048,16.1103048 C17.7781907,16.1103048 18.6659333,16.9980474 18.6659333,18.0931333 C18.6659333,19.1882193 17.7781907,20.0759619 16.6831048,20.0759619 C15.5880188,20.0759619 14.7002762,19.1882193 14.7002762,18.0931333 C14.7002762,16.9980474 15.5880188,16.1103048 16.6831048,16.1103048 Z M22.8118476,16.1103048 C23.9069336,16.1103048 24.7946762,16.9980474 24.7946762,18.0931333 C24.7946762,19.1882193 23.9069336,20.0759619 22.8118476,20.0759619 C21.7167616,20.0759619 20.829019,19.1882193 20.829019,18.0931333 C20.829019,16.9980474 21.7167616,16.1103048 22.8118476,16.1103048 Z M28.9405905,16.1103048 C30.0356765,16.1103048 30.923419,16.9980474 30.923419,18.0931333 C30.923419,19.1882193 30.0356765,20.0759619 28.9405905,20.0759619 C27.8455045,20.0759619 26.9577619,19.1882193 26.9577619,18.0931333 C26.9577619,16.9980474 27.8455045,16.1103048 28.9405905,16.1103048 Z"
+                                            id="形状结合" fill="#FFFFFF" fill-rule="nonzero"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div data-i18n="batchAdbCommands" class="item-title"></div>
+                <div data-i18n="adbCommandInput" class="item-describe"></div>
+                <a href="https://dl.neibuapi.com/video/batchADBCommands.mp4" target="_blank" class="item-operate">
+                    <p data-i18n="understandVideo" class="operate-text"></p>
+                    <div class="operate-more">
+                        <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>箭头icon</title>
+                            <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="20240612来喜官网5.0" transform="translate(-663.000000, -5524.000000)">
+                                    <g id="更多功能" transform="translate(176.000000, 5066.000000)">
+                                        <g id="文字按钮cover" transform="translate(65.000000, 452.000000)">
+                                            <g id="箭头icon" transform="translate(422.000000, 6.000000)">
+                                                <rect id="矩形" fill="#D8D8D8" opacity="0" x="0" y="0" width="20"
+                                                    height="20"></rect>
+                                                <path
+                                                    d="M17.5453161,10.7902932 L0.768059361,10.7902932 C0.549933511,10.7902932 0.367137905,10.7156048 0.219672541,10.5662279 C0.0722071779,10.416851 -0.00101347125,10.230391 0,10.006848 C0.0010346588,9.78330495 0.074255308,9.59684498 0.219672541,9.44746809 C0.365089775,9.2980912 0.547885381,9.22340276 0.768059361,9.22340276 L17.5453161,9.22340276 L11.8079918,3.3726338 C11.6584784,3.21907853 11.5806494,3.03888613 11.574505,2.83205659 C11.5683606,2.62522705 11.6461896,2.4356333 11.8079918,2.26327535 C11.9779866,2.08987281 12.1607822,2.00212694 12.3563787,1.99996358 C12.5519751,1.99794857 12.7347707,2.08256065 12.9047655,2.25387401 L19.637481,9.12155488 C19.7706094,9.25735205 19.8643114,9.3968053 19.9185868,9.53991463 C19.9728623,9.68302396 20,9.83866841 20,10.006848 C20,10.1750276 19.9728623,10.330672 19.9185868,10.4737813 C19.8643114,10.6168907 19.7706094,10.7568662 19.637481,10.893708 L12.9047655,17.759822 C12.755252,17.9123326 12.5775767,17.992244 12.3717396,17.9995562 C12.1659026,18.0068684 11.9779866,17.9238232 11.8079918,17.7504206 C11.6441414,17.5780627 11.5611922,17.3931696 11.559144,17.1957414 C11.5570959,16.9983132 11.6400452,16.8134201 11.8079918,16.6410622 L17.5453161,10.7902932 Z"
+                                                    id="路径" fill="#FFFFFF" fill-rule="nonzero" class="fill-hover">
+                                                </path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="customer-evaluation-box">
+        <div class="customer-evaluation">
+            <div data-i18n="userTestimonials" class="title"></div>
+            <div data-i18n="userFeedback" class="describe"></div>
+            <div class="customers">
+                <div class="item">
+                    <div class="item-outline">
+                        <div class="stars">
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="evaluation" data-i18n="common1"></div>
+                        <div class="item-boot">
+                            <div class="user-info">
+                                <div class="user-img">
+                                    <img src="https://laixiui.cnhack.com/images/newWaterfalls/user-1.png" alt="来喜用户" />
+                                </div>
+                                <div class="user-name" data-i18n="user1"></div>
+                            </div>
+                            <div class="use-time" data-i18n="useTime1"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item-outline">
+                        <div class="stars">
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-716.000000, -5997.000000)">
+                                            <g id="编组-10备份" transform="translate(580.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#E1E1E1" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="evaluation" data-i18n="common2"></div>
+                        <div class="item-boot">
+                            <div class="user-info">
+                                <div class="user-img">
+                                    <img src="https://laixiui.cnhack.com/images/newWaterfalls/user-2.png" alt="来喜用户" />
+                                </div>
+                                <div class="user-name" data-i18n="user2">玄晓奘0528</div>
+                            </div>
+                            <div class="use-time" data-i18n="useTime2"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item-outline">
+                        <div class="stars">
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="evaluation" data-i18n="common3"></div>
+                        <div class="item-boot">
+                            <div class="user-info">
+                                <div class="user-img">
+                                    <img src="https://laixiui.cnhack.com/images/newWaterfalls/user-3.png" alt="来喜用户" />
+                                </div>
+                                <div class="user-name" data-i18n="user3"></div>
+                            </div>
+                            <div class="use-time" data-i18n="useTime3"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item-outline">
+                        <div class="stars">
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="star">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <title>编组备份 4</title>
+                                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="20240612来喜官网5.0" transform="translate(-1120.000000, -5997.000000)">
+                                            <g id="编组-10备份-2" transform="translate(984.000000, 5965.000000)">
+                                                <g id="编组备份-4" transform="translate(136.000000, 32.000000)">
+                                                    <circle id="椭圆形" fill="#F9F9F9" cx="12" cy="12" r="12"></circle>
+                                                    <path
+                                                        d="M12.0002123,16.3093342 L8.20262781,18.3061633 C8.03831066,18.3925552 7.83919713,18.3781764 7.68899749,18.2690721 C7.53879786,18.1599677 7.46355784,17.9750573 7.49490945,17.7920798 L8.22018664,13.5633284 L5.14739157,10.5685726 C5.01433821,10.43894 4.96647291,10.2449825 5.02394111,10.0683326 C5.0814093,9.89168258 5.23423224,9.76301349 5.41809018,9.73647922 L9.66391257,9.11948148 L11.5627048,5.27214695 C11.644817,5.10551899 11.8144509,5 12.0002123,5 C12.1859737,5 12.3556076,5.10551899 12.4377198,5.27214695 L14.3365121,9.11948148 L18.5823345,9.73647922 C18.7661082,9.76316638 18.9187833,9.89189504 18.9761388,10.068517 C19.0334944,10.245139 18.9855781,10.4390069 18.8525453,10.5685726 L15.780238,13.5633284 L16.5055152,17.7920798 C16.5367327,17.9749173 16.4615424,18.1596376 16.3115084,18.2686968 C16.1614744,18.377756 15.9625666,18.3922767 15.7982846,18.3061633 L12.0002123,16.3093342 Z"
+                                                        id="路径" fill="#FF9C00" fill-rule="nonzero"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="evaluation" data-i18n="common4"></div>
+                        <div class="item-boot">
+                            <div class="user-info">
+                                <div class="user-img">
+                                    <img src="https://laixiui.cnhack.com/images/newWaterfalls/user-4.png" alt="来喜用户" />
+                                </div>
+                                <div class="user-name" data-i18n="user4"></div>
+                            </div>
+                            <div class="use-time" data-i18n="useTime4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="invite-box-placeholder">
+        <!-- <div class="invite-box invite-box-float">
+            <div class="invite">
+                <div class="invite-left">
+                    <div class="invite-info">
+                        <div data-i18n="joinNow" class="title"></div>
+                        <div data-i18n="userCount" class="contact"></div>
+                    </div>
+
+
+                    <a href="down" class="btn-down">
+                        <p data-i18n="freeDownloadWindows"></p>
+                    </a>
+                </div>
+                <div class="invite-right">
+                    <div data-i18n="quickCustomerSupport" class="service-tips"></div>
+                    <div class="service-qrcode">
+                        <img class="service-qrcode-img"
+                            src="https://laixiui.cnhack.com/images/newWaterfalls/service-qrcode.png" alt="加入来喜" />
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="floor-bg">
+        <div class="floor-box">
+            <div class="agreement">
+                <a href="https://laixi.app/privacyPolicy" target="_blank" data-i18n="privacyPolicies"></a> ｜
+                <a href="https://laixi.app/userAgreement" target="_blank" data-i18n="userAgreement"></a>
+            </div>
+            <div class="partner">
+                <span data-i18n="partner"></span>：
+                <a href="https://www.aliyun.com/" data-i18n="aliyun" target="_blank"></a>｜
+                <a href="https://www.54nb.com/guajibao/" data-i18n="guajibao" target="_blank"></a>｜
+                <a href="https://www.54nb.com/wuji/" data-i18n="wuji" target="_blank"></a>｜
+                <a href="https://www.ipdodo.com/?cid=hl-laixi" data-i18n="ipdodo" target="_blank"></a>｜
+                <a href="https://www.ctyun.cn/" data-i18n="tianyiyun" target="_blank"></a>｜
+                <a href="https://www.quanqiudaili.com/" data-i18n="quanqiu" target="_blank"></a>｜
+                <a href="https://www.alipay.com/" data-i18n="alipay" target="_blank"></a>｜
+                <a href="https://www.54nb.com/androids/" data-i18n="juejinqunkong" target="_blank"></a>｜
+                <a href="https://developer.baidu.com/" data-i18n="baidu" target="_blank"></a>｜
+                <a href="http://www.ipipgo.com/?promotionLink=d01b97" data-i18n="ipipgo" target="_blank"></a>|
+                <a href="http://www.shenlongproxy.com/?promotionLink=d01b97" data-i18n="shenlong" target="_blank"></a>｜
+                <a href="https://www.partnershare.net/?source=laixi" data-i18n="partnerShare" target="_blank"></a>｜
+                <a href="https://www.lizhi.io/" data-i18n="lizhi" target="_blank"></a>
+            </div>
+            <div class="copyright zh-txt">
+                Copyright © 2025 Hainan YouHu Technology Co.,Ltd All rights reserved.
+
+                <span class="integrated">｜增值电信业务经营许可证：B1-20234488</span>
+                <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" class="integrated">
+                    琼IC备080268号-1
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="levitate-service">
+        <svg width="96px" height="96px" viewBox="0 0 96 96" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <title>悬浮图标-客服</title>
+            <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="官网5.0移动端-顶部功能菜单显示" transform="translate(-630.000000, -1260.000000)">
+                    <g id="悬浮图标-客服" transform="translate(630.000000, 1260.000000)">
+                        <circle id="椭圆形" fill="#177FF9" cx="48" cy="48" r="48"></circle>
+                        <path
+                            d="M47.4411007,30.0266551 C56.1152194,30.2166809 61.5253655,35.4926912 61.5253655,44.3903696 C61.5253655,45.9105759 61.5477215,47.9114358 61.4582976,49.8116937 C59.4127257,50.6723988 54.3043853,51.2089422 49.6766982,50.7171108 C47.4075667,50.448839 45.339639,52.1143592 45.0825452,54.3946688 C44.8366295,56.6749783 46.4797937,58.9329318 48.7601032,59.1900256 C49.8443681,59.3129835 51.6216681,59.2570935 53.7007739,59.2570935 C55.399828,59.2570935 57.5124678,59.3688734 59.4015477,59.0670677 C58.5408426,61.0008596 57.0877042,62.3757521 55.2656922,63.7953566 L55.2656922,63.7953566 L55.2656922,64.421324 C63.5932932,65.7291486 69.4729149,69.1384349 69.461753,73.6655199 C69.461753,74.8168526 68.0197766,75.8899395 66.8684439,75.8899395 L66.8684439,75.8899395 L26.0576099,75.8899395 C24.9062772,75.8899395 23.9449702,74.8168526 23.9449702,73.6655199 C23.9449702,69.1496128 30.3164233,65.7291485 38.6328463,64.4325019 L38.6328463,64.4325019 L38.6328463,63.8065346 C32.6143823,59.1039355 32.3199495,50.5818464 32.3066971,45.048852 L32.3061051,44.4574375 C32.3061051,35.5485812 37.5038695,30.2055029 46.1779881,30.0266551 L46.1779881,30.0266551 Z M66.533104,49.0180566 C67.5726569,49.5098881 68.0085984,50.7618227 67.505589,51.7901976 C65.3035253,56.3396387 58.0937231,57.1444538 53.2536544,57.1444538 C51.0292348,57.1444538 49.2966466,56.976784 48.8048152,56.9208941 C47.6646604,56.7867583 46.8374893,55.7695614 46.9716252,54.6294066 C47.094583,53.4892518 48.1117799,52.6732587 49.2631127,52.7962165 C54.4385211,53.366294 62.3748926,52.8744625 63.760963,49.9905416 C64.2527945,48.9621667 65.4935511,48.5150471 66.533104,49.0180566 Z M46.9492691,20 C59.0662081,20.0111779 69.0146173,29.4789337 69.7858985,41.4058468 L72.6139295,42.4118657 C73.4411006,42.7024934 74,43.4961306 74,44.3680136 L74,52.9974203 C73.988822,54.1487531 73.061049,55.076526 71.9097162,55.076526 C70.7583835,55.076526 69.8306105,54.1487531 69.8306105,52.9974203 L69.8306105,45.83233 L67.0472914,44.8374891 C66.2201203,44.5468614 65.6612209,43.7532242 65.6612209,42.8813412 C65.6612209,32.5640583 57.266552,24.1693894 46.9492691,24.1693894 C36.6319863,24.1693894 28.2373173,32.5640583 28.2373173,42.8813412 C28.2373173,43.5520205 27.9131557,44.1779878 27.3654343,44.5692174 L26.1582116,45.4299225 L26.1582116,52.9862423 C26.1582116,54.1375751 25.2304386,55.0653481 24.0791058,55.0653481 C22.927773,55.0653481 22,54.1375751 22,52.9862423 L22,44.3568357 C22,43.6861564 22.3241616,43.0601891 22.8718831,42.6689595 L24.1014617,41.7858984 C24.6715392,29.6801375 34.6981943,20 46.9492691,20 Z"
+                            id="形状结合" fill="#FFFFFF" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+
+    <div class="levitate-service-content" style="display: none;">
+        <div class="levitate-service-closed">
+            <svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>LaiXi - Home</title>
+                <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="20240612来喜官网5.0移动端-联系我们二维码" transform="translate(-638.000000, -391.000000)">
+                        <g id="提示弹窗-关闭icon" transform="translate(638.000000, 391.000000)">
+                            <circle id="椭圆形" fill="#FFFFFF" cx="28" cy="28" r="28"></circle>
+                            <path
+                                d="M39.5606602,16.4393398 C40.109835,16.9885146 40.1441584,17.857577 39.6636304,18.4467378 L39.5606602,18.5606602 L30.121,28 L39.5606602,37.4393398 C40.1464466,38.0251263 40.1464466,38.9748737 39.5606602,39.5606602 C39.0114854,40.109835 38.142423,40.1441584 37.5532622,39.6636304 L37.4393398,39.5606602 L28,30.121 L18.5606602,39.5606602 C17.9748737,40.1464466 17.0251263,40.1464466 16.4393398,39.5606602 C15.890165,39.0114854 15.8558416,38.142423 16.3363696,37.5532622 L16.4393398,37.4393398 L25.879,28 L16.4393398,18.5606602 C15.8535534,17.9748737 15.8535534,17.0251263 16.4393398,16.4393398 C16.9885146,15.890165 17.857577,15.8558416 18.4467378,16.3363696 L18.5606602,16.4393398 L28,25.879 L37.4393398,16.4393398 C38.0251263,15.8535534 38.9748737,15.8535534 39.5606602,16.4393398 Z"
+                                id="形状" fill="#717171" fill-rule="nonzero"></path>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </div>
+        <div class="overlay"></div>
+        <img class="manager-img" src="https://laixiui.cnhack.com/images/newWaterfalls/manager.png" alt="">
+        <a data-i18n="saveServiceQrcode"
+            class="save-img" href="#"
+            download="https://laixiui.cnhack.com/images/newWaterfalls/manager.png">
+        </a>
+    </div>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/ai-customer-service.css">
+
+<div id="lx-ai-cs" class="lx-ai-cs" aria-live="polite">
+  <button type="button" class="lx-ai-cs__fab" id="lx-ai-cs-fab" data-i18n-aria-label="aiCsOpenLabel" aria-label="打开 AI 客服" aria-expanded="false" aria-controls="lx-ai-cs-panel">
+    <img src="/static/img/customer.png" data-i18n-alt="aiCsAlt" alt="来喜 AI 客服" width="68" height="68" draggable="false">
+  </button>
+
+  <div class="lx-ai-cs__panel" id="lx-ai-cs-panel" role="dialog" data-i18n-aria-label="aiCsTitle" aria-label="来喜 AI 客服" aria-hidden="true" hidden>
+    <header class="lx-ai-cs__header">
+      <div class="lx-ai-cs__header-main">
+        <img class="lx-ai-cs__avatar" src="/static/img/customer.png" alt="" width="36" height="36" draggable="false">
+        <div class="lx-ai-cs__titles">
+          <strong data-i18n="aiCsTitle">来喜 AI 客服</strong>
+          <span data-i18n="aiCsSubtitle">常见问题秒回 · 点选或输入提问</span>
+        </div>
+      </div>
+      <button type="button" class="lx-ai-cs__close" id="lx-ai-cs-close" data-i18n-aria-label="aiCsCloseLabel" aria-label="关闭">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3.5 3.5l9 9M12.5 3.5l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </header>
+
+    <div class="lx-ai-cs__body" id="lx-ai-cs-body">
+      <div class="lx-ai-cs__messages" id="lx-ai-cs-messages"></div>
+    </div>
+
+    <div class="lx-ai-cs__suggest" id="lx-ai-cs-suggest"></div>
+
+    <form class="lx-ai-cs__composer" id="lx-ai-cs-form" autocomplete="off">
+      <input
+        type="text"
+        id="lx-ai-cs-input"
+        class="lx-ai-cs__input"
+        data-i18n-placeholder="aiCsPlaceholder"
+        placeholder="输入你的问题…"
+        maxlength="200"
+        enterkeyhint="send"
+      >
+      <button type="submit" class="lx-ai-cs__send" id="lx-ai-cs-send" data-i18n-aria-label="aiCsSendLabel" aria-label="发送">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M3 9h10.5M9.5 4.5L14.5 9l-5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+<script src="/static/js/ai-customer-service.js" defer></script>
+
+
+</body>
+
+</html>
