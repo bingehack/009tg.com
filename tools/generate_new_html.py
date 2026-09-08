@@ -418,7 +418,7 @@ def generate_recent_and_hot(groups, favicon_mapping, lang='cn', asset_prefix='..
     recent_html = '''
             <!-- 最新收录 -->
             <div class="col-md-6">
-                <div class="panel panel-default">
+                <div class="panel panel-default recent-hot-panel">
                     <div class="panel-heading">
                         <h3 class="panel-title" style="font-size: 18px; font-weight: 600;">
                             <i class="fa-clock-o" style="margin-right: 8px; color: #337ab7;"></i>''' + recent_title + '''
@@ -475,7 +475,7 @@ def generate_recent_and_hot(groups, favicon_mapping, lang='cn', asset_prefix='..
     hot_html = '''
             <!-- 热门分类榜 -->
             <div class="col-md-6">
-                <div class="panel panel-default">
+                <div class="panel panel-default recent-hot-panel">
                         <div class="panel-heading">
                             <h3 class="panel-title" style="font-size: 18px; font-weight: 600;">
                                 <i class="fa-fire" style="margin-right: 8px; color: #e74c3c;"></i>''' + hot_title + '''
@@ -622,6 +622,36 @@ def generate_html(lang='cn'):
         nav_about = '关于我们'
         nav_contact = '联系我们'
         nav_tools = '站长工具'
+        tools_dropdown = '''<li class="dropdown hover-dropdown hidden-sm hidden-xs" style="margin-left: 15px;">
+                        <a href="../tools/index.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size: 13px; color: inherit; text-decoration: none;">
+                            <i class="fa-wrench" style="margin-right: 4px;"></i>站长工具 <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" style="min-width: 200px; padding: 8px 0;">
+                            <li><a href="../tools/index.html" style="font-size: 13px; padding: 6px 15px;"><i class="fa-th-large" style="margin-right: 8px; color: #337ab7;"></i>全部工具</a></li>
+                            <li role="separator" class="divider" style="margin: 5px 0;"></li>
+                            <li class="dropdown-header" style="font-size: 11px; color: #999; padding: 3px 15px;">网络工具</li>
+                            <li><a href="../tools/ip.html" style="font-size: 13px; padding: 5px 15px;">IP查询</a></li>
+                            <li><a href="../tools/dns.html" style="font-size: 13px; padding: 5px 15px;">DNS查询</a></li>
+                            <li><a href="../tools/whois.html" style="font-size: 13px; padding: 5px 15px;">WHOIS查询</a></li>
+                            <li><a href="../tools/http.html" style="font-size: 13px; padding: 5px 15px;">HTTP检测</a></li>
+                            <li><a href="../tools/port.html" style="font-size: 13px; padding: 5px 15px;">端口扫描</a></li>
+                            <li role="separator" class="divider" style="margin: 5px 0;"></li>
+                            <li class="dropdown-header" style="font-size: 11px; color: #999; padding: 3px 15px;">编码转换</li>
+                            <li><a href="../tools/base64.html" style="font-size: 13px; padding: 5px 15px;">Base64编解码</a></li>
+                            <li><a href="../tools/url.html" style="font-size: 13px; padding: 5px 15px;">URL编解码</a></li>
+                            <li><a href="../tools/timestamp.html" style="font-size: 13px; padding: 5px 15px;">时间戳转换</a></li>
+                            <li role="separator" class="divider" style="margin: 5px 0;"></li>
+                            <li class="dropdown-header" style="font-size: 11px; color: #999; padding: 3px 15px;">开发工具</li>
+                            <li><a href="../tools/json.html" style="font-size: 13px; padding: 5px 15px;">JSON格式化</a></li>
+                            <li><a href="../tools/regex.html" style="font-size: 13px; padding: 5px 15px;">正则表达式</a></li>
+                            <li><a href="../tools/jwt.html" style="font-size: 13px; padding: 5px 15px;">JWT解析</a></li>
+                            <li role="separator" class="divider" style="margin: 5px 0;"></li>
+                            <li class="dropdown-header" style="font-size: 11px; color: #999; padding: 3px 15px;">计算工具</li>
+                            <li><a href="../tools/mortgage.html" style="font-size: 13px; padding: 5px 15px;">房贷计算</a></li>
+                            <li><a href="../tools/tax.html" style="font-size: 13px; padding: 5px 15px;">个税计算</a></li>
+                            <li><a href="../tools/unit.html" style="font-size: 13px; padding: 5px 15px;">单位换算</a></li>
+                        </ul>
+                    </li>'''
     else:
         html_lang = 'en'
         title = '009tg Navigation - Invisible Man'
@@ -636,6 +666,36 @@ def generate_html(lang='cn'):
         nav_about = 'About'
         nav_contact = 'Contact'
         nav_tools = 'Tools'
+        tools_dropdown = '''<li class="dropdown hover-dropdown hidden-sm hidden-xs" style="margin-left: 15px;">
+                        <a href="../tools/index.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size: 13px; color: inherit; text-decoration: none;">
+                            <i class="fa-wrench" style="margin-right: 4px;"></i>Tools <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" style="min-width: 200px; padding: 8px 0;">
+                            <li><a href="../tools/index.html" style="font-size: 13px; padding: 6px 15px;"><i class="fa-th-large" style="margin-right: 8px; color: #337ab7;"></i>All Tools</a></li>
+                            <li role="separator" class="divider" style="margin: 5px 0;"></li>
+                            <li class="dropdown-header" style="font-size: 11px; color: #999; padding: 3px 15px;">Network</li>
+                            <li><a href="../tools/ip.html" style="font-size: 13px; padding: 5px 15px;">IP Lookup</a></li>
+                            <li><a href="../tools/dns.html" style="font-size: 13px; padding: 5px 15px;">DNS Lookup</a></li>
+                            <li><a href="../tools/whois.html" style="font-size: 13px; padding: 5px 15px;">WHOIS Lookup</a></li>
+                            <li><a href="../tools/http.html" style="font-size: 13px; padding: 5px 15px;">HTTP Check</a></li>
+                            <li><a href="../tools/port.html" style="font-size: 13px; padding: 5px 15px;">Port Scan</a></li>
+                            <li role="separator" class="divider" style="margin: 5px 0;"></li>
+                            <li class="dropdown-header" style="font-size: 11px; color: #999; padding: 3px 15px;">Encoding</li>
+                            <li><a href="../tools/base64.html" style="font-size: 13px; padding: 5px 15px;">Base64</a></li>
+                            <li><a href="../tools/url.html" style="font-size: 13px; padding: 5px 15px;">URL Encode</a></li>
+                            <li><a href="../tools/timestamp.html" style="font-size: 13px; padding: 5px 15px;">Timestamp</a></li>
+                            <li role="separator" class="divider" style="margin: 5px 0;"></li>
+                            <li class="dropdown-header" style="font-size: 11px; color: #999; padding: 3px 15px;">Developer</li>
+                            <li><a href="../tools/json.html" style="font-size: 13px; padding: 5px 15px;">JSON Formatter</a></li>
+                            <li><a href="../tools/regex.html" style="font-size: 13px; padding: 5px 15px;">Regex Tester</a></li>
+                            <li><a href="../tools/jwt.html" style="font-size: 13px; padding: 5px 15px;">JWT Decoder</a></li>
+                            <li role="separator" class="divider" style="margin: 5px 0;"></li>
+                            <li class="dropdown-header" style="font-size: 11px; color: #999; padding: 3px 15px;">Calculator</li>
+                            <li><a href="../tools/mortgage.html" style="font-size: 13px; padding: 5px 15px;">Mortgage</a></li>
+                            <li><a href="../tools/tax.html" style="font-size: 13px; padding: 5px 15px;">Income Tax</a></li>
+                            <li><a href="../tools/unit.html" style="font-size: 13px; padding: 5px 15px;">Unit Converter</a></li>
+                        </ul>
+                    </li>'''
 
     # 底部footer内容
     if lang == 'cn':
@@ -688,6 +748,9 @@ def generate_html(lang='cn'):
         .back-to-top svg{width:20px;height:20px;fill:#fff;}
         [data-theme="dark"] .back-to-top{background-color:#4a90d9;}
         @media (max-width:768px){.back-to-top{bottom:20px;right:20px;width:40px;height:40px;}}
+        .hover-dropdown:hover .dropdown-menu { display: block; }
+        .hover-dropdown .dropdown-menu { margin-top: 0; }
+        .recent-hot-panel .panel-body { min-height: 320px; }
     </style>
     <button class="back-to-top" onclick="return backToTop(event)" title="''' + ('回到顶部' if lang == 'cn' else 'Back to Top') + '''">
         <svg viewBox="0 0 24 24"><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg>
@@ -1223,11 +1286,7 @@ def generate_html(lang='cn'):
                             <i class="fa-newspaper-o" style="margin-right: 4px;"></i>{nav_articles}
                         </a>
                     </li>
-                    <li class="hidden-sm hidden-xs" style="margin-left: 15px;">
-                        <a href="../tools/index.html" style="font-size: 13px; color: inherit; text-decoration: none;">
-                            <i class="fa-wrench" style="margin-right: 4px;"></i>{nav_tools}
-                        </a>
-                    </li>
+                    {tools_dropdown}
                     <li class="hidden-sm hidden-xs" style="margin-left: 15px;">
                         <a href="about.html" style="font-size: 13px; color: inherit; text-decoration: none;">
                             <i class="fa-info-circle" style="margin-right: 4px;"></i>{nav_about}
@@ -1328,7 +1387,7 @@ def generate_html(lang='cn'):
                         for (var i = startIndex; i < endIndex; i++) {{
                             var site = sites[i];
                             var siteHtml = `<div class="site-item" data-index="${{i}}">
-                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href='{asset_prefix}site/${{site.id}}.html'" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
+                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href='site/${{site.id}}.html'" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
                                     <div class="xe-comment-entry">
                                         <a class="xe-user-img">
                                             <img src="${{site.icon}}" data-src="${{site.icon}}" class="lozad img-circle" width="40" onerror="this.onerror=null;this.src='{asset_prefix}assets/images/logos/default.png'">
@@ -1348,7 +1407,7 @@ def generate_html(lang='cn'):
                         for (var i = 0; i < sites.length; i++) {{
                             var site = sites[i];
                             var siteHtml = `<div class="site-item" data-index="${{i}}">
-                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href='{asset_prefix}site/${{site.id}}.html'" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
+                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href='site/${{site.id}}.html'" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
                                     <div class="xe-comment-entry">
                                         <a class="xe-user-img">
                                             <img src="${{site.icon}}" data-src="${{site.icon}}" class="lozad img-circle" width="40" onerror="this.onerror=null;this.src='{asset_prefix}assets/images/logos/default.png'">
@@ -1408,7 +1467,7 @@ def generate_html(lang='cn'):
                         for (var i = startIndex; i < endIndex; i++) {{
                             var site = sites[i];
                             var siteHtml = `<div class="site-item" data-index="${{i}}">
-                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href='{asset_prefix}site/${{site.id}}.html'" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
+                                <div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href='site/${{site.id}}.html'" data-toggle="tooltip" data-placement="bottom" title="${{site.url}}">
                                     <div class="xe-comment-entry">
                                         <a class="xe-user-img">
                                             <img src="${{site.icon}}" data-src="${{site.icon}}" class="lozad img-circle" width="40" onerror="this.onerror=null;this.src='{asset_prefix}assets/images/logos/default.png'">

@@ -351,7 +351,7 @@ def generate_site_card(site, favicon_mapping, asset_prefix, lang='cn'):
 
     return f'''
                     <div class="site-item">
-                        <div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href='{asset_prefix}site/{site.get('id', 0)}.html'" data-toggle="tooltip" data-placement="bottom" title="{site_url}">
+                        <div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href='../site/{site.get('id', 0)}.html'" data-toggle="tooltip" data-placement="bottom" title="{site_url}">
                             <div class="xe-comment-entry">
                                 <a class="xe-user-img">
                                     <img src="{site_icon}" class="lozad img-circle" width="40" alt="{site_name}" onerror="this.onerror=null;this.src='{asset_prefix}assets/images/logos/default.png'">
@@ -1104,7 +1104,7 @@ def generate_category_page(category, parent_category, children, all_sites_in_cat
                 for (var i = start; i < end; i++) {{
                     var site = allSites[i];
                     var siteHtml = '<div class="site-item">' +
-                        '<div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href=\\'' + '{asset_prefix}site/' + site.id + '.html\\'" data-toggle="tooltip" data-placement="bottom" title="' + site.url + '">' +
+                        '<div class="xe-widget xe-conversations box2 label-info" onclick="window.location.href=\\'' + '../site/' + site.id + '.html\\'" data-toggle="tooltip" data-placement="bottom" title="' + site.url + '">' +
                             '<div class="xe-comment-entry">' +
                                 '<a class="xe-user-img"><img src="' + site.icon + '" class="lozad img-circle" width="40" alt="' + site.name + '" onerror="this.onerror=null;this.src=\'' + '{asset_prefix}assets/images/logos/default.png' + '\'"></a>' +
                                 '<div class="xe-comment">' +

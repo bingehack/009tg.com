@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting - 009tg Navigation</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f5f6fa;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+        .redirect-box {
+            background: #fff;
+            border-radius: 12px;
+            padding: 40px 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+        .redirect-box h1 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        .redirect-box p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .redirect-box .site-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #337ab7;
+            margin: 15px 0;
+            word-break: break-all;
+        }
+        .redirect-box .site-url {
+            font-size: 12px;
+            color: #999;
+            word-break: break-all;
+            margin-bottom: 20px;
+        }
+        .redirect-box .countdown {
+            font-size: 14px;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        .redirect-box a {
+            display: inline-block;
+            padding: 10px 30px;
+            background: #337ab7;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .redirect-box a:hover {
+            background: #286090;
+        }
+        .redirect-box .back-link {
+            display: block;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #999;
+            background: none;
+            padding: 0;
+        }
+        .redirect-box .back-link:hover {
+            color: #337ab7;
+            background: none;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 12px 15px;
+            margin: 15px 0;
+            font-size: 12px;
+            color: #856404;
+            text-align: left;
+            line-height: 1.6;
+        }
+        .spinner {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #337ab7;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="redirect-box">
+        <div class="spinner"></div>
+        <h1>Redirecting</h1>
+        <p>You are leaving 009tg Navigation to visit a third-party website</p>
+        <div class="site-name" id="siteName">Loading...</div>
+        <div class="site-url" id="siteUrl"></div>
+        <div class="warning">
+            <strong>Safety Notice:</strong> This link leads to a third-party website. We are not responsible for its content, security, or availability. Please assess the safety and legitimacy of the target website before visiting, and protect your personal privacy and financial security.
+        </div>
+        <p class="countdown"><span id="countdown">5</span> seconds to auto-redirect, or click the button below</p>
+        <a href="#" id="jumpBtn" onclick="jumpNow();return false;">Visit Now</a>
+        <a href="/en/" class="back-link">Back to Home</a>
+    </div>
+    <script>
+        function getQueryParam(name) {
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+        var targetUrl = getQueryParam('url') || '';
+        var siteName = getQueryParam('name') || targetUrl || 'Unknown Site';
+        document.getElementById('siteName').textContent = siteName;
+        document.getElementById('siteUrl').textContent = targetUrl;
+        document.getElementById('jumpBtn').href = targetUrl;
+        var countdown = 5;
+        var countdownEl = document.getElementById('countdown');
+        var timer = setInterval(function() {
+            countdown--;
+            countdownEl.textContent = countdown;
+            if (countdown <= 0) {
+                clearInterval(timer);
+                if (targetUrl) {
+                    window.location.href = targetUrl;
+                }
+            }
+        }, 1000);
+        function jumpNow() {
+            if (targetUrl) {
+                window.location.href = targetUrl;
+            }
+        }
+    </script>
+</body>
+</html>
