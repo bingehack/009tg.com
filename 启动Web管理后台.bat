@@ -1,44 +1,71 @@
 @echo off
-title 009tg Web Admin
+title 009tg Web Admin Panel
+color 0A
+
 echo ============================================
 echo   009tg Navigation - Web Admin Panel
 echo ============================================
 echo.
+
+REM Switch to script directory
+cd /d "%~dp0"
+echo Working directory: %CD%
+echo.
+
+REM Find Python
+set PYTHON_CMD=
+where python >nul 2>&1
+if %errorlevel%==0 (
+    set PYTHON_CMD=python
+    echo Found Python: python
+) else (
+    where py >nul 2>&1
+    if %errorlevel%==0 (
+        set PYTHON_CMD=py
+        echo Found Python: py
+    )
+)
+
+if "%PYTHON_CMD%"=="" (
+    echo.
+    echo [ERROR] Python not found!
+    echo Please install Python 3.8+ from https://python.org
+    echo.
+    pause
+    exit /b 1
+)
+
+echo.
+echo Checking dependencies...
+%PYTHON_CMD% -c "import flask" >nul 2>&1
+if errorlevel 1 (
+    echo [WARNING] Flask not found, installing...
+    %PYTHON_CMD% -m pip install flask requests beautifulsoup4 pillow pyyaml
+    if errorlevel 1 (
+        echo.
+        echo [ERROR] Failed to install dependencies.
+        echo Please run manually: pip install flask requests beautifulsoup4 pillow pyyaml
+        echo.
+        pause
+        exit /b 1
+    )
+)
+
+echo Dependencies OK.
+echo.
+echo ============================================
 echo Starting server...
 echo URL: http://127.0.0.1:5000
 echo Close this window to stop the server.
 echo ============================================
 echo.
 
-cd /d "%~dp0"
+REM Start the server
+%PYTHON_CMD% tools\web_admin\app.py
 
-REM Try to find python
-where python >nul 2>&1
-if %errorlevel%==0 (
-    python tools\web_admin\app.py
-) else (
-    where py >nul 2>&1
-    if %errorlevel%==0 (
-        py tools\web_admin\app.py
-    ) else (
-        echo.
-        echo ERROR: Python not found!
-        echo Please install Python 3.8+ from https://python.org
-        echo.
-        pause
-    )
-)
-
-if errorlevel 1 (
-    echo.
-    echo ============================================
-    echo Server stopped with error.
-    echo ============================================
-    echo.
-    echo Common issues:
-    echo 1. Flask not installed: run "pip install flask"
-    echo 2. Port 5000 in use: close other apps using port 5000
-    echo 3. Missing dependencies: run "pip install flask requests beautifulsoup4 pillow pyyaml"
-    echo.
-    pause
-)
+echo.
+echo ============================================
+echo Server has stopped.
+echo ============================================
+echo.
+pause
