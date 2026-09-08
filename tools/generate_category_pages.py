@@ -523,6 +523,50 @@ def generate_category_page(category, parent_category, children, all_sites_in_cat
         keywords = f'{display_name},url directory,tool recommendation,{category_name}'
         description = f'Quality tools and resources in the {display_name} category, {total_sites} sites total. {category_desc[:100]}'
 
+    # 底部footer内容
+    if lang == 'cn':
+        footer_html = f'''<footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="../../cn/index.html">首页</a>
+                <a href="../../cn/about.html">关于我们</a>
+                <a href="../../cn/articles.html">文章资讯</a>
+                <a href="../../cn/privacy.html">隐私政策</a>
+                <a href="../../cn/terms.html">服务条款</a>
+                <a href="../../cn/disclaimer.html">免责声明</a>
+                <a href="../../cn/contact.html">联系我们</a>
+                <a href="../../cn/sitemap.html">网站地图</a>
+            </div>
+            <div class="footer-copyright">
+                © 2024-2026 009tg.com 版权所有 | Invisible Man
+            </div>
+            <div class="footer-disclaimer">
+                本站仅供学习交流使用，所有内容均来自互联网，如有侵权请联系删除
+            </div>
+        </div>
+    </footer>'''
+    else:
+        footer_html = f'''<footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="../../en/index.html">Home</a>
+                <a href="../../en/about.html">About</a>
+                <a href="../../en/articles.html">Articles</a>
+                <a href="../../en/privacy.html">Privacy</a>
+                <a href="../../en/terms.html">Terms</a>
+                <a href="../../en/disclaimer.html">Disclaimer</a>
+                <a href="../../en/contact.html">Contact</a>
+                <a href="../../en/sitemap.html">Sitemap</a>
+            </div>
+            <div class="footer-copyright">
+                © 2024-2026 009tg.com All Rights Reserved | Invisible Man
+            </div>
+            <div class="footer-disclaimer">
+                For learning purposes only, all content from the internet, contact us for removal if infringement
+            </div>
+        </div>
+    </footer>'''
+
     html = f'''<!DOCTYPE html>
 <html lang="{html_lang}">
 
@@ -822,6 +866,59 @@ def generate_category_page(category, parent_category, children, all_sites_in_cat
         @media (max-width: 480px) {{
             .site-item {{ flex: 0 0 100%; max-width: 100%; margin: 0 0 15px 0; }}
         }}
+        .site-footer {{
+            background-color: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+            padding: 30px 0 20px;
+            margin-top: 40px;
+        }}
+        [data-theme="dark"] .site-footer {{
+            background-color: var(--bg-sidebar) !important;
+            border-top-color: var(--border-color) !important;
+        }}
+        .site-footer .footer-container {{
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }}
+        .site-footer .footer-links {{
+            text-align: center;
+            margin-bottom: 15px;
+        }}
+        .site-footer .footer-links a {{
+            color: #666;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 14px;
+            transition: color 0.2s;
+        }}
+        .site-footer .footer-links a:hover {{
+            color: #007bff;
+        }}
+        [data-theme="dark"] .site-footer .footer-links a {{
+            color: var(--text-secondary) !important;
+        }}
+        [data-theme="dark"] .site-footer .footer-links a:hover {{
+            color: var(--link-color) !important;
+        }}
+        .site-footer .footer-copyright {{
+            text-align: center;
+            color: #999;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }}
+        [data-theme="dark"] .site-footer .footer-copyright {{
+            color: var(--text-muted) !important;
+        }}
+        .site-footer .footer-disclaimer {{
+            text-align: center;
+            color: #aaa;
+            font-size: 12px;
+        }}
+        [data-theme="dark"] .site-footer .footer-disclaimer {{
+            color: var(--text-muted) !important;
+            opacity: 0.8;
+        }}
     </style>
     <script src="{asset_prefix}assets/js/jquery-1.11.1.min.js"></script>
     <script src="{asset_prefix}assets/js/lozad.js"></script>
@@ -1114,6 +1211,7 @@ def generate_category_page(category, parent_category, children, all_sites_in_cat
     <script src="{asset_prefix}assets/js/xenon-api.js"></script>
     <script src="{asset_prefix}assets/js/xenon-toggles.js"></script>
     <script src="{asset_prefix}assets/js/xenon-custom.js"></script>
+    {footer_html}
 </body>
 </html>
 '''
