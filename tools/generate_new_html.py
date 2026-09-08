@@ -445,12 +445,14 @@ def generate_html(lang='cn'):
         keywords = '009tg下海导航,网址导航,上网导航,网址大全,网址目录,创业工具,副业赚钱,投资理财,跨境电商,营销工具,AI工具,社交媒体,独立站,广告投放'
         description = '009tg下海导航致力于打造国内最好的互联网上优质网站网址大全，收录了全网好用强大的网站网址和软件包括创业、副业、投资、跨境电商、营销工具、AI工具、社交媒体、独立站、广告投放、生活、休闲、办公、工具、资源等超全面的网址和职业技巧内容，让您的上网体验更便捷更放心，努力成为全民级人人都在用的网址导航。'
         about_text = '关于本站'
+        articles_text = '文章资讯'
     else:
         html_lang = 'en'
         title = '009tg Navigation - Invisible Man'
         keywords = '009tg navigation, url directory, web directory, startup tools, side hustle, investment, cross-border e-commerce, marketing tools, AI tools, social media, advertising'
         description = '009tg Navigation is a comprehensive web directory featuring the best websites and tools for entrepreneurship, side hustles, investment, cross-border e-commerce, marketing, AI tools, social media, and more. Your ultimate resource for discovering powerful online tools and professional tips.'
         about_text = 'About Us'
+        articles_text = 'Articles'
 
     print(f"生成完整HTML ({lang})...")
     html = f'''<!DOCTYPE html>
@@ -852,6 +854,13 @@ def generate_html(lang='cn'):
                 </header>
                 <ul id="main-menu" class="main-menu">
                     {nav_html}
+                    <li>
+                        <a href="articles.html">
+                            <i class="linecons-note"></i>
+                            <span class="tooltip-blue">{articles_text}</span>
+                            <span class="label label-Primary pull-right hidden-collapsed">NEW</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="about.html">
                             <i class="linecons-heart"></i>

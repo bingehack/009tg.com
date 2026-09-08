@@ -47,6 +47,22 @@ for cat_id in category_ids:
     urls.append((f'https://009tg.com/cn/category/{cat_id}.html', 'weekly', '0.7'))
     urls.append((f'https://009tg.com/en/category/{cat_id}.html', 'weekly', '0.7'))
 
+# 文章页面
+article_count = 0
+articles_path = os.path.join(project_root, 'data', 'articles.json')
+if os.path.exists(articles_path):
+    with open(articles_path, 'r', encoding='utf-8') as f:
+        articles_data = json.load(f)
+    articles = [a for a in articles_data.get('articles', []) if a.get('isPublic', True)]
+    article_count = len(articles)
+    # 文章列表页
+    urls.append(('https://009tg.com/cn/articles.html', 'weekly', '0.8'))
+    urls.append(('https://009tg.com/en/articles.html', 'weekly', '0.8'))
+    # 文章详情页
+    for article in articles:
+        urls.append((f'https://009tg.com/cn/article/{article["id"]}.html', 'monthly', '0.6'))
+        urls.append((f'https://009tg.com/en/article/{article["id"]}.html', 'monthly', '0.6'))
+
 # 生成XML
 xml_content = '''<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -72,3 +88,4 @@ print(f"sitemap.xml 已更新，共 {len(urls)} 个URL")
 print(f"  - 首页: 3")
 print(f"  - 标准页面: {len(standard_pages) * 2}")
 print(f"  - 分类详情页: {len(category_ids) * 2}")
+print(f"  - 文章页面: {article_count * 2 + 2 if article_count else 0}")
