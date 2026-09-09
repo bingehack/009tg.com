@@ -522,7 +522,7 @@ def generate_recent_and_hot(groups, favicon_mapping, lang='cn', asset_prefix='..
     
     # 左右布局：最新收录(左) + 热门分类(右)，用row包裹
     combined_html = '''
-            <div class="row" style="margin-bottom: 30px;">
+            <div class="row recent-hot-row" style="margin-bottom: 30px;">
     ''' + recent_html + hot_html + '''
             </div>
     '''
@@ -750,7 +750,10 @@ def generate_html(lang='cn'):
         @media (max-width:768px){.back-to-top{bottom:20px;right:20px;width:40px;height:40px;}}
         .hover-dropdown:hover .dropdown-menu { display: block; }
         .hover-dropdown .dropdown-menu { margin-top: 0; }
-        .recent-hot-panel .panel-body { min-height: 320px; }
+        .recent-hot-row { display: flex; flex-wrap: wrap; }
+        .recent-hot-row > .col-md-6 { display: flex; }
+        .recent-hot-panel { width: 100%; display: flex; flex-direction: column; }
+        .recent-hot-panel .panel-body { flex: 1; min-height: 300px; }
         /* 最新收录响应式：大屏9个，中屏6个，小屏3个，超小屏4个 */
         @media (max-width: 1200px) { .recent-item:nth-child(n+7) { display: none; } }
         @media (max-width: 992px) { .recent-item:nth-child(n+4) { display: none; } }

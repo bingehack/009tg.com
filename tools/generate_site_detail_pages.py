@@ -183,6 +183,15 @@ def generate_site_detail_page(site, category, related_sites, favicon_mapping, me
     # favicon路径（用绝对路径，避免相对路径在URL重写后解析错误）
     favicon = get_favicon_path(site, favicon_mapping, asset_prefix='/')
     
+    # 首字母头像（替代favicon图片，避免图片加载问题）
+    if name:
+        first_char = name[0].upper()
+    else:
+        first_char = '?'
+    name_hash = sum(ord(c) for c in name) if name else 0
+    hue = name_hash % 360
+    avatar_bg = f'hsl({hue}, 65%, 55%)'
+    
     # 分类信息
     cat_id = category.get('id', 0) if category else 0
     cat_name = category.get('name', '') if category else ''
@@ -301,20 +310,18 @@ def generate_site_detail_page(site, category, related_sites, favicon_mapping, me
             margin-bottom: 30px;
             border: 1px solid var(--border-color);
         }}
-        .site-logo {{
+        .site-logo-avatar {{
             width: 80px;
             height: 80px;
             border-radius: 12px;
-            object-fit: contain;
-            background: #f5f5f5;
-            padding: 8px;
-            border: 1px solid #e8e8e8;
-            display: block;
-            box-sizing: border-box;
-        }}
-        [data-theme="dark"] .site-logo {{
-            background: #2a2a4a;
-            border-color: #3a3a5a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }}
         .site-info h1 {{
             margin: 0 0 8px 0;
@@ -538,7 +545,7 @@ def generate_site_detail_page(site, category, related_sites, favicon_mapping, me
         </div>
         
         <div class="site-header">
-            <img src="{favicon}" alt="{name}" class="site-logo" onerror="this.src='/assets/images/logos/default.png'">
+            <div class="site-logo-avatar" style="background: {avatar_bg};">{first_char}</div>
             <div class="site-info">
                 <h1>{name}</h1>
                 <div class="site-domain"><i class="fa-globe" style="margin-right: 6px;"></i>{domain}</div>
