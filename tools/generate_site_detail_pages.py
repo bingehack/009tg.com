@@ -306,8 +306,13 @@ def generate_site_detail_page(site, category, related_sites, favicon_mapping, me
             height: 80px;
             border-radius: 12px;
             object-fit: contain;
-            background: transparent;
-            padding: 0;
+            background: #f5f5f5;
+            padding: 12px;
+            border: 1px solid #e8e8e8;
+        }}
+        [data-theme="dark"] .site-logo {{
+            background: #2a2a4a;
+            border-color: #3a3a5a;
         }}
         .site-info h1 {{
             margin: 0 0 8px 0;
