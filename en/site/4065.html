@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BBMSL - 009tg Navigation</title>
+    <meta name="keywords" content="BBMSL, bbmsl.com, , 009tg navigation"/>
+    <meta name="description" content="BBMSL电子支付服务，让您的业务领先一步"/>
+    <link rel="shortcut icon" href="/assets/images/favicon.png">
+    <link rel="stylesheet" href="/assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="/assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            --accent-color: #337ab7;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --border-color: #2a2a4a;
+            --accent-color: #5dade2;
+        }
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+        .site-detail-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .site-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 30px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+        .site-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: contain;
+            background: #f5f5f5;
+            padding: 8px;
+            border: 1px solid #e8e8e8;
+            display: block;
+            box-sizing: border-box;
+        }
+        [data-theme="dark"] .site-logo {
+            background: #2a2a4a;
+            border-color: #3a3a5a;
+        }
+        .site-info h1 {
+            margin: 0 0 8px 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .site-domain {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .site-actions {
+            display: flex;
+            gap: 12px;
+        }
+        .btn-primary {
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.9; color: #fff; text-decoration: none; }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover { border-color: var(--accent-color); color: var(--accent-color); }
+        .section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title i { color: var(--accent-color); }
+        .intro-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+        .keyword-tag {
+            display: inline-block;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin: 4px 6px 4px 0;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        .info-item {
+            font-size: 14px;
+        }
+        .info-label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .info-value {
+            color: var(--text-primary);
+            font-weight: 500;
+            word-break: break-all;
+        }
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+        .related-site-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .related-site-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-decoration: none;
+        }
+        .related-favicon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            object-fit: contain;
+            background: #fff;
+            padding: 2px;
+        }
+        .related-name {
+            font-size: 13px;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1;
+        }
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .breadcrumb a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+        .theme-toggle:hover { border-color: var(--accent-color); }
+        .site-footer {
+            background-color: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+            padding: 30px 0 20px;
+            margin-top: 40px;
+        }
+        [data-theme="dark"] .site-footer {
+            background-color: var(--bg-sidebar) !important;
+            border-top-color: var(--border-color) !important;
+        }
+        .site-footer .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .site-footer .footer-links {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .site-footer .footer-links a {
+            color: #666;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        .site-footer .footer-links a:hover {
+            color: #007bff;
+        }
+        [data-theme="dark"] .site-footer .footer-links a {
+            color: var(--text-secondary) !important;
+        }
+        [data-theme="dark"] .site-footer .footer-links a:hover {
+            color: var(--link-color) !important;
+        }
+        .site-footer .footer-copyright {
+            text-align: center;
+            color: #999;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+        [data-theme="dark"] .site-footer .footer-copyright {
+            color: var(--text-muted) !important;
+        }
+        .site-footer .footer-disclaimer {
+            text-align: center;
+            color: #aaa;
+            font-size: 12px;
+        }
+        [data-theme="dark"] .site-footer .footer-disclaimer {
+            color: var(--text-muted) !important;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+        <i class="fa-moon-o" id="theme-icon"></i>
+    </button>
+    
+    <div class="site-detail-container">
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a> / 
+            <a href="../category/47.html">跨境支付</a> / 
+            <span>BBMSL</span>
+        </div>
+        
+        <div class="site-header">
+            <img src="/assets/images/logos/default.png" alt="BBMSL" class="site-logo" onerror="this.src='/assets/images/logos/default.png'">
+            <div class="site-info">
+                <h1>BBMSL</h1>
+                <div class="site-domain"><i class="fa-globe" style="margin-right: 6px;"></i>bbmsl.com</div>
+                <div class="site-actions">
+                    <a href="../redirect.html?url=https://bbmsl.com/tc&name=BBMSL" target="_blank" class="btn-primary">
+                        <i class="fa-external-link" style="margin-right: 6px;"></i>Visit Website
+                    </a>
+                    <button class="btn-secondary" onclick="copyUrl()">
+                        <i class="fa-copy" style="margin-right: 6px;"></i>Copy URL
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-info-circle"></i>About</h2>
+            <div class="intro-text">BBMSL电子支付服务，让您的业务领先一步</div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-tags"></i>Keywords</h2>
+            <div><span class="keyword-tag">BBMSL</span> <span class="keyword-tag">跨境支付</span></div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-list-alt"></i>Site Info</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Domain</div>
+                    <div class="info-value">bbmsl.com</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Category</div>
+                    <div class="info-value"><a href="../category/47.html" style="color: var(--accent-color);">跨境支付</a></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Added</div>
+                    <div class="info-value"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fa-thumbs-up"></i>Related Sites</h2>
+            <div class="related-grid">
+                
+                        <a href="279.html" class="related-site-card">
+                            <img src="../../assets/favicons/4f85fe6fe0956339602459a462186ee7.png" alt="e.pn虚拟银行卡" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
+                            <span class="related-name">e.pn虚拟银行卡</span>
+                        </a>
+            
+                        <a href="280.html" class="related-site-card">
+                            <img src="../../assets/favicons/ffc28cf82a039090167c4fdde98abcae.png" alt="Paypal" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
+                            <span class="related-name">Paypal</span>
+                        </a>
+            
+                        <a href="281.html" class="related-site-card">
+                            <img src="../../assets/favicons/9b09dcafd0ef28259c561573da7b9c7a.png" alt="PingPong" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
+                            <span class="related-name">PingPong</span>
+                        </a>
+            
+                        <a href="282.html" class="related-site-card">
+                            <img src="../../assets/favicons/8cee1da5594c90fcd022c57add8d2666.png" alt="PhotonPay光子易" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
+                            <span class="related-name">PhotonPay光子易</span>
+                        </a>
+            
+                        <a href="283.html" class="related-site-card">
+                            <img src="../../assets/favicons/4372d4740ea8090b1e5a2945c2621974.png" alt="连连支付" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
+                            <span class="related-name">连连支付</span>
+                        </a>
+            
+                        <a href="284.html" class="related-site-card">
+                            <img src="../../assets/favicons/9b138529b5476f333cdb6ac8f81c32ab.png" alt="钱海" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
+                            <span class="related-name">钱海</span>
+                        </a>
+            
+                        <a href="285.html" class="related-site-card">
+                            <img src="../../assets/favicons/2062db04001dd9524fdf0e291d4cd691.png" alt="WorldFirst" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
+                            <span class="related-name">WorldFirst</span>
+                        </a>
+            
+                        <a href="286.html" class="related-site-card">
+                            <img src="../../assets/favicons/ebb24647ae4eeef75d920f9c22bab4cb.png" alt="Airwallex 空中云汇" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
+                            <span class="related-name">Airwallex 空中云汇</span>
+                        </a>
+            
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 深色模式
+        function toggleTheme() {
+            var current = document.documentElement.getAttribute('data-theme');
+            var newTheme = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            document.getElementById('theme-icon').className = newTheme === 'dark' ? 'fa-sun-o' : 'fa-moon-o';
+        }
+        (function() {
+            var saved = localStorage.getItem('theme');
+            if (saved) {
+                document.documentElement.setAttribute('data-theme', saved);
+                document.getElementById('theme-icon').className = saved === 'dark' ? 'fa-sun-o' : 'fa-moon-o';
+            }
+        })();
+        
+        // 复制URL
+        function copyUrl() {
+            navigator.clipboard.writeText('https://bbmsl.com/tc').then(function() {
+                var btn = event.target.closest('button');
+                var original = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-check" style="margin-right: 6px;"></i>Copied';
+                setTimeout(function() { btn.innerHTML = original; }, 2000);
+            });
+        }
+    </script>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="../index.html">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../articles.html">Articles</a>
+                <a href="../privacy.html">Privacy</a>
+                <a href="../terms.html">Terms</a>
+                <a href="../disclaimer.html">Disclaimer</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../sitemap.html">Sitemap</a>
+            </div>
+            <div class="footer-copyright">
+                © 2024-2026 009tg.com All Rights Reserved | Invisible Man
+            </div>
+            <div class="footer-disclaimer">
+                For learning purposes only, all content from the internet, contact us for removal if infringement
+            </div>
+        </div>
+    </footer>
+    
+    <style>
+        .back-to-top {position:fixed;bottom:30px;right:30px;width:44px;height:44px;background-color:#337ab7;color:#fff;border:none;border-radius:50%;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.25);z-index:9999;display:none;align-items:center;justify-content:center;transition:all .3s;}
+        .back-to-top.show{display:flex;}
+        .back-to-top:hover{background-color:#286090;transform:translateY(-2px);}
+        .back-to-top svg{width:20px;height:20px;fill:#fff;}
+        [data-theme="dark"] .back-to-top{background-color:#4a90d9;}
+        @media (max-width:768px){.back-to-top{bottom:20px;right:20px;width:40px;height:40px;}}
+    </style>
+    <button class="back-to-top" onclick="backToTop()" title="Back to Top">
+        <svg viewBox="0 0 24 24"><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg>
+    </button>
+    <script>
+        function backToTop(){var s={p:window.scrollY||document.documentElement.scrollTop},t=performance.now();function a(n){var e=Math.min((n-t)/300,1);window.scrollTo(0,s.p*(1-Math.pow(1-e,3)));e<1&&requestAnimationFrame(a)}requestAnimationFrame(a)}
+        window.addEventListener('scroll',function(){var b=document.querySelector('.back-to-top');if(b){window.scrollY>300?b.classList.add('show'):b.classList.remove('show')}});
+    </script>
+</body>
+</html>
