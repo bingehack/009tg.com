@@ -192,7 +192,7 @@ def generate_site_detail_page(site, category, related_sites, favicon_mapping, me
     if meta_keywords:
         keywords_list = [k.strip() for k in re.split(r'[,，]', meta_keywords) if k.strip()][:10]
     else:
-        # 自动从名称、域名、分类、描述中提取关键词
+        # 自动从名称、域名、分类中提取关键词（不从中文描述中简单分词，避免产生无用标签）
         keywords_list = []
         # 站点名称
         if name:
@@ -205,18 +205,14 @@ def generate_site_detail_page(site, category, related_sites, favicon_mapping, me
         # 分类名称
         if cat_name:
             keywords_list.append(cat_name)
-        # 从描述中提取关键词（简单分词，取前几个有意义的词）
+        # 从描述中提取英文单词（英文单词空格分隔，提取较准确；中文不做简单分词）
         if description and len(description) > 10:
-            # 中文描述：提取2-4字的词
-            cn_words = re.findall(r'[\u4e00-\u9fa5]{2,4}', description)
-            for w in cn_words[:5]:
-                if w not in keywords_list and len(w) >= 2:
-                    keywords_list.append(w)
-            # 英文描述：提取单词
             en_words = re.findall(r'[a-zA-Z]{3,}', description)
+            # 过滤常见无意义词
+            stop_words = {'the', 'and', 'for', 'with', 'that', 'this', 'from', 'your', 'you', 'are', 'was', 'were', 'but', 'not', 'all', 'can', 'has', 'have', 'had', 'will', 'would', 'could', 'should', 'may', 'might', 'must', 'shall', 'its', 'our', 'their', 'them', 'they', 'then', 'than', 'into', 'out', 'off', 'over', 'under', 'again', 'further', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'any', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very', 'just', 'because', 'as', 'until', 'while', 'about', 'between', 'through', 'during', 'before', 'after', 'above', 'below', 'up', 'down', 'in', 'on', 'at', 'by', 'an', 'a', 'is', 'am', 'are', 'be', 'been', 'being', 'do', 'does', 'did', 'doing', 'have', 'has', 'had', 'having', 'will', 'would', 'shall', 'should', 'may', 'might', 'must', 'can', 'could', 'need', 'dare', 'ought', 'used', 'to', 'of', 'in', 'for', 'on', 'with', 'at', 'by', 'from', 'as', 'into', 'through', 'during', 'before', 'after', 'above', 'below', 'between', 'out', 'off', 'over', 'under', 'again', 'further', 'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very', 'just'}
             for w in en_words[:5]:
                 w_lower = w.lower()
-                if w_lower not in [k.lower() for k in keywords_list]:
+                if w_lower not in stop_words and w_lower not in [k.lower() for k in keywords_list]:
                     keywords_list.append(w)
         # 去重并限制数量
         seen = set()
