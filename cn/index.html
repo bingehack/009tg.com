@@ -983,13 +983,13 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="hidden-sm hidden-xs" style="margin-left: 10px;">
-                        <div class="search-box-wrapper" style="position: relative;">
+                    <li class="hidden-sm hidden-xs" style="margin-left: 10px; display: flex; align-items: center;">
+                        <div class="search-box-wrapper" style="position: relative; display: flex; align-items: center;">
                             <input type="text" id="site-search-input" class="form-control" 
                                    placeholder="搜索站点..." 
-                                   style="width: 200px; height: 32px; font-size: 13px; border-radius: 16px; padding-left: 32px;"
+                                   style="width: 200px; height: 32px; font-size: 13px; border-radius: 16px; padding-left: 32px; margin: 0;"
                                    autocomplete="off">
-                            <i class="fa-search" style="position: absolute; left: 12px; top: 9px; color: #999; font-size: 13px;"></i>
+                            <i class="fa-search" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #999; font-size: 13px;"></i>
                             <div id="search-results" style="display: none; position: absolute; top: 38px; left: 0; width: 350px; max-height: 400px; overflow-y: auto; background: #fff; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 9999;"></div>
                         </div>
                     </li>
@@ -2837,12 +2837,18 @@
         for (var catName in allSitesData) {
             var sites = allSitesData[catName] || [];
             for (var i = 0; i < sites.length; i++) {
+                // 自动生成关键词：名称 + 域名 + 分类
+                var siteUrl = sites[i].url || '';
+                var domain = siteUrl.replace(/^https?:\/\//, '').replace(/\/.*$/, '').toLowerCase();
+                var domainMain = domain.replace(/\.(com|cn|net|org|io|co|me|tv|cc|info|biz|xyz|top|club|site|online|store|tech|design|app|dev|cloud|ai|pro)$/, '');
+                var keywords = (sites[i].name || '') + ' ' + domain + ' ' + domainMain + ' ' + catName;
                 allSitesFlat.push({
                     name: sites[i].name,
                     url: sites[i].url,
                     description: sites[i].description || '',
                     icon: sites[i].icon || '',
-                    category: catName
+                    category: catName,
+                    keywords: keywords
                 });
             }
         }
@@ -2900,12 +2906,14 @@
                 var descMatch = site.description.toLowerCase().indexOf(queryLower) !== -1;
                 var urlMatch = site.url.toLowerCase().indexOf(queryLower) !== -1;
                 var catMatch = site.category.toLowerCase().indexOf(queryLower) !== -1;
+                var kwMatch = site.keywords.toLowerCase().indexOf(queryLower) !== -1;
 
-                if (nameMatch || descMatch || urlMatch || catMatch) {
+                if (nameMatch || descMatch || urlMatch || catMatch || kwMatch) {
                     // 计算匹配分数，名称匹配权重最高
                     var score = 0;
                     if (nameMatch) score += 10;
                     if (catMatch) score += 5;
+                    if (kwMatch) score += 4;
                     if (descMatch) score += 3;
                     if (urlMatch) score += 1;
                     results.push({ site: site, score: score, nameMatch: nameMatch });

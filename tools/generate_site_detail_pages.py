@@ -191,6 +191,44 @@ def generate_site_detail_page(site, category, related_sites, favicon_mapping, me
     # 关键词标签HTML
     if meta_keywords:
         keywords_list = [k.strip() for k in re.split(r'[,，]', meta_keywords) if k.strip()][:10]
+    else:
+        # 自动从名称、域名、分类、描述中提取关键词
+        keywords_list = []
+        # 站点名称
+        if name:
+            keywords_list.append(name)
+        # 域名（去掉后缀）
+        if domain:
+            domain_main = re.sub(r'\.(com|cn|net|org|io|co|me|tv|cc|info|biz|xyz|top|club|site|online|store|tech|design|app|dev|cloud|ai|pro)$', '', domain)
+            if domain_main and domain_main != domain:
+                keywords_list.append(domain_main)
+        # 分类名称
+        if cat_name:
+            keywords_list.append(cat_name)
+        # 从描述中提取关键词（简单分词，取前几个有意义的词）
+        if description and len(description) > 10:
+            # 中文描述：提取2-4字的词
+            cn_words = re.findall(r'[\u4e00-\u9fa5]{2,4}', description)
+            for w in cn_words[:5]:
+                if w not in keywords_list and len(w) >= 2:
+                    keywords_list.append(w)
+            # 英文描述：提取单词
+            en_words = re.findall(r'[a-zA-Z]{3,}', description)
+            for w in en_words[:5]:
+                w_lower = w.lower()
+                if w_lower not in [k.lower() for k in keywords_list]:
+                    keywords_list.append(w)
+        # 去重并限制数量
+        seen = set()
+        unique_keywords = []
+        for k in keywords_list:
+            k_lower = k.lower()
+            if k_lower not in seen and len(k) <= 20:
+                seen.add(k_lower)
+                unique_keywords.append(k)
+        keywords_list = unique_keywords[:10]
+    
+    if keywords_list:
         keywords_html = ' '.join([f'<span class="keyword-tag">{k}</span>' for k in keywords_list])
     else:
         keywords_html = f'<span style="color: #999;">{no_keywords}</span>'
@@ -268,9 +306,8 @@ def generate_site_detail_page(site, category, related_sites, favicon_mapping, me
             height: 80px;
             border-radius: 12px;
             object-fit: contain;
-            background: #fff;
-            padding: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background: transparent;
+            padding: 0;
         }}
         .site-info h1 {{
             margin: 0 0 8px 0;
