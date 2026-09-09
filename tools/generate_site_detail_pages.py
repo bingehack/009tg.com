@@ -183,15 +183,6 @@ def generate_site_detail_page(site, category, related_sites, favicon_mapping, me
     # favicon路径（用绝对路径，避免相对路径在URL重写后解析错误）
     favicon = get_favicon_path(site, favicon_mapping, asset_prefix='/')
     
-    # 首字母头像（替代favicon图片，避免图片加载问题）
-    if name:
-        first_char = name[0].upper()
-    else:
-        first_char = '?'
-    name_hash = sum(ord(c) for c in name) if name else 0
-    hue = name_hash % 360
-    avatar_bg = f'hsl({hue}, 65%, 55%)'
-    
     # 分类信息
     cat_id = category.get('id', 0) if category else 0
     cat_name = category.get('name', '') if category else ''
@@ -252,7 +243,7 @@ def generate_site_detail_page(site, category, related_sites, favicon_mapping, me
             rs_favicon = get_favicon_path(rs, favicon_mapping)
             related_html += f'''
                         <a href="{rs_id}.html" class="related-site-card">
-                            <img src="{rs_favicon}" alt="{rs_name}" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="{rs_favicon}" alt="{rs_name}" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">{rs_name}</span>
                         </a>
             '''
@@ -268,10 +259,10 @@ def generate_site_detail_page(site, category, related_sites, favicon_mapping, me
     <title>{page_title}</title>
     <meta name="keywords" content="{page_keywords}"/>
     <meta name="description" content="{page_description}"/>
-    <link rel="shortcut icon" href="../../assets/images/favicon.png">
-    <link rel="stylesheet" href="../../assets/css/fonts/linecons/css/linecons.css">
-    <link rel="stylesheet" href="../../assets/css/fonts/fontawesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.png">
+    <link rel="stylesheet" href="/assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="/assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
     <style>
         :root {{
             --bg-primary: #ffffff;
@@ -310,18 +301,20 @@ def generate_site_detail_page(site, category, related_sites, favicon_mapping, me
             margin-bottom: 30px;
             border: 1px solid var(--border-color);
         }}
-        .site-logo-avatar {{
+        .site-logo {{
             width: 80px;
             height: 80px;
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            font-weight: 700;
-            color: #fff;
-            flex-shrink: 0;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            object-fit: contain;
+            background: #f5f5f5;
+            padding: 8px;
+            border: 1px solid #e8e8e8;
+            display: block;
+            box-sizing: border-box;
+        }}
+        [data-theme="dark"] .site-logo {{
+            background: #2a2a4a;
+            border-color: #3a3a5a;
         }}
         .site-info h1 {{
             margin: 0 0 8px 0;
@@ -545,7 +538,7 @@ def generate_site_detail_page(site, category, related_sites, favicon_mapping, me
         </div>
         
         <div class="site-header">
-            <div class="site-logo-avatar" style="background: {avatar_bg};">{first_char}</div>
+            <img src="{favicon}" alt="{name}" class="site-logo" onerror="this.src='/assets/images/logos/default.png'">
             <div class="site-info">
                 <h1>{name}</h1>
                 <div class="site-domain"><i class="fa-globe" style="margin-right: 6px;"></i>{domain}</div>

@@ -7,10 +7,10 @@
     <title>Stack Overflow - 009tg下海导航</title>
     <meta name="keywords" content="Stack Overflow, stackoverflow.com, Stack Overflow为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网, 009tg导航"/>
     <meta name="description" content="Stack Overflow为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。"/>
-    <link rel="shortcut icon" href="../../assets/images/favicon.png">
-    <link rel="stylesheet" href="../../assets/css/fonts/linecons/css/linecons.css">
-    <link rel="stylesheet" href="../../assets/css/fonts/fontawesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.png">
+    <link rel="stylesheet" href="/assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="/assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
     <style>
         :root {
             --bg-primary: #ffffff;
@@ -49,18 +49,20 @@
             margin-bottom: 30px;
             border: 1px solid var(--border-color);
         }
-        .site-logo-avatar {
+        .site-logo {
             width: 80px;
             height: 80px;
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            font-weight: 700;
-            color: #fff;
-            flex-shrink: 0;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            object-fit: contain;
+            background: #f5f5f5;
+            padding: 8px;
+            border: 1px solid #e8e8e8;
+            display: block;
+            box-sizing: border-box;
+        }
+        [data-theme="dark"] .site-logo {
+            background: #2a2a4a;
+            border-color: #3a3a5a;
         }
         .site-info h1 {
             margin: 0 0 8px 0;
@@ -284,7 +286,7 @@
         </div>
         
         <div class="site-header">
-            <div class="site-logo-avatar" style="background: hsl(306, 65%, 55%);">S</div>
+            <img src="/assets/favicons/d0cc85b26f2ceb8714b978e07def4f6e.png" alt="Stack Overflow" class="site-logo" onerror="this.src='/assets/images/logos/default.png'">
             <div class="site-info">
                 <h1>Stack Overflow</h1>
                 <div class="site-domain"><i class="fa-globe" style="margin-right: 6px;"></i>stackoverflow.com</div>
@@ -332,42 +334,42 @@
             <div class="related-grid">
                 
                         <a href="359.html" class="related-site-card">
-                            <img src="../../assets/favicons/c55cb88f428db3438c2ff9b1b3a8962d.png" alt="CSDN" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/c55cb88f428db3438c2ff9b1b3a8962d.png" alt="CSDN" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">CSDN</span>
                         </a>
             
                         <a href="360.html" class="related-site-card">
-                            <img src="../../assets/favicons/fd9e97c735e2f766d3e75b33327ab568.png" alt="精易论坛" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/fd9e97c735e2f766d3e75b33327ab568.png" alt="精易论坛" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">精易论坛</span>
                         </a>
             
                         <a href="361.html" class="related-site-card">
-                            <img src="../../assets/favicons/603691168bcea00d3475984183e0501e.png" alt="火山软件开发平台" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/603691168bcea00d3475984183e0501e.png" alt="火山软件开发平台" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">火山软件开发平台</span>
                         </a>
             
                         <a href="362.html" class="related-site-card">
-                            <img src="../../assets/favicons/d5be4f0fed951060fb7c3cad1838b28b.png" alt="V2EX" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/d5be4f0fed951060fb7c3cad1838b28b.png" alt="V2EX" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">V2EX</span>
                         </a>
             
                         <a href="363.html" class="related-site-card">
-                            <img src="../../assets/favicons/0279cc93c8707522d28e211c74de4a29.png" alt="Bytes" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/0279cc93c8707522d28e211c74de4a29.png" alt="Bytes" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">Bytes</span>
                         </a>
             
                         <a href="364.html" class="related-site-card">
-                            <img src="../../assets/favicons/bf904d1379fa5971444e6fd57da9c374.png" alt="1024.COM" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/bf904d1379fa5971444e6fd57da9c374.png" alt="1024.COM" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">1024.COM</span>
                         </a>
             
                         <a href="365.html" class="related-site-card">
-                            <img src="../../assets/favicons/19ea0e33cf4a3da046b678afe6a37df8.png" alt="果壳网" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/19ea0e33cf4a3da046b678afe6a37df8.png" alt="果壳网" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">果壳网</span>
                         </a>
             
                         <a href="367.html" class="related-site-card">
-                            <img src="../../assets/favicons/38456f335b3c4337054ab8b6397755be.png" alt="博客园" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/38456f335b3c4337054ab8b6397755be.png" alt="博客园" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">博客园</span>
                         </a>
             

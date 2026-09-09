@@ -7,10 +7,10 @@
     <title>语雀AI - 009tg Navigation</title>
     <meta name="keywords" content="语雀AI, www.yuque.com, 语雀AI is an intelligent office platform offering AI, 009tg navigation"/>
     <meta name="description" content="优雅高效的在线文档编辑与协同工具，让每个企业轻松拥有文档中心，阿里巴巴集团内部使用多年，众多中小企业首选。主流 Office 文件全兼容，多人协同，轻松拥有团队知识库。企业文档中心化管理，各类文档井然有序，独立域名，随时随地安全获取。语雀致力于帮助每一个个体与企业，都拥有珍贵的知识财富。写文档，就用"/>
-    <link rel="shortcut icon" href="../../assets/images/favicon.png">
-    <link rel="stylesheet" href="../../assets/css/fonts/linecons/css/linecons.css">
-    <link rel="stylesheet" href="../../assets/css/fonts/fontawesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.png">
+    <link rel="stylesheet" href="/assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="/assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
     <style>
         :root {
             --bg-primary: #ffffff;
@@ -49,18 +49,20 @@
             margin-bottom: 30px;
             border: 1px solid var(--border-color);
         }
-        .site-logo-avatar {
+        .site-logo {
             width: 80px;
             height: 80px;
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            font-weight: 700;
-            color: #fff;
-            flex-shrink: 0;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            object-fit: contain;
+            background: #f5f5f5;
+            padding: 8px;
+            border: 1px solid #e8e8e8;
+            display: block;
+            box-sizing: border-box;
+        }
+        [data-theme="dark"] .site-logo {
+            background: #2a2a4a;
+            border-color: #3a3a5a;
         }
         .site-info h1 {
             margin: 0 0 8px 0;
@@ -284,7 +286,7 @@
         </div>
         
         <div class="site-header">
-            <div class="site-logo-avatar" style="background: hsl(31, 65%, 55%);">语</div>
+            <img src="/assets/favicons/e8188f73ec909ab52d352f9bccfd101d.png" alt="语雀AI" class="site-logo" onerror="this.src='/assets/images/logos/default.png'">
             <div class="site-info">
                 <h1>语雀AI</h1>
                 <div class="site-domain"><i class="fa-globe" style="margin-right: 6px;"></i>www.yuque.com</div>
@@ -332,42 +334,42 @@
             <div class="related-grid">
                 
                         <a href="44.html" class="related-site-card">
-                            <img src="../../assets/favicons/cf1dae53fcbd992af13c014ec9a1d0dc.png" alt="讯飞听见" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/cf1dae53fcbd992af13c014ec9a1d0dc.png" alt="讯飞听见" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">讯飞听见</span>
                         </a>
             
                         <a href="45.html" class="related-site-card">
-                            <img src="../../assets/favicons/0a7255c6b8036f979fb7861e9cfc0d30.png" alt="飞书妙记" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/0a7255c6b8036f979fb7861e9cfc0d30.png" alt="飞书妙记" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">飞书妙记</span>
                         </a>
             
                         <a href="46.html" class="related-site-card">
-                            <img src="../../assets/favicons/1772443066b343ac376190b010375550.png" alt="智标领航" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/1772443066b343ac376190b010375550.png" alt="智标领航" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">智标领航</span>
                         </a>
             
                         <a href="47.html" class="related-site-card">
-                            <img src="../../assets/favicons/a37c98028e5ad5cc06db1f3210f520b6.png" alt="DeepL" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/a37c98028e5ad5cc06db1f3210f520b6.png" alt="DeepL" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">DeepL</span>
                         </a>
             
                         <a href="48.html" class="related-site-card">
-                            <img src="../../assets/favicons/e46c43f00f3b428d585a9b9827ca8543.png" alt="Otter.ai" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/e46c43f00f3b428d585a9b9827ca8543.png" alt="Otter.ai" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">Otter.ai</span>
                         </a>
             
                         <a href="49.html" class="related-site-card">
-                            <img src="../../assets/favicons/1e848ab2f4537d8766c8ce0c446e1bde.png" alt="Fireflies.ai" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/1e848ab2f4537d8766c8ce0c446e1bde.png" alt="Fireflies.ai" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">Fireflies.ai</span>
                         </a>
             
                         <a href="50.html" class="related-site-card">
-                            <img src="../../assets/favicons/669ee86b5aaed6bb7a929e71135639d2.png" alt="GitMind" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/669ee86b5aaed6bb7a929e71135639d2.png" alt="GitMind" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">GitMind</span>
                         </a>
             
                         <a href="51.html" class="related-site-card">
-                            <img src="../../assets/favicons/bfcbcd2a2d53732bb8938a9b1935a23f.png" alt="Ayoa Ultimate" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/bfcbcd2a2d53732bb8938a9b1935a23f.png" alt="Ayoa Ultimate" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">Ayoa Ultimate</span>
                         </a>
             

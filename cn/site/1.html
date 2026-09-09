@@ -7,10 +7,10 @@
     <title>Libretv - 009tg下海导航</title>
     <meta name="keywords" content="Libretv, tv.safesystem.dpdns.org, Libretv为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。, 009tg导航"/>
     <meta name="description" content="LibreTV是一个免费的在线视频搜索平台，无广告、安全，提供来自多个视频源的内容搜索与观看服务，无需注册即可使用。"/>
-    <link rel="shortcut icon" href="../../assets/images/favicon.png">
-    <link rel="stylesheet" href="../../assets/css/fonts/linecons/css/linecons.css">
-    <link rel="stylesheet" href="../../assets/css/fonts/fontawesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.png">
+    <link rel="stylesheet" href="/assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="/assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
     <style>
         :root {
             --bg-primary: #ffffff;
@@ -49,18 +49,20 @@
             margin-bottom: 30px;
             border: 1px solid var(--border-color);
         }
-        .site-logo-avatar {
+        .site-logo {
             width: 80px;
             height: 80px;
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            font-weight: 700;
-            color: #fff;
-            flex-shrink: 0;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            object-fit: contain;
+            background: #f5f5f5;
+            padding: 8px;
+            border: 1px solid #e8e8e8;
+            display: block;
+            box-sizing: border-box;
+        }
+        [data-theme="dark"] .site-logo {
+            background: #2a2a4a;
+            border-color: #3a3a5a;
         }
         .site-info h1 {
             margin: 0 0 8px 0;
@@ -284,7 +286,7 @@
         </div>
         
         <div class="site-header">
-            <div class="site-logo-avatar" style="background: hsl(8, 65%, 55%);">L</div>
+            <img src="/assets/favicons/093bca42950dbc02ab00f74e58b5d918.png" alt="Libretv" class="site-logo" onerror="this.src='/assets/images/logos/default.png'">
             <div class="site-info">
                 <h1>Libretv</h1>
                 <div class="site-domain"><i class="fa-globe" style="margin-right: 6px;"></i>tv.safesystem.dpdns.org</div>
@@ -332,7 +334,7 @@
             <div class="related-grid">
                 
                         <a href="13.html" class="related-site-card">
-                            <img src="../../assets/favicons/c00f5a5795130a909f978a73fce74027.png" alt="Sexo 博客" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/c00f5a5795130a909f978a73fce74027.png" alt="Sexo 博客" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">Sexo 博客</span>
                         </a>
             

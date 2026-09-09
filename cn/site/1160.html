@@ -7,10 +7,10 @@
     <title>CryptoPanic - 009tg下海导航</title>
     <meta name="keywords" content="CryptoPanic, cryptopanic.com, CryptoPanic是一个专业的在线工具平台，操作简单，使用方便，无需安装即可享受便捷的在线服务。, 009tg导航"/>
     <meta name="description" content="News aggregator platform indicating impact on price and market for traders and cryptocurrency enthusiasts"/>
-    <link rel="shortcut icon" href="../../assets/images/favicon.png">
-    <link rel="stylesheet" href="../../assets/css/fonts/linecons/css/linecons.css">
-    <link rel="stylesheet" href="../../assets/css/fonts/fontawesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.png">
+    <link rel="stylesheet" href="/assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="/assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
     <style>
         :root {
             --bg-primary: #ffffff;
@@ -49,18 +49,20 @@
             margin-bottom: 30px;
             border: 1px solid var(--border-color);
         }
-        .site-logo-avatar {
+        .site-logo {
             width: 80px;
             height: 80px;
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            font-weight: 700;
-            color: #fff;
-            flex-shrink: 0;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            object-fit: contain;
+            background: #f5f5f5;
+            padding: 8px;
+            border: 1px solid #e8e8e8;
+            display: block;
+            box-sizing: border-box;
+        }
+        [data-theme="dark"] .site-logo {
+            background: #2a2a4a;
+            border-color: #3a3a5a;
         }
         .site-info h1 {
             margin: 0 0 8px 0;
@@ -284,7 +286,7 @@
         </div>
         
         <div class="site-header">
-            <div class="site-logo-avatar" style="background: hsl(52, 65%, 55%);">C</div>
+            <img src="/assets/favicons/50a3876d052ea20ba929ab7ff777d810.png" alt="CryptoPanic" class="site-logo" onerror="this.src='/assets/images/logos/default.png'">
             <div class="site-info">
                 <h1>CryptoPanic</h1>
                 <div class="site-domain"><i class="fa-globe" style="margin-right: 6px;"></i>cryptopanic.com</div>
@@ -332,27 +334,27 @@
             <div class="related-grid">
                 
                         <a href="1158.html" class="related-site-card">
-                            <img src="../../assets/favicons/0a137b375cc3881a70e186ce2172c8d1.png" alt="市场行情" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/0a137b375cc3881a70e186ce2172c8d1.png" alt="市场行情" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">市场行情</span>
                         </a>
             
                         <a href="1159.html" class="related-site-card">
-                            <img src="../../assets/favicons/0a137b375cc3881a70e186ce2172c8d1.png" alt="货币趋势" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/0a137b375cc3881a70e186ce2172c8d1.png" alt="货币趋势" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">货币趋势</span>
                         </a>
             
                         <a href="1161.html" class="related-site-card">
-                            <img src="../../assets/favicons/041d428e3f3e9a9a1fe17643dcd98648.png" alt="BitcoinTalk" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/041d428e3f3e9a9a1fe17643dcd98648.png" alt="BitcoinTalk" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">BitcoinTalk</span>
                         </a>
             
                         <a href="1162.html" class="related-site-card">
-                            <img src="../../assets/favicons/0a73b76132419f9b4f4b09ec6c0e3be1.png" alt="CryptoSlate" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/0a73b76132419f9b4f4b09ec6c0e3be1.png" alt="CryptoSlate" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">CryptoSlate</span>
                         </a>
             
                         <a href="1163.html" class="related-site-card">
-                            <img src="../../assets/favicons/9c116d0beb7b444f14e117896d566cdf.png" alt="Decrypt" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/9c116d0beb7b444f14e117896d566cdf.png" alt="Decrypt" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">Decrypt</span>
                         </a>
             

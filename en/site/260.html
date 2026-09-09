@@ -7,10 +7,10 @@
     <title>⽜信云 - 009tg Navigation</title>
     <meta name="keywords" content="⽜信云, www.nxcloud.com, ⽜信云 is a practical online platform providing vario, 009tg navigation"/>
     <meta name="description" content="NXCLOUD helps businesses communicate with your customers via SMS, Voice, WhatsApp Business, Global Number, Viber Business, Zalo Business, Email, and b"/>
-    <link rel="shortcut icon" href="../../assets/images/favicon.png">
-    <link rel="stylesheet" href="../../assets/css/fonts/linecons/css/linecons.css">
-    <link rel="stylesheet" href="../../assets/css/fonts/fontawesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.png">
+    <link rel="stylesheet" href="/assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="/assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
     <style>
         :root {
             --bg-primary: #ffffff;
@@ -49,18 +49,20 @@
             margin-bottom: 30px;
             border: 1px solid var(--border-color);
         }
-        .site-logo-avatar {
+        .site-logo {
             width: 80px;
             height: 80px;
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            font-weight: 700;
-            color: #fff;
-            flex-shrink: 0;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            object-fit: contain;
+            background: #f5f5f5;
+            padding: 8px;
+            border: 1px solid #e8e8e8;
+            display: block;
+            box-sizing: border-box;
+        }
+        [data-theme="dark"] .site-logo {
+            background: #2a2a4a;
+            border-color: #3a3a5a;
         }
         .site-info h1 {
             margin: 0 0 8px 0;
@@ -284,7 +286,7 @@
         </div>
         
         <div class="site-header">
-            <div class="site-logo-avatar" style="background: hsl(126, 65%, 55%);">⽜</div>
+            <img src="/assets/favicons/56a158df5f0da865affca395ac5232e2.png" alt="⽜信云" class="site-logo" onerror="this.src='/assets/images/logos/default.png'">
             <div class="site-info">
                 <h1>⽜信云</h1>
                 <div class="site-domain"><i class="fa-globe" style="margin-right: 6px;"></i>www.nxcloud.com</div>
@@ -332,12 +334,12 @@
             <div class="related-grid">
                 
                         <a href="257.html" class="related-site-card">
-                            <img src="../../assets/favicons/b9fa00f8c57613445bc0699e11b9b1c9.png" alt="云片OTP短信" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/b9fa00f8c57613445bc0699e11b9b1c9.png" alt="云片OTP短信" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">云片OTP短信</span>
                         </a>
             
                         <a href="259.html" class="related-site-card">
-                            <img src="../../assets/favicons/633725cf14c163693d209f898b3bb465.png" alt="SUBMAIL赛邮云通信" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/633725cf14c163693d209f898b3bb465.png" alt="SUBMAIL赛邮云通信" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">SUBMAIL赛邮云通信</span>
                         </a>
             

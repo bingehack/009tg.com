@@ -7,10 +7,10 @@
     <title>Coingecko - 009tg下海导航</title>
     <meta name="keywords" content="Coingecko, www.coingecko.com, Coingecko为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。, 009tg导航"/>
     <meta name="description" content="Coingecko为用户提供优质的在线服务，功能完善，体验优秀，是互联网上值得收藏的实用网站。"/>
-    <link rel="shortcut icon" href="../../assets/images/favicon.png">
-    <link rel="stylesheet" href="../../assets/css/fonts/linecons/css/linecons.css">
-    <link rel="stylesheet" href="../../assets/css/fonts/fontawesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.png">
+    <link rel="stylesheet" href="/assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="/assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
     <style>
         :root {
             --bg-primary: #ffffff;
@@ -49,18 +49,20 @@
             margin-bottom: 30px;
             border: 1px solid var(--border-color);
         }
-        .site-logo-avatar {
+        .site-logo {
             width: 80px;
             height: 80px;
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            font-weight: 700;
-            color: #fff;
-            flex-shrink: 0;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            object-fit: contain;
+            background: #f5f5f5;
+            padding: 8px;
+            border: 1px solid #e8e8e8;
+            display: block;
+            box-sizing: border-box;
+        }
+        [data-theme="dark"] .site-logo {
+            background: #2a2a4a;
+            border-color: #3a3a5a;
         }
         .site-info h1 {
             margin: 0 0 8px 0;
@@ -284,7 +286,7 @@
         </div>
         
         <div class="site-header">
-            <div class="site-logo-avatar" style="background: hsl(194, 65%, 55%);">C</div>
+            <img src="/assets/favicons/a3b4c975d86f06e3e40822de2f685764.png" alt="Coingecko" class="site-logo" onerror="this.src='/assets/images/logos/default.png'">
             <div class="site-info">
                 <h1>Coingecko</h1>
                 <div class="site-domain"><i class="fa-globe" style="margin-right: 6px;"></i>www.coingecko.com</div>
@@ -332,42 +334,42 @@
             <div class="related-grid">
                 
                         <a href="1139.html" class="related-site-card">
-                            <img src="../../assets/favicons/c29a9627258c36fe87faefbf928681d1.png" alt="DeFi Pulse" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/c29a9627258c36fe87faefbf928681d1.png" alt="DeFi Pulse" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">DeFi Pulse</span>
                         </a>
             
                         <a href="1140.html" class="related-site-card">
-                            <img src="../../assets/favicons/ce1068342aabd1e8bcf5dd9c9d88319c.png" alt="The Block" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/ce1068342aabd1e8bcf5dd9c9d88319c.png" alt="The Block" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">The Block</span>
                         </a>
             
                         <a href="1141.html" class="related-site-card">
-                            <img src="../../assets/favicons/74d5e2b50b966d18aebd9a8a5c91f10d.png" alt="CoinMarketCap" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/74d5e2b50b966d18aebd9a8a5c91f10d.png" alt="CoinMarketCap" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">CoinMarketCap</span>
                         </a>
             
                         <a href="1142.html" class="related-site-card">
-                            <img src="../../assets/favicons/351de1ca0d0f6b4cff0eb12f1d0c7432.png" alt="MyToken" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/351de1ca0d0f6b4cff0eb12f1d0c7432.png" alt="MyToken" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">MyToken</span>
                         </a>
             
                         <a href="1143.html" class="related-site-card">
-                            <img src="../../assets/favicons/e57549183fbe414e72eeac7a0e914fe6.png" alt="Coin Metrics" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/e57549183fbe414e72eeac7a0e914fe6.png" alt="Coin Metrics" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">Coin Metrics</span>
                         </a>
             
                         <a href="1144.html" class="related-site-card">
-                            <img src="../../assets/favicons/2cc06f0066346a43c1336cdb0e4cdd98.png" alt="Token Terminal" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/2cc06f0066346a43c1336cdb0e4cdd98.png" alt="Token Terminal" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">Token Terminal</span>
                         </a>
             
                         <a href="1145.html" class="related-site-card">
-                            <img src="../../assets/favicons/521d581b6c6e719952cd26e6a145c194.png" alt="蜜蜂查" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/521d581b6c6e719952cd26e6a145c194.png" alt="蜜蜂查" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">蜜蜂查</span>
                         </a>
             
                         <a href="1146.html" class="related-site-card">
-                            <img src="../../assets/favicons/37ec1d196523a070fa7a06aca9136dfc.png" alt="IntoTheBlock" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/37ec1d196523a070fa7a06aca9136dfc.png" alt="IntoTheBlock" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">IntoTheBlock</span>
                         </a>
             

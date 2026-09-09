@@ -7,10 +7,10 @@
     <title>东森新闻 - 009tg下海导航</title>
     <meta name="keywords" content="东森新闻, news.ebc.net.tw, 东森新闻是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。, 009tg导航"/>
     <meta name="description" content="东森新闻是一个实用的在线平台，提供多种便捷功能，帮助用户提升效率，适用于日常工作和学习场景。"/>
-    <link rel="shortcut icon" href="../../assets/images/favicon.png">
-    <link rel="stylesheet" href="../../assets/css/fonts/linecons/css/linecons.css">
-    <link rel="stylesheet" href="../../assets/css/fonts/fontawesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.png">
+    <link rel="stylesheet" href="/assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="/assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
     <style>
         :root {
             --bg-primary: #ffffff;
@@ -49,18 +49,20 @@
             margin-bottom: 30px;
             border: 1px solid var(--border-color);
         }
-        .site-logo-avatar {
+        .site-logo {
             width: 80px;
             height: 80px;
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            font-weight: 700;
-            color: #fff;
-            flex-shrink: 0;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            object-fit: contain;
+            background: #f5f5f5;
+            padding: 8px;
+            border: 1px solid #e8e8e8;
+            display: block;
+            box-sizing: border-box;
+        }
+        [data-theme="dark"] .site-logo {
+            background: #2a2a4a;
+            border-color: #3a3a5a;
         }
         .site-info h1 {
             margin: 0 0 8px 0;
@@ -284,7 +286,7 @@
         </div>
         
         <div class="site-header">
-            <div class="site-logo-avatar" style="background: hsl(45, 65%, 55%);">东</div>
+            <img src="/assets/favicons/aaa2aa9b31a647e378a1d931b0c970a4.png" alt="东森新闻" class="site-logo" onerror="this.src='/assets/images/logos/default.png'">
             <div class="site-info">
                 <h1>东森新闻</h1>
                 <div class="site-domain"><i class="fa-globe" style="margin-right: 6px;"></i>news.ebc.net.tw</div>
@@ -332,42 +334,42 @@
             <div class="related-grid">
                 
                         <a href="194.html" class="related-site-card">
-                            <img src="../../assets/favicons/a3a39f40a147aa983040094d0cabd9e2.png" alt="明报" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/a3a39f40a147aa983040094d0cabd9e2.png" alt="明报" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">明报</span>
                         </a>
             
                         <a href="195.html" class="related-site-card">
-                            <img src="../../assets/favicons/4eed2c93c0be0d9182c751ae291b8080.png" alt="凤凰网" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/4eed2c93c0be0d9182c751ae291b8080.png" alt="凤凰网" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">凤凰网</span>
                         </a>
             
                         <a href="196.html" class="related-site-card">
-                            <img src="../../assets/favicons/ab4b576406d62f1cc335603bf4a1aa01.png" alt="yahoo!雅虎香港" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/ab4b576406d62f1cc335603bf4a1aa01.png" alt="yahoo!雅虎香港" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">yahoo!雅虎香港</span>
                         </a>
             
                         <a href="197.html" class="related-site-card">
-                            <img src="../../assets/favicons/ba61883ef7f102be1fab1d1aee5214ae.png" alt="香港电台网站" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/ba61883ef7f102be1fab1d1aee5214ae.png" alt="香港电台网站" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">香港电台网站</span>
                         </a>
             
                         <a href="198.html" class="related-site-card">
-                            <img src="../../assets/favicons/1629c75e9ca406757cd61daf154e2629.png" alt="南华早报" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/1629c75e9ca406757cd61daf154e2629.png" alt="南华早报" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">南华早报</span>
                         </a>
             
                         <a href="200.html" class="related-site-card">
-                            <img src="../../assets/favicons/a44e3c9600c2e162cb9d04b4a33d755a.png" alt="香港01" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/a44e3c9600c2e162cb9d04b4a33d755a.png" alt="香港01" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">香港01</span>
                         </a>
             
                         <a href="201.html" class="related-site-card">
-                            <img src="../../assets/favicons/04b60b2a7bf079c8e32d89c6402c24cb.png" alt="文汇报" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/04b60b2a7bf079c8e32d89c6402c24cb.png" alt="文汇报" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">文汇报</span>
                         </a>
             
                         <a href="202.html" class="related-site-card">
-                            <img src="../../assets/favicons/c3cd15dd2e776449a678ffd5059182e3.png" alt="东方日报" class="related-favicon" onerror="this.src='../../assets/images/logos/default.png'">
+                            <img src="../../assets/favicons/c3cd15dd2e776449a678ffd5059182e3.png" alt="东方日报" class="related-favicon" onerror="this.src='/assets/images/logos/default.png'">
                             <span class="related-name">东方日报</span>
                         </a>
             
