@@ -1819,18 +1819,6 @@
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://009tg.com/cn/site/13.html</loc>
-        <lastmod>2026-09-09</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
-        <loc>https://009tg.com/en/site/13.html</loc>
-        <lastmod>2026-09-09</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
         <loc>https://009tg.com/cn/site/1.html</loc>
         <lastmod>2026-09-09</lastmod>
         <changefreq>monthly</changefreq>
@@ -32606,6 +32594,18 @@
     </url>
     <url>
         <loc>https://009tg.com/en/site/2783.html</loc>
+        <lastmod>2026-09-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://009tg.com/cn/site/13.html</loc>
+        <lastmod>2026-09-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://009tg.com/en/site/13.html</loc>
         <lastmod>2026-09-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
