@@ -381,8 +381,8 @@ def generate_recent_and_hot(groups, favicon_mapping, lang='cn', asset_prefix='..
     for g in groups:
         collect_sites(g)
     
-    # 最新收录（按created_at降序，取6个，左右布局）
-    recent_sites = sorted(all_sites, key=lambda s: s.get('created_at', ''), reverse=True)[:6]
+    # 最新收录（按created_at降序，取9个，响应式显示）
+    recent_sites = sorted(all_sites, key=lambda s: s.get('created_at', ''), reverse=True)[:9]
     
     # 热门分类（按站点数降序，取10个一级分类）
     cat_counts = []
@@ -450,7 +450,7 @@ def generate_recent_and_hot(groups, favicon_mapping, lang='cn', asset_prefix='..
         created = site.get('created_at', '')
         
         recent_html += '''
-                                <div class="col-md-4 col-sm-4 col-xs-6" style="margin-bottom: 12px;">
+                                <div class="col-md-4 col-sm-4 col-xs-6 recent-item" style="margin-bottom: 12px;">
                                     <a href="site/''' + str(site.get('id', 0)) + '''.html" 
                                        style="display: block; padding: 10px; border: 1px solid #eee; border-radius: 6px; text-decoration: none; transition: all 0.2s; height: 100%;"
                                        onmouseover="this.style.borderColor='#337ab7';this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)'"
@@ -502,7 +502,7 @@ def generate_recent_and_hot(groups, favicon_mapping, lang='cn', asset_prefix='..
             rank_color = '#999'
         
         hot_html += '''
-                                <div class="col-md-6" style="margin-bottom: 10px;">
+                                <div class="col-md-6 hot-item" style="margin-bottom: 10px;">
                                     <a href="category/''' + str(cat_id) + '''.html" style="display: flex; align-items: center; padding: 8px 12px; border: 1px solid #eee; border-radius: 6px; text-decoration: none; transition: all 0.2s;"
                                        onmouseover="this.style.borderColor='#337ab7';this.style.backgroundColor='#f8f9fa'"
                                        onmouseout="this.style.borderColor='#eee';this.style.backgroundColor='transparent'">
@@ -751,6 +751,13 @@ def generate_html(lang='cn'):
         .hover-dropdown:hover .dropdown-menu { display: block; }
         .hover-dropdown .dropdown-menu { margin-top: 0; }
         .recent-hot-panel .panel-body { min-height: 320px; }
+        /* 最新收录响应式：大屏9个，中屏6个，小屏3个，超小屏4个 */
+        @media (max-width: 1200px) { .recent-item:nth-child(n+7) { display: none; } }
+        @media (max-width: 992px) { .recent-item:nth-child(n+4) { display: none; } }
+        @media (max-width: 768px) { .recent-item:nth-child(n+5) { display: none; } }
+        /* 热门分类响应式：大屏10个，中屏6个，小屏4个 */
+        @media (max-width: 1200px) { .hot-item:nth-child(n+7) { display: none; } }
+        @media (max-width: 992px) { .hot-item:nth-child(n+5) { display: none; } }
     </style>
     <button class="back-to-top" onclick="return backToTop(event)" title="''' + ('回到顶部' if lang == 'cn' else 'Back to Top') + '''">
         <svg viewBox="0 0 24 24"><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg>
@@ -1532,18 +1539,23 @@ def generate_html(lang='cn'):
 
         // ========== 站内搜索功能 ==========
         var allSitesFlat = [];
-        // 把所有分类的站点合并成扁平数组
+        var seenUrls = {{}}; // 去重用
+        // 把所有分类的站点合并成扁平数组（按URL去重）
         for (var catName in allSitesData) {{
             var sites = allSitesData[catName] || [];
             for (var i = 0; i < sites.length; i++) {{
-                // 自动生成关键词：名称 + 域名 + 分类
                 var siteUrl = sites[i].url || '';
+                // 按URL去重，同一个站点只保留第一次出现的
+                if (siteUrl && seenUrls[siteUrl]) continue;
+                if (siteUrl) seenUrls[siteUrl] = true;
+                // 自动生成关键词：名称 + 域名 + 分类
                 var domain = siteUrl.replace(/^https?:\/\//, '').replace(/\/.*$/, '').toLowerCase();
                 var domainMain = domain.replace(/\.(com|cn|net|org|io|co|me|tv|cc|info|biz|xyz|top|club|site|online|store|tech|design|app|dev|cloud|ai|pro)$/, '');
                 var keywords = (sites[i].name || '') + ' ' + domain + ' ' + domainMain + ' ' + catName;
                 allSitesFlat.push({{
+                    id: sites[i].id,
                     name: sites[i].name,
-                    url: sites[i].url,
+                    url: siteUrl,
                     description: sites[i].description || '',
                     icon: sites[i].icon || '',
                     category: catName,
