@@ -1644,7 +1644,7 @@ def generate_html(lang='cn'):
                 var html = '<div style="padding: 8px 15px; font-size: 12px; color: #999; border-bottom: 1px solid #f0f0f0;">' + countText + '</div>';
                 for (var j = 0; j < results.length; j++) {{
                     var s = results[j].site;
-                    var detailUrl = '{asset_prefix}site/' + s.id + '.html';
+                    var detailUrl = 'site/' + s.id + '.html';
                     html += '<div class="search-result-item" style="padding: 10px 15px; border-bottom: 1px solid #f5f5f5; cursor: pointer;" onmouseover="this.style.background=\\'#f9f9f9\\'" onmouseout="this.style.background=\\'#fff\\'">' +
                         '<a href="' + detailUrl + '" style="text-decoration: none; color: inherit; display: block;">' +
                         '<div style="display: flex; align-items: center;">' +

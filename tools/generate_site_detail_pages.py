@@ -180,8 +180,8 @@ def generate_site_detail_page(site, category, related_sites, favicon_mapping, me
         window.addEventListener('scroll',function(){var b=document.querySelector('.back-to-top');if(b){window.scrollY>300?b.classList.add('show'):b.classList.remove('show')}});
     </script>'''
 
-    # favicon路径
-    favicon = get_favicon_path(site, favicon_mapping)
+    # favicon路径（用绝对路径，避免相对路径在URL重写后解析错误）
+    favicon = get_favicon_path(site, favicon_mapping, asset_prefix='/')
     
     # 分类信息
     cat_id = category.get('id', 0) if category else 0
@@ -307,8 +307,10 @@ def generate_site_detail_page(site, category, related_sites, favicon_mapping, me
             border-radius: 12px;
             object-fit: contain;
             background: #f5f5f5;
-            padding: 12px;
+            padding: 8px;
             border: 1px solid #e8e8e8;
+            display: block;
+            box-sizing: border-box;
         }}
         [data-theme="dark"] .site-logo {{
             background: #2a2a4a;
@@ -536,7 +538,7 @@ def generate_site_detail_page(site, category, related_sites, favicon_mapping, me
         </div>
         
         <div class="site-header">
-            <img src="{favicon}" alt="{name}" class="site-logo" onerror="this.src='../../assets/images/logos/default.png'">
+            <img src="{favicon}" alt="{name}" class="site-logo" onerror="this.src='/assets/images/logos/default.png'">
             <div class="site-info">
                 <h1>{name}</h1>
                 <div class="site-domain"><i class="fa-globe" style="margin-right: 6px;"></i>{domain}</div>
