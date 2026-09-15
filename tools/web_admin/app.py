@@ -17,6 +17,15 @@ from flask import Flask, render_template, request, jsonify, session, redirect, u
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.insert(0, PROJECT_ROOT)
 sys.path.insert(0, os.path.join(PROJECT_ROOT, 'tools'))
+sys.path.insert(0, os.path.join(PROJECT_ROOT, 'tools', 'web_admin'))
+
+# 导入自动分类映射模块
+try:
+    from auto_mapper import auto_map_all_sites, get_all_categories_with_info
+    AUTO_MAPPER_AVAILABLE = True
+except ImportError as e:
+    AUTO_MAPPER_AVAILABLE = False
+    print(f'警告: 自动分类映射模块不可用: {e}')
 
 app = Flask(__name__)
 app.secret_key = '009tg-admin-secret-key-2026'
@@ -261,6 +270,7 @@ def api_crawl():
     url = data.get('url', '').strip()
     crawler_type = data.get('crawler_type', 'generic')
     custom_script = data.get('custom_script', '')
+    extra_args = data.get('extra_args', {})
 
     if not url and crawler_type == 'generic':
         return jsonify({'success': False, 'error': '请输入目标站点URL'})
@@ -278,7 +288,15 @@ def api_crawl():
             script_path = os.path.join(PROJECT_ROOT, 'tools', 'crawler', custom_script)
             if not os.path.exists(script_path):
                 return jsonify({'success': False, 'error': f'脚本不存在: {custom_script}'})
-            result = run_command([sys.executable, script_path])
+
+            # 构建命令参数
+            cmd = [sys.executable, script_path]
+
+            # zvcard专用：传递模式参数
+            if custom_script == 'crawl_zvcard.py' and extra_args.get('zvcard_mode'):
+                cmd.extend(['--mode', extra_args['zvcard_mode']])
+
+            result = run_command(cmd)
 
         if not result.get('success'):
             return jsonify({
@@ -333,6 +351,43 @@ def api_crawl():
             'error': str(e),
             'traceback': traceback.format_exc()
         })
+
+@app.route('/api/auto_map', methods=['POST'])
+def api_auto_map():
+    """自动分类映射推荐"""
+    if not AUTO_MAPPER_AVAILABLE:
+        return jsonify({'success': False, 'error': '自动分类映射模块不可用'})
+
+    crawl_result = session.get('crawl_result', None)
+    if not crawl_result:
+        return jsonify({'success': False, 'error': '没有抓取结果，请先抓取'})
+
+    try:
+        sites = crawl_result.get('sites', [])
+        categories = get_all_categories_with_info()
+        result = auto_map_all_sites(sites, categories)
+
+        # 格式化输出
+        formatted = {}
+        for src_cat, info in result.items():
+            formatted[src_cat] = {
+                'sites_count': info['sites_count'],
+                'best_match': info['best_match'],
+                'recommendations': info['recommendations']
+            }
+
+        return jsonify({
+            'success': True,
+            'auto_map': formatted,
+            'total_categories': len(formatted)
+        })
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e),
+            'traceback': traceback.format_exc()
+        })
+
 
 @app.route('/api/merge', methods=['POST'])
 def api_merge():

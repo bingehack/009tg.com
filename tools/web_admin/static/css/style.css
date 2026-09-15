@@ -244,3 +244,26 @@ pre {
         padding: 20px 15px;
     }
 }
+
+/* 智能推荐框 */
+.recommend-box {
+    background: #f0f7ff;
+    border-left: 3px solid #3498db;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.recommend-box strong {
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.recommend-box .label {
+    margin-right: 5px;
+}
+
+.auto-recommend {
+    min-width: 180px;
+}

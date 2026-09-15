@@ -47,12 +47,29 @@
                 <div id="specificForm" style="display: none;">
                     <div class="form-group">
                         <label for="customScript"><i class="fa fa-file-code-o"></i> 选择抓取脚本</label>
-                        <select class="form-control input-lg" id="customScript">
+                        <select class="form-control input-lg" id="customScript" onchange="onScriptChange()">
                             {% for crawler in crawlers %}
                             <option value="{{ crawler }}">{{ crawler.replace('crawl_', '').replace('.py', '') }}</option>
                             {% endfor %}
                         </select>
                         <p class="help-block">这些脚本针对特定站点优化，抓取数据更准确。站点结构变化时可能需要更新脚本。</p>
+                    </div>
+
+                    <!-- zvcard专用：抓取模式选择 -->
+                    <div class="form-group" id="zvcardModeGroup" style="display: none;">
+                        <label><i class="fa fa-bolt"></i> zvcard抓取模式</label>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="zvcard_mode" value="quick" checked>
+                                <strong>快速模式</strong> - 抓取首页分页（约1-2分钟，适合快速更新）
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="zvcard_mode" value="deep">
+                                <strong>深度模式</strong> - 遍历所有分类页面+分类内分页（约5-10分钟，数据更全）
+                            </label>
+                        </div>
                     </div>
                 </div>
 
@@ -177,13 +194,30 @@ $('input[name="crawler_type"]').change(function() {
     } else {
         $('#genericForm').hide();
         $('#specificForm').show();
+        onScriptChange();
     }
 });
+
+// 脚本切换事件
+function onScriptChange() {
+    var script = $('#customScript').val();
+    if (script === 'crawl_zvcard.py') {
+        $('#zvcardModeGroup').show();
+    } else {
+        $('#zvcardModeGroup').hide();
+    }
+}
 
 function startCrawl() {
     var crawlerType = $('input[name="crawler_type"]:checked').val();
     var url = $('#targetUrl').val().trim();
     var customScript = $('#customScript').val();
+    var extraArgs = {};
+
+    // zvcard模式参数
+    if (customScript === 'crawl_zvcard.py') {
+        extraArgs.zvcard_mode = $('input[name="zvcard_mode"]:checked').val();
+    }
 
     if (crawlerType === 'generic' && !url) {
         alert('请输入目标站点URL');
@@ -203,7 +237,8 @@ function startCrawl() {
         data: JSON.stringify({
             url: url,
             crawler_type: crawlerType,
-            custom_script: customScript
+            custom_script: customScript,
+            extra_args: extraArgs
         }),
         success: function(res) {
             $('#progressPanel').hide();

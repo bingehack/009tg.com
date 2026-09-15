@@ -152,28 +152,24 @@ def parse_server_rendered(html, base_url):
     sites = []
     categories = []
 
-    # 常见的工具卡片选择器
+    # 常见的工具卡片选择器（按优先级排序）
     card_selectors = [
+        # onenav主题
+        'a[class*="site-"]', 'a[data-url]',
+        # 通用卡片
         '.site-item', '.website-item', '.tool-item', '.card-item',
-        '.app-item', '.link-item', '.nav-item', '.url-item',
-        '.site-card', '.website-card', '.tool-card',
+        '.app-item', '.link-item', '.url-item',
+        '.site-card', '.website-card', '.tool-card', '.app-card',
         'li.site', 'li.website', 'li.tool', 'li.app',
-        '.item-box', '.site-box', '.web-box',
-        'a[class*="site"]', 'a[class*="web"]', 'a[class*="tool"]',
-        '.card', '.item',
-    ]
-
-    # 查找分类
-    category_selectors = [
-        '.category-title', '.cat-title', '.group-title', '.section-title',
-        'h2.category', 'h3.category', 'h2.cat', 'h3.cat',
-        '.category-name', '.cat-name', '.group-name',
-        'h2', 'h3', 'h4',
+        '.item-box', '.site-box', '.web-box', '.tool-box',
+        # 更多通用
+        'a[class*="web"]', 'a[class*="tool"]', 'a[class*="app"]',
+        'a[class*="link"]', 'a[class*="url"]',
+        '.card', '.item', '.box',
     ]
 
     # 策略1：按分类区块解析
-    # 查找包含标题和卡片的区块
-    sections = soup.select('.category, .cat-group, .group, .section, .category-section')
+    sections = soup.select('.category, .cat-group, .group, .section, .category-section, .content-card')
     if not sections:
         # 尝试用标题+后续卡片的方式
         all_headings = soup.find_all(['h2', 'h3', 'h4'])
@@ -188,7 +184,7 @@ def parse_server_rendered(html, base_url):
             # 查找标题后面的卡片
             next_sibling = heading.find_next_sibling()
             while next_sibling:
-                cards = next_sibling.select(', '.join(card_selectors[:15]))
+                cards = next_sibling.select(', '.join(card_selectors[:20]))
                 for card in cards:
                     site = extract_site_from_card(card, base_url, current_category)
                     if site:
@@ -201,8 +197,11 @@ def parse_server_rendered(html, base_url):
     if len(sites) < 10:
         sites = []
         categories = []
-        for selector in card_selectors[:20]:
-            cards = soup.select(selector)
+        for selector in card_selectors[:25]:
+            try:
+                cards = soup.select(selector)
+            except:
+                continue
             if len(cards) >= 5:
                 for card in cards:
                     site = extract_site_from_card(card, base_url, '未分类')
@@ -210,6 +209,11 @@ def parse_server_rendered(html, base_url):
                         sites.append(site)
                 if len(sites) >= 5:
                     break
+
+    # 策略3：纯外链模式（优设导航等结构）
+    if len(sites) < 10:
+        print('  卡片模式未找到足够站点，尝试纯外链模式...')
+        sites = extract_external_links(soup, base_url)
 
     # 去重
     unique_sites = []
@@ -233,51 +237,81 @@ def parse_server_rendered(html, base_url):
 
 def extract_site_from_card(card, base_url, default_category):
     """从卡片元素中提取站点信息"""
-    # 查找链接
-    link = card.find('a', href=True)
-    if not link:
-        return None
+    # 判断card本身是否是a标签
+    if card.name == 'a':
+        link = card
+    else:
+        link = card.find('a', href=True)
+        if not link:
+            # 尝试找有data-url的a标签
+            link = card.find('a', attrs={'data-url': True})
+        if not link:
+            return None
 
-    url = link['href']
-    if url.startswith('/') or url.startswith('#') or 'javascript:' in url:
-        # 可能是跳转链接，尝试从data属性获取真实URL
-        for attr in ['data-url', 'data-href', 'data-link', 'data-site', 'data-original-url', 'data-real-url']:
-            if attr in link.attrs:
-                url = link[attr]
-                break
-        else:
-            # 尝试从卡片的data属性获取
-            for attr in ['data-url', 'data-href', 'data-link']:
-                if attr in card.attrs:
-                    url = card[attr]
-                    break
+    # 提取URL：优先data-url，其次href
+    url = ''
+    # 从link的data属性获取
+    for attr in ['data-url', 'data-href', 'data-link', 'data-site',
+                 'data-original-url', 'data-real-url', 'data-target',
+                 'data-outurl', 'data-goto']:
+        if attr in link.attrs and link[attr]:
+            url = link[attr]
+            break
+
+    # 如果没有data-url，从href获取（排除站内链接）
+    if not url:
+        href = link.get('href', '')
+        if href and not href.startswith(('#', 'javascript:', 'mailto:', 'tel:')):
+            # 检查是否是站内链接（同域名）
+            base_domain = get_domain(base_url)
+            href_domain = get_domain(href)
+            if href.startswith('http') and href_domain and href_domain != base_domain:
+                # 外链，直接用
+                url = href
+            elif href.startswith('/') or not href.startswith('http'):
+                # 站内相对路径，可能是跳转页，尝试从card的data属性获取
+                for attr in ['data-url', 'data-href', 'data-link']:
+                    if attr in card.attrs and card[attr]:
+                        url = card[attr]
+                        break
 
     if not url or url.startswith('#') or 'javascript:' in url or url == '/':
         return None
 
     # 相对URL转绝对URL
-    if url.startswith('/'):
+    if url.startswith('//'):
+        url = 'https:' + url
+    elif url.startswith('/'):
         url = urljoin(base_url, url)
     elif not url.startswith('http'):
         url = 'https://' + url
 
     url = normalize_url(url)
 
-    # 提取名称
+    # 提取名称：优先title属性，其次文本
     name = ''
-    name_selectors = ['.site-name', '.website-name', '.tool-name', '.app-name', '.title', 'h3', 'h4', '.name']
-    for selector in name_selectors:
-        el = card.select_one(selector)
-        if el:
-            name = el.get_text(strip=True)
-            break
+    # 从link的title属性获取
+    if link.get('title'):
+        name = link['title']
+    # 从card的title属性获取
+    if not name and card.get('title'):
+        name = card['title']
+    # 从常见class获取
+    if not name:
+        name_selectors = ['.site-name', '.website-name', '.tool-name', '.app-name',
+                          '.title', 'h3', 'h4', '.name', '.card-title', '.item-title']
+        for selector in name_selectors:
+            el = card.select_one(selector)
+            if el:
+                name = el.get_text(strip=True)
+                break
+    # 最后用link文本
     if not name:
         name = link.get_text(strip=True)
+    # 用card文本
     if not name:
-        # 尝试从img的alt属性
-        img = card.find('img')
-        if img and img.get('alt'):
-            name = img['alt']
+        name = card.get_text(strip=True)
+
     if not name or len(name) > 100:
         return None
 
@@ -287,19 +321,26 @@ def extract_site_from_card(card, base_url, default_category):
 
     # 提取描述
     description = ''
-    desc_selectors = ['.site-desc', '.website-desc', '.tool-desc', '.app-desc', '.description', '.desc', '.summary', 'p']
+    desc_selectors = ['.site-desc', '.website-desc', '.tool-desc', '.app-desc',
+                      '.description', '.desc', '.summary', 'p', '.card-desc', '.item-desc']
     for selector in desc_selectors:
         el = card.select_one(selector)
         if el:
             description = el.get_text(strip=True)
             if description:
                 break
+    if not description:
+        # 从link的data-desc等属性获取
+        for attr in ['data-desc', 'data-description', 'data-summary']:
+            if attr in link.attrs and link[attr]:
+                description = link[attr]
+                break
     if description and len(description) > 200:
         description = description[:200] + '...'
 
     # 提取分类
     category = default_category
-    cat_el = card.select_one('.category, .cat, .tag')
+    cat_el = card.select_one('.category, .cat, .tag, .label')
     if cat_el:
         cat_text = cat_el.get_text(strip=True)
         if cat_text and len(cat_text) < 30:
@@ -312,6 +353,61 @@ def extract_site_from_card(card, base_url, default_category):
         'category': category,
         'icon': '',
     }
+
+
+def extract_external_links(soup, base_url):
+    """纯外链模式：从页面所有外链中提取站点（适用于优设导航等结构）"""
+    sites = []
+    base_domain = get_domain(base_url)
+    seen_domains = set()
+
+    # 找所有外链
+    for a in soup.find_all('a', href=True):
+        href = a['href']
+        if not href.startswith('http'):
+            continue
+
+        domain = get_domain(href)
+        if not domain or domain == base_domain:
+            continue
+
+        # 排除常见非站点链接
+        if any(x in href for x in ['javascript:', 'mailto:', 'tel:', '#', '?ref=', '?utm_']):
+            # 有utm参数的可能是推广链接，保留
+            pass
+
+        # 排除社交媒体、搜索引擎等
+        skip_domains = ['facebook.com', 'twitter.com', 'youtube.com', 'instagram.com',
+                         'linkedin.com', 'pinterest.com', 'tiktok.com', 'weibo.com',
+                         'zhihu.com', 'bilibili.com', 'baidu.com', 'google.com',
+                         'qq.com', 'taobao.com', 'jd.com', 'amazon.com', 'github.com',
+                         'wikipedia.org', 'stackoverflow.com']
+        if any(domain.endswith(sd) or domain == sd for sd in skip_domains):
+            continue
+
+        # 去重
+        if domain in seen_domains:
+            continue
+        seen_domains.add(domain)
+
+        # 提取名称
+        name = a.get('title', '') or a.get_text(strip=True)
+        if not name or len(name) > 60 or len(name) < 2:
+            continue
+
+        # 清理名称
+        name = re.sub(r'[\n\r\t]', ' ', name).strip()
+        name = re.sub(r'\s+', ' ', name)
+
+        sites.append({
+            'name': name,
+            'url': normalize_url(href),
+            'description': '',
+            'category': '未分类',
+            'icon': '',
+        })
+
+    return sites
 
 def crawl(url):
     """主抓取函数"""
