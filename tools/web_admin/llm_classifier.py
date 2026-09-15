@@ -197,9 +197,10 @@ def build_classification_prompt(sites, categories):
 规则：
 1. 只返回JSON格式，不要返回其他内容
 2. 每个网站选择一个最合适的分类ID
-3. 如果不确定，选择最接近的分类，并降低置信度
-4. 置信度范围：0-100，90以上为高置信，70-89为中置信，70以下为低置信
-5. 返回格式：{"results": [{"index": 1, "category_id": 分类ID, "confidence": 置信度, "reason": "简短原因"}]}"""
+3. index从0开始，对应待分类网站的序号
+4. 如果不确定，选择最接近的分类，并降低置信度
+5. 置信度范围：0-100，90以上为高置信，70-89为中置信，70以下为低置信
+6. 返回格式：{"results": [{"index": 0, "category_id": 分类ID, "confidence": 置信度, "reason": "简短原因"}]}"""
 
     user_prompt = f"""分类列表：
 {cat_text}
@@ -298,20 +299,28 @@ def classify_sites(sites, platform='siliconflow', batch_size=20, use_cache=True)
 
                 # 映射回原始索引
                 for result in results:
-                    orig_index = batch_indices[result['index'] - 1] if 1 <= result['index'] <= len(batch) else -1
-                    if orig_index >= 0:
-                        result['index'] = orig_index
-                        result['cached'] = False
-                        all_results.append(result)
+                    raw_index = result.get('index', -1)
+                    # 兼容index从0开始或从1开始
+                    if 0 <= raw_index < len(batch):
+                        batch_idx = raw_index
+                    elif 1 <= raw_index <= len(batch):
+                        batch_idx = raw_index - 1
+                    else:
+                        continue
 
-                        # 保存缓存
-                        site = batch[result['index'] - batch_start - 1 + batch_start] if False else uncached_sites[uncached_indices.index(orig_index)]
-                        cache_key = get_cache_key(site)
-                        cache[cache_key] = {
-                            'category_id': result['category_id'],
-                            'confidence': result['confidence'],
-                            'reason': result.get('reason', ''),
-                        }
+                    orig_index = batch_indices[batch_idx]
+                    result['index'] = orig_index
+                    result['cached'] = False
+                    all_results.append(result)
+
+                    # 保存缓存
+                    site = batch[batch_idx]
+                    cache_key = get_cache_key(site)
+                    cache[cache_key] = {
+                        'category_id': result['category_id'],
+                        'confidence': result['confidence'],
+                        'reason': result.get('reason', ''),
+                    }
 
                 # 每批保存一次缓存
                 if use_cache:
